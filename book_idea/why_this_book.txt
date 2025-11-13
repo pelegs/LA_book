@@ -1,0 +1,4 @@
+Summary:
+* Because LA is extremely important* for all sciences, but it is taught horribly: too much abstract things, too many definitions and proofs instead of intuition development, not enough justification for *why* we do things in certain ways, etc.
+* My approach: first understand the *why*, then develop the intuition for simple cases (with as much visualization as possible), then generalize - and only then do more rigorous stuff like defs and proofs.
+* The book will cover everything science students need to know, including for physics students who arguably need the most topics covered. However, it will be marked what parts are more important for other fields (e.g. biology students generally don't need to learn about dual spaces and functional analysis).
