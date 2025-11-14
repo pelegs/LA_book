@@ -1,0 +1,26 @@
+\documentclass[12pt]{book}
+\usepackage{fancyhdr}
+
+\fancyhead{}
+\fancyfoot[LE, RO]{ \thepage }
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+
+\usepackage{booktabs}
+\usepackage[]{geometry}
+
+% Start section on newpage
+\AddToHook{cmd/section/before}{\clearpage}
+
+\usepackage{lipsum}
+% \usepackage{import}  % for relative paths importing
+
+% Language-related
+\usepackage[english]{babel}
+\usepackage[autostyle, german=guillemets, english=american]{csquotes}
+
+\usepackage{subfigure}
+
+% For tests
+\usepackage{lipsum}

@@ -1,0 +1,171 @@
+% Packages
+\usepackage{xcolor}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%        COLORS        %
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Normal colors
+\definecolor{xred}{HTML}{BD4242}
+\definecolor{xblue}{HTML}{4268BD}
+\definecolor{xgreen}{HTML}{52B256}
+\definecolor{xpurple}{HTML}{7F52B2}
+\definecolor{xorange}{HTML}{FD9337}
+\definecolor{xdotted}{HTML}{999999}
+\definecolor{xgray}{HTML}{777777}
+\definecolor{xcyan}{HTML}{80F5DC}
+\definecolor{xpink}{HTML}{F690EA}
+\definecolor{xgrayblue}{HTML}{49B095}
+\definecolor{xgraycyan}{HTML}{5AA1B9}
+
+% Dark colors
+\colorlet{xdarkred}{red!85!black}
+\colorlet{xdarkblue}{xblue!85!black}
+\colorlet{xdarkgreen}{xgreen!85!black}
+\colorlet{xdarkpurple}{xpurple!85!black}
+\colorlet{xdarkorange}{xorange!85!black}
+\colorlet{xdarkcyan}{xcyan!85!black}
+
+% Very dark colors
+\colorlet{xverydarkblue}{xblue!50!black}
+
+% Document-specific colors
+\colorlet{normaltextcolor}{black}
+\colorlet{figtextcolor}{xblue}
+
+% Enumerated colors
+\colorlet{xcol0}{black}
+\colorlet{xcol1}{xred}
+\colorlet{xcol2}{xblue}
+\colorlet{xcol3}{xgreen}
+\colorlet{xcol4}{xpurple}
+\colorlet{xcol5}{xorange}
+\colorlet{xcol6}{xcyan}
+\colorlet{xcol7}{xpink!75!black}
+
+%%%%%%%%%%%%%%%%%%%%%
+%        PGF        %
+%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}%, colormaps, colorbrewer, patchplots}
+\pgfplotsset{
+	compat=1.16,
+	%% Styles %%
+	xyplane/.style = {
+			axis equal,
+			axis x line=middle,
+			axis y line=middle,
+			xlabel=$x$,
+			ylabel=$y$,
+			every axis x label/.style={at={(ticklabel* cs:1.02)}, anchor=west},
+			every axis y label/.style={at={(ticklabel* cs:1.02)}, anchor=south},
+			axis line style={stealth-stealth, very thick},
+			label style={font=\large},
+			tick label style={font=\large},
+			samples=100,
+			xmin=-5, xmax=5,
+			ymin=-5, ymax=5,
+			grid=both,
+			major grid style={black!15},
+			minor grid style={black!10},
+			xticklabels={,},
+			yticklabels={,},
+		},
+	xynogrid/.style={
+			xyplane,
+			major grid style={opacity=0},
+			minor grid style={opacity=0},
+		},
+	xynoaxes/.style={
+			xyplane,
+			axis line style={draw=none},
+			xlabel={}, ylabel={},
+			extra x tick labels={,},
+			extra y tick labels={,},
+			tick style={draw=none},
+		},
+	xyempty/.style={
+			xyplane,
+			axis line style={draw=none},
+			tick style={draw=none},
+			xlabel={},
+			ylabel={},
+			major grid style={draw=black!0},
+		},
+	hyperplane1D/.style={very thick, #1},
+	%% Function plots
+	function/.style={
+			ultra thick, draw=#1,
+		},
+	filledfunction/.style={
+			function={#1}, opacity=1, fill=#1, fill opacity=0.3,
+		},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%        TikZ        %
+%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{tikz, tikz-3dplot}
+\usetikzlibrary{calc, shapes, intersections, backgrounds, decorations.markings, tikzmark, angles}
+\tikzset{
+	%% Styles %%
+	vector/.style = {#1, ultra thick, -stealth, cap=round},
+	pics/ruler/.style n args = {5}{
+			code = {
+					% Parameters
+					\pgfmathsetmacro{\width}{#1}
+					\pgfmathsetmacro{\height}{#2}
+					\pgfmathsetmacro{\yMaj}{\height/3}
+					\pgfmathsetmacro{\yMid}{\yMaj*0.7}
+					\pgfmathsetmacro{\yMin}{\yMaj*0.5}
+					\pgfmathsetmacro{\dxMaj}{#3}
+					\pgfmathsetmacro{\dxMin}{\dxMaj*0.1}
+					\pgfmathsetmacro{\maxMajGrad}{ceil((\width-2)/\dxMaj)}
+					\pgfmathsetmacro{\maxMidGrad}{\maxMajGrad-0.5}
+					\pgfmathsetmacro{\maxMinGrad}{(\maxMajGrad-1)*10}
+
+					% Main rectangle
+					\draw[thick, fill=#4] (0,0) rectangle (\width,\height);
+
+					% Graduations
+					% Major
+					\foreach \x [count=\k from 0] in {1,2,...,\maxMajGrad}
+					\draw[thick] ({\x*\dxMaj}, \height) -- ++(0.0,-\yMaj) node[below] (g\k) {$\k$};
+					% Middle
+					\foreach \y in {1.5,2.5,...,\maxMidGrad}
+					\draw[thick] ({\y*\dxMaj}, \height) -- ++(0.0,-\yMid);
+					% Minor
+					\foreach \z in {1,2,...,\maxMinGrad}
+					\draw[thin] ({\dxMaj+\z*\dxMin}, \height) -- ++(0.0,-\yMin);
+
+					% units label
+					\node[below of=g0, font=\small, yshift={11*\height}] {#5};
+				}
+		},
+	arcnode/.style 2 args={
+			decoration={
+					raise=#1,
+					markings,
+					mark=at position 0.5 with {
+							\node[inner sep=0] {#2};
+						}
+				},
+			postaction={decorate}
+		},
+	perpline/.style = {
+			very thick, densely dotted, draw=#1
+		},
+	curly/.style n args = {3}{
+			#1, very thick, decorate, decoration={brace, amplitude=#2, raise=#3, mirror}
+		},
+}
+\newcommand{\rulerTwoD}[6]{
+	\pgfmathsetmacro{\Vx}{#1};
+	\pgfmathsetmacro{\Vy}{#2};
+	\pgfmathsetmacro{\a}{#3};
+	\pgfmathsetmacro{\scale}{3*\a/sqrt(\Vx*\Vx+\Vy*\Vy)};
+	\foreach \b in {-#4,...,#4}
+	\addplot[very thick, #5] {-(\Vx/\Vy)*x+(\b/\a)};
+}

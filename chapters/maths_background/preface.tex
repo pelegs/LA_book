@@ -1,0 +1,70 @@
+\section{Preface}
+\lipsum[5]
+
+Testing some equations: let $\vec{x},\vec{y}\in\Rs[n]$ and $\alpha,\beta\in\Rs$. Then from the fact that $\Rs[n]$ is a vector space, we get
+\begin{equation}
+	\vec{c} = \alpha\vec{x} + \beta\vec{y} \in \Rs[n].
+	\label{eq:vector_space_closure}
+\end{equation}
+
+However, if $\vec{a}\in\Rs[m]$, where $m\neq n$, then $\alpha\vec{x}\in\Rs[m]$, and therefore $\vec{c}$ is not defined (i.e. \autoref{eq:vector_space_closure} is irrelevant).
+
+\begin{note}{Test note}{test_note}
+	This is a test note. I will try to also refernce it later.
+\end{note}
+
+Now, I wish to refernce \autoref{note:test_note}. Did it work?
+
+Also, let us look at an example.
+
+\begin{example}{Some test example}{}
+	If $x=\rowvec{1;2;-3}$ and $y=\rowvec{5;-1}$, then $n=3$ and $m=2$. Clearly, $n\neq m$ - and so $\alpha\vec{x}\in\Rs[3]$, while $\beta\vec{y}\in\Rs[2]$. This means that $\alpha\vec{x}+\beta\vec{y}$ is not defined.
+\end{example}
+
+I believe it is now time for some figures! See \autoref{fig:test_fig_1}.
+
+\begin{figure}
+	\begin{center}
+		\begin{tikzpicture}
+			\coordinate (o) at (0,0);
+			\draw[vector, xred] (0,0) -- (3,1) node [pos=1.1] (a) {$\vec{w}_{1}$};
+			\draw[vector, xblue] (0,0) -- (2,3) node [pos=1.1] (b){$\vec{w}_{2}$};
+			\pic[draw, xpurple, -stealth, thick, angle radius=2cm, angle eccentricity=1.1, pic text=$\varphi$]{angle=a--o--b};
+			\draw[vector, xgreen] (0,0) -- (-1,2) node [pos=1.1] (c) {$\vec{x}_{1}$};
+			\draw[vector, xorange] (0,0) -- (-3,2) node [pos=1.1] (d){$\vec{x}_{2}$};
+			\pic[draw, black!75, -stealth, thick, angle radius=1.25cm, angle eccentricity=1.2, pic text=$\theta$]{angle=c--o--d};
+		\end{tikzpicture}
+	\end{center}
+	\caption{This is the first test figure. Does it look ok?}
+	\label{fig:test_fig_1}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{axis}[
+					width=10cm,
+					xyplane,
+					xmin=-2, xmax=2,
+					ymin=-2, ymax=2,
+					xtick={-2,...,2},
+					ytick={-2,...,2},
+					xticklabels={,$-1$,,$1$,},
+					minor tick num=4,
+					samples=150,
+				]
+				\addplot[name path=sqrd, very thick, xred] {\x^2-\x-1};
+				\addplot[name path=cubd, very thick, xblue] {\x^3-\x};
+				\addplot[thick, fill=xgreen, fill opacity=0.4] fill between[of=sqrd and cubd, soft clip={domain=0:1}];
+				\coordinate (a) at (-0.755,0.325);
+				\addplot [only marks, mark=*, mark options={fill=white, scale=1.5}] table {
+						-0.755 0.325
+					};
+				\node[above left of=a, xshift=-20pt, align=right] (a_txt) {intersection};
+				\draw[-stealth] (a_txt.south) to [out=270, in=180] (a);
+			\end{axis}
+		\end{tikzpicture}
+	\end{center}
+	\caption{And this is another test figure! I hope it works.}
+	\label{fig:test_fig_2}
+\end{figure}

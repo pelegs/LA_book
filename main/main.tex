@@ -1,0 +1,48 @@
+\raggedbottom
+
+%----------%
+% SETTINGS %
+%----------%
+
+\makeatletter
+\def\input@path{{./settings/}}
+\makeatother
+\input{basics}
+\input{graphics}
+\input{titles}
+\input{environments}
+\input{maths}
+\input{refs_cites}
+
+%-----------%
+% FOR TESTS %
+%-----------%
+
+\usepackage{layouts} % http://ctan.org/pkg/layouts
+
+%----------%
+% DOCUMENT %
+%----------%
+
+\begin{document}
+\makeatletter
+
+% Maths background
+\chapter{Mathematical Background}
+\def\input@path{{./chapters/maths_background/}}
+\input{preface}
+
+% Basic linear algebra
+\chapter{The Basics of Linear Algebra}
+\def\input@path{{./chapters/the_basics/}}
+\input{preface}
+
+% Basic linear algebra
+\chapter{Bibliography}
+% \def\input@path{{./chapters//}}
+% \input{bibliography}
+
+\pagevalues
+
+\makeatother
+\end{document}
