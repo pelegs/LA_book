@@ -1,0 +1,11 @@
+This is a not-at-all-comprehensive list of science fields/topics that directly use linear algebra:
+
+* Physics: LITERALLY EVERYTHING. It's hard to think about a field in physics that doesn't use linear algebra. Basic quantum physics, for example, is formulated *entirely* in the language of LA. Special relativity uses LA extensively, general relativity is formulated using differential geometry, which in turn needs tensor algebra for its formulation - and TA is one extension of LA. Fluid dynamics, dynamic systems, statistical mechanics, etc., etc. - all use LA and maths based on LA all the time.
+
+* Chemistry: obviously, anything that uses physics directly, e.g. quantum chemistry, physical chemistry, etc.
+
+* Biology: TBA
+
+* Computer science: machine learning (and especially LLMs), quantum computing, cryptography, ... - all use LA extensively.
+
+* Engineering: electric engineering, mechanical engineering, aerospace engineering, etc. - LA is everywhere.
