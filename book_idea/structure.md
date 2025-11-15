@@ -33,7 +33,7 @@ with examples of proofs all thoroughout (but not necessarily for everything).
 
 Chapters:
 
-## Part 4: A bit of Formalizing
+## Part 4: Adanced Topics
 This part will cover more adanced topics in LA which should be taught to any undergraduate physics student.
 
 Chapters:
