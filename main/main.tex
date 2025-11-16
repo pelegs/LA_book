@@ -19,6 +19,7 @@
 %-----------%
 
 \usepackage{layouts} % http://ctan.org/pkg/layouts
+\usepackage[abspath]{currfile}
 
 %----------%
 % DOCUMENT %
@@ -27,18 +28,26 @@
 \begin{document}
 \makeatletter
 
-% Maths background
-\def\input@path{{./chapters/maths_background/}}
-\input{head}
 
-% Basic linear algebra
-\def\input@path{{./chapters/the_basics/}}
-\input{head}
+\def\chapterslist{
+	{maths\_background},{the\_basics},{formalism},{advanced\_la},{further\_topics}%
+}
+\foreach \c [count=\x from 1] in \chapterslist {
+	\def\input@path{{./chapters/\c/}}
+	\input{head}
+}
 
-% Basic linear algebra
-\chapter{Bibliography}
-% \def\input@path{{./chapters//}}
-% \input{bibliography}
+% % Maths background
+% \input{head}
+%
+% % Basic linear algebra
+% \def\input@path{{./chapters/the_basics/}}
+% \input{head}
+%
+% % Basic linear algebra
+% \chapter{Bibliography}
+% % \def\input@path{{./chapters//}}
+% % \input{bibliography}
 
 \pagevalues
 

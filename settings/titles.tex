@@ -2,10 +2,19 @@
 % https://tex.stackexchange.com/questions/599059/fancy-chapter-style-custom
 
 \usepackage[most]{tcolorbox}
+\usepackage[explicit]{titlesec}
+
+% Chapter title colors
+\colorlet{chaptercol1}{xred}
+\colorlet{chaptercol2}{xblue}
+\colorlet{chaptercol3}{xgreen}
+\colorlet{chaptercol4}{xpurple}
+\colorlet{chaptercol5}{xorange}
+
+
 \newtcolorbox{titlecolorbox}[1]{ %the box around chapter
 	coltext=white,
-	colframe=black,
-	colback=black,
+	colback=xpurple,
 	boxrule=0pt,
 	arc=0pt,
 	notitle,
@@ -14,18 +23,17 @@
 	before=\hfill
 }
 
-\usepackage{xcolor}
-
-\usepackage[explicit]{titlesec}
 \titleformat{\chapter}[display]
 {\sffamily\Huge}
 {}
 {0pt}
-{\begin{titlecolorbox}{}
-		{\large\sffamily\MakeUppercase{\chaptername}}
+{
+	\begin{titlecolorbox}{}
+		{\large\bfseries\MakeUppercase{\chaptername}}
 	\end{titlecolorbox}
 	\vspace*{-4.19ex}\noindent\rule{\textwidth}{0.4pt}
-	\parbox[b]{\dimexpr\textwidth-4.8em\relax}{\raggedright\MakeUppercase{#1}}{\hfill\fontsize{70}{60}\selectfont\thechapter}
+	\parbox[b]{\dimexpr\textwidth-4.8em\relax}{\raggedright\bfseries\color{xpurple}\fontsize{30}{30}\selectfont\MakeUppercase{#1}}
+	{\hfill\fontsize{150}{60}\selectfont\bfseries\thechapter}
 }
 []
 
