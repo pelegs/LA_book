@@ -6,7 +6,7 @@ all: boxes
 main/main:
 	# This should be done via latexmk, but it's misbahving atm
 	# latexmk $(LATEXMKSWITCHES) $@.tex
-	lualatex --output-directory main main.tex
+	lualatex --shell-escape --output-directory main main.tex
 	cp main/main.pdf pdfs/main.pdf
 	# Update current number of pages in README.md
 	# A=$$(pdfinfo main.pdf | awk '/^Pages:/ {print $$2}'); \

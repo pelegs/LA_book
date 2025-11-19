@@ -12,53 +12,58 @@
 \colorlet{chaptercol4}{xpurple}
 \colorlet{chaptercol5}{xorange}
 
-\definecolor{titlebgdark}{HTML}{7F52B2}
-\definecolor{titlebglight}{HTML}{AD81DE}
+\definecolor{titlebgdark}{HTML}{48505e}
+\definecolor{titlebglight}{HTML}{596774}
 
 \titleformat{\chapter}[display]
-{\normalfont\huge\bfseries}
 {}
-{20pt}
+{}
+{60mm}
 {%
 	\begin{tcolorbox}[
 			enhanced,
 			halign=flush left,
 			frame style={left color=titlebglight, right color=white},
+			interior engine=path,
 			interior style={left color=titlebgdark, right color=white},
-			boxrule=0.5cm,
+			boxrule=5.0mm,
 			arc=0pt,
 			outer arc=0pt,
 			leftrule=0pt,
 			rightrule=0pt,
 			fontupper=\color{white}\chaptertitleseries\bfseries\fontsize{40}{40}\selectfont,
 			enlarge left by=-1in-\hoffset-\oddsidemargin,
-			enlarge right by=-\paperwidth+2.5cm+\hoffset+\oddsidemargin+\textwidth,
+			enlarge right by=-\paperwidth+25mm+\hoffset+\oddsidemargin+\textwidth,
 			width=\paperwidth,
-			left=2cm,
-			right=\paperwidth-2.5cm-\hoffset-\oddsidemargin-\textwidth,
-			top=2.0cm,
-			bottom=1.0cm,
+			left=20mm,
+			right=\paperwidth-25mm-\hoffset-\oddsidemargin-\textwidth,
+			top=15mm,
+			bottom=5mm,
 			overlay={
 					\node[
 						fill=titlebgdark,
 						draw=titlebglight,
-						line width=0.25cm,
+						line width=2.5mm,
 						inner sep=0pt,
-						text width=3.6cm,
-						minimum height=3.6cm,
+						text width=32mm,
+						minimum height=32mm,
 						align=center,
 						font=\color{white}\chapternumberseries\bfseries\fontsize{100}{106}\selectfont,
 					]
 					(chapname)
-					at ([xshift=4cm]frame.north west)
+					at ([xshift=40mm]frame.north west)
 					{\thechapter};
-					\node[font=\chapternumberseries\bfseries\fontsize{23}{20}\selectfont,anchor=south,yshift=5pt, inner sep=2pt] at (chapname.north)
+					\node[font=\chapternumberseries\bfseries\fontsize{20}{20}\selectfont,anchor=south,yshift=5pt, inner sep=2pt] at (chapname.north)
 					{\MakeUppercase\chaptertitlename};  % if using amsbook, this should be \chaptername
+					\node[anchor=south, yshift=-2mm] (tapir) at (frame.north) {\includesvg{graphics/chapters/chapter\thechapter}};
 				}
 		]
 		\uppercase{#1}
 	\end{tcolorbox}%
+	\vspace{5em}
+	Text text text?
 }
+
 \titleformat{name=\chapter,numberless}[display]
 {\normalfont\huge\bfseries}
 {}
