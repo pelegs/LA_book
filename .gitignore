@@ -48,5 +48,7 @@ inspiration/*
 *blx.bib
 .bak 
 .mtc
+.pdf_tex
+_svg-tex.pdf
 build/
 @rumpelsepp
