@@ -48,10 +48,11 @@
 						text width=32mm,
 						minimum height=32mm,
 						align=center,
+						anchor=west,
 						font=\color{white}\chapternumberseries\bfseries\fontsize{100}{106}\selectfont,
 					]
 					(chapname)
-					at ([xshift=40mm]frame.north west)
+					at ([xshift=20mm]frame.north west)
 					{\thechapter};
 					\node[font=\chapternumberseries\bfseries\fontsize{20}{20}\selectfont,anchor=south,yshift=5pt, inner sep=2pt] at (chapname.north)
 					{\MakeUppercase\chaptertitlename};  % if using amsbook, this should be \chaptername
@@ -60,8 +61,10 @@
 		]
 		\uppercase{#1}
 	\end{tcolorbox}%
-	\vspace{5em}
-	Text text text?
+	% Add chapter description under title - using the \description macro
+	% defined in the main chapters loop (main.tex)
+	\vspace{3em}
+	\chapterdescription
 }
 
 \titleformat{name=\chapter,numberless}[display]
