@@ -6,14 +6,23 @@
 \usepackage[explicit]{titlesec}
 
 % Chapter title colors
-\colorlet{chaptercol1}{xred}
-\colorlet{chaptercol2}{xblue}
-\colorlet{chaptercol3}{xgreen}
-\colorlet{chaptercol4}{xpurple}
-\colorlet{chaptercol5}{xorange}
+\definecolor{chaptercoldark1}{HTML}{5e5156}
+\definecolor{chaptercoldark2}{HTML}{48505e}
+\definecolor{chaptercoldark3}{HTML}{485e59}
+\definecolor{chaptercoldark4}{HTML}{5e485e}
+\definecolor{chaptercoldark5}{HTML}{5e4b48}
 
-\definecolor{titlebgdark}{HTML}{48505e}
-\definecolor{titlebglight}{HTML}{596774}
+\colorlet{chaptercollight1}{chaptercoldark1!50!white}
+\colorlet{chaptercollight2}{chaptercoldark2!50!white}
+\colorlet{chaptercollight3}{chaptercoldark3!50!white}
+\colorlet{chaptercollight4}{chaptercoldark4!50!white}
+\colorlet{chaptercollight5}{chaptercoldark5!50!white}
+
+% \definecolor{chaptercollight1}{HTML}{596774}
+% \definecolor{chaptercollight2}{HTML}{596774}
+% \definecolor{chaptercollight3}{HTML}{596774}
+% \definecolor{chaptercollight4}{HTML}{596774}
+% \definecolor{chaptercollight5}{HTML}{596774}
 
 \titleformat{\chapter}[display]
 {}
@@ -23,9 +32,9 @@
 	\begin{tcolorbox}[
 			enhanced,
 			halign=flush left,
-			frame style={left color=titlebglight, right color=white},
+			frame style={left color=chaptercollight\thechapter, right color=white},
 			interior engine=path,
-			interior style={left color=titlebgdark, right color=white},
+			interior style={left color=chaptercoldark\thechapter, right color=white},
 			boxrule=5.0mm,
 			arc=0pt,
 			outer arc=0pt,
@@ -41,8 +50,8 @@
 			bottom=5mm,
 			overlay={
 					\node[
-						fill=titlebgdark,
-						draw=titlebglight,
+						fill=chaptercoldark\thechapter,
+						draw=chaptercollight\thechapter,
 						line width=2.5mm,
 						inner sep=0pt,
 						text width=32mm,
