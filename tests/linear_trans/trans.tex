@@ -1,0 +1,46 @@
+\documentclass{standalone}
+\usepackage{tikz, pgfplots}
+\usetikzlibrary{arrows, calc, angles}
+
+\newcommand{\proj}[4]{
+    \mathrm{proj}_{\textcolor{#3}{#1}}\textcolor{#4}{#2}
+}
+
+\definecolor{xred}{HTML}{BD4242}
+\definecolor{xblue}{HTML}{4268BD}
+\definecolor{xgreen}{HTML}{52B256}
+\definecolor{xpurple}{HTML}{7F52B2}
+
+\tikzset{
+    vector/.style={-stealth, ultra thick, cap=round},
+    perp/.style={very thick, dashed, black!50},
+    pt/.style={circle, minimum size=5pt, solid, very thick, fill=white, draw=#1, inner sep=0pt, outer sep=0pt},
+}
+
+\begin{document}
+\begin{tikzpicture}
+	\draw[opacity=0] (-2,-1) rectangle (6,7);
+
+	\pgfmathsetmacro{\Ax}{\ax}
+	\pgfmathsetmacro{\Ay}{\ay}
+	\pgfmathsetmacro{\Bx}{\bx}
+	\pgfmathsetmacro{\By}{\by}
+
+	\pgfmathsetmacro{\An}{sqrt(\Ax^2+\Ay^2)}
+	\pgfmathsetmacro{\Bn}{sqrt(\Bx^2+\By^2)}
+	\pgfmathsetmacro{\Ath}{atan2(\Ay, \Ax)}
+	\pgfmathsetmacro{\AdotB}{\Ax*\Bx+\Ay*\By}
+	\pgfmathsetmacro{\th}{acos((\AdotB)/(\An*\Bn))}
+	\pgfmathsetmacro{\BprojA}{\AdotB/\An^2}
+
+	\coordinate (o) at (0,0);
+	\coordinate (a) at (\Ax,\Ay);
+	\coordinate (b) at (\Bx,\By);
+
+	\pic[draw=xpurple, very thick, fill=xpurple, fill opacity=0.35, angle radius=10mm, angle eccentricity=1.2, text=xpurple, pic text=$\theta$, text opacity=1.0] {angle=a--o--b};
+	\draw[vector, xred] (o) -- (a) node[pos=1.05] {$\vec{a}$};
+	\draw[vector, xblue] (o) -- (b) node[pos=1.075] {$\vec{b}$};
+	\draw[perp] (b) -- ($(o)!\BprojA!(a)$) node[pt={xred}] (BprojA) {} node[black, below, rotate=\Ath] {$\proj{\vec{a}}{\vec{b}}{xred}{xblue}$};
+	\pic[draw, thick, angle radius=3mm] {right angle = b--BprojA--o};
+\end{tikzpicture}
+\end{document}
