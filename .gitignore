@@ -1,5 +1,7 @@
 # Specific folders and files of this book
 inspiration/*
+*.mp4
+tests/**/frames/
 
 # General LaTeX-related
 *.acn
@@ -52,3 +54,4 @@ inspiration/*
 *_svg-tex.pdf
 build/
 @rumpelsepp
+
