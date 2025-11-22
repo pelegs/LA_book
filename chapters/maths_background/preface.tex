@@ -9,6 +9,17 @@ Testing some equations: let $\vec{x},\vec{y}\in\Rs[n]$ and $\alpha,\beta\in\Rs$.
 
 However, if $\vec{a}\in\Rs[m]$, where $m\neq n$, then $\alpha\vec{x}\in\Rs[m]$, and therefore $\vec{c}$ is not defined (i.e. \autoref{eq:vector_space_closure} is irrelevant).
 
+Now, this is a test of the \textit{aligned} environment, which allows for multiple (correctly-aligned) lines of equations and having the label only once (instead of per line, as in the \textit{align} environment):
+\begin{equation}
+	\begin{aligned}
+		\sin(2x) & = \frac{1}{2\iu}\left(\Eu{2x\iu}-\Eu{-2x\iu}\right)                                                                             \\
+		         & = \frac{1}{2\iu}\left(\left[\Eu{x\iu}\right]^{2}-\left[\Eu{-x\iu}\right]^{2}\right)                                             \\
+		         & = \underbrace{\frac{1}{2\iu}\left(\Eu{x\iu}-\Eu{x\iu}\right)}_{\sin(x)}\underbrace{\left(\Eu{x\iu}+\Eu{x\iu}\right)}_{2\cos(x)} \\
+		         & = 2\sin(x)\cos(x).
+	\end{aligned}
+	\label{eq:aligned_env}
+\end{equation}
+
 \begin{note}{Test note}{test_note}
 	This is a test note. I will try to also refernce it later.
 \end{note}
@@ -17,13 +28,17 @@ Now, I wish to refernce \autoref{note:test_note}. Did it work?
 
 Also, let us look at an example.
 
-\begin{example}{Some test example}{}
+\begin{example}{Some test example}{test_example}
 	If $x=\rowvec{1;2;-3}$ and $y=\rowvec{5;-1}$, then $n=3$ and $m=2$. Clearly, $n\neq m$ - and so $\alpha\vec{x}\in\Rs[3]$, while $\beta\vec{y}\in\Rs[2]$. This means that $\alpha\vec{x}+\beta\vec{y}$ is not defined.
 \end{example}
 
+\dots let's check if referencing an example works correctly: can you see \autoref{example:test_example}?
+
 I believe it is now time for some figures! See \autoref{fig:test_fig_1}.
 
-\begin{figure}
+\lipsum{1}
+
+\begin{wrapfigure}{l}{75mm}
 	\begin{center}
 		\begin{tikzpicture}
 			\coordinate (o) at (0,0);
@@ -37,13 +52,15 @@ I believe it is now time for some figures! See \autoref{fig:test_fig_1}.
 	\end{center}
 	\caption{This is the first test figure. Does it look ok?}
 	\label{fig:test_fig_1}
-\end{figure}
+\end{wrapfigure}
 
-\begin{figure}
+\lipsum{2}
+
+\begin{wrapfigure}{c}{90mm}
 	\begin{center}
 		\begin{tikzpicture}
 			\begin{axis}[
-					width=10cm,
+					width=8cm,
 					xyplane,
 					xmin=-2, xmax=2,
 					ymin=-2, ymax=2,
@@ -67,6 +84,6 @@ I believe it is now time for some figures! See \autoref{fig:test_fig_1}.
 	\end{center}
 	\caption{And this is another test figure! I hope it works.}
 	\label{fig:test_fig_2}
-\end{figure}
+\end{wrapfigure}
 
 \lipsum{2}
