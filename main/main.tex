@@ -28,15 +28,22 @@
 %----------%
 
 \begin{document}
-\makeatletter
 
+% Preface
+\begingroup
+\let\clearpage\relax
+\input{chapters/preface/head}
+\endgroup
+
+% Material chapters
+\makeatletter
 \foreach \c [count=\x from 1] in \chapterslist {
 	\def\input@path{{./chapters/\c/}}
 	\def\chapterdescription{\input{description}}
 	\input{head}
 }
+\makeatother
 
 \pagevalues
 
-\makeatother
 \end{document}

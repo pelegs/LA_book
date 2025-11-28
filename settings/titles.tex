@@ -18,12 +18,6 @@
 \colorlet{chaptercollight4}{chaptercoldark4!50!white}
 \colorlet{chaptercollight5}{chaptercoldark5!50!white}
 
-% \definecolor{chaptercollight1}{HTML}{596774}
-% \definecolor{chaptercollight2}{HTML}{596774}
-% \definecolor{chaptercollight3}{HTML}{596774}
-% \definecolor{chaptercollight4}{HTML}{596774}
-% \definecolor{chaptercollight5}{HTML}{596774}
-
 \titleformat{\chapter}[display]
 {}
 {}
@@ -76,39 +70,18 @@
 	\chapterdescription
 }
 
-\titleformat{name=\chapter,numberless}[display]
-{\normalfont\huge\bfseries}
-{}
-{20pt}
-{%
-	\begin{tcolorbox}[
-			enhanced,
-			colback=titlebgdark,
-			boxrule=0.25cm,
-			colframe=titlebglight,
-			arc=0pt,
-			outer arc=0pt,
-			remember as=title,
-			leftrule=0pt,
-			rightrule=0pt,
-			fontupper=\color{white}\sffamily\bfseries\huge,
-			enlarge left by=-1in-\hoffset-\oddsidemargin,
-			enlarge right by=-\paperwidth+1in+\hoffset+\oddsidemargin+\textwidth,
-			width=\paperwidth,
-			left=1in+\hoffset+\oddsidemargin,
-			right=\paperwidth-1in-\hoffset-\oddsidemargin-\textwidth,
-			top=0.6cm,
-			bottom=0.6cm,
-		]
-		#1
-	\end{tcolorbox}%
-}
-\titlespacing*{\chapter}
-{0pt}{0pt}{40pt}
-\makeatother
 \titleformat{\section}[display]
 {\sffamily\large}
 {}
 {0pt}
-{\hrule\vspace*{0.25ex}\parbox[b]{\dimexpr\textwidth\relax}{\textcolor{darkgray}{\thesection}\quad\raggedright\bfseries\MakeUppercase{#1}}}
+{\hrule\vspace*{0.25ex}\parbox[b]{\dimexpr\textwidth\relax}{\thesection\quad\raggedright\bfseries\MakeUppercase{#1}}}
 [\hrule]
+
+% Numberless headings (for preface chapter)
+\titleformat{name=\chapter, numberless}
+{\normalfont\huge\bfseries}
+{}
+{0pt}
+{#1}
+
+\titleformat{name=\section, numberless}{\bfseries}{#1}{0em}{}
