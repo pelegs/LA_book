@@ -21,7 +21,7 @@ and generalizing to (real) n-dimensions after the 2/3-dims cases are covered.
 ### Linear Equations
 ### Eigenvectors and Eigenvalues
 ### Matrix Decompositions
-### Principle Component Aalysis? (maybe in next Part)
+### Principle Component Analysis? (maybe in next Part)
 
 ## Chapter 3: A bit of Formalizing
 This chapter will take all topics covered in the previous chapter and define them rigourously,
