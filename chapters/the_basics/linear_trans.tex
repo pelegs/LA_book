@@ -1,7 +1,9 @@
 \section{Linear Transformations}
- (HERE COMES LOTS OF INTRO TEXT ON LINEAR TRANSFORMATIONS WHICH I WILL WRITE LATER)
+(here comes lots of intro text on linear transformations and all of the stuff about them except what i already wrote\dots\ which is the very end of the section)
 
-Linear transformations have a very nice property which makes applying them on different vectors extremely efficient. Consider the linear transformation $T:\Rs[2]\to\Rs[2]$ which is a composition of scaling by a factor of $2$ in the $y$-diretion followed by a rotation of $\ang{90}$ anti-clockwise around the origin. Now let's say that we wish to calculate how $T$ transforms the vector
+\dots
+
+Linear transformations have a very nice property which makes applying them on different vectors an extremely efficient process. Consider the linear transformation $T:\Rs[2]\to\Rs[2]$ which is a composition of scaling by a factor of $2$ in the $y$-diretion followed by a rotation of $\ang{90}$ anti-clockwise around the origin. Now let's say that we wish to calculate how $T$ transforms the vector
 $$\vec{a}=\colvec{3;2}.$$
 
 In principle, we could simply apply the operations one after the other on $\vec{a}$:
@@ -9,6 +11,34 @@ In principle, we could simply apply the operations one after the other on $\vec{
 	\vec{a} = \colvec{3;2} \xmapsto{\text{$\times 2$ in $y$}} \colvec{3;4} \xmapsto{\text{$\ang{90}$ rotation}} \colvec{-4;3} = T(\vec{a}).
 	\label{eq:simple_LT_example_single_2d_vec}
 \end{equation}
+
+\begin{figure}[h]
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{axis}[
+				width=110mm,
+				xyplane,
+				xmin=-5, xmax=5,
+				ymin=-0.5, ymax=4,
+				major grid style={black!10},
+			]
+				\tikzset{transarrow/.style={darkgray!75, stealth-|, thick, dashed}}
+				\coordinate (o) at (0,0);
+				\draw[vector, xblue] (o) -- (3,2) node [pos=1.1] (albl) {$\vec{a}$};
+				\draw[vector, xblue, dashed, opacity=0.75] (o) -- (3,4) node (atildelbl) [pos=1.1] {$\tilde{\vec{a}}$};
+				\draw[vector, xblue] (o) -- (-4,3) node [pos=1.1] (Talbl) {$T(\vec{a})$};
+				\draw[
+					transarrow, postaction={
+						decorate, decoration={raise=-2ex, text along path, text align={left indent=50mm}, text color=darkgray, text={|\large\bfseries|rotation}}
+					},
+				] (Talbl) to [bend left=45] (atildelbl);
+				\draw[transarrow] (atildelbl) -- (albl) node[darkgray, midway, right, font=\bfseries\large] {$\mathbf{\times 2}$};
+			\end{axis}
+		\end{tikzpicture}
+	\end{center}
+	\caption{The transformation $T$ applied to $\vec{a}$: first the vector is scaled by $2$ in the $y$-direction, and then rotated by $\ang{90}$ anti-clockwise.}
+	\label{fig:simple_LT_example_single_2d_vec}
+\end{figure}
 
 Now, what happens if we wish to calculate a more complicated linear transformation, which is both composed out of many more basic transformations - and also acts on higher-dimensional vectors? Performing each transformation step might not be so straight-forward, and is definitely not an efficient process. In fact, even if we're dealing with a simple example just like the one we just saw, we would still need to apply it every time we want to calculate how a new vector is transformed.
 
@@ -82,4 +112,5 @@ To make this a bit more formal, let's look at the most generic case: say $T:\Rs[
 	\label{eq:}
 \end{equation}
 
-This is an incredibly powerful insight which allows us to save a lot of calculations - and which we will use in the next section to make the calculations of linear transformations \textit{even more} concise and simple \footnote{\textbf{spoiler}: \rotatebox{180}{matrices!}}.
+This is an incredibly powerful insight which allows us to save a lot of calculations - and which we will use in the next section to make the calculations of linear transformations \textit{even more} concise and simple, using the power of\dots % this was the previous joke: \footnote{\textbf{spoiler}: \rotatebox{180}{matrices!}\ \dots\ although the section heading is right here.}.
+
