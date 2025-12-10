@@ -203,3 +203,17 @@ Just like in the $2\times2$ case, the $i$-th column vector of $A$ shows how it t
 			}
 		\end{tikzpicture}.
 \end{equation*}
+
+Therefore, in general we define the product of an $n\times n$ matrix $A$ (otherwise written as $A\in\Rs[n\times n]$) and a vector $\vec{v}\in\Rs[n]$ to be
+\begin{equation}
+	A\vec{v} = 
+	\begin{bNiceMatrix}[margin]
+		a_{11} & a_{12}  & \cdots & a_{1n} \\
+		a_{21} & a_{22}  & \cdots & a_{2n} \\
+		\vdots & \vdots  & \ddots & \vdots \\
+		a_{n1} & a_{n2}  & \cdots & a_{nn}
+	\end{bNiceMatrix}\clrgenericvec{v}{n} = \colvec{a_{11}\LCa{v_{1}} + a_{12}\LCb{v_{2}} + \dots + a_{1n}\LCe{v_{n}};a_{21}\LCa{v_{1}} + a_{22}\LCb{v_{2}} + \dots + a_{2n}\LCe{v_{n}};\vdots;a_{n1}\LCa{v_{1}} + a_{n2}\LCb{v_{2}} + \dots + a_{nn}\LCe{v_{n}}}.
+	\label{eq:product of n-by-n matrix and a vec in Rn}
+\end{equation}
+
+Indeed, this can be presented (as it often does) in the following way: the $i$-th coefficient of the vector $\vec{w}=A\vec{v}$ is the dot product of the $i$-th row of $A$ and the vector $\vec{v}$. To see this in practice, follow closely how each of the rows $1,2$ and $n$ of $A$ in \autoref{eq:product of n-by-n matrix and a vec in Rn} are dot-multiplied with $\vec{n}$ to yields the corresponding component of $A\vec{v}$.
