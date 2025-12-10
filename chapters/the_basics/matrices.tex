@@ -37,3 +37,58 @@ Of course, we should make sure that the matrix $M$ we just defined works for oth
 	\label{eq:validating matrix works for b}
 \end{equation}
 which is exactly the result we got in \autoref{eq:second_simple_LT_example_single_2d_vec}. Great!
+
+Why not continue checking how this matrix-vector product we developed works for other vectors? First, let's check $\eb{1}$ and $\eb{2}$ for which we already know the results (\autoref{eq:simple_LT_example_single_2d_vec}):
+\begin{equation}
+	\begin{aligned}
+		M\eb{1} &= 
+		\begin{bmatrix}
+			0 & -2 \\
+			1 & 0
+		\end{bmatrix}\clrcolvecxy{1}{0} = \colvec{0\cdot\LCa{1}-2\cdot\LCb{0};1\cdot\LCa{1}+0\cdot\LCb{0}} = \colvec{0;1} = T(\eb{1}),\\
+		M\eb{2} &= 
+		\begin{bmatrix}
+			0 & -2 \\
+			1 & 0
+		\end{bmatrix}\clrcolvecxy{0}{1} = \colvec{0\cdot\LCa{0}-2\cdot\LCb{1};1\cdot\LCa{0}+0\cdot\LCb{1}} = \colvec{-2;0} = T(\eb{2}),
+		\label{eq:}
+	\end{aligned}
+\end{equation}
+exactly the results we expected.
+
+Perhaps you've noticed something by now - the columns of $M$ are exactly the vectors $T(\eb{1})$ and $T(\eb{2})$ in the right order:
+% \begin{equation}
+% 	M = 
+% 	\begin{bNiceMatrix}[margin]
+% 		\tikzmark{e1}\Block[fill=xpurple!25, rounded-corners]{2-1}{}0 & \tikzmark{e2}\Block[fill=xorange!25, rounded-corners]{2-1}{}-2 \\
+% 		1 & 0
+% 		\begin{tikz}[overlay, remember picture] {\node[above of=e1] {$\eb{1}$}; \node[above of=e2] {$\eb{2}$}}
+% 	\end{bNiceMatrix}.
+% 	\label{eq:}
+% \end{equation}
+
+\begin{equation*}
+	M = \begin{tikzpicture}[baseline=-0.5ex]
+		\matrix [matrix of math nodes,
+		nodes={rectangle, minimum size=15pt}, % should somehow also make a vertical space to the bottom of the matrix
+		inner sep=0pt,
+		column sep=8pt,
+		left delimiter={[}, right delimiter={]},
+		] (M)
+		{
+			0 & -2 \\
+			1 & 0 \\
+		};
+		\begin{scope}[on background layer]
+			\filldraw[xpurple, rounded corners, opacity=0.25] (M-1-1.north west) rectangle (M-2-1.south east);
+			\filldraw[xorange, rounded corners, opacity=0.25] (M-1-2.north west) rectangle (M-2-2.south east);
+		\end{scope}
+
+		\tiny
+		\node[xpurple, above of=M-1-1] (eb1text) {$T(\eb{1})$};
+		\draw[-stealth, xpurple] (eb1text) -- (M-1-1.north);
+		\node[xorange, above of=M-1-2] (eb2text) {$T(\eb{2})$};
+		\draw[-stealth, xorange] (eb2text) -- (M-1-2.north);
+\end{tikzpicture}.
+	\label{eq:}
+\end{equation*}
