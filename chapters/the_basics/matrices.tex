@@ -57,38 +57,100 @@ Why not continue checking how this matrix-vector product we developed works for 
 exactly the results we expected.
 
 Perhaps you've noticed something by now - the columns of $M$ are exactly the vectors $T(\eb{1})$ and $T(\eb{2})$ in the right order:
-% \begin{equation}
-% 	M = 
-% 	\begin{bNiceMatrix}[margin]
-% 		\tikzmark{e1}\Block[fill=xpurple!25, rounded-corners]{2-1}{}0 & \tikzmark{e2}\Block[fill=xorange!25, rounded-corners]{2-1}{}-2 \\
-% 		1 & 0
-% 		\begin{tikz}[overlay, remember picture] {\node[above of=e1] {$\eb{1}$}; \node[above of=e2] {$\eb{2}$}}
-% 	\end{bNiceMatrix}.
-% 	\label{eq:}
-% \end{equation}
 
 \begin{equation*}
 	M = \begin{tikzpicture}[baseline=-0.5ex]
-		\matrix [matrix of math nodes,
-		nodes={rectangle, minimum size=15pt}, % should somehow also make a vertical space to the bottom of the matrix
-		inner sep=0pt,
-		column sep=8pt,
-		left delimiter={[}, right delimiter={]},
-		] (M)
-		{
-			0 & -2 \\
-			1 & 0 \\
-		};
-		\begin{scope}[on background layer]
-			\filldraw[xpurple, rounded corners, opacity=0.25] (M-1-1.north west) rectangle (M-2-1.south east);
-			\filldraw[xorange, rounded corners, opacity=0.25] (M-1-2.north west) rectangle (M-2-2.south east);
-		\end{scope}
+			\matrix [matrix of math nodes,
+			nodes={rectangle, minimum size=15pt}, % should somehow also make a vertical space to the bottom of the matrix
+			inner sep=0pt,
+			column sep=8pt,
+			left delimiter={[}, right delimiter={]},
+			] (M)
+			{
+				0 & -2 \\
+				1 & 0 \\
+			};
+			\begin{scope}[on background layer]
+				\filldraw[xpurple, rounded corners, opacity=0.25] (M-1-1.north west) rectangle (M-2-1.south east);
+				\filldraw[xorange, rounded corners, opacity=0.25] (M-1-2.north west) rectangle (M-2-2.south east);
+			\end{scope}
 
-		\tiny
-		\node[xpurple, above of=M-1-1] (eb1text) {$T(\eb{1})$};
-		\draw[-stealth, xpurple] (eb1text) -- (M-1-1.north);
-		\node[xorange, above of=M-1-2] (eb2text) {$T(\eb{2})$};
-		\draw[-stealth, xorange] (eb2text) -- (M-1-2.north);
-\end{tikzpicture}.
-	\label{eq:}
+			\tiny
+			\node[xpurple, above of=M-1-1] (eb1text) {$T(\eb{1})$};
+			\draw[-stealth, xpurple] (eb1text) -- (M-1-1.north);
+			\node[xorange, above of=M-1-2] (eb2text) {$T(\eb{2})$};
+			\draw[-stealth, xorange] (eb2text) -- (M-1-2.north);
+		\end{tikzpicture}.
 \end{equation*}
+
+The most general transformation we can have using $M$ would be applying it to a general vector, $\vec{v}=\clrcolvecxy{x}{y}\in\Rs[2]$:
+\begin{equation}
+	M\vec{v} = \begin{bmatrix}
+			0 & -2 \\
+			1 & 0
+		\end{bmatrix}\clrcolvecxy{x}{y} = \colvec{0\cdot\LCa{x}-2\cdot\LCb{y};1\cdot\LCa{x}+0\cdot\LCb{y}} = \colvec{-2y;x}.
+	\label{eq:applying M on a generic 2D vector}
+\end{equation}
+
+Of course, this result is exactly what we expect, as we can see when we apply each step of $T$ on the generic vector $\vec{v}$:
+\begin{equation}
+	\colvec{x;y} \xmapsto{\text{$\times 2$ in $y$}} \colvec{x;2y} \xmapsto{\text{$\ang{90}$ rotation}} \colvec{-2y;x}.
+	\label{eq:}
+\end{equation}
+
+OK, up until now everything we did was for a specific transformation we called $T$. However, we can build a matrix for a general linear transformation $T:\Rs[2]\to\Rs[2]$. Such a transformation has the form 
+\begin{equation*}
+	T\colvec{x;y} = \colvec{ax+by;cx+dy},
+\end{equation*}
+where $a,b,c,d\in\Rs$ (REF), and using the same process as in \autoref{eq:developing matrix notation step 1} we get the general matrix
+\begin{equation}
+	M = \begin{bmatrix}
+		a & b \\
+		c & d
+	\end{bmatrix}.
+	\label{eq:general 2x2 matrix}
+\end{equation}
+
+Just like in our specific example, the columns of $M$ are exactly the images of the basis vectors $\eb{1}$ and $\eb{2}$, respectively. To confirm this, let's apply the $M$ on both basis vectors:
+\begin{equation}
+	\begin{aligned}
+		M\eb{1} &= 
+		\begin{bmatrix}
+			a & b \\
+			c & d
+		\end{bmatrix}\clrcolvecxy{1}{0} = \colvec{a\cdot\LCa{1}+b\cdot\LCb{0};c\cdot\LCa{1}+d\cdot\LCb{0}} = \colvec{a;c} = M_{1},\\
+		M\eb{2} &= 
+		\begin{bmatrix}
+			a & b \\
+			c & d
+		\end{bmatrix}\clrcolvecxy{0}{1} = \colvec{a\cdot\LCa{0}+b\cdot\LCb{1};c\cdot\LCa{0}+d\cdot\LCb{1}} = \colvec{b;d} = M_{2}.
+		\label{eq:applying a general 2x2 matrix on basis vectors}
+	\end{aligned}
+\end{equation}
+
+Note that I use $M_{1}$ and $M_{2}$ to denote the $1$-st and $2$-nd columns of $M$, respectively.
+
+In most textbooks and courses I've seen, the process of multiplying a matrix $M$ by a vector $\vec{v}$ is described as following: the $i$-th component of the resulting vector (in our case $i\in\left\{\LCa{1},\LCb{2}\right\}$) is the \textit{dot product} of the $i$-th row of $M$ and the vector $\vec{v}$ itself. This is exactly what happens in practice in the development process we went through here - if we name the resulting vector of $M\vec{v}$ as $\vec{w}$ we get its following two components:
+\begin{equation}
+	\left.
+	\begin{aligned}
+		w_{1} &= \rowvec{a;b}\clrcolvecxy{x}{y} = \colvec{a\cdot\LCa{x}+b\cdot\LCb{y}} = \colvec{a\LCa{x}+b\LCb{y}}\\[2ex]
+		w_{2} &= \rowvec{c;d}\clrcolvecxy{x}{y} = \colvec{c\cdot\LCa{x}+d\cdot\LCb{y}} = \colvec{c\LCa{x}+d\LCb{y}}
+		\label{eq:}
+	\end{aligned}
+\right\} \rightarrow \vec{w} = \colvec{a\LCa{x}+b\LCb{y};c\LCa{x}+d\LCb{y}}.
+\end{equation}
+
+Of course, this is just the case for a matrix representing a general linear transformation $T:\Rs[2]\to\Rs[2]$. Matrices representing such transformations have $4$ components, since they are made of $2$ basis vectors as columns, each having $2$ components (since the vectors live in $\Rs[2]$). We also say that the matrix lives in the space $\Rs[2\times2]$.
+
+In general (also in higher-dimensional cases), we use 2 indices to denote the components of any matrix: the 1st index for the \textit{row} of the component and the 2nd index for the \textit{column} of the component. For example, a general matrix $A\in\Rs[2\times2]$ can be written as
+\begin{equation}
+	A = \begin{bmatrix}
+		a_{11} & a_{12} \\
+		a_{21} & a_{22} \\
+	\end{bmatrix},
+	\label{eq:general 2x2 matrix with index notation for components}
+\end{equation}
+where it is important to remember that there are two indices here - and not a single number. For example, $a_{11}$ should be read as \enquote{a-one-one} (i.e. the component in the 1st row and the 1st column), and not as \enquote{a-eleven}. Similarly, $a_{12}$ is \enquote{a-one-two} (not \enquote{a-tweleve}), $a_{21}$ is \enquote{a-two-one}, etc. The reason this notation is used (as much as it might be confusing at first) is lazyness: nobody wants to write redundant commas (i.e. $a_{1,1}$). It is what it is, and you will get used to it \shrug
+
+Now we can move on to the most general form of a linear transformation between a real vector space to itself:
