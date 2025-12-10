@@ -153,4 +153,53 @@ In general (also in higher-dimensional cases), we use 2 indices to denote the co
 \end{equation}
 where it is important to remember that there are two indices here - and not a single number. For example, $a_{11}$ should be read as \enquote{a-one-one} (i.e. the component in the 1st row and the 1st column), and not as \enquote{a-eleven}. Similarly, $a_{12}$ is \enquote{a-one-two} (not \enquote{a-tweleve}), $a_{21}$ is \enquote{a-two-one}, etc. The reason this notation is used (as much as it might be confusing at first) is lazyness: nobody wants to write redundant commas (i.e. $a_{1,1}$). It is what it is, and you will get used to it \shrug
 
-Now we can move on to the most general form of a linear transformation between a real vector space to itself:
+We can now finally move on to the most general form of a linear transformation between a real vector space to itself, i.e. $T:\Rs[n]\to\Rs[n]$. The most general vector $\vec{v}\in\Rs[n]$ has the form
+\begin{equation}
+	\vec{v} = \clrgenericvec{v}{n},
+	\label{eq:generic vector in Rn}
+\end{equation}
+and therefore the application of a generic linear transformation from $\Rs[n]$ to itself on $\vec{v}$ yields the vector
+\begin{equation}
+	T(\vec{v}) = \vec{w} =
+	\colvec{a_{11}\LCa{v_{1}} + a_{12}\LCb{v_{2}} + \dots + a_{1n}\LCe{v_{n}};a_{21}\LCa{v_{1}} + a_{22}\LCb{v_{2}} + \dots + a_{2n}\LCe{v_{n}};\vdots;a_{n1}\LCa{v_{1}} + a_{n2}\LCb{v_{2}} + \dots + a_{nn}\LCe{v_{n}}},
+	\label{eq:generic LT from Rn to itself}
+\end{equation}
+where $a_{ij}\in\Rs$ (with $i,j\in\left\{1,2,\dots,n\right\}$). Of course, denoting the components as $a_{ij}$ is alluding to the next step - collecting them into a matrix:
+\begin{equation}
+	A = 
+	\begin{bNiceMatrix}[margin]
+	  a_{11} & a_{12}  & \cdots & a_{1n} \\
+	  a_{21} & a_{22}  & \cdots & a_{2n} \\
+	  \vdots & \vdots  & \ddots & \vdots \\
+	  a_{n1} & a_{n2}  & \cdots & a_{nn}
+	\end{bNiceMatrix}.
+	\label{eq:}
+\end{equation}
+
+Just like in the $2\times2$ case, the $i$-th column vector of $A$ shows how it transforms $\eb{i}$ (which in this case lives in the space $\Rs[n]$, of course):
+
+\begin{equation*}
+	M = \begin{tikzpicture}[baseline=-0.5ex]
+			\matrix [
+				matrix of math nodes,
+				nodes={rectangle, minimum size=15pt}, % should somehow also make a vertical space to the bottom of the matrix
+				inner sep=0pt,
+				column sep=8pt,
+				left delimiter={[}, right delimiter={]},
+				] (A) {
+						a_{11} & a_{12} & \cdots & a_{1n} \\
+						a_{21} & a_{22} & \cdots & a_{2n} \\
+						\vdots & \vdots & \ddots & \vdots \\
+						a_{n1} & a_{n2} & \cdots & a_{nn} \\
+					  };
+			\tiny
+			\foreach \x in {1,2,4} {
+				\begin{scope}[on background layer]
+					\filldraw[MCol\x, rounded corners, opacity=0.25] (A-1-\x.north west) rectangle (A-4-\x.south east);
+				\end{scope}
+				
+				\node[MCol\x, above of=A-1-\x] (eb-\x-text) {$T(\eb{\ifthenelse{\x=4}{n}{\x}})$};
+				\draw[-stealth, MCol\x] (eb-\x-text) -- (A-1-\x.north);
+			}
+		\end{tikzpicture}.
+\end{equation*}
