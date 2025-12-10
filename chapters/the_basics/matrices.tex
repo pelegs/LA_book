@@ -1,1 +1,39 @@
 \section{Matrices}
+Following our example from the end of the previous section, let's look again at the result of applying $T$ from \autoref{eq:simple_LT_example_single_2d_vec} on the vector $\vec{a}=\clrcolvecxy{3}{2}$.
+
+Since we know how $T$ transforms the basis vectors $\eb{1}$ and $\eb{2}$ (\autoref{eq:simple LT example transformed basis vectors}), we can $T(\vec{a})$ in the following way:
+\begin{equation}
+	T(\vec{a}) = \colvec{3;4} = \overset{\substack{\LCa{a_{1}} \\ \downarrow}}{\LCa{3}}\underset{\substack{\uparrow \\ T(\eb{1})}}{\colvec{0;1}} + \overset{\substack{\LCb{a_{2}} \\ \downarrow}}{\LCb{2}}\underset{\substack{\uparrow \\ T(\eb{2})}}{\colvec{-2;0}} = \colvec{0\cdot\LCa{3}-2\cdot\LCb{2};1\cdot\LCa{3}+0\cdot\LCb{2}}.
+	\label{eq:developing matrix notation step 1}
+\end{equation}
+
+Then, we collect all the coefficients in black into a single structure, which we call a \newdef{matrix}:
+\begin{equation}
+	M =
+	\begin{bmatrix}
+		0 & -2 \\
+		1 & 0
+	\end{bmatrix}.
+	\label{eq:developing matrix notation step 2}
+\end{equation}
+
+Finally, we define the action of the matrix $M$ on the vector $\vec{a}$ as following:
+\begin{equation}
+	M\vec{a} = 
+	\begin{bmatrix}
+		0 & -2 \\
+		1 & 0
+	\end{bmatrix}\clrcolvecxy{3}{2} = \colvec{0\cdot\LCa{3}-2\cdot\LCb{2};1\cdot\LCa{3}+0\cdot\LCb{2}} = T(\vec{a}).
+	\label{eq:developing matrix notation step 3}
+\end{equation}
+
+Of course, we should make sure that the matrix $M$ we just defined works for other vectors as well. If we apply $M$ to the second vector from our example, $\vec{b}=\clrcolvecxy{2}{-4}$, we get
+\begin{equation}
+	M\vec{b} = 
+	\begin{bmatrix}
+		0 & -2 \\
+		1 & 0
+	\end{bmatrix}\clrcolvecxy{2}{-4} = \colvec{0\cdot\LCa{2}-2\cdot\LCb{-4};1\cdot\LCa{2}+0\cdot\LCb{-4}} = \colvec{8;2} = T(\vec{b}),
+	\label{eq:validating matrix works for b}
+\end{equation}
+which is exactly the result we got in \autoref{eq:second_simple_LT_example_single_2d_vec}. Great!

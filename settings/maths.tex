@@ -109,3 +109,19 @@
 		#1_{#21} & #1_{#22} & \dots  & #1_{#2#3}
 	\end{bNiceMatrix}
 }
+
+% Color-coded linear combinations
+\newcommand{\LCa}[1]{\textcolor{xred}{#1}}
+\newcommand{\LCb}[1]{\textcolor{xblue}{#1}}
+\newcommand{\LCc}[1]{\textcolor{xdarkgreen}{#1}}
+\newcommand{\LCd}[1]{\textcolor{xpurple}{#1}}
+\newcommand{\LCe}[1]{\textcolor{xorange}{#1}}
+
+% Colored column vectors? Should be implemented better...
+% (but I need to write instead of over-engineering the code)
+\newcommand{\clrcolvecxy}[2]{
+	\colvec{\LCa{#1};\LCb{#2}}
+}
+\newcommand{\clrgenericvec}[2]{
+	\colvec{\LCa{#1_{1}};\LCb{#1_{2}};\vdots;\LCe{#1_{#2}}}
+}

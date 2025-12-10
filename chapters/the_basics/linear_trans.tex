@@ -2,11 +2,11 @@
  (HERE COMES LOTS OF INTRO TEXT ON LINEAR TRANSFORMATIONS WHICH I WILL WRITE LATER)
 
 Linear transformations have a very nice property which makes applying them on different vectors extremely efficient. Consider the linear transformation $T:\Rs[2]\to\Rs[2]$ which is a composition of scaling by a factor of $2$ in the $y$-diretion followed by a rotation of $\ang{90}$ anti-clockwise around the origin. Now let's say that we wish to calculate how $T$ transforms the vector
-$$\vec{a}=\colvec{3;1}.$$
+$$\vec{a}=\colvec{3;2}.$$
 
-In principle, we could simply apply the operations one after the other on $\vec{a}$: scaling by $2$ in the $y$-direction yields the vector $$\tilde{\vec{a}}=\colvec{3;2},$$ and then rotating it yields the final vector
+In principle, we could simply apply the operations one after the other on $\vec{a}$:
 \begin{equation}
-	T(\vec{a}) = \colvec{-2;3}.
+	\vec{a} = \colvec{3;2} \xmapsto{\text{$\times 2$ in $y$}} \colvec{3;4} \xmapsto{\text{$\ang{90}$ rotation}} \colvec{-4;3} = T(\vec{a}).
 	\label{eq:simple_LT_example_single_2d_vec}
 \end{equation}
 
@@ -14,59 +14,72 @@ Now, what happens if we wish to calculate a more complicated linear transformati
 
 It turns out that thanks to the simplicity of linear transformations \footnote{more correctly: to the strict rules they enforce} we only need to perform a few simple calculations per transformation to practically get any possible application of it on any vector!
 
-To see how this is the case, let's go back to our simple $2$-dimensional example. First, recall that we can express any vector in terms of the standard basis vectors (REF), which in this case gives $$\vec{a}=\colvec{3;1}=3\colvec{1;0}+1\colvec{0;1}$$. We can then apply the defining properties of linear transformations (REF) on $\vec{a}$:
+To see how this is the case, let's go back to our simple $2$-dimensional example. First, recall that we can express any vector in terms of the standard basis vectors (REF), which in this case gives us (note the color-coding)
+\begin{equation}
+	\vec{a} = \clrcolvecxy{3}{2} = \LCa{3}\overset{\substack{\eb{1} \\ \downarrow}}{\colvec{1;0}} + \LCb{2}\overset{\substack{\eb{2} \\ \downarrow}}{\colvec{0;1}}.
+	\label{eq:vec a representation in the standard basis}
+\end{equation}
 
+We can then apply the defining properties of linear transformations (REF) on $\vec{a}$:
 \begin{equation}
 	\begin{aligned}
-		T\colvec{3;1} & = T\left(3\colvec{1;0}+1\colvec{0;1}\right)                 \\
-		              & = T\left(3\colvec{1;0}\right) + T\left(1\colvec{0;1}\right) \\
-		              & = 3T\colvec{1;0} + 1T\colvec{0;1}                           \\
-		              & = 3T\left(\eb{1}\right) + T\left(\eb{2}\right).
+		T\clrcolvecxy{3}{2} & = T\left(\LCa{3}\colvec{1;0}+\LCb{2}\colvec{0;1}\right)                 \\
+		                    & = T\left(\LCa{3}\colvec{1;0}\right) + T\left(\LCb{2}\colvec{0;1}\right) \\
+		                    & = \LCa{3}T\colvec{1;0} + \LCb{2}T\colvec{0;1}                           \\
+		                    & = \LCa{3}T\left(\eb{1}\right) + \LCb{2}T\left(\eb{2}\right).
 	\end{aligned}
-	\label{eq:}
+	\label{eq:T applied to a in std basis representation}
 \end{equation}
 
 Now, applying $T$ to the two standard basis vectors $\eb{1}$ and $\eb{2}$ we get
 \begin{equation}
 	\begin{aligned}
-		T\left(\eb{1}\right) & = \colvec{0;1},  \\
-		T\left(\eb{2}\right) & = \colvec{-2;0}, \\
+		\eb{1} & = \colvec{1;0} \xmapsto[\text{$\times 2$ in $y$}]{} \colvec{1;0} \xmapsto[\text{$\ang{90}$ rotation}]{} \colvec{0;1} = T(\eb{1})                                      \\
+		\eb{2} & = \colvec{0;1} \xmapsto{\textcolor{white}{\text{$\times 2$ in $y$}}} \colvec{0;2} \xmapsto{\textcolor{white}{\text{$\ang{90}$ rotation}}} \colvec{-2;0} = T(\eb{2})
+	\end{aligned}
+	\label{eq:simple LT example transformed basis vectors}
+\end{equation}
+
+And when we use these transformed basis vectors in the linear combination we finally get
+\begin{equation}
+	\begin{aligned}
+		\LCa{3}T\left(\eb{1}\right) + \LCb{2}T\left(\eb{2}\right) & = \LCa{3}\colvec{0;1} +\LCb{2}\colvec{-2;0} \\
+		                                                          & = \colvec{0;3} + \colvec{-4;0}              \\
+		                                                          & = \colvec{-4;3},
 	\end{aligned}
 	\label{eq:}
 \end{equation}
-and then
-\begin{align*}
-	3T\left(\eb{1}\right) + T\left(\eb{2}\right) & = 3\colvec{0;1} + \colvec{-2;0} \\
-	                                             & = \colvec{0;3} + \colvec{-2;0}  \\
-	                                             & = \colvec{-2;3},
-\end{align*}
 which is exactly what we got when we calculated $T$'s effect directly on $\vec{a}$ (cf. \autoref{eq:simple_LT_example_single_2d_vec}).
 
-Notice exactly what happened: in the standard basis representation, $\vec{a}$ had the coefficients $3$ and $1$ for $\eb{1}$ and $\eb{2}$, respectively. When applying $T$ on $\vec{a}$ these two coefficients remained, but the basis changed: instead of $\left\{\eb{1},\eb{2}\right\}$, the two basis vectors are $\left\{T(\eb{1}),T(\eb{2})\right\}$.
+Notice exactly what happened: in the standard basis representation, $\vec{a}$ had the coefficients $\LCa{3}$ and $\LCb{2}$ for $\eb{1}$ and $\eb{2}$, respectively. When applying $T$ to $\vec{a}$ these two coefficients remained, but the basis changed: instead of $\left\{\eb{1},\eb{2}\right\}$, the two basis vectors became $\left\{T(\eb{1}),T(\eb{2})\right\}$.
 
-Of course, this is not unique to $\vec{a}$. For example, let's look at another vector, $$\vec{b}=\colvec{2;-4}.$$ Its coefficients in the standard basis representation are $2$ and $-4$, respectively. So we expect $T(\vec{b})$ to be
+Of course, this is not unique to $\vec{a}$. For example, let's look at another vector, $$\vec{b}=\clrcolvecxy{2}{-4}.$$ Its coefficients in the standard basis representation are $\LCa{2}$ and $\LCb{-4}$, respectively. So we expect $T(\vec{b})$ to be
 \begin{equation}
 	\begin{aligned}
-		T(\vec{b}) & = 2T(\eb{1}) - 4T(\eb{2})        \\
-		           & = 2\colvec{0;1} - 4\colvec{-2;0} \\
-		           & = \colvec{0;2} + \colvec{8;0}    \\
+		T(\vec{b}) & = \LCa{2}T(\eb{1}) - \LCb{4}T(\eb{2})        \\
+		           & = \LCa{2}\colvec{0;1} - \LCb{4}\colvec{-2;0} \\
+		           & = \colvec{0;2} + \colvec{8;0}                \\
 		           & = \colvec{8;2}.
 	\end{aligned}
 	\label{eq:second_simple_LT_example_single_2d_vec}
 \end{equation}
 
-If we now calculate $T(\vec{b})$ directly, we get that scaling $\vec{b}$ by $2$ in the $y$-direction gives the vector $$\tilde{\vec{b}}=\colvec{2;-8},$$ and rotating this vector by $\ang{90}$ anti-clockwise gives $$T(\vec{b})=\colvec{8;2},$$ exactly as we got in \autoref{eq:second_simple_LT_example_single_2d_vec}.
+If we now calculate $T(\vec{b})$ directly, we get the following:
+\begin{equation}
+	\vec{b} = \colvec{2;-4} \xmapsto{\text{$\times 2$ in $y$}} \colvec{2;-8} \xmapsto{\text{$\ang{90}$ rotation}} \colvec{8;2} = T(\vec{b}).
+	\label{eq:simple_LT_example_single_2d_vec}
+\end{equation}
 
 What this insight shows us is that given a linear transformation, we only need to know how it transforms the respective standard basis vectors in order to calculate how it transform any vector in its domain. The transformed version of the vector would simply be the linear combination of these transformed basis vectors, with the coefficients given by the vector's presentation in the standard basis. It really can't get any simpler than that!
 
-To make this a bit more formal, let's look at the most generic case: say $T:\Rs[n]\to\Rs[n]$ is a linear transformation \footnote{we'll deal with the more general case of $T:\Rs[n]\to\Rs[m]$ where $n\neq m$ in the next section}. Then applying it to a vector $\vec{v}\in\Rs[n]$ in its standard basis representation $$\vec{v}=\colvec{v_{1};v_{2};\vdots;v_{n}}=v_{1}\eb{1}+v_{2}\eb{2}+\dots+v_{n}\eb{n}$$ we get
+To make this a bit more formal, let's look at the most generic case: say $T:\Rs[n]\to\Rs[n]$ is a linear transformation \footnote{we'll deal with the more general case of $T:\Rs[n]\to\Rs[m]$ where $n\neq m$ in the next section.}. Then applying $T$ to a vector $\vec{v}\in\Rs[n]$ in its standard basis representation, $$\vec{v}=\clrgenericvec{v}{n},$$ we get
 \begin{equation}
 	\begin{aligned}
-		T(\vec{v}) & = T\colvec{v_{1};v_{2};\vdots;v_{n}}                            \\
-		           & = T\left( v_{1}\eb{1} + v_{2}\eb{2} + \dots v_{n}\eb{n} \right) \\
-		           & = v_{1}T(\eb{1}) + v_{2}T(\eb{2}) + \dots + v_{n}\eb{n}.
+		T(\vec{v}) & = T\clrgenericvec{v}{n}                                                             \\
+		           & = T\left( \LCa{v_{1}}\eb{1} + \LCb{v_{2}}\eb{2} + \dots + \LCe{v_{n}}\eb{n} \right) \\
+		           & = \LCa{v_{1}}T(\eb{1}) + \LCb{v_{2}}T(\eb{2}) + \dots + \LCe{v_{n}}T(\eb{n}).
 	\end{aligned}
 	\label{eq:}
 \end{equation}
 
-This is an incredibly powerful insight which allows us to save a lot of calculation - and which we will use in the next section to make the calculations of linear transformations \textit{even more} concise and simple \footnote{\textbf{spoiler}: \rotatebox{180}{matrices!}}.
+This is an incredibly powerful insight which allows us to save a lot of calculations - and which we will use in the next section to make the calculations of linear transformations \textit{even more} concise and simple \footnote{\textbf{spoiler}: \rotatebox{180}{matrices!}}.
