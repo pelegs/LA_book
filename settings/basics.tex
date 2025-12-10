@@ -1,6 +1,12 @@
 \documentclass[a4paper, 12pt]{scrbook}
 \usepackage{fancyhdr}
 
+% Don't pagebreake before new section
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\scr@startsection}{}{}{}{}
+\makeatother
+
 \fancyhead{}
 \fancyfoot[LE, RO]{ \thepage }
 
