@@ -1,5 +1,5 @@
 \usepackage{enumitem}
-\usepackage{fontawesome}
+\usepackage{fontawesome5}
 
 % Bold text itemize/enumerate
 % Taken from an answer to the TeX StackExchange question #266225
@@ -97,6 +97,9 @@
 	quotestyle/.style={
 			common={gray}{\textbf{"}},
 		},
+	summarystyle/.style={
+			common={xpastelblue}{\textbf{\faClipboardList}},
+		},
 }
 
 \newtcbtheorem[auto counter, number within=chapter]{definition}{Definition}{defstyle}{def}
@@ -106,4 +109,5 @@
 \newtcbtheorem[auto counter, number within=chapter]{example}{Example}{examplestyle}{example}
 \newtcbtheorem[auto counter, number within=chapter]{note}{Note}{notestyle}{note}
 \newtcbtheorem[auto counter, number within=chapter]{challenge}{Challenge}{challengestyle}{challenge}
+\newtcbtheorem[auto counter, number within=chapter]{summary}{Summary}{summarystyle}{summary}
 \newtcbtheorem[]{nquote}{Quote}{quotestyle}{quote}
