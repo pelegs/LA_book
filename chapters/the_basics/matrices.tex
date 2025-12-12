@@ -20,7 +20,7 @@ Then, we collect all the coefficients in black into a single structure, which we
 
 Finally, we define the action of the matrix $\mat{M}$ on the vector $\vec{a}$ as following:
 \begin{equation}
-	\mat{M}\vec{a} = 
+	\mat{M}\vec{a} =
 	\begin{bmatrix}
 		0 & -2 \\
 		1 & 0
@@ -30,7 +30,7 @@ Finally, we define the action of the matrix $\mat{M}$ on the vector $\vec{a}$ as
 
 Of course, we should make sure that the matrix $\mat{M}$ we just defined works for other vectors as well. If we apply $\mat{M}$ to the second vector from our example, $\vec{b}=\clrcolvecxy{2}{-4}$, we get
 \begin{equation}
-	\mat{M}\vec{b} = 
+	\mat{M}\vec{b} =
 	\begin{bmatrix}
 		0 & -2 \\
 		1 & 0
@@ -42,12 +42,12 @@ which is exactly the result we got in \autoref{eq:second_simple_LT_example_singl
 Why not continue checking how this matrix-vector product we developed works for other vectors? First, let's check $\eb{1}$ and $\eb{2}$ for which we already know the results (\autoref{eq:simple_LT_example_single_2d_vec}):
 \begin{equation}
 	\begin{aligned}
-		\mat{M}\eb{1} &= 
+		\mat{M}\eb{1} & =
 		\begin{bmatrix}
 			0 & -2 \\
 			1 & 0
-		\end{bmatrix}\clrcolvecxy{1}{0} = \colvec{0\cdot\LCa{1}-2\cdot\LCb{0};1\cdot\LCa{1}+0\cdot\LCb{0}} = \colvec{0;1} = T(\eb{1}),\\
-		\mat{M}\eb{2} &= 
+		\end{bmatrix}\clrcolvecxy{1}{0} = \colvec{0\cdot\LCa{1}-2\cdot\LCb{0};1\cdot\LCa{1}+0\cdot\LCb{0}} = \colvec{0;1} = T(\eb{1}), \\
+		\mat{M}\eb{2} & =
 		\begin{bmatrix}
 			0 & -2 \\
 			1 & 0
@@ -59,37 +59,16 @@ exactly the results we expected.
 
 Perhaps you've noticed something by now - the columns of $\mat{M}$ are exactly the vectors $T(\eb{1})$ and $T(\eb{2})$ in the right order:
 
-\begin{equation*}
-	\mat{M} = \begin{tikzpicture}[baseline=-0.5ex]
-			\matrix [matrix of math nodes,
-			nodes={rectangle, minimum size=15pt}, % should somehow also make a vertical space to the bottom of the matrix
-			inner sep=0pt,
-			column sep=8pt,
-			left delimiter={[}, right delimiter={]},
-			] (M)
-			{
-				0 & -2 \\
-				1 & 0 \\
-			};
-			\begin{scope}[on background layer]
-				\filldraw[xpurple, rounded corners, opacity=0.25] (M-1-1.north west) rectangle (M-2-1.south east);
-				\filldraw[xorange, rounded corners, opacity=0.25] (M-1-2.north west) rectangle (M-2-2.south east);
-			\end{scope}
-
-			\tiny
-			\node[xpurple, above of=M-1-1] (eb1text) {$T(\eb{1})$};
-			\draw[-stealth, xpurple] (eb1text) -- (M-1-1.north);
-			\node[xorange, above of=M-1-2] (eb2text) {$T(\eb{2})$};
-			\draw[-stealth, xorange] (eb2text) -- (M-1-2.north);
-		\end{tikzpicture}.
-\end{equation*}
+\begin{center}
+	\fromtranstomat{T}{\mat{M}}{0}{1}{-2}{0}
+\end{center}
 
 The most general transformation we can have using $\mat{M}$ would be applying it to a general vector, $\vec{v}=\clrcolvecxy{x}{y}\in\Rs[2]$:
 \begin{equation}
 	\mat{M}\vec{v} = \begin{bmatrix}
-			0 & -2 \\
-			1 & 0
-		\end{bmatrix}\clrcolvecxy{x}{y} = \colvec{0\cdot\LCa{x}-2\cdot\LCb{y};1\cdot\LCa{x}+0\cdot\LCb{y}} = \colvec{-2y;x}.
+		0 & -2 \\
+		1 & 0
+	\end{bmatrix}\clrcolvecxy{x}{y} = \colvec{0\cdot\LCa{x}-2\cdot\LCb{y};1\cdot\LCa{x}+0\cdot\LCb{y}} = \colvec{-2y;x}.
 	\label{eq:applying M on a generic 2D vector}
 \end{equation}
 
@@ -99,7 +78,7 @@ Of course, this result is exactly what we expect, as we can see when we apply ea
 	\label{eq:}
 \end{equation}
 
-OK, up until now everything we did was for a specific transformation we called $T$. However, we can build a matrix for a general linear transformation $T:\Rs[2]\to\Rs[2]$. Such a transformation has the form 
+OK, up until now everything we did was for a specific transformation we called $T$. However, we can build a matrix for a general linear transformation $T:\Rs[2]\to\Rs[2]$. Such a transformation has the form
 \begin{equation*}
 	T\colvec{x;y} = \colvec{ax+by;cx+dy},
 \end{equation*}
@@ -115,12 +94,12 @@ where $a,b,c,d\in\Rs$ (REF), and using the same process as in \autoref{eq:develo
 Just like in our specific example, the columns of $\mat{M}$ are exactly the images of the basis vectors $\eb{1}$ and $\eb{2}$, respectively. To confirm this, let's apply the $\mat{M}$ on both basis vectors:
 \begin{equation}
 	\begin{aligned}
-		\mat{M}\eb{1} &= 
+		\mat{M}\eb{1} & =
 		\begin{bmatrix}
 			a & b \\
 			c & d
-		\end{bmatrix}\clrcolvecxy{1}{0} = \colvec{a\cdot\LCa{1}+b\cdot\LCb{0};c\cdot\LCa{1}+d\cdot\LCb{0}} = \colvec{a;c} = M_{1},\\
-		\mat{M}\eb{2} &= 
+		\end{bmatrix}\clrcolvecxy{1}{0} = \colvec{a\cdot\LCa{1}+b\cdot\LCb{0};c\cdot\LCa{1}+d\cdot\LCb{0}} = \colvec{a;c} = M_{1}, \\
+		\mat{M}\eb{2} & =
 		\begin{bmatrix}
 			a & b \\
 			c & d
@@ -135,11 +114,11 @@ In most textbooks and courses I've seen, the process of multiplying a matrix $\m
 \begin{equation}
 	\left.
 	\begin{aligned}
-		w_{1} &= \rowvec{a;b}\clrcolvecxy{x}{y} = \colvec{a\cdot\LCa{x}+b\cdot\LCb{y}} = \colvec{a\LCa{x}+b\LCb{y}}\\[2ex]
-		w_{2} &= \rowvec{c;d}\clrcolvecxy{x}{y} = \colvec{c\cdot\LCa{x}+d\cdot\LCb{y}} = \colvec{c\LCa{x}+d\LCb{y}}
+		w_{1} & = \rowvec{a;b}\clrcolvecxy{x}{y} = \colvec{a\cdot\LCa{x}+b\cdot\LCb{y}} = \colvec{a\LCa{x}+b\LCb{y}} \\[2ex]
+		w_{2} & = \rowvec{c;d}\clrcolvecxy{x}{y} = \colvec{c\cdot\LCa{x}+d\cdot\LCb{y}} = \colvec{c\LCa{x}+d\LCb{y}}
 		\label{eq:}
 	\end{aligned}
-\right\} \rightarrow \vec{w} = \colvec{a\LCa{x}+b\LCb{y};c\LCa{x}+d\LCb{y}}.
+	\right\} \rightarrow \vec{w} = \colvec{a\LCa{x}+b\LCb{y};c\LCa{x}+d\LCb{y}}.
 \end{equation}
 
 Of course, this is just the case for a matrix representing a general linear transformation $T:\Rs[2]\to\Rs[2]$. Matrices representing such transformations have $4$ components, since they are made of $2$ basis vectors as columns, each having $2$ components (since the vectors live in $\Rs[2]$). We also say that the matrix lives in the space $\Rs[2\times2]$.
@@ -167,12 +146,12 @@ and therefore the application of a generic linear transformation from $\Rs[n]$ t
 \end{equation}
 where $a_{ij}\in\Rs$ (with $i,j\in\left\{1,2,\dots,n\right\}$). Of course, denoting the components as $a_{ij}$ is alluding to the next step - collecting them into a matrix:
 \begin{equation}
-	\mat{A} = 
+	\mat{A} =
 	\begin{bNiceMatrix}[margin]
-	  a_{11} & a_{12}  & \cdots & a_{1n} \\
-	  a_{21} & a_{22}  & \cdots & a_{2n} \\
-	  \vdots & \vdots  & \ddots & \vdots \\
-	  a_{n1} & a_{n2}  & \cdots & a_{nn}
+		a_{11} & a_{12} & \cdots & a_{1n} \\
+		a_{21} & a_{22} & \cdots & a_{2n} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		a_{n1} & a_{n2} & \cdots & a_{nn}
 	\end{bNiceMatrix}.
 	\label{eq:}
 \end{equation}
@@ -181,38 +160,38 @@ Just like in the $2\times2$ case, the $i$-th column vector of $\mat{A}$ shows ho
 
 \begin{equation*}
 	\mat{M} = \begin{tikzpicture}[baseline=-0.5ex]
-			\matrix [
-				matrix of math nodes,
-				nodes={rectangle, minimum size=15pt}, % should somehow also make a vertical space to the bottom of the matrix
-				inner sep=0pt,
-				column sep=8pt,
-				left delimiter={[}, right delimiter={]},
-				] (A) {
-						a_{11} & a_{12} & \cdots & a_{1n} \\
-						a_{21} & a_{22} & \cdots & a_{2n} \\
-						\vdots & \vdots & \ddots & \vdots \\
-						a_{n1} & a_{n2} & \cdots & a_{nn} \\
-					  };
-			\tiny
-			\foreach \x in {1,2,4} {
+		\matrix [
+		matrix of math nodes,
+		nodes={rectangle, minimum size=15pt}, % should somehow also make a vertical space to the bottom of the matrix
+		inner sep=0pt,
+		column sep=8pt,
+		left delimiter={[}, right delimiter={]},
+			] (A) {
+				a_{11} & a_{12} & \cdots & a_{1n} \\
+				a_{21} & a_{22} & \cdots & a_{2n} \\
+				\vdots & \vdots & \ddots & \vdots \\
+				a_{n1} & a_{n2} & \cdots & a_{nn} \\
+			};
+		\tiny
+		\foreach \x in {1,2,4} {
 				\begin{scope}[on background layer]
 					\filldraw[MCol\x, rounded corners, opacity=0.25] (A-1-\x.north west) rectangle (A-4-\x.south east);
 				\end{scope}
-				
+
 				\node[MCol\x, above of=A-1-\x] (eb-\x-text) {$T(\eb{\ifthenelse{\x=4}{n}{\x}})$};
 				\draw[-stealth, MCol\x] (eb-\x-text) -- (A-1-\x.north);
 			}
-		\end{tikzpicture}.
+	\end{tikzpicture}.
 \end{equation*}
 
 Therefore, in general we define the product of an $n\times n$ matrix $\mat{A}$ (otherwise written as $\mat{A}\in\Rs[n\times n]$) and a vector $\vec{v}\in\Rs[n]$ to be
 \begin{equation}
-	\mat{A}\vec{v} = 
+	\mat{A}\vec{v} =
 	\begin{bNiceMatrix}[margin]
-		a_{11} & a_{12}  & \cdots & a_{1n} \\
-		a_{21} & a_{22}  & \cdots & a_{2n} \\
-		\vdots & \vdots  & \ddots & \vdots \\
-		a_{n1} & a_{n2}  & \cdots & a_{nn}
+		a_{11} & a_{12} & \cdots & a_{1n} \\
+		a_{21} & a_{22} & \cdots & a_{2n} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		a_{n1} & a_{n2} & \cdots & a_{nn}
 	\end{bNiceMatrix}\clrgenericvec{v}{n} = \colvec{a_{11}\LCa{v_{1}} + a_{12}\LCb{v_{2}} + \dots + a_{1n}\LCe{v_{n}};a_{21}\LCa{v_{1}} + a_{22}\LCb{v_{2}} + \dots + a_{2n}\LCe{v_{n}};\vdots;a_{n1}\LCa{v_{1}} + a_{n2}\LCb{v_{2}} + \dots + a_{nn}\LCe{v_{n}}} = \vec{w}.
 	\label{eq:product of n-by-n matrix and a vec in Rn}
 \end{equation}
@@ -231,7 +210,7 @@ Let us now use the process we devolped above to represent the fundamental $\Rs[2
 
 We start with the most boring linear transformation: the identity transformation $I$. As a reminder, $I$ maps \textit{any} vector $\vec{v}\in\Rs[2]$ to itself: $I(\vec{v})=\vec{v}$. In particular, it takes the two standard basis vectors $\eb{1}$ and $\eb{2}$ and maps them to themselves:
 \begin{equation}
-		\colvec{1;0} \xmapsto{I}\ \colvec{1;0},\quad \colvec{0;1} \xmapsto{I}\ \colvec{0;1}.
+	\colvec{1;0} \xmapsto{I}\ \colvec{1;0},\quad \colvec{0;1} \xmapsto{I}\ \colvec{0;1}.
 	\label{eq:}
 \end{equation}
 Very exciting indeed. Knowing how $I$ transforms $\eb{1}$ and $\eb{2}$ we can use their maps as the columns of the matrix representation of $I$:
@@ -240,4 +219,54 @@ Very exciting indeed. Knowing how $I$ transforms $\eb{1}$ and $\eb{2}$ we can us
 	% \fromtranstomat{R}{\mat{R}}{\cos(\theta)}{\sin(\theta)}{-\sin(\theta)}{\cos(\theta)}
 	\label{eq:the 2-by-2 identity matrix}
 \end{equation}
-(this is a common notation for identity matrices, and the index $2$ signifies that this is the specific $2\times2$ identity matrix)
+($\Id{}$ is a common notation for identity matrices, and the index $2$ signifies that this is the specific $2\times2$ identity matrix)
+
+The next type of fundamental linear transformations we should represent in matrix form are the scaling matrices. Instead of calculting their representation separately, let's directly find the matrix representation of the linear transformation $S$ which scales any vector by $\alpha$ in the $x$-direction and by $\beta$ in the $y$-direction:
+
+\begin{equation}
+	\fromtranstomat{S}{\mat{S}}{\alpha}{0}{0}{\beta}
+	\label{eq:matrix representation of scaling in R2}
+\end{equation}
+
+$\mat{S}$ has an important property: it only has non-zero entries in $a_{11}$ and $a_{22}$: we call these elements together the \newterm{main diagonal} of the matrix. A matrix which has non-zero entries only in its main diagonal is unsurprisingly called a \newterm{diagonal matrix}\footnote{this might seem unremarkable now, but in higher dimensions these matrices are very important.}.
+
+\begin{note}{The Identity Matrix is a Diagonal Matrix}{}
+	In the specific case where $\alpha=\beta=1$ a scaling matrix essentially does nothing: it scales by $1$ in both directions. Indeed, in this case it becomes the identity matrix $\Id{2}$.
+\end{note}
+
+The next family of linear transformations to represent as matrices are the rotations around the origin. Again, we don't really need to think too much: just check the results of rotating $\eb{1}$ and $\eb{2}$ by $\theta$ anti-clockwise, which we can easily calculate using basic trigonometry to be
+
+\begin{equation}
+	\begin{aligned}
+		\colvec{1;0} & \xmapsto{R_{\theta}}\ \colvec{\cos(\theta);\sin(\theta)}   \\
+		\colvec{0;1} & \xmapsto{R_{\theta}}\ \colvec{-\sin(\theta);\cos(\theta)}.
+	\end{aligned}
+	\label{eq:rotating_e1_e2}
+\end{equation}
+
+See \autoref{fig:rotating_e1_e2} for a visual explanation of these results.
+
+\begin{figure}
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{axis}[
+					width=12cm,
+					xyplane,
+					xmin=-1.25, xmax=1.25,
+					ymin=-1.25, ymax=1.25,
+				]
+				\draw[ultra thick, dashed, gray] (0,0) circle (1);
+				\draw[vector, xred] (0,0) -- (1,0) node[midway, below] {$\eb{1}$};
+				\draw[vector, xblue] (0,0) -- (0,1) node[midway, left] {$\eb{2}$};
+			\end{axis}
+		\end{tikzpicture}
+	\end{center}
+	\caption{}
+	\label{fig:rotating_e1_e2}
+\end{figure}
+
+
+\begin{equation}
+	\fromtranstomat{R_{\theta}}{\mat{R}_{\theta}}{\cos(\theta)}{\sin{\theta}}{-\sin(\theta)}{\cos(\theta)}
+	\label{eq:2d rotation matrix}
+\end{equation}
