@@ -71,11 +71,11 @@
 }
 
 \titleformat{\section}[display]
-{\sffamily\large}
+{\sffamily\Large}
 {}
 {0pt}
-{\hrule\vspace*{0.25ex}\parbox[b]{\dimexpr\textwidth\relax}{\thesection\quad\raggedright\bfseries\MakeUppercase{#1}}}
-[\hrule]
+{\titlerule[1.25pt]\vspace*{-1.0ex}\parbox[b]{\dimexpr\textwidth\relax}{\bfseries\thesection\quad\raggedright\bfseries\MakeUppercase{#1}}}
+[{\titlerule[1.25pt]}]
 
 % Numberless headings (for preface chapter)
 \titleformat{name=\chapter, numberless}
@@ -85,3 +85,10 @@
 {#1}
 
 \titleformat{name=\section, numberless}{\bfseries}{#1}{0em}{}
+
+\titleformat{\subsection}[display]
+{\sffamily\large}
+{}
+{-2em}
+{\textbf{\thesubsection\ #1}}
+[]

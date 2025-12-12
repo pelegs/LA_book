@@ -1,4 +1,5 @@
 \section{Matrices}
+\subsection{Representing Linear Transformations as Matrices}
 Following our example from the end of the previous section, let's look again at the result of applying $T$ from \autoref{eq:simple_LT_example_single_2d_vec} on the vector $\vec{a}=\clrcolvecxy{3}{2}$.
 
 Since we know how $T$ transforms the basis vectors $\eb{1}$ and $\eb{2}$ (\autoref{eq:simple LT example transformed basis vectors}), we can $T(\vec{a})$ in the following way:
@@ -9,7 +10,7 @@ Since we know how $T$ transforms the basis vectors $\eb{1}$ and $\eb{2}$ (\autor
 
 Then, we collect all the coefficients in black into a single structure, which we call a \newterm{matrix}:
 \begin{equation}
-	M =
+	\mat{M} =
 	\begin{bmatrix}
 		0 & -2 \\
 		1 & 0
@@ -17,9 +18,9 @@ Then, we collect all the coefficients in black into a single structure, which we
 	\label{eq:developing matrix notation step 2}
 \end{equation}
 
-Finally, we define the action of the matrix $M$ on the vector $\vec{a}$ as following:
+Finally, we define the action of the matrix $\mat{M}$ on the vector $\vec{a}$ as following:
 \begin{equation}
-	M\vec{a} = 
+	\mat{M}\vec{a} = 
 	\begin{bmatrix}
 		0 & -2 \\
 		1 & 0
@@ -27,9 +28,9 @@ Finally, we define the action of the matrix $M$ on the vector $\vec{a}$ as follo
 	\label{eq:developing matrix notation step 3}
 \end{equation}
 
-Of course, we should make sure that the matrix $M$ we just defined works for other vectors as well. If we apply $M$ to the second vector from our example, $\vec{b}=\clrcolvecxy{2}{-4}$, we get
+Of course, we should make sure that the matrix $\mat{M}$ we just defined works for other vectors as well. If we apply $\mat{M}$ to the second vector from our example, $\vec{b}=\clrcolvecxy{2}{-4}$, we get
 \begin{equation}
-	M\vec{b} = 
+	\mat{M}\vec{b} = 
 	\begin{bmatrix}
 		0 & -2 \\
 		1 & 0
@@ -41,12 +42,12 @@ which is exactly the result we got in \autoref{eq:second_simple_LT_example_singl
 Why not continue checking how this matrix-vector product we developed works for other vectors? First, let's check $\eb{1}$ and $\eb{2}$ for which we already know the results (\autoref{eq:simple_LT_example_single_2d_vec}):
 \begin{equation}
 	\begin{aligned}
-		M\eb{1} &= 
+		\mat{M}\eb{1} &= 
 		\begin{bmatrix}
 			0 & -2 \\
 			1 & 0
 		\end{bmatrix}\clrcolvecxy{1}{0} = \colvec{0\cdot\LCa{1}-2\cdot\LCb{0};1\cdot\LCa{1}+0\cdot\LCb{0}} = \colvec{0;1} = T(\eb{1}),\\
-		M\eb{2} &= 
+		\mat{M}\eb{2} &= 
 		\begin{bmatrix}
 			0 & -2 \\
 			1 & 0
@@ -56,10 +57,10 @@ Why not continue checking how this matrix-vector product we developed works for 
 \end{equation}
 exactly the results we expected.
 
-Perhaps you've noticed something by now - the columns of $M$ are exactly the vectors $T(\eb{1})$ and $T(\eb{2})$ in the right order:
+Perhaps you've noticed something by now - the columns of $\mat{M}$ are exactly the vectors $T(\eb{1})$ and $T(\eb{2})$ in the right order:
 
 \begin{equation*}
-	M = \begin{tikzpicture}[baseline=-0.5ex]
+	\mat{M} = \begin{tikzpicture}[baseline=-0.5ex]
 			\matrix [matrix of math nodes,
 			nodes={rectangle, minimum size=15pt}, % should somehow also make a vertical space to the bottom of the matrix
 			inner sep=0pt,
@@ -83,9 +84,9 @@ Perhaps you've noticed something by now - the columns of $M$ are exactly the vec
 		\end{tikzpicture}.
 \end{equation*}
 
-The most general transformation we can have using $M$ would be applying it to a general vector, $\vec{v}=\clrcolvecxy{x}{y}\in\Rs[2]$:
+The most general transformation we can have using $\mat{M}$ would be applying it to a general vector, $\vec{v}=\clrcolvecxy{x}{y}\in\Rs[2]$:
 \begin{equation}
-	M\vec{v} = \begin{bmatrix}
+	\mat{M}\vec{v} = \begin{bmatrix}
 			0 & -2 \\
 			1 & 0
 		\end{bmatrix}\clrcolvecxy{x}{y} = \colvec{0\cdot\LCa{x}-2\cdot\LCb{y};1\cdot\LCa{x}+0\cdot\LCb{y}} = \colvec{-2y;x}.
@@ -104,33 +105,33 @@ OK, up until now everything we did was for a specific transformation we called $
 \end{equation*}
 where $a,b,c,d\in\Rs$ (REF), and using the same process as in \autoref{eq:developing matrix notation step 1} we get the general matrix
 \begin{equation}
-	M = \begin{bmatrix}
+	\mat{M} = \begin{bmatrix}
 		a & b \\
 		c & d
 	\end{bmatrix}.
 	\label{eq:general 2x2 matrix}
 \end{equation}
 
-Just like in our specific example, the columns of $M$ are exactly the images of the basis vectors $\eb{1}$ and $\eb{2}$, respectively. To confirm this, let's apply the $M$ on both basis vectors:
+Just like in our specific example, the columns of $\mat{M}$ are exactly the images of the basis vectors $\eb{1}$ and $\eb{2}$, respectively. To confirm this, let's apply the $\mat{M}$ on both basis vectors:
 \begin{equation}
 	\begin{aligned}
-		M\eb{1} &= 
+		\mat{M}\eb{1} &= 
 		\begin{bmatrix}
 			a & b \\
 			c & d
 		\end{bmatrix}\clrcolvecxy{1}{0} = \colvec{a\cdot\LCa{1}+b\cdot\LCb{0};c\cdot\LCa{1}+d\cdot\LCb{0}} = \colvec{a;c} = M_{1},\\
-		M\eb{2} &= 
+		\mat{M}\eb{2} &= 
 		\begin{bmatrix}
 			a & b \\
 			c & d
-		\end{bmatrix}\clrcolvecxy{0}{1} = \colvec{a\cdot\LCa{0}+b\cdot\LCb{1};c\cdot\LCa{0}+d\cdot\LCb{1}} = \colvec{b;d} = M_{2}.
+		\end{bmatrix}\clrcolvecxy{0}{1} = \colvec{a\cdot\LCa{0}+b\cdot\LCb{1};c\cdot\LCa{0}+d\cdot\LCb{1}} = \colvec{b;d} = \mat{M}_{2}.
 		\label{eq:applying a general 2x2 matrix on basis vectors}
 	\end{aligned}
 \end{equation}
 
-Note that I use $M_{1}$ and $M_{2}$ to denote the $1$-st and $2$-nd columns of $M$, respectively.
+Note that I use $M_{1}$ and $M_{2}$ to denote the $1$-st and $2$-nd columns of $\mat{M}$, respectively.
 
-In most textbooks and courses I've seen, the process of multiplying a matrix $M$ by a vector $\vec{v}$ is described as following: the $i$-th component of the resulting vector (in our case $i\in\left\{\LCa{1},\LCb{2}\right\}$) is the \textit{dot product} of the $i$-th row of $M$ and the vector $\vec{v}$ itself. This is exactly what happens in practice in the development process we went through here - if we name the resulting vector of $M\vec{v}$ as $\vec{w}$ we get its following two components:
+In most textbooks and courses I've seen, the process of multiplying a matrix $\mat{M}$ by a vector $\vec{v}$ is described as following: the $i$-th component of the resulting vector (in our case $i\in\left\{\LCa{1},\LCb{2}\right\}$) is the \textit{dot product} of the $i$-th row of $\mat{M}$ and the vector $\vec{v}$ itself. This is exactly what happens in practice in the development process we went through here - if we name the resulting vector of $\mat{M}\vec{v}$ as $\vec{w}$ we get its following two components:
 \begin{equation}
 	\left.
 	\begin{aligned}
@@ -143,9 +144,9 @@ In most textbooks and courses I've seen, the process of multiplying a matrix $M$
 
 Of course, this is just the case for a matrix representing a general linear transformation $T:\Rs[2]\to\Rs[2]$. Matrices representing such transformations have $4$ components, since they are made of $2$ basis vectors as columns, each having $2$ components (since the vectors live in $\Rs[2]$). We also say that the matrix lives in the space $\Rs[2\times2]$.
 
-In general (also in higher-dimensional cases), we use 2 indices to denote the components of any matrix: the 1st index for the \textit{row} of the component and the 2nd index for the \textit{column} of the component. For example, a general matrix $A\in\Rs[2\times2]$ can be written as
+In general (also in higher-dimensional cases), we use 2 indices to denote the components of any matrix: the 1st index for the \textit{row} of the component and the 2nd index for the \textit{column} of the component. For example, a general matrix $\mat{A}\in\Rs[2\times2]$ can be written as
 \begin{equation}
-	A = \begin{bmatrix}
+	\mat{A} = \begin{bmatrix}
 		a_{11} & a_{12} \\
 		a_{21} & a_{22} \\
 	\end{bmatrix},
@@ -166,7 +167,7 @@ and therefore the application of a generic linear transformation from $\Rs[n]$ t
 \end{equation}
 where $a_{ij}\in\Rs$ (with $i,j\in\left\{1,2,\dots,n\right\}$). Of course, denoting the components as $a_{ij}$ is alluding to the next step - collecting them into a matrix:
 \begin{equation}
-	A = 
+	\mat{A} = 
 	\begin{bNiceMatrix}[margin]
 	  a_{11} & a_{12}  & \cdots & a_{1n} \\
 	  a_{21} & a_{22}  & \cdots & a_{2n} \\
@@ -176,10 +177,10 @@ where $a_{ij}\in\Rs$ (with $i,j\in\left\{1,2,\dots,n\right\}$). Of course, denot
 	\label{eq:}
 \end{equation}
 
-Just like in the $2\times2$ case, the $i$-th column vector of $A$ shows how it transforms $\eb{i}$ (which in this case lives in the space $\Rs[n]$, of course):
+Just like in the $2\times2$ case, the $i$-th column vector of $\mat{A}$ shows how it transforms $\eb{i}$ (which in this case lives in the space $\Rs[n]$, of course):
 
 \begin{equation*}
-	M = \begin{tikzpicture}[baseline=-0.5ex]
+	\mat{M} = \begin{tikzpicture}[baseline=-0.5ex]
 			\matrix [
 				matrix of math nodes,
 				nodes={rectangle, minimum size=15pt}, % should somehow also make a vertical space to the bottom of the matrix
@@ -204,9 +205,9 @@ Just like in the $2\times2$ case, the $i$-th column vector of $A$ shows how it t
 		\end{tikzpicture}.
 \end{equation*}
 
-Therefore, in general we define the product of an $n\times n$ matrix $A$ (otherwise written as $A\in\Rs[n\times n]$) and a vector $\vec{v}\in\Rs[n]$ to be
+Therefore, in general we define the product of an $n\times n$ matrix $\mat{A}$ (otherwise written as $\mat{A}\in\Rs[n\times n]$) and a vector $\vec{v}\in\Rs[n]$ to be
 \begin{equation}
-	A\vec{v} = 
+	\mat{A}\vec{v} = 
 	\begin{bNiceMatrix}[margin]
 		a_{11} & a_{12}  & \cdots & a_{1n} \\
 		a_{21} & a_{22}  & \cdots & a_{2n} \\
@@ -216,4 +217,26 @@ Therefore, in general we define the product of an $n\times n$ matrix $A$ (otherw
 	\label{eq:product of n-by-n matrix and a vec in Rn}
 \end{equation}
 
-Indeed, this can be presented (as it often does) in the following way: the $i$-th coefficient of the vector $\vec{w}=A\vec{v}$ is the dot product of the $i$-th row of $A$ and the vector $\vec{v}$. To see this in practice, follow closely how each of the rows $1,2$ and $n$ of $A$ in \autoref{eq:product of n-by-n matrix and a vec in Rn} are dot-multiplied with $\vec{v}$ to yields the corresponding component of $\vec{w}$.
+Indeed, this can be presented (as it often does) in the following way: the $i$-th coefficient of the vector $\vec{w}=\mat{A}\vec{v}$ is the dot product of the $i$-th row of $\mat{A}$ and the vector $\vec{v}$. To see this in practice, follow closely how each of the rows $1,2$ and $n$ of $\mat{A}$ in \autoref{eq:product of n-by-n matrix and a vec in Rn} are dot-multiplied with $\vec{v}$ to yields the corresponding component of $\vec{w}$.
+
+\begin{note}{Square Matrices}{}
+	All the kinds of matrices we defined so far are called \newterm{square matrices}, since they have an equal number of rows and columns (since they map from any vector space $\Rs[n]$ to itself) - i.e. their dimensions are of the form $n\times n$.
+
+	\vspace{1em}
+	However, in general matrices can represent any kind of linear transformation - also those that map between different real vector spaces, i.e. $\Rs[n]\to\Rs[m]$ (where $n\neq m$). These matrices would be of order $m\times n$, and are of course \textbf{not} square matrices. However, since square matrices are the easiest to understand when first learning the topic, and they also happen to play a very important role in linear algebra - I chose to concentrate on them in the beginning, before moving on to more general matrices.
+\end{note}
+
+\subsection{The Fundamental Linear Transformations as Matrices}
+Let us now use the process we devolped above to represent the fundamental $\Rs[2]\to\Rs[2]$ linear transformations (REF) in matrix form. Since we're dealing with transformations from $\Rs[2]$ to itself, the matrices representing these transformations are of dimension $2\times2$, i.e. they live in the space $\Rs[2\times2]$.
+
+We start with the most boring linear transformation: the identity transformation $I$. As a reminder, $I$ maps \textit{any} vector $\vec{v}\in\Rs[2]$ to itself: $I(\vec{v})=\vec{v}$. In particular, it takes the two standard basis vectors $\eb{1}$ and $\eb{2}$ and maps them to themselves:
+\begin{equation}
+		\colvec{1;0} \xmapsto{I}\ \colvec{1;0},\quad \colvec{0;1} \xmapsto{I}\ \colvec{0;1}.
+	\label{eq:}
+\end{equation}
+Very exciting indeed. Knowing how $I$ transforms $\eb{1}$ and $\eb{2}$ we can use their maps as the columns of the matrix representation of $I$:
+\begin{equation}
+	\fromtranstomat{R}{\mathbf{R}}{\cos(\theta)}{\sin(\theta)}{-\sin(\theta)}{\cos(\theta)}
+	\label{eq:the 2-by-2 identity matrix}
+\end{equation}
+(this is a common notation for identity matrices, and the index $2$ signifies that this is the specific $2\times2$ identity matrix)

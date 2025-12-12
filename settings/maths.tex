@@ -25,11 +25,11 @@
 \newcommand{\conj}[1]{\overline{#1}}
 
 % Set notation for vectors (currently: bold letters)
-\renewcommand{\vec}[1]{\bm{#1}}
-\newcommand{\uvec}[1]{\bm{\hat{#1}}}
+% \renewcommand{\vec}[1]{\bm{#1}}
+\newcommand{\uvec}[1]{\hat{#1}}
 \newcommand{\vnorm}[1]{\left\| \vec{#1} \right\|}
 \newcommand{\cvec}[1]{\bm{\overline{#1}}}
-\newcommand{\mat}[1]{\bm{#1}}
+\newcommand{\mat}[1]{\mathbf{#1}}
 
 % Identity matrix
 \newcommand{\Id}[1]{\mathbb{I}_{#1}}
@@ -74,7 +74,7 @@
 \newcommand{\vgreen}{\colorVec{xdarkgreen}{v}}
 
 % Basis vectors and transformations
-\newcommand{\eb}[1]{\vec{e}_{#1}}
+\newcommand{\eb}[1]{\hat{e}_{#1}}
 \newcommand{\ebc}[1]{\tilde{\vec{e}}_{#1}}
 \newcommand{\ebr}[1]{\color{xdarkblue}\eb{#1}\color{black}}
 \newcommand{\ebcr}[1]{\color{xdarkred}\ebc{#1}\color{black}}
@@ -124,4 +124,23 @@
 }
 \newcommand{\clrgenericvec}[2]{
 	\colvec{\LCa{#1_{1}};\LCb{#1_{2}};\vdots;\LCe{#1_{#2}}}
+}
+
+\newcommand{\fromtranstomat}[6]{
+	\begin{tikzpicture}
+		\node (e1) at (-1.,0) {$\eb{1}$};
+		\node (e2) at (+1.,0) {$\eb{2}$};
+		\node[below of=e1] (e1col) {$\colvec{1;0}$};
+		\node[below of=e2] (e2col) {$\colvec{0;1}$};
+		\node[below of=e1col, yshift=-1.25cm] (e1map) {$\colvec{#3;#4}$};
+		\node[below of=e2col, yshift=-1.25cm] (e2map) {$\colvec{#5;#6}$};
+		\draw[|->] (e1col.south) -- (e1map.north);
+		\draw[|->] (e2col.south) -- (e2map.north);
+		\draw[dashed] (-3,-2) -- ++(6,0);
+		\node[fill=white] (T) at (0,-2) {$#1$};
+		\node (A) at (0, -5.5) {$\begin{bmatrix}#3&#5\\#4&#6\end{bmatrix}$};
+		\draw[->, xpurple] (e1map.south) to[out=270, in=90] ($(A.north)-(0.3,0)$);
+		\draw[->, xorange] (e2map.south) to[out=270, in=90] ($(A.north)+(0.3,0)$);
+		\node[below of=A] {$#2$};
+	\end{tikzpicture}
 }
