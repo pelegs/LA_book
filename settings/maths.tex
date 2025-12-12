@@ -127,20 +127,38 @@
 }
 
 \newcommand{\fromtranstomat}[6]{
-	\begin{tikzpicture}
+	\begin{tikzpicture}[ampersand replacement=\&]
+		\tikzset{mapstoarrow/.style={|->, thick, xblue}}
+
+		\draw[thick, dotted, black!25] (-2,-2.1) -- ++(4,0) node[midway, fill=white, text=xblue] (T) {$#1$};
+
 		\node (e1) at (-1.,0) {$\eb{1}$};
 		\node (e2) at (+1.,0) {$\eb{2}$};
 		\node[below of=e1] (e1col) {$\colvec{1;0}$};
 		\node[below of=e2] (e2col) {$\colvec{0;1}$};
 		\node[below of=e1col, yshift=-1.25cm] (e1map) {$\colvec{#3;#4}$};
 		\node[below of=e2col, yshift=-1.25cm] (e2map) {$\colvec{#5;#6}$};
-		\draw[|->] (e1col.south) -- (e1map.north);
-		\draw[|->] (e2col.south) -- (e2map.north);
-		\draw[dashed] (-3,-2) -- ++(6,0);
-		\node[fill=white] (T) at (0,-2) {$#1$};
-		\node (A) at (0, -5.5) {$\begin{bmatrix}#3&#5\\#4&#6\end{bmatrix}$};
-		\draw[->, xpurple] (e1map.south) to[out=270, in=90] ($(A.north)-(0.3,0)$);
-		\draw[->, xorange] (e2map.south) to[out=270, in=90] ($(A.north)+(0.3,0)$);
-		\node[below of=A] {$#2$};
+		\draw[mapstoarrow] (e1col.south) -- (e1map.north);
+		\draw[mapstoarrow] (e2col.south) -- (e2map.north);
+
+		\matrix [
+			matrix of math nodes,
+			nodes={rectangle, minimum size=15pt},
+			inner sep=0pt,
+			column sep=8pt,
+			left delimiter={[}, right delimiter={]},
+		] (A) at (0,-5.5)
+		{
+			#3 \& #5 \\
+			#4 \& #6 \\
+		};
+		\begin{scope}[on background layer]
+			\filldraw[xpurple, rounded corners, opacity=0.25] (A-1-1.north west) rectangle (A-2-1.south east);
+			\filldraw[xorange, rounded corners, opacity=0.25] (A-1-2.north west) rectangle (A-2-2.south east);
+		\end{scope}
+
+		\draw[-stealth, thick, xpurple] (e1map.south) to[out=270, in=90] (A-1-1.north);
+		\draw[-stealth, thick, xorange] (e2map.south) to[out=270, in=90] (A-1-2.north);
+		\node[below of=A, text=xblue] {$#2$};
 	\end{tikzpicture}
 }
