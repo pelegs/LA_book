@@ -1,18 +1,29 @@
 \section{Linear Transformations}
 \begin{summary}{The Next Two Sections}{}
-This section and the one immediately following it deal with a rather simple, yet very powerful type of functions between vector spaces: \newterm{linear transformations}.
+	This section and the one immediately following it deal with a rather simple, yet very powerful type of functions between vector spaces: \newterm{linear transformations}.
 
-In this section we will:
-\begin{enumerate}
-	\item see why are we interested in linear transformations,
-	\item what are their properties, and
-	\item how they can provide a powerful tool for many different applications.
-\end{enumerate}
+	In this section we will:
+	\begin{enumerate}
+		\item see why are we interested in linear transformations,
+		\item what are their properties, and
+		\item how they can provide a powerful tool for many different applications.
+	\end{enumerate}
 
-In the next section we will explore how we can turn the caulculations of linear transformations into an extremely easy and straight-forward process using \newterm{matrices}.
+	In the next section we will explore how we can turn the caulculations of linear transformations into an extremely easy and straight-forward process using \newterm{matrices}.
 \end{summary}
 
 (here comes lots of intro text on linear transformations and all of the stuff about them except what i already wrote\dots\ which is the very end of the section)
+
+Testing LTs visualization:
+
+\begin{figure}
+	\begin{center}
+		\drawtrans{1}{0}{0}{1}
+	\end{center}
+	\caption{Testing a visualization idea for linear transformations.}
+	\label{fig:}
+\end{figure}
+
 
 \dots
 
@@ -29,12 +40,12 @@ In principle, we could simply apply the operations one after the other on $\vec{
 	\begin{center}
 		\begin{tikzpicture}
 			\begin{axis}[
-				width=110mm,
-				xyplane,
-				xmin=-5, xmax=5,
-				ymin=-0.5, ymax=4,
-				major grid style={black!10},
-			]
+					width=110mm,
+					xyplane,
+					xmin=-5, xmax=5,
+					ymin=-0.5, ymax=4,
+					major grid style={black!10},
+				]
 				\tikzset{transarrow/.style={darkgray!75, stealth-|, thick, dashed}}
 				\coordinate (o) at (0,0);
 				\draw[vector, xblue] (o) -- (3,2) node [pos=1.1] (albl) {$\vec{a}$};
@@ -42,8 +53,8 @@ In principle, we could simply apply the operations one after the other on $\vec{
 				\draw[vector, xblue] (o) -- (-4,3) node [pos=1.1] (Talbl) {$T(\vec{a})$};
 				\draw[
 					transarrow, postaction={
-						decorate, decoration={raise=-2ex, text along path, text align={left indent=50mm}, text color=darkgray, text={|\large\bfseries|rotation}}
-					},
+							decorate, decoration={raise=-2ex, text along path, text align={left indent=50mm}, text color=darkgray, text={|\large\bfseries|rotation}}
+						},
 				] (Talbl) to [bend left=45] (atildelbl);
 				\draw[transarrow] (atildelbl) -- (albl) node[darkgray, midway, right, font=\bfseries\large] {$\mathbf{\times 2}$};
 			\end{axis}
@@ -77,7 +88,7 @@ We can then apply the defining properties of linear transformations (REF) on $\v
 Now, applying $T$ to the two standard basis vectors $\eb{1}$ and $\eb{2}$ we get
 \begin{equation}
 	\begin{aligned}
-		\eb{1} & = \colvec{1;0} \xmapsto[\text{$\times 2$ in $y$}]{} \colvec{1;0} \xmapsto[\text{$\ang{90}$ rotation}]{} \colvec{0;1} = T(\eb{1})                                      \\
+		\eb{1} & = \colvec{1;0} \xmapsto[\text{$\times 2$ in $y$}]{} \colvec{1;0} \xmapsto[\text{$\ang{90}$ rotation}]{} \colvec{0;1} = T(\eb{1})                                    \\
 		\eb{2} & = \colvec{0;1} \xmapsto{\textcolor{white}{\text{$\times 2$ in $y$}}} \colvec{0;2} \xmapsto{\textcolor{white}{\text{$\ang{90}$ rotation}}} \colvec{-2;0} = T(\eb{2})
 	\end{aligned}
 	\label{eq:simple LT example transformed basis vectors}
