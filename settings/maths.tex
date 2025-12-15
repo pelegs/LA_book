@@ -131,17 +131,36 @@
 	\colvec{\LCa{#1_{1}};\LCb{#1_{2}};\vdots;\LCe{#1_{#2}}}
 }
 
+\newcommand{\spacefortrans}[1]{
+	\begin{axis}[
+			#1,
+			width=7cm,
+			xyplane,
+			xmin=-4, xmax=4,
+			ymin=-4, ymax=4,
+			grid=major,
+			xtick={-4,-3,...,4},
+			ytick={-4,-3,...,4},
+			anchor=origin,
+			% xlabel={},
+			% ylabel={},
+		]
+		\draw[very thick, xorange, fill=xorange!25] (0,0) rectangle (1,1);
+		\draw[vector, xred] (0,0) -- (1,0);
+		\draw[vector, xblue] (0,0) -- (0,1);
+		\draw[very thick, xgreen, fill=xgreen, fill opacity=0.25] (-2,1) ellipse (1 and 1.5);
+		\draw[very thick, densely dotted, xpurple] (-5,-2) -- (5,-1);
+		\draw[very thick, densely dotted, xpurple] (-5,-3) -- (5,-2);
+		\draw[very thick, xblue, fill=xblue, fill opacity=0.25] (2,2) rectangle (4,3);
+	\end{axis}
+}
+
 \newcommand{\drawtrans}[4]{
 	\begin{tikzpicture}
+		\spacefortrans{name=beforetrans}
 		\pgftransformcm{#1}{#2}{#3}{#4}{\pgfpoint{0}{0}}
-		\begin{axis}[
-				xyplane,
-			]
-			\draw[very thick, xorange, fill=xorange!25] (0,0) rectangle (1,1);
-			\draw[vector, xred] (0,0) -- (1,0);
-			\draw[vector, xblue] (0,0) -- (0,1);
-			\draw[very thick, xgreen, fill=xgreen, fill opacity=0.25] (-2,2) ellipse (1 and 1.5);
-		\end{axis}
+		\spacefortrans{}
+		\pgftransformreset
 	\end{tikzpicture}
 }
 
