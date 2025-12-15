@@ -19,10 +19,18 @@ Testing LTs visualization:
 \begin{figure}
 	\begin{center}
 		\pgfmathsetmacro{\th}{45}
-		\drawtrans{cos(\th)}{sin(\th)}{-sin(\th)}{cos(\th)}
-		% \drawtrans{1}{0}{0.2}{1}
+		\drawtrans{R_{\theta}}{cos(\th)}{sin(\th)}{-sin(\th)}{cos(\th)}
 	\end{center}
 	\caption{Testing a visualization idea for linear transformations.}
+	\label{fig:}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+		\pgfmathsetmacro{\m}{0.6}
+		\drawtrans{K_{x}}{1}{0}{\m}{1}
+	\end{center}
+	\caption{Testing a visualization idea for linear transformations\dots\ again.}
 	\label{fig:}
 \end{figure}
 

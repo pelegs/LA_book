@@ -133,7 +133,7 @@
 
 \newcommand{\spacefortrans}[1]{
 	\begin{axis}[
-			width=7cm,
+			width=10cm,
 			xyplane,
 			xmin=-4, xmax=4,
 			ymin=-4, ymax=4,
@@ -144,25 +144,33 @@
 			anchor=origin,
 			xlabel={},
 			ylabel={},
+			domain={-5:5},
 			#1,
 		]
+		% Rectangles
 		\draw[very thick, xorange, fill=xorange!25] (0,0) rectangle (1,1);
+		\draw[very thick, xblue, fill=xblue, fill opacity=0.25] (2,2) rectangle (4,3);
+
+		% Basis vectors
 		\draw[vector, xred] (0,0) -- (1,0);
 		\draw[vector, xblue] (0,0) -- (0,1);
-		\draw[very thick, xgreen, fill=xgreen, fill opacity=0.25] (-2.5,1) to[closed, curve through = {(-3.5,-1) (-4.5,0) (-3.5,1) (-3.5,3) (-2.5,2)}] (-0.5,2); % This shape is shamelessly stolen from https://tikz.org/examples/chapter-12-drawing-smooth-curves/
+
+		% Parallel and orthogonal lines
 		\draw[very thick, densely dotted, xpurple] (-5,-3) -- (5,-1);
 		\draw[very thick, densely dotted, xpurple] (-5,-4) -- (5,-2);
-		\draw[very thick, xblue, fill=xblue, fill opacity=0.25] (2,2) rectangle (4,3);
+
+		% Smooth shape
+		\draw[very thick, xgreen, fill=xgreen, fill opacity=0.25] (-2.5,1) to[closed, curve through = {(-3.5,-1) (-4.5,0) (-3.5,1) (-3.5,3) (-2.5,2)}] (-0.5,2); % This shape is shamelessly stolen from https://tikz.org/examples/chapter-12-drawing-smooth-curves/
 	\end{axis}
 }
 
-\newcommand{\drawtrans}[4]{
+\newcommand{\drawtrans}[5]{
 	\begin{tikzpicture}
 		\spacefortrans{name=beforetrans, xlabel={$x$}, ylabel={$y$}}
-		\pgftransformcm{#1}{#2}{#3}{#4}{\pgfpoint{9cm}{0}}
+		\pgftransformcm{#2}{#3}{#4}{#5}{\pgfpoint{0}{-12cm}}
 		\spacefortrans{name=aftertrans}
 		\pgftransformreset
-		\draw[|->, very thick] ($(beforetrans.east)+(8mm,10mm)$) -- ++(2cm,0) node[midway, above] {$T$};
+		\draw[|->, very thick] ($(beforetrans.south)+(0,-8mm)$) -- ++(0,-2cm) node[midway, right] {\Huge$#1$};
 		\node[anchor=west] at (aftertrans.east) {$x'$};
 		\node[anchor=south] at (aftertrans.north) {$y'$};
 	\end{tikzpicture}
