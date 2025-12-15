@@ -11,32 +11,45 @@
 
 	In the next section we will explore how we can turn the caulculations of linear transformations into an extremely easy and straight-forward process using \newterm{matrices}.
 \end{summary}
-
-(here comes lots of intro text on linear transformations and all of the stuff about them except what i already wrote\dots\ which is the very end of the section)
-
-Testing LTs visualization:
-
-\begin{figure}
-	\begin{center}
-		\pgfmathsetmacro{\th}{45}
-		\drawtrans{R_{\theta}}{cos(\th)}{sin(\th)}{-sin(\th)}{cos(\th)}
-	\end{center}
-	\caption{Testing a visualization idea for linear transformations.}
-	\label{fig:}
-\end{figure}
-
-\begin{figure}
-	\begin{center}
-		\pgfmathsetmacro{\m}{0.6}
-		\drawtrans{K_{x}}{1}{0}{\m}{1}
-	\end{center}
-	\caption{Testing a visualization idea for linear transformations\dots\ again.}
-	\label{fig:}
-\end{figure}
-
+\subsection{Introduction}
+Text text text\dots
 
 \dots
 
+\subsection{2-Dimensional Linear Transformations}
+Here comes an introductory text about the fundamental linear transformations in $\Rs[2]$, what are their properties and some more relevant information\dots
+
+\dots
+
+There are several \enquote{basic} linear transformations in $\Rs[2]$: these transformations can be thought of as the building blocks of all possible linear transformations on a $2$-dimensional plane. We will see later how we can combine these basic transformations to createnew transformations, but first let's introduce these \enquote{basic} linear transformations.
+
+In the following introduction, each transformation is shown using a drawing of $\Rs[2]$ with several shapes on it: the two standard basis vectors $\eb{1}$ and $\eb{2}$, a unit area between the two vectors (drawn in orange), a blue rectangle, two purple parallel lines, a somewhat random green shape\footnote{I shamelessly stole the shape from \url{https://tikz.org/examples/chapter-12-drawing-smooth-curves/} because it's perfect for this illustration.} and the grid lines (or rather, grid dots). When looking at these figures you should pay attention to how each shape is deformed, and especially what relationship are kept the same or are changed: for example, parallel lines remain parallel - but other angles between lines (including $\ang{90}$) are not kept. Also note the areas of the different shapes and how they change under the transformation.
+
+Let's begin:
+
+\begin{descitemize}
+	\item[The identity transformation] not doing anything to the plane is a transformation, even if a rather boring one:
+
+	\begin{center}
+		\drawtrans{I}{1}{0}{0}{1}
+	\end{center}
+
+	Indeed, the identity transformation has all of three key properties of linear transformations: the origin is perserved, parallel lines remain parallel after the transformation, and all areas are scaled by the same factor (namely $1$).
+
+	\item[Scaling] Scaling the plane can be done in either the $x$-diretion or the $y$-direction. Just as with vectors, the scaling factor can be any real number, positive or negative (where negative scaling factors flip the direction of the axis):
+
+	\begin{center}
+		\drawtrans{S_{x}}{1.5}{0}{0}{1}
+
+
+		\drawtrans{S_{y}}{1}{0}{0}{0.35}
+	\end{center}
+
+\end{descitemize}
+
+\subsection{3-Dimensional Linear Transformations}
+
+\subsection{Calculating Linear Transformations}
 Linear transformations have a very nice property which makes applying them on different vectors an extremely efficient process. Consider the linear transformation $T:\Rs[2]\to\Rs[2]$ which is a composition of scaling by a factor of $2$ in the $y$-diretion followed by a rotation of $\ang{90}$ anti-clockwise around the origin. Now let's say that we wish to calculate how $T$ transforms the vector
 $$\vec{a}=\colvec{3;2}.$$
 

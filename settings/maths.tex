@@ -133,7 +133,7 @@
 
 \newcommand{\spacefortrans}[1]{
 	\begin{axis}[
-			width=10cm,
+			width=9cm,
 			xyplane,
 			xmin=-4, xmax=4,
 			ymin=-4, ymax=4,
@@ -167,7 +167,7 @@
 \newcommand{\drawtrans}[5]{
 	\begin{tikzpicture}
 		\spacefortrans{name=beforetrans, xlabel={$x$}, ylabel={$y$}}
-		\pgftransformcm{#2}{#3}{#4}{#5}{\pgfpoint{0}{-12cm}}
+		\pgftransformcm{#2}{#3}{#4}{#5}{\pgfpoint{0}{-10cm}}
 		\spacefortrans{name=aftertrans}
 		\pgftransformreset
 		\draw[|->, very thick] ($(beforetrans.south)+(0,-8mm)$) -- ++(0,-2cm) node[midway, right] {\Huge$#1$};
