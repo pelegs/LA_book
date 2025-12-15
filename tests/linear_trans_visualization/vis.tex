@@ -1,0 +1,34 @@
+\documentclass{standalone}
+\usepackage{tikz, pgfplots}
+
+\pgfplotsset{
+    basicplane/.style={
+        axis equal,
+        axis x line=middle,
+        axis y line=middle,
+        xmin=-5, xmax=5,
+        ymin=-5, ymax=5,
+        xticklabels={,},
+        yticklabels={,},
+        grid=major,
+    }
+}
+
+\begin{document}
+\begin{tikzpicture}
+	\begin{axis}[
+			basicplane,
+			name=beforetrans,
+			anchor=origin,
+		]
+	\end{axis}
+	% \pgftransformcm{0.7071}{0.7071}{0.7071}{-0.7071}{\pgfpoint{9cm}{0}}
+	\pgftransformcm{0.9}{0.75}{0}{0.8}{\pgfpoint{9cm}{0}}
+	\begin{axis}[
+			basicplane,
+			name=aftertrans,
+			anchor=origin,
+		]
+	\end{axis}
+\end{tikzpicture}
+\end{document}

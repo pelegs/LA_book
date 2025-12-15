@@ -18,7 +18,9 @@ Testing LTs visualization:
 
 \begin{figure}
 	\begin{center}
-		\drawtrans{0.9}{-0.2}{0.4}{1}
+		\pgfmathsetmacro{\th}{45}
+		\drawtrans{cos(\th)}{sin(\th)}{-sin(\th)}{cos(\th)}
+		% \drawtrans{1}{0}{0.2}{1}
 	\end{center}
 	\caption{Testing a visualization idea for linear transformations.}
 	\label{fig:}
