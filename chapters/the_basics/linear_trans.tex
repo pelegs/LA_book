@@ -23,7 +23,7 @@ Here comes an introductory text about the fundamental linear transformations in 
 
 There are several \enquote{basic} linear transformations in $\Rs[2]$: these transformations can be thought of as the building blocks of all possible linear transformations on a $2$-dimensional plane. We will see later how we can combine these basic transformations to createnew transformations, but first let's introduce these \enquote{basic} linear transformations.
 
-In the following introduction, each transformation is shown using a drawing of $\Rs[2]$ with several shapes on it: the two standard basis vectors $\eb{1}$ and $\eb{2}$, a unit area between the two vectors (drawn in orange), a blue rectangle, two purple parallel lines, a somewhat random green shape\footnote{I shamelessly stole the shape from \url{https://tikz.org/examples/chapter-12-drawing-smooth-curves/} because it's perfect for this illustration.} and the grid lines (or rather, grid dots). When looking at these figures you should pay attention to how each shape is deformed, and especially what relationship are kept the same or are changed: for example, parallel lines remain parallel - but other angles between lines (including $\ang{90}$) are not kept. Also note the areas of the different shapes and how they change under the transformation.
+In the following introduction, each transformation is shown using a drawing of $\Rs[2]$ with several shapes on it: the two standard basis vectors $\ebx$ and $\eby$, a unit area between the two vectors (drawn in orange), a blue rectangle, two purple parallel lines, a somewhat random green shape\footnote{I shamelessly stole the shape from \url{https://tikz.org/examples/chapter-12-drawing-smooth-curves/} because it's perfect for this illustration.} and the grid lines (or rather, grid dots). When looking at these figures you should pay attention to how each shape is deformed, and especially what relationship are kept the same or are changed: for example, parallel lines remain parallel - but other angles between lines (including $\ang{90}$) are not kept. Also note the areas of the different shapes and how they change under the transformation.
 
 Let's begin:
 
@@ -93,7 +93,7 @@ It turns out that thanks to the simplicity of linear transformations \footnote{m
 
 To see how this is the case, let's go back to our simple $2$-dimensional example. First, recall that we can express any vector in terms of the standard basis vectors (REF), which in this case gives us (note the color-coding)
 \begin{equation}
-	\vec{a} = \clrcolvecxy{3}{2} = \LCa{3}\overset{\substack{\eb{1} \\ \downarrow}}{\colvec{1;0}} + \LCb{2}\overset{\substack{\eb{2} \\ \downarrow}}{\colvec{0;1}}.
+	\vec{a} = \clrcolvecxy{3}{2} = \LCa{3}\overset{\substack{\ebx \\ \downarrow}}{\colvec{1;0}} + \LCb{2}\overset{\substack{\eby \\ \downarrow}}{\colvec{0;1}}.
 	\label{eq:vec a representation in the standard basis}
 \end{equation}
 
@@ -103,16 +103,16 @@ We can then apply the defining properties of linear transformations (REF) on $\v
 		T\clrcolvecxy{3}{2} & = T\left(\LCa{3}\colvec{1;0}+\LCb{2}\colvec{0;1}\right)                 \\
 		                    & = T\left(\LCa{3}\colvec{1;0}\right) + T\left(\LCb{2}\colvec{0;1}\right) \\
 		                    & = \LCa{3}T\colvec{1;0} + \LCb{2}T\colvec{0;1}                           \\
-		                    & = \LCa{3}T\left(\eb{1}\right) + \LCb{2}T\left(\eb{2}\right).
+		                    & = \LCa{3}T\left(\ebx\right) + \LCb{2}T\left(\eby\right).
 	\end{aligned}
 	\label{eq:T applied to a in std basis representation}
 \end{equation}
 
-Now, applying $T$ to the two standard basis vectors $\eb{1}$ and $\eb{2}$ we get
+Now, applying $T$ to the two standard basis vectors $\ebx$ and $\eby$ we get
 \begin{equation}
 	\begin{aligned}
-		\eb{1} & = \colvec{1;0} \xmapsto[\text{$\times 2$ in $y$}]{} \colvec{1;0} \xmapsto[\text{$\ang{90}$ rotation}]{} \colvec{0;1} = T(\eb{1})                                    \\
-		\eb{2} & = \colvec{0;1} \xmapsto{\textcolor{white}{\text{$\times 2$ in $y$}}} \colvec{0;2} \xmapsto{\textcolor{white}{\text{$\ang{90}$ rotation}}} \colvec{-2;0} = T(\eb{2})
+		\ebx & = \colvec{1;0} \xmapsto[\text{$\times 2$ in $y$}]{} \colvec{1;0} \xmapsto[\text{$\ang{90}$ rotation}]{} \colvec{0;1} = T(\ebx)                                    \\
+		\eby & = \colvec{0;1} \xmapsto{\textcolor{white}{\text{$\times 2$ in $y$}}} \colvec{0;2} \xmapsto{\textcolor{white}{\text{$\ang{90}$ rotation}}} \colvec{-2;0} = T(\eby)
 	\end{aligned}
 	\label{eq:simple LT example transformed basis vectors}
 \end{equation}
@@ -120,20 +120,20 @@ Now, applying $T$ to the two standard basis vectors $\eb{1}$ and $\eb{2}$ we get
 And when we use these transformed basis vectors in the linear combination we finally get
 \begin{equation}
 	\begin{aligned}
-		\LCa{3}T\left(\eb{1}\right) + \LCb{2}T\left(\eb{2}\right) & = \LCa{3}\colvec{0;1} +\LCb{2}\colvec{-2;0} \\
-		                                                          & = \colvec{0;3} + \colvec{-4;0}              \\
-		                                                          & = \colvec{-4;3},
+		\LCa{3}T\left(\ebx\right) + \LCb{2}T\left(\eby\right) & = \LCa{3}\colvec{0;1} +\LCb{2}\colvec{-2;0} \\
+		                                                      & = \colvec{0;3} + \colvec{-4;0}              \\
+		                                                      & = \colvec{-4;3},
 	\end{aligned}
 	\label{eq:}
 \end{equation}
 which is exactly what we got when we calculated $T$'s effect directly on $\vec{a}$ (cf. \autoref{eq:simple_LT_example_single_2d_vec}).
 
-Notice exactly what happened: in the standard basis representation, $\vec{a}$ had the coefficients $\LCa{3}$ and $\LCb{2}$ for $\eb{1}$ and $\eb{2}$, respectively. When applying $T$ to $\vec{a}$ these two coefficients remained, but the basis changed: instead of $\left\{\eb{1},\eb{2}\right\}$, the two basis vectors became $\left\{T(\eb{1}),T(\eb{2})\right\}$.
+Notice exactly what happened: in the standard basis representation, $\vec{a}$ had the coefficients $\LCa{3}$ and $\LCb{2}$ for $\ebx$ and $\eby$, respectively. When applying $T$ to $\vec{a}$ these two coefficients remained, but the basis changed: instead of $\left\{\ebx,\eby\right\}$, the two basis vectors became $\left\{T(\ebx),T(\eby)\right\}$.
 
 Of course, this is not unique to $\vec{a}$. For example, let's look at another vector, $$\vec{b}=\clrcolvecxy{2}{-4}.$$ Its coefficients in the standard basis representation are $\LCa{2}$ and $\LCb{-4}$, respectively. So we expect $T(\vec{b})$ to be
 \begin{equation}
 	\begin{aligned}
-		T(\vec{b}) & = \LCa{2}T(\eb{1}) - \LCb{4}T(\eb{2})        \\
+		T(\vec{b}) & = \LCa{2}T(\ebx) - \LCb{4}T(\eby)            \\
 		           & = \LCa{2}\colvec{0;1} - \LCb{4}\colvec{-2;0} \\
 		           & = \colvec{0;2} + \colvec{8;0}                \\
 		           & = \colvec{8;2}.
@@ -152,9 +152,9 @@ What this insight shows us is that given a linear transformation, we only need t
 To make this a bit more formal, let's look at the most generic case: say $T:\Rs[n]\to\Rs[n]$ is a linear transformation \footnote{we'll deal with the more general case of $T:\Rs[n]\to\Rs[m]$ where $n\neq m$ in the next section.}. Then applying $T$ to a vector $\vec{v}\in\Rs[n]$ in its standard basis representation, $$\vec{v}=\clrgenericvec{v}{n},$$ we get
 \begin{equation}
 	\begin{aligned}
-		T(\vec{v}) & = T\clrgenericvec{v}{n}                                                             \\
-		           & = T\left( \LCa{v_{1}}\eb{1} + \LCb{v_{2}}\eb{2} + \dots + \LCe{v_{n}}\eb{n} \right) \\
-		           & = \LCa{v_{1}}T(\eb{1}) + \LCb{v_{2}}T(\eb{2}) + \dots + \LCe{v_{n}}T(\eb{n}).
+		T(\vec{v}) & = T\clrgenericvec{v}{n}                                                         \\
+		           & = T\left( \LCa{v_{1}}\ebx + \LCb{v_{2}}\eby + \dots + \LCe{v_{n}}\eb{n} \right) \\
+		           & = \LCa{v_{1}}T(\ebx) + \LCb{v_{2}}T(\eby) + \dots + \LCe{v_{n}}T(\eb{n}).
 	\end{aligned}
 	\label{eq:}
 \end{equation}

@@ -2,9 +2,9 @@
 \subsection{Representing Linear Transformations as Matrices}
 Following our example from the end of the previous section, let's look again at the result of applying $T$ from \autoref{eq:simple_LT_example_single_2d_vec} on the vector $\vec{a}=\clrcolvecxy{3}{2}$.
 
-Since we know how $T$ transforms the basis vectors $\eb{1}$ and $\eb{2}$ (\autoref{eq:simple LT example transformed basis vectors}), we can $T(\vec{a})$ in the following way:
+Since we know how $T$ transforms the basis vectors $\ebx$ and $\eby$ (\autoref{eq:simple LT example transformed basis vectors}), we can $T(\vec{a})$ in the following way:
 \begin{equation}
-	T(\vec{a}) = \colvec{3;4} = \overset{\substack{\LCa{a_{1}} \\ \downarrow}}{\LCa{3}}\underset{\substack{\uparrow \\ T(\eb{1})}}{\colvec{0;1}} + \overset{\substack{\LCb{a_{2}} \\ \downarrow}}{\LCb{2}}\underset{\substack{\uparrow \\ T(\eb{2})}}{\colvec{-2;0}} = \colvec{0\cdot\LCa{3}-2\cdot\LCb{2};1\cdot\LCa{3}+0\cdot\LCb{2}}.
+	T(\vec{a}) = \colvec{3;4} = \overset{\substack{\LCa{a_{1}} \\ \downarrow}}{\LCa{3}}\underset{\substack{\uparrow \\ T(\ebx)}}{\colvec{0;1}} + \overset{\substack{\LCb{a_{2}} \\ \downarrow}}{\LCb{2}}\underset{\substack{\uparrow \\ T(\eby)}}{\colvec{-2;0}} = \colvec{0\cdot\LCa{3}-2\cdot\LCb{2};1\cdot\LCa{3}+0\cdot\LCb{2}}.
 	\label{eq:developing matrix notation step 1}
 \end{equation}
 
@@ -39,25 +39,25 @@ Of course, we should make sure that the matrix $\mat{M}$ we just defined works f
 \end{equation}
 which is exactly the result we got in \autoref{eq:second_simple_LT_example_single_2d_vec}. Great!
 
-Why not continue checking how this matrix-vector product we developed works for other vectors? First, let's check $\eb{1}$ and $\eb{2}$ for which we already know the results (\autoref{eq:simple_LT_example_single_2d_vec}):
+Why not continue checking how this matrix-vector product we developed works for other vectors? First, let's check $\ebx$ and $\eby$ for which we already know the results (\autoref{eq:simple_LT_example_single_2d_vec}):
 \begin{equation}
 	\begin{aligned}
-		\mat{M}\eb{1} & =
+		\mat{M}\ebx & =
 		\begin{bmatrix}
 			0 & -2 \\
 			1 & 0
-		\end{bmatrix}\clrcolvecxy{1}{0} = \colvec{0\cdot\LCa{1}-2\cdot\LCb{0};1\cdot\LCa{1}+0\cdot\LCb{0}} = \colvec{0;1} = T(\eb{1}), \\
-		\mat{M}\eb{2} & =
+		\end{bmatrix}\clrcolvecxy{1}{0} = \colvec{0\cdot\LCa{1}-2\cdot\LCb{0};1\cdot\LCa{1}+0\cdot\LCb{0}} = \colvec{0;1} = T(\ebx), \\
+		\mat{M}\eby & =
 		\begin{bmatrix}
 			0 & -2 \\
 			1 & 0
-		\end{bmatrix}\clrcolvecxy{0}{1} = \colvec{0\cdot\LCa{0}-2\cdot\LCb{1};1\cdot\LCa{0}+0\cdot\LCb{1}} = \colvec{-2;0} = T(\eb{2}),
+		\end{bmatrix}\clrcolvecxy{0}{1} = \colvec{0\cdot\LCa{0}-2\cdot\LCb{1};1\cdot\LCa{0}+0\cdot\LCb{1}} = \colvec{-2;0} = T(\eby),
 		\label{eq:}
 	\end{aligned}
 \end{equation}
 exactly the results we expected.
 
-Perhaps you've noticed something by now - the columns of $\mat{M}$ are exactly the vectors $T(\eb{1})$ and $T(\eb{2})$ in the right order:
+Perhaps you've noticed something by now - the columns of $\mat{M}$ are exactly the vectors $T(\ebx)$ and $T(\eby)$ in the right order:
 
 \begin{center}
 	\fromtranstomat{T}{\mat{M}}{0}{1}{-2}{0}
@@ -91,15 +91,15 @@ where $a,b,c,d\in\Rs$ (REF), and using the same process as in \autoref{eq:develo
 	\label{eq:general 2x2 matrix}
 \end{equation}
 
-Just like in our specific example, the columns of $\mat{M}$ are exactly the images of the basis vectors $\eb{1}$ and $\eb{2}$, respectively. To confirm this, let's apply the $\mat{M}$ on both basis vectors:
+Just like in our specific example, the columns of $\mat{M}$ are exactly the images of the basis vectors $\ebx$ and $\eby$, respectively. To confirm this, let's apply the $\mat{M}$ on both basis vectors:
 \begin{equation}
 	\begin{aligned}
-		\mat{M}\eb{1} & =
+		\mat{M}\ebx & =
 		\begin{bmatrix}
 			a & b \\
 			c & d
 		\end{bmatrix}\clrcolvecxy{1}{0} = \colvec{a\cdot\LCa{1}+b\cdot\LCb{0};c\cdot\LCa{1}+d\cdot\LCb{0}} = \colvec{a;c} = M_{1}, \\
-		\mat{M}\eb{2} & =
+		\mat{M}\eby & =
 		\begin{bmatrix}
 			a & b \\
 			c & d
@@ -208,12 +208,12 @@ Indeed, this can be presented (as it often does) in the following way: the $i$-t
 \subsection{The Fundamental Linear Transformations as Matrices}
 Let us now use the process we devolped above to represent the fundamental $\Rs[2]\to\Rs[2]$ linear transformations (REF) in matrix form. Since we're dealing with transformations from $\Rs[2]$ to itself, the matrices representing these transformations are of dimension $2\times2$, i.e. they live in the space $\Rs[2\times2]$.
 
-We start with the most boring linear transformation: the identity transformation $I$. As a reminder, $I$ maps \textit{any} vector $\vec{v}\in\Rs[2]$ to itself: $I(\vec{v})=\vec{v}$. In particular, it takes the two standard basis vectors $\eb{1}$ and $\eb{2}$ and maps them to themselves:
+We start with the most boring linear transformation: the identity transformation $I$. As a reminder, $I$ maps \textit{any} vector $\vec{v}\in\Rs[2]$ to itself: $I(\vec{v})=\vec{v}$. In particular, it takes the two standard basis vectors $\ebx$ and $\eby$ and maps them to themselves:
 \begin{equation}
 	\colvec{1;0} \xmapsto{I}\ \colvec{1;0},\quad \colvec{0;1} \xmapsto{I}\ \colvec{0;1}.
 	\label{eq:}
 \end{equation}
-Very exciting indeed. Knowing how $I$ transforms $\eb{1}$ and $\eb{2}$ we can use their maps as the columns of the matrix representation of $I$:
+Very exciting indeed. Knowing how $I$ transforms $\ebx$ and $\eby$ we can use their maps as the columns of the matrix representation of $I$:
 \begin{equation}
 	\fromtranstomat{I}{\Id{2}}{1}{0}{0}{1}
 	% \fromtranstomat{R}{\mat{R}}{\cos(\theta)}{\sin(\theta)}{-\sin(\theta)}{\cos(\theta)}
@@ -234,15 +234,15 @@ $\mat{S}$ has an important property: it only has non-zero entries in $a_{11}$ an
 	In the specific case where $\alpha=\beta=1$ a scaling matrix essentially does nothing: it scales by $1$ in both directions. Indeed, in this case it becomes the identity matrix $\Id{2}$.
 \end{note}
 
-The next family of linear transformations to represent as matrices are the rotations around the origin. Again, we don't really need to think too much: just check the results of rotating $\eb{1}$ and $\eb{2}$ by $\theta$ anti-clockwise. Since $\eb{1}$ is a unit vector, rotating it by $\theta$ anti-clockwise around the origin gives another unit vector (since rotating a vector doesn't change its norm), which is at an $theta$ to the $x$-axis. Its coordinates are then exactly the polar coordinates of a vector at $\theta$ to the $x$-axis but with $R=1$ (see REF TO POLAR COORDINATES EQUATION):
+The next family of linear transformations to represent as matrices are the rotations around the origin. Again, we don't really need to think too much: just check the results of rotating $\ebx$ and $\eby$ by $\theta$ anti-clockwise. Since $\ebx$ is a unit vector, rotating it by $\theta$ anti-clockwise around the origin gives another unit vector (since rotating a vector doesn't change its norm), which is at an $theta$ to the $x$-axis. Its coordinates are then exactly the polar coordinates of a vector at $\theta$ to the $x$-axis but with $R=1$ (see REF TO POLAR COORDINATES EQUATION):
 \begin{equation}
-	R_{\theta}(\eb{1}) = \colvec{\cos(\theta);\sin(\theta)}.
+	R_{\theta}(\ebx) = \colvec{\cos(\theta);\sin(\theta)}.
 	\label{eq:eb1 rotated by theta}
 \end{equation}
 
-Since the rotated $\eb{2}$ is orthogonal to the rotated $\eb{1}$ we can use the orthogonality trick in 2-dimensions to find its coordinates (REF TO ORTHOGONALITY TRICK IN 2D):
+Since the rotated $\eby$ is orthogonal to the rotated $\ebx$ we can use the orthogonality trick in 2-dimensions to find its coordinates (REF TO ORTHOGONALITY TRICK IN 2D):
 \begin{equation}
-	R_{\theta}(\eb{2}) = \colvec{-\sin(\theta);\cos(\theta)}.
+	R_{\theta}(\eby) = \colvec{-\sin(\theta);\cos(\theta)}.
 	\label{eq:eb2 rotated by theta}
 \end{equation}
 
@@ -282,8 +282,8 @@ Since the rotated $\eb{2}$ is orthogonal to the rotated $\eb{1}$ we can use the 
 					pic text=$\theta$, pic text options={text=xred, opacity=1},
 				] {angle=e1--o--Re1};
 
-				\draw[vector, xred, line width=2pt] (0,0) -- (Re1) node[pos=1.1] {$R_{\theta}(\eb{1})$};
-				\draw[vector, xblue, line width=2pt] (0,0) -- (Re2) node[pos=1.2] {$R_{\theta}(\eb{2})$};
+				\draw[vector, xred, line width=2pt] (0,0) -- (Re1) node[pos=1.1] {$R_{\theta}(\ebx)$};
+				\draw[vector, xblue, line width=2pt] (0,0) -- (Re2) node[pos=1.2] {$R_{\theta}(\eby)$};
 
 				% \draw[leftbracket] (0,0) -- ({-sin(\th)},0) node[midway, below, yshift=-7pt] {$-\sin(\theta)$};
 				% \draw[leftbracket] ({-sin(\th)},0) -- ({-sin(\th)},{cos(\th)}) node[midway, left, xshift=-7pt] {$\cos(\theta)$};
@@ -292,7 +292,7 @@ Since the rotated $\eb{2}$ is orthogonal to the rotated $\eb{1}$ we can use the 
 			\end{axis}
 		\end{tikzpicture}
 	\end{center}
-	\caption{The two basis vectors $\eb{1},\eb{2}$ rotated by an angle $\theta$ anti-clockwise around the origin. The coordinates of the rotated $\eb{1}$ are simply the polar coordinates of a general vector which is at an angle $\theta$ to the $x$-axis, with $R=1$ (since $\eb{1}$ is a unit vector).}
+	\caption{The two basis vectors $\ebx,\eby$ rotated by an angle $\theta$ anti-clockwise around the origin. The coordinates of the rotated $\ebx$ are simply the polar coordinates of a general vector which is at an angle $\theta$ to the $x$-axis, with $R=1$ (since $\ebx$ is a unit vector).}
 	\label{fig:rotating_e1_e2}
 \end{figure}
 
@@ -315,7 +315,7 @@ A rotation by $\theta=\pihalf$ (equivalent to $\ang{90}$) is done by the matrix
 	\mat{R}_{\pihalf} = \begin{bmatrix} \cos\left(\pihalf\right) & -\sin\left(\pihalf\right) \\ \sin\left(\pihalf\right) & \cos\left(\pihalf\right) \end{bmatrix} = \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}.
 	\label{eq:rotation by angle 90}
 \end{equation}
-This is an nice result: rotating by $\pihalf$ is equivalent to switching the two basis vector $\eb{1}$ and $\eb{2}$ and then flipping the \enquote{new} $\eb{2}$ around so it faces in the negative $x$-direction.
+This is an nice result: rotating by $\pihalf$ is equivalent to switching the two basis vector $\ebx$ and $\eby$ and then flipping the \enquote{new} $\eby$ around so it faces in the negative $x$-direction.
 
 Before continuing to $mat{R}_{\pi}$ let's see what we expect: rotating a vector by $\theta=\pi$ is simply inverting it (i.e. negating both its coordinates). And indeed,
 \begin{equation}
@@ -324,13 +324,13 @@ Before continuing to $mat{R}_{\pi}$ let's see what we expect: rotating a vector 
 \end{equation}
 which is exactly the identity matrix with all its entries negating. How cool is that?
 
-Ok, next up: reflections! Reflecting a vector across the $x$-axis is simply flipping it\footnote{yes, I also laughed when writing this.} vertically - so its $x$-component doesn't change, and its $y$-component gets flipped. The result for the basis vectors is that $\eb{1}$ stays the same (i.e. reflecting $\eb{1}$ across the $x$ access doesn't change it), while $\eb{2}$ gets flipped:
+Ok, next up: reflections! Reflecting a vector across the $x$-axis is simply flipping it\footnote{yes, I also laughed when writing this.} vertically - so its $x$-component doesn't change, and its $y$-component gets flipped. The result for the basis vectors is that $\ebx$ stays the same (i.e. reflecting $\ebx$ across the $x$ access doesn't change it), while $\eby$ gets flipped:
 \begin{equation}
 	\fromtranstomat{\text{ref}_{x}}{\mat{ref}_{x}}{1}{0}{0}{-1}
 	\label{eq:vertical reflection matrix}
 \end{equation}
 
-Similarly, reflecting a vector across the $y$-axis flips their $x$-coordinate and keeps their $y$-coordinate untouched, i.e. $\eb{1}$ gets flipped and $\eb{2}$ remains the same:
+Similarly, reflecting a vector across the $y$-axis flips their $x$-coordinate and keeps their $y$-coordinate untouched, i.e. $\ebx$ gets flipped and $\eby$ remains the same:
 \begin{equation}
 	\fromtranstomat{\text{ref}_{y}}{\mat{ref}_{y}}{-1}{0}{0}{1}
 	\label{eq:horizontal reflection matrix}
