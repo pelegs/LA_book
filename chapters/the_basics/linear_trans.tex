@@ -11,8 +11,94 @@
 
 	In the next section we will explore how we can turn the caulculations of linear transformations into an extremely easy and straight-forward process using \newterm{matrices}.
 \end{summary}
+
 \subsection{Introduction}
 Text text text\dots
+
+\dots
+
+The main purely mathematical property of linear transformations is that they preserve the structure of vector spaces. This means that if we have three vectors $\vec{a},\ \vec{b}$ and $\vec{c}$ such that $\vec{c}=\alpha\vec{a}+\beta\vec{b}$, then for any linear transformation $T$,
+\begin{equation}
+	T(\vec{c}) = \alpha T(\vec{a}) + \beta T(\vec{b}).
+	\label{eq:}
+\end{equation}
+(see \autoref{fig:linear trans preservering linear structure} for a visual example)
+
+\begin{figure}
+	\begin{center}
+		\begin{tikzpicture}
+			\coordinate (a) at (1,0.5);
+			\coordinate (b) at (0,0.75);
+			\pgfmathsetmacro{\al}{2}
+			\pgfmathsetmacro{\be}{3}
+			\draw[vector, xred] (0,0) -- (a) node[midway, below] {$\vec{a}$};
+			\draw[vector, xblue] (0,0) -- (b) node[midway, left] {$\vec{b}$};
+			\draw[vector, xred, dashed] (a) -- ($\al*(a)$) node[pos=0.6, below] {$\alpha\vec{a}$};
+			\draw[vector, xblue, dashed] (b) -- ($\be*(b)$) node[pos=0.6, left] {$\beta\vec{b}$};
+			\draw[vector, dashed, xred, opacity=0.25] ($\be*(b)$) -- ++($\al*(a)$) node[midway, above left] {$\alpha\vec{a}$};
+			\draw[vector, dashed, xblue, opacity=0.25] ($\al*(a)$) -- ++($\be*(b)$) node[midway, right] {$\beta\vec{b}$};
+			\draw[vector, xpurple] (0,0) -- ($\al*(a)+\be*(b)$) node[pos=1.1] {$\vec{c}$};
+
+			\draw[very thick, |->] (3.5,1.5) -- ++(2.5,0) node[midway, above] {$T$} node[midway, below] {(linear)};
+
+			\pgfmathsetmacro{\th}{-45}
+			\pgftransformcm{0.8}{0.0}{0.6}{0.7}{\pgfpoint{75mm}{0}}
+			\coordinate (a) at (1,0.5);
+			\coordinate (b) at (0,0.75);
+			\pgfmathsetmacro{\al}{2}
+			\pgfmathsetmacro{\be}{3}
+			\draw[vector, xred] (0,0) -- (a) node[midway, below, yshift=-3pt] {$T(\vec{a})$};
+			\draw[vector, xblue] (0,0) -- (b) node[midway, left, yshift=3pt] {$T(\vec{b})$};
+			\draw[vector, xred, dashed] (a) -- ($\al*(a)$) node[pos=0.6, below, xshift=-2pt, yshift=-2pt] {$\alpha T(\vec{a})$};
+			\draw[vector, xblue, dashed] (b) -- ($\be*(b)$) node[pos=0.6, left, xshift=2pt, yshift=5pt] {$\beta T(\vec{b})$};
+			\draw[vector, dashed, xred, opacity=0.25] ($\be*(b)$) -- ++($\al*(a)$) node[midway, above] {$\alpha T(\vec{a})$};
+			\draw[vector, dashed, xblue, opacity=0.25] ($\al*(a)$) -- ++($\be*(b)$) node[midway, right, xshift=-5pt, yshift=-5pt] {$\beta T(\vec{b})$};
+			\draw[vector, xpurple] (0,0) -- ($\al*(a)+\be*(b)$) node[pos=1.1] {$T(\vec{c})$};
+		\end{tikzpicture}
+	\end{center}
+	\caption{Two vectors $\color{xred}{\vec{a}}$ and $\color{xblue}{\vec{b}}$ are both scaled (by $\color{xred}{\alpha}$ and $\color{xblue}{\beta}$, respectively) and then added together to form the vector $\color{xdarkpurple}{\vec{c}}$. All the addition and scaling relations between the vectors are kept under the application of a linear transformation $T$.}
+	\label{fig:linear trans preservering linear structure}
+\end{figure}
+
+However, this is a rather abstract way of discussing linear transformations. Instead, let's first learn some of the more \enquote{graphical} properies of linear transformations in the plane, i.e. $T:\Rs[2]\to\Rs[2]$, and then see practical examples of such transformations before moving on to their more abstract (and powerful) mathematical description.
+
+Any linear transformation $T:\Rs[2]\to\Rs[2]$ always has the following four properties:
+\begin{descitemize}
+	\item[The origin is kept untouched] $T$ always maps $\vec{0}$ to $\vec{0}$.
+	\item[Lines remain lines] a set of points forming a line in $\Rs[2]$ will be mapped to another set of points forming a line (with possibly different direction, distance from origin and scale).
+	\item[Parallel directions remain parallel] if $\vec{a}$ and $\vec{b}$ point at the same direction, then $\vec{b}=\alpha\vec{a}$ for some $\alpha\in\Rs$. After the transformation the maps of $\vec{a}$ and $\vec{b}$ will stay parallels, and would even keep their scalar relation: $T(\vec{b})=\alpha T(\vec{a})$.
+	\item[All areas are scaled by the same factor] if two shapes $S_{1}$ and $S_{2}$ have areas $A_{1}$ and $A_{2}$, respectively, before the transformation is applied, their maps $\tilde{S}_{1}$ and $\tilde{S}_{2}$ would have the areas $kA_{1}$ and $kA_{2}$ (where $k\in\Rs$ depends on the transformation and can take both positive, zero and negative values).
+\end{descitemize}
+\autoref{fig:general linear transformation and invariants} shows these properties in action: there are two planes in the figure - before and after the application of a random linear transformation $T$ (up and down, respectively). The following can be seen:
+\begin{enumerate}
+	\item The origin stays at the same place - see how a small purple dot placed on the origin doesn't change its position after the application of $T$. 
+	\item All lines (e.g. axes, grid lines, the two purple lines) are mapped to lines in the transformed plane. 
+	\item Parallel directions remain parallel, e.g. grid lines aligned with one of the axes, and the two purple lines. 
+	\item All areas are scaled by the same factor: notice for example how all unit squares formed by the grid lines (one is highlighted in orange) are mapped to identical parallelograms. You can also check to see that the blue rectangle is exactly twice as large than the orange square before and after the transformation.
+\end{enumerate}
+
+\begin{figure}
+	\begin{center}
+		\drawtrans{T}{0.8}{0.2}{-1.0}{0.7}
+	\end{center}
+	\caption{Some random linear transformation $T$ applied to $\Rs[2]$, with different shapes showing the four main properties discussed for linear transformatiosn.}
+	\label{fig:general linear transformation and invariants}
+\end{figure}
+
+The example in \autoref{fig:general linear transformation and invariants} also shows what \textit{doesn't} get preserved under a linear transformation: two important properties are relative distances and angles. Let's \enquote{zoom-in} on the orange unit square to see this better (\autoref{fig:orange unit square in R2}): we label the vertices of the 
+
+\begin{figure}
+	\begin{center}
+		\begin{tikzpicture}[scale=0.6]
+			\Large
+			\draw[xorange, fill=xorange!25, line width=3pt] (0,0) node[below left] {$\pnt{O}$} -- (5,0) node[below right] {$\pnt{A}$} -- (5,5) node[above right] {$\pnt{B}$} -- (0,5) node[above left] {$\pnt{C}$} -- cycle;
+			\draw[xshift=17cm, xorange, fill=xorange!25, line width=3pt] (0,0) node[below] {$\pnt{O}'$} -- (4,1) node[right] {$\pnt{A}'$} -- (-1,4.5) node[above] {$\pnt{B}'$} -- (-5,3.5) node[left] {$\pnt{C}'$} -- cycle;
+		\end{tikzpicture}
+	\end{center}
+	\caption{bla}
+	\label{fig:orange unit square in R2}
+\end{figure}
+
 
 \dots
 
@@ -160,4 +246,3 @@ To make this a bit more formal, let's look at the most generic case: say $T:\Rs[
 \end{equation}
 
 This is an incredibly powerful insight which allows us to save a lot of calculations - and which we will use in the next section to make the calculations of linear transformations \textit{even more} concise and simple, using the power of\dots % this was the previous joke: \footnote{\textbf{spoiler}: \rotatebox{180}{matrices!}\ \dots\ although the section heading is right here.}.
-
