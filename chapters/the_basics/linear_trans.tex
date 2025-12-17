@@ -85,18 +85,22 @@ Any linear transformation $T:\Rs[2]\to\Rs[2]$ always has the following four prop
 	\label{fig:general linear transformation and invariants}
 \end{figure}
 
-The example in \autoref{fig:general linear transformation and invariants} also shows what \textit{doesn't} get preserved under a linear transformation: two important properties are relative distances and angles. Let's \enquote{zoom-in} on the orange unit square to see this better (\autoref{fig:orange unit square in R2}): we label the vertices of the 
+The example in \autoref{fig:general linear transformation and invariants} also shows what \textit{doesn't} get preserved under a linear transformation: two important properties are relative distances and angles. Let's \enquote{zoom-in} on the orange unit square to see this better (\autoref{fig:orange unit square in R2}): we label its vertices as $\color{xorange}{\pnt{O}}, \color{xorange}{\pnt{A}}, \color{xorange}{\pnt{B}}$ and $\color{xorange}{\pnt{C}}$ starting from the point at the origin and going anti-clockwise. The transformed vertices are then, respectively, $\color{xorange}{\pnt{O'}}, \color{xorange}{\pnt{A'}}, \color{xorange}{\pnt{B'}}$ and $\color{xorange}{\pnt{C}'}$.
+
+In the original unit square the diagonals are equal - these are the distances $\color{xorange}{\mathbf{OB}}$ and $\color{xorange}{\mathbf{AC}}$ (each being exactly $sqrt{2}$). However, its clear that $\color{xorange}{\mathbf{O'B'}} < \color{xorange}{\mathbf{A'C'}}$. In addition, all the angles in the original unit square are, of course, right angles - but the parallelogram $\color{xorange}{\mathbf{O'A'B'C'}}$ has two equal acute angles, $\color{xorange}{\mathbf{O'C'B'}}$ - and two equal obtuse angles, $f$.
+WORK ON THIS!!!
 
 \begin{figure}
 	\begin{center}
 		\begin{tikzpicture}[scale=0.6]
 			\Large
-			\draw[xorange, fill=xorange!25, line width=3pt] (0,0) node[below left] {$\pnt{O}$} -- (5,0) node[below right] {$\pnt{A}$} -- (5,5) node[above right] {$\pnt{B}$} -- (0,5) node[above left] {$\pnt{C}$} -- cycle;
-			\draw[xshift=17cm, xorange, fill=xorange!25, line width=3pt] (0,0) node[below] {$\pnt{O}'$} -- (4,1) node[right] {$\pnt{A}'$} -- (-1,4.5) node[above] {$\pnt{B}'$} -- (-5,3.5) node[left] {$\pnt{C}'$} -- cycle;
+			\draw[xorange, fill=xorange!25, line width=3pt] (0,0) node[below left] {$\pnt{O}$} -- (5,0) node[below right] (A) {$\pnt{A}$} -- (5,5) node[above right] (B) {$\pnt{B}$} -- (0,5) node[above left] {$\pnt{C}$} -- cycle;
+			\draw[|->, ultra thick] (7,2.5) -- ++(4,0) node[midway, above] {$T$};
+			\draw[xshift=18cm, xorange, fill=xorange!25, line width=3pt] (0,0) node[below] {$\pnt{O}'$} -- (4,1) node[right] {$\pnt{A}'$} -- (-1,4.5) node[above] {$\pnt{B}'$} -- (-5,3.5) node[left] {$\pnt{C}'$} -- cycle;
 		\end{tikzpicture}
 	\end{center}
 	\caption{bla}
-	\label{fig:orange unit square in R2}
+	\label{fig:orange unit square in R2 before and after application of a linear transformation $T$.}
 \end{figure}
 
 
