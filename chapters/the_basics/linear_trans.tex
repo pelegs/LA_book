@@ -71,9 +71,9 @@ Any linear transformation $T:\Rs[2]\to\Rs[2]$ always has the following four prop
 \end{descitemize}
 \autoref{fig:general linear transformation and invariants} shows these properties in action: there are two planes in the figure - before and after the application of a random linear transformation $T$ (up and down, respectively). The following can be seen:
 \begin{enumerate}
-	\item The origin stays at the same place - see how a small purple dot placed on the origin doesn't change its position after the application of $T$. 
-	\item All lines (e.g. axes, grid lines, the two purple lines) are mapped to lines in the transformed plane. 
-	\item Parallel directions remain parallel, e.g. grid lines aligned with one of the axes, and the two purple lines. 
+	\item The origin stays at the same place - see how a small purple dot placed on the origin doesn't change its position after the application of $T$.
+	\item All lines (e.g. axes, grid lines, the two purple lines) are mapped to lines in the transformed plane.
+	\item Parallel directions remain parallel, e.g. grid lines aligned with one of the axes, and the two purple lines.
 	\item All areas are scaled by the same factor: notice for example how all unit squares formed by the grid lines (one is highlighted in orange) are mapped to identical parallelograms. You can also check to see that the blue rectangle is exactly twice as large than the orange square before and after the transformation.
 \end{enumerate}
 
@@ -81,30 +81,56 @@ Any linear transformation $T:\Rs[2]\to\Rs[2]$ always has the following four prop
 	\begin{center}
 		\drawtrans{T}{0.8}{0.2}{-1.0}{0.7}
 	\end{center}
-	\caption{Some random linear transformation $T$ applied to $\Rs[2]$, with different shapes showing the four main properties discussed for linear transformatiosn.}
+	\caption{Some random linear transformation $T$ applied to $\Rs[2]$, with different shapes showing the four main properties discussed for linear transformations.}
 	\label{fig:general linear transformation and invariants}
 \end{figure}
 
-The example in \autoref{fig:general linear transformation and invariants} also shows what \textit{doesn't} get preserved under a linear transformation: two important properties are relative distances and angles. Let's \enquote{zoom-in} on the orange unit square to see this better (\autoref{fig:orange unit square in R2}): we label its vertices as $\color{xorange}{\pnt{O}}, \color{xorange}{\pnt{A}}, \color{xorange}{\pnt{B}}$ and $\color{xorange}{\pnt{C}}$ starting from the point at the origin and going anti-clockwise. The transformed vertices are then, respectively, $\color{xorange}{\pnt{O'}}, \color{xorange}{\pnt{A'}}, \color{xorange}{\pnt{B'}}$ and $\color{xorange}{\pnt{C}'}$.
-
-In the original unit square the diagonals are equal - these are the distances $\color{xorange}{\mathbf{OB}}$ and $\color{xorange}{\mathbf{AC}}$ (each being exactly $sqrt{2}$). However, its clear that $\color{xorange}{\mathbf{O'B'}} < \color{xorange}{\mathbf{A'C'}}$. In addition, all the angles in the original unit square are, of course, right angles - but the parallelogram $\color{xorange}{\mathbf{O'A'B'C'}}$ has two equal acute angles, $\color{xorange}{\mathbf{O'C'B'}}$ - and two equal obtuse angles, $f$.
-WORK ON THIS!!!
+The example in \autoref{fig:general linear transformation and invariants} also shows what \textit{doesn't} get preserved under a linear transformation. To see this more clearly, \autoref{fig:orange unit square in R2}  \enquote{zooms-in} on the orange unit square: we label its vertices as $\color{xorange}{\pnt{O}}, \color{xorange}{\pnt{A}}, \color{xorange}{\pnt{B}}$ and $\color{xorange}{\pnt{C}}$ starting from the point at the origin and going anti-clockwise. The transformed vertices are then, respectively, $\color{xorange}{\pnt{O'}}, \color{xorange}{\pnt{A'}}, \color{xorange}{\pnt{B'}}$ and $\color{xorange}{\pnt{C}'}$.
 
 \begin{figure}
 	\begin{center}
-		\begin{tikzpicture}[scale=0.6]
-			\Large
-			\draw[xorange, fill=xorange!25, line width=3pt] (0,0) node[below left] {$\pnt{O}$} -- (5,0) node[below right] (A) {$\pnt{A}$} -- (5,5) node[above right] (B) {$\pnt{B}$} -- (0,5) node[above left] {$\pnt{C}$} -- cycle;
-			\draw[|->, ultra thick] (7,2.5) -- ++(4,0) node[midway, above] {$T$};
-			\draw[xshift=18cm, xorange, fill=xorange!25, line width=3pt] (0,0) node[below] {$\pnt{O}'$} -- (4,1) node[right] {$\pnt{A}'$} -- (-1,4.5) node[above] {$\pnt{B}'$} -- (-5,3.5) node[left] {$\pnt{C}'$} -- cycle;
+		\begin{tikzpicture}[node distance=4mm]
+			\tikzset{
+				label/.style={xorange, font=\Large},
+				rshape/.style={xorange, fill=xorange, opacity=1, fill opacity=0.25, line width=2pt},
+				sangle/.style={draw=xorange!75!black, ultra thick, dashed, angle radius=10mm, text=xorange!50!black},
+				measure/.style={|-|, xorange!25!black!50, very thick, dashed},
+			}
+
+			% Original unit square
+			\coordinate (O) at (0,0); \node[label, below left of=O] {$\mathbf{O}$};
+			\coordinate (A) at (2,0); \node[label, below right of=A] {$\mathbf{A}$};
+			\coordinate (B) at (2,2); \node[label, above right of=B] {$\mathbf{B}$};
+			\coordinate (C) at (0,2); \node[label, above left of=C] {$\mathbf{C}$};
+			\draw[rshape] (O) rectangle (B);
+			\draw[measure] ($(O)-(1,0)$) -- ($(C)-(1,0)$) node[midway, left] {$1$};
+			\draw[measure] ($(C)+(0,1)$) -- ($(B)+(0,1)$) node[midway, above] {$1$};
+			\pic[sangle, fill=xorange!90!black, fill opacity=0.5, solid, angle radius=5mm] {right angle=C--O--A};
+
+			% Transformed square
+			\pgftransformcm{0.8}{0.2}{-1.0}{0.7}{\pgfpoint{10cm}{0}}
+			\coordinate (O') at (0,0); \node[label, below of=O'] {$\mathbf{O'}$};
+			\coordinate (A') at (2,0); \node[label, right of=A'] {$\mathbf{A'}$};
+			\coordinate (B') at (2,2); \node[label, above of=B'] {$\mathbf{B'}$};
+			\coordinate (C') at (0,2); \node[label, left of=C'] {$\mathbf{C'}$};
+			\pgftransformreset
+			\draw[rshape] (O') -- (A') -- (B') -- (C') -- cycle;
+			\pic[sangle, pic text=$\alpha$] {angle=O'--C'--B'};
+			\pic[sangle, angle radius=7mm, angle eccentricity=0.5, pic text=$\beta$] {angle=A'--O'--C'};
+
+			% LT arrow
+			\draw[|->, ultra thick] ($(A)!0.5!(B) + (1.5,0)$) -- ++(3,0) node[midway, above] {$T$};
 		\end{tikzpicture}
 	\end{center}
-	\caption{bla}
-	\label{fig:orange unit square in R2 before and after application of a linear transformation $T$.}
+	\caption{Unit square in $\Rs[2]$ before and after the application of the random linear transformation $T$ from \autoref{fig:general linear transformation and invariants}.}
+	\label{fig:orange unit square in R2}
 \end{figure}
 
+In the original unit square the diagonals are equal: their lengths are $\textcolor{xorange}{\mathbf{OB}}=\textcolor{xorange}{\mathbf{AC}}=\sqrt{2}$. However, it's clear that $\textcolor{xorange}{\mathbf{O'B'}} < \textcolor{xorange}{\mathbf{A'C'}}$. In addition, all the angles in the original unit square are, of course, right angles, but the transformed square is a parallelogram ($\textcolor{xorange}{\mathbf{O'A'B'C'}}$) has two equal acute angles of value $\alpha$ and two equal obtuse angles of value $\beta$ (where $\beta=\pi-\alpha$).
 
-\dots
+So we can see that at least two quantities aren't necessarily conserved by linear transformations: (1) \textbf{distances}, which unlike areas don't even all scale by the same amount, and (2) \textbf{angles} (more generally, \textbf{directions}).
+
+One last key observation before we move on: as can be seen in \autoref{fig:general linear transformation and invariants} and \autoref{fig:orange unit square in R2} linear transfornations in $\Rs[2]$ transform \textbf{squares} into \textbf{parallelograms}. These parallelograms can be scaled, \enquote{squeezed}, reflected and/or rotated compared to the original squares.
 
 \subsection{2-Dimensional Linear Transformations}
 Here comes an introductory text about the fundamental linear transformations in $\Rs[2]$, what are their properties and some more relevant information\dots
