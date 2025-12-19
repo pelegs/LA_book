@@ -58,6 +58,7 @@
 
 \usepackage{pgfplots}
 \usepgfplotslibrary{fillbetween}%, colormaps, colorbrewer, patchplots}
+\usepgfmodule{nonlineartransformations}
 \pgfplotsset{
 	compat=1.16,
 	%% Styles %%
@@ -111,6 +112,22 @@
 			function={#1}, opacity=1, fill=#1, fill opacity=0.3,
 		},
 }
+
+% Some non-linear transformations
+\makeatletter
+\def\bendinglines{%
+	\pgfmathsetmacro{\TX}{\pgf@x+5.0*cos(2*\pgf@y)}
+	\pgfmathsetmacro{\TY}{0.0005*\pgf@x*\pgf@x+\pgf@y}
+	\setlength{\pgf@x}{\TX pt}
+	\setlength{\pgf@y}{\TY pt}
+}
+\def\parallelbreak{%
+	\pgfmathsetmacro{\TX}{\pgf@x+0.00001*(\pgf@y*\pgf@y)}
+	\pgfmathsetmacro{\TY}{\pgf@y}
+	\setlength{\pgf@x}{\TX pt}
+	\setlength{\pgf@y}{\TY pt}
+}
+\makeatother
 
 %%%%%%%%%%%%%%%%%%%%%%
 %        TikZ        %

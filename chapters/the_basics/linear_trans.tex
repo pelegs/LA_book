@@ -132,8 +132,10 @@ So we can see that at least two quantities aren't necessarily conserved by linea
 
 One last key observation before we move on: as can be seen in \autoref{fig:general linear transformation and invariants} and \autoref{fig:orange unit square in R2} linear transfornations in $\Rs[2]$ transform \textbf{squares} into \textbf{parallelograms}. These parallelograms can be scaled, \enquote{squeezed}, reflected and/or rotated compared to the original squares.
 
-\subsection{2-Dimensional Linear Transformations}
+\subsection{Linear Transformations in 2-Dimensions}
 Here comes an introductory text about the fundamental linear transformations in $\Rs[2]$, what are their properties and some more relevant information\dots
+
+We saw how
 
 \dots
 
@@ -162,6 +164,43 @@ Let's begin:
 	\end{center}
 
 \end{descitemize}
+
+\subsection{Examples of Non-Linear Transformations in 2-Dimensions}
+Now that we are visually familiar with linear transformations in $2$-dimensions, let's look at some examples of non-linear transformations in the plane. Each of the following examples will highlight how one of the properties of linear transformations can be \enquote{broken}.
+\begin{descitemize}
+	\item[Preservation of origin] text.
+	\item[Lines are mapped to lines] text text text:
+	\begin{center}
+		\pgftransformnonlinear{\bendinglines}
+		\begin{tikzpicture}
+			\begin{axis}[
+					width=10cm,
+					xyplane,
+					grid=major,
+					xmin=-5, xmax=5,
+					ymin=-5, ymax=5,
+				]
+			\end{axis}
+		\end{tikzpicture}
+	\end{center}
+
+	\item[Parallel lines stay parallel] text text text:
+	\begin{center}
+		\pgftransformnonlinear{\parallelbreak}
+		\begin{tikzpicture}
+			\begin{axis}[
+					width=10cm,
+					xyplane,
+					grid=major,
+					xmin=-5, xmax=5,
+					ymin=-5, ymax=5,
+				]
+			\end{axis}
+		\end{tikzpicture}
+	\end{center}
+\end{descitemize}
+
+\subsection{Formal Definition}
 
 \subsection{3-Dimensional Linear Transformations}
 
