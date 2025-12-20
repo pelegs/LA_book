@@ -240,32 +240,54 @@ The formal definition of linear transformations between any two vector spaces is
 	We can combine the above two criteria using an additional scalar $\beta\in\Rs$: $T$ is linear if $$ T(\alpha\vec{a} + \beta\vec{b}) = \alpha T(\vec{a}) + \beta T(\vec{b}).$$
 \end{definition}
 
-To understand this definition better, and learn how to actually use it in practice, let's use it to show that some of the basic linear transformations in 2-dimensions are, indeed, linear. We start with the identity transformation, since it's a rather straight-forward exercise:
+Just like with vectirs, the first condition is called \textbf{additivity} and the second condition is called \textbf{homogeneity}. What these conditions say, in simple words, is that we can always scale vectors and add them together before we apply the a linear transformation - and the result will be equal to scaling and adding the transformed vectors. So in practice we can choose what we want to calculate first (addition and scaling or the transformation) according to what is easier and/or more convinient to calculate.
 
-\begin{proof}{Linearity of the Identity Transformation}{}
-	Let $I$ be the identity transformation in $\Rs[2]$. Then for any $\vec{v}=\colvec{x;y}\in\Rs[2]$, $$I(\vec{v})=I\colvec{x;y} = \colvec{x;y}=\vec{v}.$$
-	\begin{descitemize}
-		\item[Addition] let $\vec{v}=\colvec{v_{1};v_{2}}$ and $\vec{w}=\colvec{w_{1};w_{2}}$. Then
-		\begin{align*}
-			I(\vec{v}+\vec{w}) & = I\left(\colvec{v_{1};v_{2}}+\colvec{w_{1};w_{2}}\right) \\
-			                   & = I\left(\colvec{v_{1}+w_{1};v_{2}+w_{2}}\right)          \\
-			                   & = \colvec{v_{1}+w_{1};v_{2}+w_{2}}                        \\
-			                   & = \colvec{v_{1};v_{2}} + \colvec{w_{1};w_{2}}             \\
-			                   & = \vec{v}+\vec{w}.
-		\end{align*}
+Let's see now how to use this definition to show that a transformation is linear. We can start with the identity transformation since it's a very simple transformation. For any $\vec{a},\vec{b}\in\Rs[2]$, we get that
+\begin{equation}
+	I(\vec{a})=\vec{a},\ I(\vec{b})=\vec{b},
+	\label{eq:identity trans in R2 acting on two vectors}
+\end{equation}
+and also that
+\begin{equation}
+	I\left(\vec{a}+\vec{b}\right)=\vec{a}+\vec{b}.
+	\label{eq:identity trans in R2 acting on addition of vectors}
+\end{equation}
+Therefore, if we first add the vectors $\vec{a}$ and $\vec{b}$ together and then apply $I$ on the result, we get
+\begin{equation}
+	T\left(\vec{a}+\vec{b}\right) \tikzmark{Iadd}{=}\ \vec{a}+\vec{b} \tikzmark{Itrans}{=}\ T(\vec{a})+T(\vec{b}).
+	\label{eq:}
+\end{equation}
+\tikz[remember picture]{
+	\tikzset{txbox/.style={thick, draw=#1, fill=#1!25, rounded corners}}
+\small
+\node[overlay, txbox={xgreen}, yshift=10mm] (IaddTxt) at (pic cs:Iadd) {from \autoref{eq:identity trans in R2 acting on addition of vectors}};
+\draw[-stealth, thick, xgreen] (IaddTxt) -- (pic cs:Iadd);
+}
 
-		\item[Homogeneity] let $\alpha\in\Rs$, then
-		\begin{align*}
-			I\left(\alpha\vec{v}\right) & = I\left(\alpha\colvec{v_{1};v_{2}}\right)         \\
-			                            & = I\left(\colvec{\alpha v_{1};\alpha v_{2}}\right) \\
-			                            & = \colvec{\alpha v_{1};\alpha v_{2}}               \\
-			                            & = \alpha\colvec{v_{1};v_{2}}                       \\
-			                            & = \alpha \vec{v}                                   \\
-			                            & = \alpha I(\vec{v}).
-		\end{align*}
-		% NOTE TO SELF: add equality enumeration and explanation for each important step.
-	\end{descitemize}
-\end{proof}
+% \begin{proof}{Linearity of the Identity Transformation}{}
+% 	Let $I$ be the identity transformation in $\Rs[2]$. Then for any $\vec{v}=\colvec{x;y}\in\Rs[2]$, $$I(\vec{v})=I\colvec{x;y} = \colvec{x;y}=\vec{v}.$$
+% 	\begin{descitemize}
+% 		\item[Addition] let $\vec{v}=\colvec{v_{1};v_{2}}$ and $\vec{w}=\colvec{w_{1};w_{2}}$. Then
+% 		\begin{align*}
+% 			I(\vec{v}+\vec{w}) & = I\left(\colvec{v_{1};v_{2}}+\colvec{w_{1};w_{2}}\right) \\
+% 			                   & = I\left(\colvec{v_{1}+w_{1};v_{2}+w_{2}}\right)          \\
+% 			                   & = \colvec{v_{1}+w_{1};v_{2}+w_{2}}                        \\
+% 			                   & = \colvec{v_{1};v_{2}} + \colvec{w_{1};w_{2}}             \\
+% 			                   & = \vec{v}+\vec{w}.
+% 		\end{align*}
+%
+% 		\item[Homogeneity] let $\alpha\in\Rs$, then
+% 		\begin{align*}
+% 			I\left(\alpha\vec{v}\right) & = I\left(\alpha\colvec{v_{1};v_{2}}\right)         \\
+% 			                            & = I\left(\colvec{\alpha v_{1};\alpha v_{2}}\right) \\
+% 			                            & = \colvec{\alpha v_{1};\alpha v_{2}}               \\
+% 			                            & = \alpha\colvec{v_{1};v_{2}}                       \\
+% 			                            & = \alpha \vec{v}                                   \\
+% 			                            & = \alpha I(\vec{v}).
+% 		\end{align*}
+% 		% NOTE TO SELF: add equality enumeration and explanation for each important step.
+% 	\end{descitemize}
+% \end{proof}
 
 \subsection{3-Dimensional Linear Transformations}
 
