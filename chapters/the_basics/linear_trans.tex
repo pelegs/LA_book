@@ -190,6 +190,8 @@ Let's begin:
 
 \end{descitemize}
 
+\subsection{Composition of Basic Linear Transformations}
+
 \subsection{Examples of Non-Linear Transformations in 2-Dimensions}
 % Now that we are visually familiar with linear transformations in $2$-dimensions, let's look at some examples of non-linear transformations in the plane. Each of the following examples will highlight how one of the properties of linear transformations can be \enquote{broken}.
 % \begin{descitemize}
@@ -226,6 +228,44 @@ Let's begin:
 % \end{descitemize}
 
 \subsection{Formal Definition}
+The formal definition of linear transformations between any two vector spaces is the following:
+
+\begin{definition}{Linear Transformation}{linear_trans}
+	A transformation $T:\Rs[n]\to\Rs[m]$ is said to be \textit{linear} if for any two vectors $\vec{a},\vec{b}\in\Rs[n]$ and any scalar $\alpha\in\Rs$:
+	\begin{enumerate}
+		\item $T\left(\vec{a}+\vec{b}\right) = T(\vec{a})+T(\vec{b})$, and
+		\item $T\left(\alpha \vec{a}\right) = \alpha T(\vec{a})$.
+	\end{enumerate}
+
+	We can combine the above two criteria using an additional scalar $\beta\in\Rs$: $T$ is linear if $$ T(\alpha\vec{a} + \beta\vec{b}) = \alpha T(\vec{a}) + \beta T(\vec{b}).$$
+\end{definition}
+
+To understand this definition better, and learn how to actually use it in practice, let's use it to show that some of the basic linear transformations in 2-dimensions are, indeed, linear. We start with the identity transformation, since it's a rather straight-forward exercise:
+
+\begin{proof}{Linearity of the Identity Transformation}{}
+	Let $I$ be the identity transformation in $\Rs[2]$. Then for any $\vec{v}=\colvec{x;y}\in\Rs[2]$, $$I(\vec{v})=I\colvec{x;y} = \colvec{x;y}=\vec{v}.$$
+	\begin{descitemize}
+		\item[Addition] let $\vec{v}=\colvec{v_{1};v_{2}}$ and $\vec{w}=\colvec{w_{1};w_{2}}$. Then
+		\begin{align*}
+			I(\vec{v}+\vec{w}) & = I\left(\colvec{v_{1};v_{2}}+\colvec{w_{1};w_{2}}\right) \\
+			                   & = I\left(\colvec{v_{1}+w_{1};v_{2}+w_{2}}\right)          \\
+			                   & = \colvec{v_{1}+w_{1};v_{2}+w_{2}}                        \\
+			                   & = \colvec{v_{1};v_{2}} + \colvec{w_{1};w_{2}}             \\
+			                   & = \vec{v}+\vec{w}.
+		\end{align*}
+
+		\item[Homogeneity] let $\alpha\in\Rs$, then
+		\begin{align*}
+			I\left(\alpha\vec{v}\right) & = I\left(\alpha\colvec{v_{1};v_{2}}\right)         \\
+			                            & = I\left(\colvec{\alpha v_{1};\alpha v_{2}}\right) \\
+			                            & = \colvec{\alpha v_{1};\alpha v_{2}}               \\
+			                            & = \alpha\colvec{v_{1};v_{2}}                       \\
+			                            & = \alpha \vec{v}                                   \\
+			                            & = \alpha I(\vec{v}).
+		\end{align*}
+		% NOTE TO SELF: add equality enumeration and explanation for each important step.
+	\end{descitemize}
+\end{proof}
 
 \subsection{3-Dimensional Linear Transformations}
 
