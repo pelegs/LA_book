@@ -141,14 +141,16 @@
 
 \newcommand{\spacefortrans}[1]{
 	\begin{axis}[
-			width=9cm,
+			width=7cm,
+			height=7cm,
 			xyplane,
-			xmin=-4, xmax=4,
-			ymin=-4, ymax=4,
+			xmin=-5, xmax=5,
+			ymin=-5, ymax=5,
+			enlargelimits={abs=0.0},
 			grid=major,
-			major grid style={black!75, dotted},
-			xtick={-4,-3,...,4},
-			ytick={-4,-3,...,4},
+			major grid style={black!50},
+			xtick={-5,...,5},
+			ytick={-5,...,5},
 			anchor=origin,
 			xlabel={},
 			ylabel={},
@@ -175,10 +177,12 @@
 	\end{axis}
 }
 
-\newcommand{\drawtrans}[5]{
+\newcommand{\drawtrans}[7]{
+	% This function needs to be re-defined in terms of
+	% NewDocumentCommand or whatever it's called
 	\begin{tikzpicture}
 		\spacefortrans{name=beforetrans, xlabel={$x$}, ylabel={$y$}}
-		\pgftransformcm{#2}{#3}{#4}{#5}{\pgfpoint{0}{-10cm}}
+		\pgftransformcm{#2}{#3}{#4}{#5}{\pgfpoint{#6}{#7-10cm}}
 		\spacefortrans{name=aftertrans}
 		\pgftransformreset
 		\draw[|->, very thick] ($(beforetrans.south)+(0,-8mm)$) -- ++(0,-2cm) node[midway, right] {\Huge$#1$};

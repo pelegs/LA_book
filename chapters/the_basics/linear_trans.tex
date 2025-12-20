@@ -79,7 +79,7 @@ Any linear transformation $T:\Rs[2]\to\Rs[2]$ always has the following four prop
 
 \begin{figure}
 	\begin{center}
-		\drawtrans{T}{0.8}{0.2}{-1.0}{0.7}
+		\drawtrans{T}{0.8}{0.2}{-1.0}{0.7}{0}{15mm}
 	\end{center}
 	\caption{Some random linear transformation $T$ applied to $\Rs[2]$, with different shapes showing the four main properties discussed for linear transformations.}
 	\label{fig:general linear transformation and invariants}
@@ -149,7 +149,7 @@ Let's begin:
 	\item[The identity transformation] not doing anything to the plane is a transformation, even if a rather boring one:
 
 	\begin{center}
-		\drawtrans{I}{1}{0}{0}{1}
+		\drawtrans{I}{1}{0}{0}{1}{0}{7mm}
 	\end{center}
 
 	Indeed, the identity transformation has all of three key properties of linear transformations: the origin is perserved, parallel lines remain parallel after the transformation, and all areas are scaled by the same factor (namely $1$).
@@ -157,48 +157,73 @@ Let's begin:
 	\item[Scaling] Scaling the plane can be done in either the $x$-diretion or the $y$-direction. Just as with vectors, the scaling factor can be any real number, positive or negative (where negative scaling factors flip the direction of the axis):
 
 	\begin{center}
-		\drawtrans{S_{x}}{1.5}{0}{0}{1}
+		\drawtrans{S_{x}}{2}{0}{0}{1}{0}{5mm}
 
-
-		\drawtrans{S_{y}}{1}{0}{0}{0.35}
+		\drawtrans{S_{y}}{1}{0}{0}{1.3}{0}{0mm}
 	\end{center}
+
+	\item[Rotation about the origin, anti-clockwise] text text text:
+	\begin{center}
+		\pgfmathsetmacro{\th}{35}
+		\pgfmathsetmacro{\C}{cos(\th)}
+		\pgfmathsetmacro{\S}{sin(\th)}
+		\drawtrans{R_{\theta}}{\C}{\S}{-\S}{\C}{0}{0}
+	\end{center}
+
+	\item[Reflection across a line through the origin] text text text:
+	\begin{center}
+		\drawtrans{\text{Ref}_{x}}{1}{0}{0}{-1}{0}{0}
+		\drawtrans{\text{Ref}_{y}}{-1}{0}{0}{1}{0}{0}
+	\end{center}
+
+	\item[Shear] text text text:
+	\begin{center}
+		\drawtrans{K_{x}}{1}{0}{0.2}{1}{0}{0}
+		\drawtrans{K_{y}}{1}{0.2}{0}{1}{0}{0}
+	\end{center}
+
+	\item[Projection on line through the origin] text text text:
+	\begin{center}
+		\drawtrans{P}{0.71}{0.70}{0.70}{0.71}{0}{0}
+	\end{center}
+
 
 \end{descitemize}
 
 \subsection{Examples of Non-Linear Transformations in 2-Dimensions}
-Now that we are visually familiar with linear transformations in $2$-dimensions, let's look at some examples of non-linear transformations in the plane. Each of the following examples will highlight how one of the properties of linear transformations can be \enquote{broken}.
-\begin{descitemize}
-	\item[Preservation of origin] text.
-	\item[Lines are mapped to lines] text text text:
-	\begin{center}
-		\pgftransformnonlinear{\bendinglines}
-		\begin{tikzpicture}
-			\begin{axis}[
-					width=10cm,
-					xyplane,
-					grid=major,
-					xmin=-5, xmax=5,
-					ymin=-5, ymax=5,
-				]
-			\end{axis}
-		\end{tikzpicture}
-	\end{center}
-
-	\item[Parallel lines stay parallel] text text text:
-	\begin{center}
-		\pgftransformnonlinear{\parallelbreak}
-		\begin{tikzpicture}
-			\begin{axis}[
-					width=10cm,
-					xyplane,
-					grid=major,
-					xmin=-5, xmax=5,
-					ymin=-5, ymax=5,
-				]
-			\end{axis}
-		\end{tikzpicture}
-	\end{center}
-\end{descitemize}
+% Now that we are visually familiar with linear transformations in $2$-dimensions, let's look at some examples of non-linear transformations in the plane. Each of the following examples will highlight how one of the properties of linear transformations can be \enquote{broken}.
+% \begin{descitemize}
+% 	\item[Preservation of origin] text.
+% 	\item[Lines are mapped to lines] text text text:
+% 	\begin{center}
+% 		\pgftransformnonlinear{\bendinglines}
+% 		\begin{tikzpicture}
+% 			\begin{axis}[
+% 					width=10cm,
+% 					xyplane,
+% 					grid=major,
+% 					xmin=-5, xmax=5,
+% 					ymin=-5, ymax=5,
+% 				]
+% 			\end{axis}
+% 		\end{tikzpicture}
+% 	\end{center}
+%
+% 	\item[Parallel lines stay parallel] text text text:
+% 	\begin{center}
+% 		\pgftransformnonlinear{\parallelbreak}
+% 		\begin{tikzpicture}
+% 			\begin{axis}[
+% 					width=10cm,
+% 					xyplane,
+% 					grid=major,
+% 					xmin=-5, xmax=5,
+% 					ymin=-5, ymax=5,
+% 				]
+% 			\end{axis}
+% 		\end{tikzpicture}
+% 	\end{center}
+% \end{descitemize}
 
 \subsection{Formal Definition}
 

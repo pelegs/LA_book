@@ -1,34 +1,57 @@
 \documentclass{standalone}
-\usepackage{tikz, pgfplots}
+\input{settings/graphics}
+\input{settings/maths}
 
-\pgfplotsset{
-    basicplane/.style={
-        axis equal,
-        axis x line=middle,
-        axis y line=middle,
-        xmin=-5, xmax=5,
-        ymin=-5, ymax=5,
-        xticklabels={,},
-        yticklabels={,},
-        grid=major,
-    }
-}
+% \makeatletter
+% \def\lineartest{%
+% 	\pgfmathsetmacro{\TX}{\pgf@x+0.1*\pgf@y}
+% 	\pgfmathsetmacro{\TY}{0.1*\pgf@x+\pgf@y}
+% 	\setlength{\pgf@x}{\TX pt}
+% 	\setlength{\pgf@y}{\TY pt}
+% }
+% \makeatother
 
 \begin{document}
 \begin{tikzpicture}
+	\pgfmathsetmacro{\sm}{5}
+	% \pgftransformnonlinear{\lineartest}
+	% \pgftransformnonlinear{\bendinglines}
+	% \pgftransformcm{.5}{-0.6}{0.2}{0.6}{\pgfpoint{0}{0}}
+	\pgftransformcm{0}{1}{-1}{0}{\pgfpoint{0}{0}}
 	\begin{axis}[
-			basicplane,
-			name=beforetrans,
-			anchor=origin,
+			axis equal,
+			width=10cm,
+			xmin=-\sm-1, xmax=\sm+1,
+			ymin=-\sm-1, ymax=\sm+1,
+			xtick={-\sm,...,\sm},
+			ytick={-\sm,...,\sm},
+			% domain={-\sm:\sm},
+			% enlargelimits={abs=1.0},
+			% axis x line*=bottom,
+			% axis y line*=left,
+			xlabel={},
+			ylabel={},
+			grid=major,
+			major grid style={black!25},
+			axis line style={draw=none},
+			tick style={draw=none},
+			xticklabels={},
+			yticklabels={},
+			samples=100,
 		]
-	\end{axis}
-	% \pgftransformcm{0.7071}{0.7071}{0.7071}{-0.7071}{\pgfpoint{9cm}{0}}
-	\pgftransformcm{0.9}{0.75}{0}{0.8}{\pgfpoint{9cm}{0}}
-	\begin{axis}[
-			basicplane,
-			name=aftertrans,
-			anchor=origin,
-		]
+		\coordinate (xmin) at (-\sm,0);
+		\coordinate (xmax) at (+\sm,0);
+		\coordinate (ymin) at (0,-\sm);
+		\coordinate (ymax) at (0,+\sm);
+		\draw[xgreen, fill=xgreen, fill opacity=0.25, very thick] (-2,2) ellipse (1cm and 2cm);
+		\draw[xpurple, very thick, densely dotted] (-5,-4) -- (5,0);
+		\draw[xpurple, very thick, densely dotted] (-5,-5) -- (5,-1);
+		\node[xshift=-10pt] at (xmin) {$x_{\text{min}}$};
+		\node[xshift=+10pt] at (xmax) {$x_{\text{max}}$};
+		\node[yshift=-10pt] at (ymin) {$y_{\text{min}}$};
+		\node[yshift=+10pt] at (ymax) {$y_{\text{max}}$};
+		\draw[stealth-stealth, thick] (xmin) -- (xmax);
+		\draw[stealth-stealth, thick] (ymin) -- (ymax);
 	\end{axis}
 \end{tikzpicture}
 \end{document}
