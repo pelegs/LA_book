@@ -417,6 +417,43 @@ To sum up this result, here it is again - this time in \enquote{mapping} notatio
 	\label{fig:rotation of a generic vector in R2}
 \end{figure}
 
+Now that we finally have a formula for rotating any vector in $\Rs[2]$ by any angle about the origin, we can finally prove that this is indeed a linear transformation.
+\begin{descitemize}
+	\item[Additivity] let
+		\begin{equation*}
+			\vec{a}=\GenericColVecXY{a},\ \vec{b}=\GenericColVecXY{b}.
+		\end{equation*}
+		Adding the two together gives
+		\begin{equation*}
+			\vec{a}+\vec{b} = \colvec{a_{x}+b_{x};a_{y}+b_{y}},
+		\end{equation*}
+		and then rotating the result by $\theta$ yields
+		\begin{equation*}
+			\Rotation{\theta}{\vec{a}+\vec{b}} = \colvec{\left(a_{x}+b_{x}\right)\cos(\theta)-\left(a_{y}+b_{y}\right)\sin(\theta);\left(a_{x}+b_{x}\right)\sin(\theta)+\left(a_{y}+b_{y}\right)\cos(\theta)}.
+		\end{equation*}
+		On the other hand, rotating the two vectors first gives
+		\begin{align*}
+			\Rotation{\theta}{\vec{a}} &= \colvec{a_{x}\cos(\theta)-a_{y}\sin(\theta);a_{x}\sin(\theta)+a_{y}\cos(\theta)},\\ 
+			\Rotation{\theta}{\vec{b}} &= \colvec{b_{x}\cos(\theta)-b_{y}\sin(\theta);b_{x}\sin(\theta)+b_{y}\cos(\theta)}.
+		\end{align*}
+		Finally, adding the two rotated vectors together we get
+		\begin{align*}
+			\Rotation{\theta}{\vec{a}} + \Rotation{\theta}{\vec{b}} &= \colvec{a_{x}\cos(\theta)-a_{y}\sin(\theta);a_{x}\sin(\theta)+a_{y}\cos(\theta)} + \colvec{b_{x}\cos(\theta)-b_{y}\sin(\theta);b_{x}\sin(\theta)+b_{y}\cos(\theta)},\\
+																	&= \colvec{\left(a_{x}+b_{x}\right)\cos(\theta)-\left(a_{y}+b_{y}\right)\sin(\theta);\left(a_{x}+b_{x}\right)\sin(\theta)+\left(a_{y}+b_{y}\right)\cos(\theta)}.
+		\end{align*}
+
+	\item[Homogeneity] Scaling $\vec{a}$ by a scalar $s\in\Rs$ and then rotating it by $\theta$ gives
+		\begin{equation*}
+			\Rotation{\theta}{s\vec{a}} = \text{R}_{\theta}\GenericColVecXY{sa} = \colvec{s a_{x}\cos(\theta)-s a_{y}\sin(\theta);s a_{x}\sin(\theta)+s a_{y}\cos(\theta)}.
+		\end{equation*}
+		On the other hand, first rotating $\vec{a}$ and the scaling by $s$ gives
+		\begin{equation*}
+			s\Rotation{\theta}{\vec{a}} = s\colvec{a_{x}\cos(\theta)-a_{y}\sin(\theta);a_{x}\sin(\theta)+a_{y}\cos(\theta)} = \colvec{s a_{x}\cos(\theta)-s a_{y}\sin(\theta);s a_{x}\sin(\theta)+s a_{y}\cos(\theta)}.
+		\end{equation*}
+\end{descitemize}
+
+\textcolor{xred}{\textbf{Hoorah!}} Rotation is indeed a linear transformation.
+
 
 % Todo:
 % (*) Improve visualization of 2D LTs and add text
