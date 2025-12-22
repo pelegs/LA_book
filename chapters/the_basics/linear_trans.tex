@@ -286,6 +286,37 @@ Let's see now how to use this definition to show that a transformation is linear
 \end{descitemize}
 Fullfilling these two conditions proves that $I$ is indeed a linear transformation.
 
+Next, let's see that rotation (about the origin) is also a linear transformation, starting with the simple $\ang{90}$ anti-clockwise rotation. Recall that a 2-dimensional vector $\vec{a}=\GenericColVecXY{a}$ can be rotated by $\ang{90}$ anti-clockwise by exchanging its components and then adding a minus sign to the first component (REF TO TRICK):
+\begin{equation*}
+	\GenericColVecXY{a} \xmapsto[\text{(anti-clockwise)}]{\ang{90}\ \text{rotation}} \colvec{-a_{y};a_{x}}.
+\end{equation*}
+
+Using this fact we can easily show that a $\ang{90}$ rotation is a linear transformation:
+\begin{descitemize}
+	\item[Additivity] we need two vectors, let's call them $$\vec{a}=\GenericColVecXY{a}\ \text{and}\ \vec{b}=\GenericColVecXY{b}.$$ Then, adding the vectors first and then rotating the result we get
+	\begin{equation*}
+		\RotDeg{90}{\vec{a}+\vec{b}} = \RotDeg{90}{\GenericColVecXY{a}+\GenericColVecXY{b}}
+		= \RotDeg{90}{\colvec{a_{x}+b_{x};a_{y}+b_{y}}}
+		= \colvec{-\left(a_{y}+b_{y}\right);a_{x}+b_{x}}.
+	\end{equation*}
+	And if we first rotate the vectors and then add the result we get
+	\begin{equation*}
+		\RotDeg{90}{\vec{a}} + \RotDeg{90}{\vec{b}} = \colvec{-a_{y};a_{x}}+\colvec{-b_{y};b_{x}} = \colvec{-(a_{y}+b_{y});a_{x}+b_{x}},
+	\end{equation*}
+	exactly the same as before.
+
+	\item[Homogeneity] first we scale $\vec{a}$ by some scalar $\alpha\in\Rs$, then rotating:
+	\begin{equation*}
+		\RotDeg{90}{\alpha\vec{a}} = \RotDeg{90}{\alpha\colvec{-a_{y};a_{x}}} = \RotDeg{90}{\GenericColVecXY{\alpha a}} = \colvec{-\alpha a_{y};\alpha a_{x}}.
+	\end{equation*}
+	And if we first rotate $\vec{a}$ and then scale it by $\alpha$ we get
+	\begin{equation*}
+		\alpha \RotDeg{90}{\vec{a}} = \alpha \colvec{-a_{y};a_{x}} = \colvec{-\alpha a_{y};\alpha a_{x}},
+	\end{equation*}
+	again - the same result as before.
+\end{descitemize}
+Together this means that rotating around the origin anti-clockwise by $\ang{90}$ is indeed a linear transformation.
+
 % Todo:
 % (*) Improve visualization of 2D LTs and add text
 % (*) Add composition of LTs in a graphical way

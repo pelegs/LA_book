@@ -74,6 +74,8 @@
 \newcommand{\rowvec}[1]{\rcvector[\ \;]{#1}}
 \newcommand{\GenericRowVec}[2][n]{\rowvec{#2_{1};#2_{2};\dots;#2_{#1}}}
 \newcommand{\GenericColVec}[2][n]{\colvec{#2^{1};#2^{2};\vdots;#2^{#1}}}
+\newcommand{\GenericColVecXY}[1]{\colvec{#1_{x};#1_{y}}}
+\newcommand{\GenericColVecXYZ}[1]{\colvec{#1_{x};#1_{y};#1_{z}}}
 
 % Colored vectors
 \newcommand{\colorVec}[2]{\color{#1}{\vec{#2}}\color{black}}
@@ -107,6 +109,10 @@
 % Dark equal?
 \newcommand{\beq}{\color{black}{=}}
 
+% LTs with "names"
+\newcommand{\Rotation}[2]{\text{R}_{#1}\left(#2\right)}
+\newcommand{\RotDeg}[2]{\Rotation{\ang{#1}}{#2}}
+
 % Better imaginary unit and natural base notation (to separate from variables)
 \newcommand{\iu}{\mathrm{i}\mkern1mu}
 \newcommand{\eu}{\mathrm{e}}
@@ -134,6 +140,9 @@
 % (but I need to write instead of over-engineering the code)
 \newcommand{\clrcolvecxy}[2]{
 	\colvec{\LCa{#1};\LCb{#2}}
+}
+\newcommand{\clrgenericxyz}[2]{
+	\colvec{\LCa{#1_{1}};\LCb{#1_{2}};\LCc{#1_{3}}}
 }
 \newcommand{\clrgenericvec}[2]{
 	\colvec{\LCa{#1_{1}};\LCb{#1_{2}};\vdots;\LCe{#1_{#2}}}
