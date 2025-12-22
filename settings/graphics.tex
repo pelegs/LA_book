@@ -62,6 +62,10 @@
 \pgfplotsset{
 	compat=1.16,
 	%% Styles %%
+	/pgfplots/layers/Bowpark/.define layer set = {
+			axis background,axis grid,main,axis ticks,axis lines,axis tick labels,
+			axis descriptions,axis foreground
+		}{/pgfplots/layers/standard},
 	xyplane/.style = {
 			axis equal,
 			axis x line=middle,

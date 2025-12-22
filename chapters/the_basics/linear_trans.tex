@@ -365,9 +365,15 @@ Substituting \autoref{eq:angle alpha in terms of arccos and arcsin} into \autore
 		b_{y} & = \mathbf{a}\left[\sin(\alpha)\cos(\theta) - \sin(\alpha)\cos(\theta)\right]                                                                                                   \\
 		      & = \mathbf{a}\left[\sin\left(\arcsin\left(\frac{a_{y}}{\mathbf{a}}\right)\right)\cos(\theta) - \sin\left(\arcsin\left(\frac{a_{y}}{\mathbf{a}}\right)\right)\cos(\theta)\right] \\
 		      & = \cancel{\mathbf{a}}\left[\frac{a_{y}}{\cancel{\mathbf{a}}}\cos(\theta) - \frac{a_{x}}{\cancel{\mathbf{a}}}\sin(\theta)\right]                                                \\
-		      & = a_{x}\sin(\theta)+a_{y}\cos(\theta),
+		      & = a_{x}\sin(\theta)+a_{y}\cos(\theta).
 	\end{aligned}
-	\label{eq:}
+	\label{eq:components of rotated vector}
+\end{equation}
+
+To sum up this result, here it is again - this time in \enquote{mapping} notation:
+\begin{equation}
+	\GenericColVecXY{a} \xmapsto{\text{R}_{\theta}} \colvec{a_{x}\cos(\theta)-a_{y}\sin(\theta);a_{x}\sin(\theta)+a_{y}\cos(\theta)}.
+	\label{eq:vector rotation is direct column notation}
 \end{equation}
 
 \begin{figure}
@@ -377,10 +383,11 @@ Substituting \autoref{eq:angle alpha in terms of arccos and arcsin} into \autore
 			\tikzset{sangle/.style={draw=#1, very thick, fill=#1!25, text=#1, angle radius=20mm}}
 			\colorlet{acol}{xpurple}
 			\colorlet{bcol}{xorange}
-			\colorlet{abcol}{xdarkgreen}
+			\colorlet{abcol}{xgreen}
 			\begin{axis}[
-					width=8cm, height=8cm,
 					xyplane,
+					width=8cm, height=8cm,
+					set layers=Bowpark,
 					xmin=-0.1, xmax=1.1,
 					ymin=-0.1, ymax=1.1,
 					grid=major,
@@ -397,23 +404,23 @@ Substituting \autoref{eq:angle alpha in terms of arccos and arcsin} into \autore
 				\coordinate (a) at (\ax,\ay);
 				\coordinate (b) at ({\anorm*cos(\alph+\th)},{\anorm*sin(\alph+\th)});
 
-				\pic[sangle={acol}, dashed, angle radius=23mm, angle eccentricity=1.1, pic text=$\beta$, pic text options={shift={(-10pt,17pt)}}]{angle=xaxs--origin--b};
-				\pic[sangle={bcol}, pic text=$\alpha$]{angle=xaxs--origin--a};
+				\pic[sangle={bcol}, dashed, angle radius=23mm, angle eccentricity=0.75, pic text=$\beta$, pic text options={shift={(1pt,10pt)}}]{angle=xaxs--origin--b};
+				\pic[sangle={acol}, angle eccentricity=0.75, pic text=$\alpha$]{angle=xaxs--origin--a};
 				\pic[sangle={abcol}, -stealth, densely dotted, fill=none, angle radius=30mm, angle eccentricity=1.1, pic text=$\theta$]{angle=a--origin--b};
 
-				\draw[vector, bcol] (origin) -- (a) node[pos=1, anchor=west] {$\vec{a}$};
-				\draw[vector, acol, dashed] (origin) -- (b) node[pos=1, anchor=west] {$\vec{b}=\Rotation{\theta}{\vec{a}}$};
+				\draw[vector, acol] (origin) -- (a) node[pos=1, anchor=west] {$\vec{a}$};
+				\draw[vector, bcol, dashed] (origin) -- (b) node[pos=1, anchor=west] {$\vec{b}=\Rotation{\theta}{\vec{a}}$};
 			\end{axis}
 		\end{tikzpicture}
 	\end{center}
-	\caption{Text will be here.}
+	\caption{The vector $\textcolor{xpurple}{\vec{a}}$ is rotated by an angle $\textcolor{xgreen}{\theta}$ anti-clockwise about the origin, yielding the vector $\textcolor{xorange}{\vec{b}}$. $\textcolor{xpurple}{\vec{a}}$ is at $\textcolor{xpurple}{\theta}$ relative to the $x$-axis, which becomes $\textcolor{xorange}{\beta}=\textcolor{xpurple}{\alpha}+\textcolor{xgreen}{\theta}$ after the rotation.}
 	\label{fig:rotation of a generic vector in R2}
 \end{figure}
 
 
 % Todo:
 % (*) Improve visualization of 2D LTs and add text
-% (*) Add composition of LTs in a graphical way
+% (*) Add composition of LTs in a graphical way?
 % (*) Continue examples of LTs, some more specific and for some add general proofs (e.g. for rotations: start with π/2, then π, then general. Same for reflections, at least across the axes.)
 % (*) Write about how every LT can be made from compositions of scaling + rotation/reflection (+ rotation can be made from reflections, and reflections from scaling with negative scalars. So actually... scaling IS the basic LT? huh. Any way: think SVD).
 
