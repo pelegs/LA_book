@@ -305,17 +305,103 @@ Using this fact we can easily show that a $\ang{90}$ rotation is a linear transf
 	\end{equation*}
 	exactly the same as before.
 
-	\item[Homogeneity] first we scale $\vec{a}$ by some scalar $\alpha\in\Rs$, then rotating:
+	\item[Homogeneity] if we scale $\vec{a}$ by some scalar\footnote{I'm using $s$ here instead of the usual $\alpha$ because I want to avoid confusion the scalar with an angle.} $s\in\Rs$ first and then rotating the result we get
 	\begin{equation*}
-		\RotDeg{90}{\alpha\vec{a}} = \RotDeg{90}{\alpha\colvec{-a_{y};a_{x}}} = \RotDeg{90}{\GenericColVecXY{\alpha a}} = \colvec{-\alpha a_{y};\alpha a_{x}}.
+		\RotDeg{90}{s\vec{a}} = \RotDeg{90}{s\colvec{-a_{y};a_{x}}} = \RotDeg{90}{\GenericColVecXY{s a}} = \colvec{-s a_{y};s a_{x}}.
 	\end{equation*}
-	And if we first rotate $\vec{a}$ and then scale it by $\alpha$ we get
+	And if we first rotate $\vec{a}$ and then scale it by $s$ we get
 	\begin{equation*}
-		\alpha \RotDeg{90}{\vec{a}} = \alpha \colvec{-a_{y};a_{x}} = \colvec{-\alpha a_{y};\alpha a_{x}},
+		s \RotDeg{90}{\vec{a}} = s \colvec{-a_{y};a_{x}} = \colvec{-s a_{y};s a_{x}},
 	\end{equation*}
 	again - the same result as before.
 \end{descitemize}
 Together this means that rotating around the origin anti-clockwise by $\ang{90}$ is indeed a linear transformation.
+
+Moving on, let's show that a rotation around the origin by \textit{any} angle $\theta$ is a linear transformation. To start, we need to know how to transform a general 2-dimensional vector $\vec{a}=\GenericColVecXY{a}$, which we will find, of course, by using basic trigonometry (use \autoref{fig:rotation of a generic vector in R2} to follow these steps). First, we calculate the norm of $\vec{a}$ (which we'll call $\mathbf{a}$ for convenience):
+\begin{equation}
+	\mathbf{a} = \norm{\vec{a}} = \sqrt{a_{x}^{2}+a_{y}^{2}}.
+	\label{eq:norm of a generic 2D vector a}
+\end{equation}
+
+We can then express $\vec{a}$ in polar coordinates (REF), as it's a more natural way of dealing with angles (and thus - rotations):
+\begin{align}
+	a_{x} &= \mathbf{a}\cos(\alpha),\\
+	a_{y} &= \mathbf{a}\sin(\alpha).
+	\label{eq:vector a in polar coords}
+\end{align}
+
+Rotating the $\vec{a}$ by $\theta$ yields a new vector $\vec{b}$ which as the same norm as $\vec{a}$ (since rotating a vector doesn't change its norm), and an angle $\beta=\alpha+\theta$. Therefore in polar coordinates $\vec{b}$ is
+\begin{align}
+	b_{x} &= \mathbf{a}\cos(\beta) = \mathbf{a}\cos(\alpha+\theta),\\
+	b_{y} &= \mathbf{a}\sin(\beta) = \mathbf{a}\sin(\alpha+\theta).
+	\label{eq:vector b in polar coords}
+\end{align}
+
+Using the trigonomitric identities for the $cos$ and $sin$ of a sum of two angles (REF), we get:
+\begin{align}
+	b_{x} &= \mathbf{a}\cos(\alpha+\theta) = \mathbf{a}\left[\cos(\alpha)\cos(\theta) - \sin(\alpha)\sin(\theta)\right],\\
+	b_{y} &= \mathbf{a}\sin(\alpha+\theta) = \mathbf{a}\left[\sin(\alpha)\cos(\theta) + \sin(\alpha)\cos(\theta)\right].\\
+	\label{eq:vector b in polar coords}
+\end{align}
+
+Now, we can express $\alpha$ in terms of the inverse trigonometric functions $\arccos$ and $\arcsin$:
+\begin{equation}
+	\alpha = \arccos(\frac{a_{x}}{\mathbf{a}}) = \arcsin(\frac{a_{y}}{\mathbf{a}}).
+	\label{eq:angle alpha in terms of arccos and arcsin}
+\end{equation}
+
+Substituting \autoref{eq:angle alpha in terms of arccos and arcsin} into \autoref{eq:vector b in polar coords} we get
+\begin{align}
+	b_{x} &= \mathbf{a}\left[\cos(\alpha)\cos(\theta) - \sin(\alpha)\sin(\theta)\right]\\
+		  &= \mathbf{a}\left[\cos\left(\arccos\left(\frac{a_{x}}{\mathbf{a}}\right)\right)\cos(\theta) - \sin\left(\arcsin\left(\frac{a_{y}}{\mathbf{a}}\right)\right)\sin(\theta)\right]\\
+		  &= \mathbf{a}\left[\frac{a_{x}}{\mathbf{a}}\cos(\theta) - \frac{a_{y}}{\mathbf{a}}\sin(\theta)\right]\\
+		  &= a_{x}\cos(\theta)-a_{y}\sin(\theta),
+	\label{eq:}
+\end{align}
+
+\begin{figure}
+	% NOTE: this fig needs more work, to make clear which angle is what exactly.
+	\begin{center}
+		\begin{tikzpicture}
+			\tikzset{
+				sangle/.style={
+						draw=#1, very thick, fill=#1, text=#1,
+						opacity=1, fill opacity=0.15, text opacity=1,
+						angle radius=20mm,
+					},
+			}
+			\begin{axis}[
+					width=8cm, height=8cm,
+					xyplane,
+					xmin=-0.1, xmax=1.1,
+					ymin=-0.1, ymax=1.1,
+					grid=major,
+					major grid style={densely dotted, draw=black!10},
+				]
+				\pgfmathsetmacro{\ax}{0.75}
+				\pgfmathsetmacro{\ay}{0.3}
+				\pgfmathsetmacro{\anorm}{sqrt(\ax*\ax+\ay*\ay)}
+				\pgfmathsetmacro{\alph}{atan2(\ay, \ax)}
+				\pgfmathsetmacro{\th}{35}
+
+				\coordinate (origin) at (0,0);
+				\coordinate (xaxs) at (\anorm,0);
+				\coordinate (a) at (\ax,\ay);
+				\coordinate (b) at ({\anorm*cos(\alph+\th)},{\anorm*sin(\alph+\th)});
+
+				\pic[sangle={xblue}, fill=none, angle radius=25mm, angle eccentricity=1.2, pic text=$\beta$]{angle=xaxs--origin--b};
+				\pic[sangle={xred}, pic text=$\alpha$]{angle=xaxs--origin--a};
+				\pic[sangle={xgreen}, pic text=$\theta$]{angle=a--origin--b};
+
+				\draw[vector, xred] (origin) -- (a) node[pos=1, anchor=west] {$\vec{a}$};
+				\draw[vector, xblue, dashed] (origin) -- (b) node[pos=1, anchor=west] {$\vec{b}=\Rotation{\theta}{\vec{a}}$};
+			\end{axis}
+		\end{tikzpicture}
+	\end{center}
+	\caption{Text will be here.}
+	\label{fig:rotation of a generic vector in R2}
+\end{figure}
+
 
 % Todo:
 % (*) Improve visualization of 2D LTs and add text
