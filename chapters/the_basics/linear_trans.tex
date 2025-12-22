@@ -325,22 +325,22 @@ Moving on, let's show that a rotation around the origin by \textit{any} angle $\
 
 We can then express $\vec{a}$ in polar coordinates (REF), as it's a more natural way of dealing with angles (and thus - rotations):
 \begin{align}
-	a_{x} &= \mathbf{a}\cos(\alpha),\\
-	a_{y} &= \mathbf{a}\sin(\alpha).
+	a_{x} & = \mathbf{a}\cos(\alpha), \\
+	a_{y} & = \mathbf{a}\sin(\alpha).
 	\label{eq:vector a in polar coords}
 \end{align}
 
 Rotating the $\vec{a}$ by $\theta$ yields a new vector $\vec{b}$ which as the same norm as $\vec{a}$ (since rotating a vector doesn't change its norm), and an angle $\beta=\alpha+\theta$. Therefore in polar coordinates $\vec{b}$ is
 \begin{align}
-	b_{x} &= \mathbf{a}\cos(\beta) = \mathbf{a}\cos(\alpha+\theta),\\
-	b_{y} &= \mathbf{a}\sin(\beta) = \mathbf{a}\sin(\alpha+\theta).
+	b_{x} & = \mathbf{a}\cos(\beta) = \mathbf{a}\cos(\alpha+\theta), \\
+	b_{y} & = \mathbf{a}\sin(\beta) = \mathbf{a}\sin(\alpha+\theta).
 	\label{eq:vector b in polar coords}
 \end{align}
 
 Using the trigonomitric identities for the $cos$ and $sin$ of a sum of two angles (REF), we get:
 \begin{align}
-	b_{x} &= \mathbf{a}\cos(\alpha+\theta) = \mathbf{a}\left[\cos(\alpha)\cos(\theta) - \sin(\alpha)\sin(\theta)\right],\\
-	b_{y} &= \mathbf{a}\sin(\alpha+\theta) = \mathbf{a}\left[\sin(\alpha)\cos(\theta) + \sin(\alpha)\cos(\theta)\right].\\
+	b_{x} & = \mathbf{a}\cos(\alpha+\theta) = \mathbf{a}\left[\cos(\alpha)\cos(\theta) - \sin(\alpha)\sin(\theta)\right], \\
+	b_{y} & = \mathbf{a}\sin(\alpha+\theta) = \mathbf{a}\left[\sin(\alpha)\cos(\theta) + \sin(\alpha)\cos(\theta)\right]. \\
 	\label{eq:vector b in polar coords}
 \end{align}
 
@@ -353,20 +353,20 @@ Now, we can express $\alpha$ in terms of the inverse trigonometric functions $\a
 Substituting \autoref{eq:angle alpha in terms of arccos and arcsin} into \autoref{eq:vector b in polar coords} we get
 \begin{equation}
 	\begin{aligned}
-	b_{x} &= \mathbf{a}\left[\cos(\alpha)\cos(\theta) - \sin(\alpha)\sin(\theta)\right]\\
-		  &= \mathbf{a}\left[\cos\left(\arccos\left(\frac{a_{x}}{\mathbf{a}}\right)\right)\cos(\theta) - \sin\left(\arcsin\left(\frac{a_{y}}{\mathbf{a}}\right)\right)\sin(\theta)\right]\\
-		  &= \cancel{\mathbf{a}}\left[\frac{a_{x}}{\cancel{\mathbf{a}}}\cos(\theta) - \frac{a_{y}}{\cancel{\mathbf{a}}}\sin(\theta)\right]\\
-		  &= a_{x}\cos(\theta)-a_{y}\sin(\theta),
-\end{aligned}
+		b_{x} & = \mathbf{a}\left[\cos(\alpha)\cos(\theta) - \sin(\alpha)\sin(\theta)\right]                                                                                                   \\
+		      & = \mathbf{a}\left[\cos\left(\arccos\left(\frac{a_{x}}{\mathbf{a}}\right)\right)\cos(\theta) - \sin\left(\arcsin\left(\frac{a_{y}}{\mathbf{a}}\right)\right)\sin(\theta)\right] \\
+		      & = \cancel{\mathbf{a}}\left[\frac{a_{x}}{\cancel{\mathbf{a}}}\cos(\theta) - \frac{a_{y}}{\cancel{\mathbf{a}}}\sin(\theta)\right]                                                \\
+		      & = a_{x}\cos(\theta)-a_{y}\sin(\theta),
+	\end{aligned}
 	\label{eq:}
 \end{equation}
 \begin{equation}
 	\begin{aligned}
-	b_{y} &= \mathbf{a}\left[\sin(\alpha)\cos(\theta) - \sin(\alpha)\cos(\theta)\right]\\
-		  &= \mathbf{a}\left[\sin\left(\arcsin\left(\frac{a_{y}}{\mathbf{a}}\right)\right)\cos(\theta) - \sin\left(\arcsin\left(\frac{a_{y}}{\mathbf{a}}\right)\right)\cos(\theta)\right]\\
-		  &= \cancel{\mathbf{a}}\left[\frac{a_{y}}{\cancel{\mathbf{a}}}\cos(\theta) - \frac{a_{x}}{\cancel{\mathbf{a}}}\sin(\theta)\right]\\
-		  &= a_{x}\sin(\theta)+a_{y}\cos(\theta),
-\end{aligned}
+		b_{y} & = \mathbf{a}\left[\sin(\alpha)\cos(\theta) - \sin(\alpha)\cos(\theta)\right]                                                                                                   \\
+		      & = \mathbf{a}\left[\sin\left(\arcsin\left(\frac{a_{y}}{\mathbf{a}}\right)\right)\cos(\theta) - \sin\left(\arcsin\left(\frac{a_{y}}{\mathbf{a}}\right)\right)\cos(\theta)\right] \\
+		      & = \cancel{\mathbf{a}}\left[\frac{a_{y}}{\cancel{\mathbf{a}}}\cos(\theta) - \frac{a_{x}}{\cancel{\mathbf{a}}}\sin(\theta)\right]                                                \\
+		      & = a_{x}\sin(\theta)+a_{y}\cos(\theta),
+	\end{aligned}
 	\label{eq:}
 \end{equation}
 
@@ -376,14 +376,14 @@ Substituting \autoref{eq:angle alpha in terms of arccos and arcsin} into \autore
 		\begin{tikzpicture}
 			\tikzset{
 				sangle/.style={
-						draw=#1, very thick, fill=#1, text=#1,
-						opacity=1, fill opacity=0.15, text opacity=1,
+						draw=#1, very thick, fill=#1!25, text=#1,
 						angle radius=20mm,
 					},
 			}
 			\begin{axis}[
 					width=8cm, height=8cm,
 					xyplane,
+					axis on top,
 					xmin=-0.1, xmax=1.1,
 					ymin=-0.1, ymax=1.1,
 					grid=major,
@@ -400,9 +400,9 @@ Substituting \autoref{eq:angle alpha in terms of arccos and arcsin} into \autore
 				\coordinate (a) at (\ax,\ay);
 				\coordinate (b) at ({\anorm*cos(\alph+\th)},{\anorm*sin(\alph+\th)});
 
-				\pic[sangle={xblue}, fill=none, angle radius=25mm, angle eccentricity=1.2, pic text=$\beta$]{angle=xaxs--origin--b};
+				\pic[sangle={xblue}, dashed, angle radius=23mm, angle eccentricity=1.1, pic text=$\beta$]{angle=xaxs--origin--b};
 				\pic[sangle={xred}, pic text=$\alpha$]{angle=xaxs--origin--a};
-				\pic[sangle={xgreen}, pic text=$\theta$]{angle=a--origin--b};
+				\pic[sangle={xpurple}, -stealth, fill=none, angle radius=30mm, angle eccentricity=1.1, pic text=$\theta$]{angle=a--origin--b};
 
 				\draw[vector, xred] (origin) -- (a) node[pos=1, anchor=west] {$\vec{a}$};
 				\draw[vector, xblue, dashed] (origin) -- (b) node[pos=1, anchor=west] {$\vec{b}=\Rotation{\theta}{\vec{a}}$};
