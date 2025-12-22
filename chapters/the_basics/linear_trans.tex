@@ -351,13 +351,24 @@ Now, we can express $\alpha$ in terms of the inverse trigonometric functions $\a
 \end{equation}
 
 Substituting \autoref{eq:angle alpha in terms of arccos and arcsin} into \autoref{eq:vector b in polar coords} we get
-\begin{align}
+\begin{equation}
+	\begin{aligned}
 	b_{x} &= \mathbf{a}\left[\cos(\alpha)\cos(\theta) - \sin(\alpha)\sin(\theta)\right]\\
 		  &= \mathbf{a}\left[\cos\left(\arccos\left(\frac{a_{x}}{\mathbf{a}}\right)\right)\cos(\theta) - \sin\left(\arcsin\left(\frac{a_{y}}{\mathbf{a}}\right)\right)\sin(\theta)\right]\\
-		  &= \mathbf{a}\left[\frac{a_{x}}{\mathbf{a}}\cos(\theta) - \frac{a_{y}}{\mathbf{a}}\sin(\theta)\right]\\
+		  &= \cancel{\mathbf{a}}\left[\frac{a_{x}}{\cancel{\mathbf{a}}}\cos(\theta) - \frac{a_{y}}{\cancel{\mathbf{a}}}\sin(\theta)\right]\\
 		  &= a_{x}\cos(\theta)-a_{y}\sin(\theta),
+\end{aligned}
 	\label{eq:}
-\end{align}
+\end{equation}
+\begin{equation}
+	\begin{aligned}
+	b_{y} &= \mathbf{a}\left[\sin(\alpha)\cos(\theta) - \sin(\alpha)\cos(\theta)\right]\\
+		  &= \mathbf{a}\left[\sin\left(\arcsin\left(\frac{a_{y}}{\mathbf{a}}\right)\right)\cos(\theta) - \sin\left(\arcsin\left(\frac{a_{y}}{\mathbf{a}}\right)\right)\cos(\theta)\right]\\
+		  &= \cancel{\mathbf{a}}\left[\frac{a_{y}}{\cancel{\mathbf{a}}}\cos(\theta) - \frac{a_{x}}{\cancel{\mathbf{a}}}\sin(\theta)\right]\\
+		  &= a_{x}\sin(\theta)+a_{y}\cos(\theta),
+\end{aligned}
+	\label{eq:}
+\end{equation}
 
 \begin{figure}
 	% NOTE: this fig needs more work, to make clear which angle is what exactly.
