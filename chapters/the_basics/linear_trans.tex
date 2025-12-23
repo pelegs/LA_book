@@ -377,10 +377,9 @@ To sum up this result, here it is again - this time in \enquote{mapping} notatio
 \end{equation}
 
 \begin{figure}
-	% NOTE: this fig needs more work, to make clear which angle is what exactly.
 	\begin{center}
 		\begin{tikzpicture}
-			\tikzset{sangle/.style={draw=#1, very thick, fill=#1!25, text=#1, angle radius=20mm}}
+			\tikzset{sangle/.style={draw=#1, very thick, fill=#1!20, text=#1, angle radius=20mm}}
 			\colorlet{acol}{xpurple}
 			\colorlet{bcol}{xorange}
 			\colorlet{abcol}{xgreen}
@@ -461,9 +460,51 @@ Now that we finally have a formula for rotating any vector in $\Rs[2]$ by any an
 % (*) Continue examples of LTs, some more specific and for some add general proofs (e.g. for rotations: start with π/2, then π, then general. Same for reflections, at least across the axes.)
 % (*) Write about how every LT can be made from compositions of scaling + rotation/reflection (+ rotation can be made from reflections, and reflections from scaling with negative scalars. So actually... scaling IS the basic LT? huh. Any way: think SVD).
 
+\subsection{General From of 2-Dimensional Linear Transformations}
+You might have noticed by now that all of the linear transformations we dealt with had a similar structure, involving adding and scaling the different components of the vectors they act on. Indeed, the most general form of a linear transform in $\Rs[2]$ is the following:
+\begin{equation}
+	T\GenericColVecXY{v} = \colvec{av_{x}+bv_{y};cv_{x}+dv_{y}},
+	\label{eq:general LT in R2}
+\end{equation}
+where $a,b,c$ and $d$ are some real numbers. In a sense, this is just two linear combinations of the vector's components: one for the $x$-component and one for the $y$-component. Performing any other operation would make the transformation no longer linear. To see this, let's first quickly prove that this general form is indeed a linear transformation:
+
+\begin{proof}{General 2-Dimensional Linear Transformation}{}
+	Let $T:\Rs[2]\to\Rs[2]$ a transformation defined for $\vec{v}=\GenericColVecXY{v}\in\Rs[2]$ as
+	\begin{equation*}
+		T\GenericColVecXY{v} = \colvec{av_{x}+bv_{y};cv_{x}+dv_{y}},
+	\end{equation*}
+	with $a,b,c,d\in\Rs$. As usual, we will prove that $T$ confirms to the two criteria of linear transformations.
+
+	\begin{descitemize}
+		\item[Additivity] Let $\vec{v}=\GenericColVecXY{v}$ and $\vec{w}=\GenericColVecXY{w}$. Then first adding the two vectors together and then applying $T$ we get
+			\begin{equation*}
+				T\left(\vec{v}+\vec{w}\right) = T\colvec{v_{x}+w_{x};v_{y}+w_{y}} = \colvec{a(v_{x}+w_{x})+b(v_{y}+w_{y});c(v_{x}+w_{x})+d(v_{y}+w_{y})}. 
+			\end{equation*}
+		And on the other hand, transforming each vector separately first and then adding the results, we get
+		\begin{align*}
+			T(\vec{v}) + T(\vec{w}) &= \colvec{av_{x}+bv_{y};cv_{x}+dv_{y}} + \colvec{aw_{x}+bw_{y};cw_{x}+dw_{y}}\\
+									&= \colvec{av_{x}+bv_{y}+aw_{x}+bw_{y};cv_{x}+dv_{y}+cw_{x}+dw_{y}}\\
+									&=\colvec{a(v_{x}+w_{x})+b(v_{y}+w_{y});c(v_{x}+w_{x})+d(v_{y}+w_{y})}. 
+		\end{align*}
+
+		\item[Homogeneity] Let $\vec{v}=\GenericColVecXY{v}$ and $\lambda\in\Rs$. Then scaling $\vec{v}$ by $\lambda$ and then applying $T$ gives us
+			\begin{equation*}
+				T\left(\lambda\vec{v}\right) = T\GenericColVecXY{\lambda v} = \colvec{a\lambda v_{x}+b\lambda v_{y};c\lambda v_{x}+d\lambda v_{y}} = \lambda\colvec{av_{x}+bv_{y};cv_{x}+dv_{y}}.
+			\end{equation*}
+			And applying $T$ to $\vec{v}$ first and then scaling it by $\lambda$ gives
+			\begin{equation*}
+				\lambda T(\vec{v}) = \lambda T\GenericColVecXY{v} = \lambda\colvec{av_{x}+bv_{y};cv_{x}+dv_{y}}.
+			\end{equation*}
+
+		Therefore, $T$ is a linear transformation.
+	\end{descitemize}
+\end{proof}
+
+% TODO: write examples of how changing T causes it to be non-linear (e.g. adding a translation, square, ..., any other operation).
+
 \subsection{3-Dimensional Linear Transformations}
 
-\subsection{Calculating Linear Transformations}
+\subsection{Calculating Linear Transformations, Part 1}
 Linear transformations have a very nice property which makes applying them on different vectors an extremely efficient process. Consider the linear transformation $T:\Rs[2]\to\Rs[2]$ which is a composition of scaling by a factor of $2$ in the $y$-diretion followed by a rotation of $\ang{90}$ anti-clockwise around the origin. Now let's say that we wish to calculate how $T$ transforms the vector
 $$\vec{a}=\colvec{3;2}.$$
 
