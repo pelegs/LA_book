@@ -327,7 +327,7 @@ which is exactly the identity matrix with all its entries negating. How cool is 
 
 Ok, next up: reflections! Reflecting a vector across the $x$-axis is simply flipping it\footnote{yes, I also laughed when writing this.} vertically - so its $x$-component doesn't change, and its $y$-component gets flipped. The result for the basis vectors is that $\ebx$ stays the same (i.e. reflecting $\ebx$ across the $x$ access doesn't change it), while $\eby$ gets flipped:
 \begin{equation}
-	\fromtranstomat{\text{ref}_{x}}{\mat{ref}_{x}}{1}{0}{0}{-1}
+	\fromtranstomat{\Reflection{x}}{\Reflection{x}}{1}{0}{0}{-1}
 	\label{eq:vertical reflection matrix}
 \end{equation}
 
@@ -340,6 +340,47 @@ Similarly, reflecting a vector across the $y$-axis flips their $x$-coordinate an
 See \autoref{fig:reflections matrices} for a visualization.
 
 Before we can build a general reflection matrix (i.e. representing a reflection across \textit{any} line going through the origin, not only the axes) we need to learn a couple of more things, so we'll skip that for now and hop on to building matrices for shear transformations.
+
+Now for the shear transformations: a shear in the $x$-direction keeps $\ebx$ untouched, while simply moving $\eby$ by some amount in the $x$-direction (see \autoref{fig:shear in x dir}).
+
+\begin{figure}
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{axis}[
+					sheargrid,
+					name=original,
+				]
+				\draw[vector, xred] (0,0) -- (1,0) node[pos=1.2, black] {$\ebx$};
+				\draw[vector, xblue] (0,0) -- (0,1) node[pos=1.2, black] {$\eby$};
+				\draw[vector, xblue, dashed] (0,0) -- (0.5,1) node[pos=1.1, anchor=west, black] {$K_{x}(\eby)$};
+				\draw[vector, dotted, black] (0.05,0.8) -- (0.35,0.8);
+			\end{axis}
+
+			\pgftransformcm{1}{0}{0.5}{1}{\pgfpoint{7cm}{0}}
+			\begin{axis}[
+					sheargrid,
+					name=transformed,
+					xlabel={},
+					ylabel={},
+				]
+				\draw[vector, xred] (0,0) -- (1,0) node (ke1) {};
+				\draw[vector, xblue] (0,0) -- (0,1) node (ke2) {};
+				\coordinate (Ke1) at (1,0);
+				\coordinate (Ke2) at (0.5,1);
+				\coordinate (xlbl) at (2.2,0);
+				\coordinate (ylbl) at (1.1,1.6);
+			\end{axis}
+			\pgftransformreset
+			\node[xshift=25pt] at (Ke1) {$\ebx$};
+			\node[xshift=-15pt] at (Ke2) {$K_{x}(\eby)$};
+			\draw[|->, very thick] ($(original.east)+(10pt,0)$) -- ($(transformed.west)-(10pt,0)$) node[midway, above] {\Large $K_{x}$};
+			\node at (xlbl) {$x'$};
+			\node at (ylbl) {$y'$};
+		\end{tikzpicture}
+	\end{center}
+	\caption{Shearing in the $x$-direction: while $\ebx$ is kept untouched, $\eby$ is shifted by some value $k\in\Rs$.}
+	\label{fig:shear in x dir}
+\end{figure}
 
 % and after that projections.
 % Cool idea for a challange: prove using matrices that a rotation by 2x can be made from two reflections, such that the angle between the two lines of reflection is x.

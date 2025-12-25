@@ -190,7 +190,7 @@ Let's begin:
 
 \end{descitemize}
 
-\subsection{Composition of Basic Linear Transformations}
+% \subsection{Composition of Basic Linear Transformations}
 
 \subsection{Examples of Non-Linear Transformations in 2-Dimensions}
 % Now that we are visually familiar with linear transformations in $2$-dimensions, let's look at some examples of non-linear transformations in the plane. Each of the following examples will highlight how one of the properties of linear transformations can be \enquote{broken}.
@@ -226,6 +226,8 @@ Let's begin:
 % 		\end{tikzpicture}
 % 	\end{center}
 % \end{descitemize}
+
+\subsection{3-Dimensional Linear Transformations}
 
 \subsection{Formal Definition}
 The formal definition of linear transformations between any two vector spaces is the following:
@@ -460,7 +462,37 @@ Now that we finally have a formula for rotating any vector in $\Rs[2]$ by any an
 % (*) Continue examples of LTs, some more specific and for some add general proofs (e.g. for rotations: start with π/2, then π, then general. Same for reflections, at least across the axes.)
 % (*) Write about how every LT can be made from compositions of scaling + rotation/reflection (+ rotation can be made from reflections, and reflections from scaling with negative scalars. So actually... scaling IS the basic LT? huh. Any way: think SVD).
 
-\subsection{General From of 2-Dimensional Linear Transformations}
+\subsection{Composing Linear Transformations}
+In the discussion about 2- and 3-dimensional linear transformations I mentioned several times compositions of such transformations and simply stated that they are also linear transformations. This topic, however, deserves some more exploration. First, in order for us to even be able to compose two transformations $T_{1}$ and $T_{2}$, the composition needs to be properly defined - specifically, if we want to compose $T_{2}$ onto $T_{1}$ (that is, first apply $T_{1}$ and then apply $T_{2}$ on the result), the \textbf{domain} of $T_{1}$ must be at least a superset of the \textbf{image} of $T_{1}$. Otherwise, we might get a situation where we apply $T_{1}$ to some vector and then not being able to apply $T_{2}$ on the result, since it isn't defined.
+
+TBW: (1) more text about the domain and image of functions in relation to composition, (2) discussion on how the order of composition matters (i.e. it isn't commutative).
+
+\dots
+
+\begin{proof}{The Composition of Linear Transformations is Linear}{}
+	Let $T_{1}:\Rs[n]\to\Rs[m]$ and $T_{2}:\Rs[m]\to\Rs[k]$ be linear transformations, let $\vec{v},\vec{w}\in\Rs[n]$ and let $\lambda\in\Rs$. Then:
+	\begin{descitemize}
+	\item[Additivity]
+		\begin{align*}
+			\comp{T_{1}}{T_{2}}\left(\vec{v}+\vec{w}\right) &= T_{2}\left(T_{1}\left(\vec{v}+\vec{w}\right)\right)\\
+			\tikzmark{first_linearity_of_T1}				&= T_{2}\left(T_{1}(\vec{v})+T_{1}(\vec{w})\right)\\
+			\tikzmark{first_linearity_of_T2}				&= T_{2}\left(T_{1}(\vec{v})\right) + T_{2}\left(T_{1}(\vec{w})\right)\\
+															&= \comp{T_{1}}{T_{2}}(\vec{v}) + \comp{T_{1}}{T_{2}}(\vec{w}).
+		\end{align*}
+
+		\item[Homogeneity]
+			\begin{align*}
+				\comp{T_{1}}{T_{2}}\left(\lambda\vec{v}\right) &= T_{2}\left(T_{1}\left(\lambda\vec{v}\right)\right)\\
+				\tikzmark{second_linearity_of_T1}			   &= T_{2}\left(\lambda T_{1}\left(\vec{v}\right)\right)\\
+				\tikzmark{second_linearity_of_T2}			   &= \lambda\left(T_{2}\left(T_{1}(\vec{v})\right)\right)\\
+															   &= \lambda\comp{T_{1}}{T_{2}}(\vec{v}).
+			\end{align*}
+	\end{descitemize}
+
+	Therefore, $\comp{T_{1}}{T_{2}}$ is also a linear transformation.
+\end{proof}
+
+\subsection{General Forms of Linear Transformations}
 You might have noticed by now that all of the linear transformations we dealt with had a similar structure, involving adding and scaling the different components of the vectors they act on. Indeed, the most general form of a linear transform in $\Rs[2]$ is the following:
 \begin{equation}
 	T\GenericColVecXY{v} = \colvec{av_{x}+bv_{y};cv_{x}+dv_{y}},
@@ -501,8 +533,6 @@ where $a,b,c$ and $d$ are some real numbers. In a sense, this is just two linear
 \end{proof}
 
 % TODO: write examples of how changing T causes it to be non-linear (e.g. adding a translation, square, ..., any other operation).
-
-\subsection{3-Dimensional Linear Transformations}
 
 \subsection{Calculating Linear Transformations, Part 1}
 Linear transformations have a very nice property which makes applying them on different vectors an extremely efficient process. Consider the linear transformation $T:\Rs[2]\to\Rs[2]$ which is a composition of scaling by a factor of $2$ in the $y$-diretion followed by a rotation of $\ang{90}$ anti-clockwise around the origin. Now let's say that we wish to calculate how $T$ transforms the vector

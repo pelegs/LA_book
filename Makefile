@@ -1,7 +1,6 @@
 TESTFOLDER=tests
 
 all: main/main
-all: boxes
 
 main/main:
 	# This should be done via latexmk, but it's misbahving atm
@@ -11,10 +10,9 @@ main/main:
 	# Update current number of pages in README.md
 	# A=$$(pdfinfo main.pdf | awk '/^Pages:/ {print $$2}'); \
 	# sed -i "s/Current.*/Current number of pages: $$A./g" README.md
-bookpartial:
-	latexmk $(LATEXMKSWITCHES) -pretex="\def\all{1}" $@.tex
-boxes:
-	latexmk $(LATEXMKSWITCHES) -jobname=$(TESTFOLDER)/$@ $(TESTFOLDER)/$@.tex
+
+partial:
+	lualatex --shell-escape --output-directory tests/partials -jobname=partial main/main.tex
 
 force:
 	$(MAKE) LATEXMKSWITCHES=-gg all
