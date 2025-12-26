@@ -35,11 +35,11 @@
 \input{chapters/preface/head}
 \endgroup
 
-% Material chapters
+%%% Chapters %%%
 \makeatletter
-\foreach \c [count=\x from 1] in \chapterslist {
+\foreach \c [count=\x from 1] in \chapterslist{
 	\def\input@path{{./chapters/\c/}}
-	\def\chapterdescription{\input{description}}
+	% \def\chapterdescription{\input{description}}
 	\input{head}
 }
 \makeatother

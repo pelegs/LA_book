@@ -13,7 +13,7 @@
 \end{summary}
 
 \subsection{Introduction}
-Text text text\dots
+Text text text\dots and some more text!
 
 \dots
 
@@ -421,36 +421,36 @@ To sum up this result, here it is again - this time in \enquote{mapping} notatio
 Now that we finally have a formula for rotating any vector in $\Rs[2]$ by any angle about the origin, we can finally prove that this is indeed a linear transformation.
 \begin{descitemize}
 	\item[Additivity] let
-		\begin{equation*}
-			\vec{a}=\GenericColVecXY{a},\ \vec{b}=\GenericColVecXY{b}.
-		\end{equation*}
-		Adding the two together gives
-		\begin{equation*}
-			\vec{a}+\vec{b} = \colvec{a_{x}+b_{x};a_{y}+b_{y}},
-		\end{equation*}
-		and then rotating the result by $\theta$ yields
-		\begin{equation*}
-			\Rotation{\theta}{\vec{a}+\vec{b}} = \colvec{\left(a_{x}+b_{x}\right)\cos(\theta)-\left(a_{y}+b_{y}\right)\sin(\theta);\left(a_{x}+b_{x}\right)\sin(\theta)+\left(a_{y}+b_{y}\right)\cos(\theta)}.
-		\end{equation*}
-		On the other hand, rotating the two vectors first gives
-		\begin{align*}
-			\Rotation{\theta}{\vec{a}} &= \colvec{a_{x}\cos(\theta)-a_{y}\sin(\theta);a_{x}\sin(\theta)+a_{y}\cos(\theta)},\\ 
-			\Rotation{\theta}{\vec{b}} &= \colvec{b_{x}\cos(\theta)-b_{y}\sin(\theta);b_{x}\sin(\theta)+b_{y}\cos(\theta)}.
-		\end{align*}
-		Finally, adding the two rotated vectors together we get
-		\begin{align*}
-			\Rotation{\theta}{\vec{a}} + \Rotation{\theta}{\vec{b}} &= \colvec{a_{x}\cos(\theta)-a_{y}\sin(\theta);a_{x}\sin(\theta)+a_{y}\cos(\theta)} + \colvec{b_{x}\cos(\theta)-b_{y}\sin(\theta);b_{x}\sin(\theta)+b_{y}\cos(\theta)},\\
-																	&= \colvec{\left(a_{x}+b_{x}\right)\cos(\theta)-\left(a_{y}+b_{y}\right)\sin(\theta);\left(a_{x}+b_{x}\right)\sin(\theta)+\left(a_{y}+b_{y}\right)\cos(\theta)}.
-		\end{align*}
+	\begin{equation*}
+		\vec{a}=\GenericColVecXY{a},\ \vec{b}=\GenericColVecXY{b}.
+	\end{equation*}
+	Adding the two together gives
+	\begin{equation*}
+		\vec{a}+\vec{b} = \colvec{a_{x}+b_{x};a_{y}+b_{y}},
+	\end{equation*}
+	and then rotating the result by $\theta$ yields
+	\begin{equation*}
+		\Rotation{\theta}{\vec{a}+\vec{b}} = \colvec{\left(a_{x}+b_{x}\right)\cos(\theta)-\left(a_{y}+b_{y}\right)\sin(\theta);\left(a_{x}+b_{x}\right)\sin(\theta)+\left(a_{y}+b_{y}\right)\cos(\theta)}.
+	\end{equation*}
+	On the other hand, rotating the two vectors first gives
+	\begin{align*}
+		\Rotation{\theta}{\vec{a}} & = \colvec{a_{x}\cos(\theta)-a_{y}\sin(\theta);a_{x}\sin(\theta)+a_{y}\cos(\theta)}, \\
+		\Rotation{\theta}{\vec{b}} & = \colvec{b_{x}\cos(\theta)-b_{y}\sin(\theta);b_{x}\sin(\theta)+b_{y}\cos(\theta)}.
+	\end{align*}
+	Finally, adding the two rotated vectors together we get
+	\begin{align*}
+		\Rotation{\theta}{\vec{a}} + \Rotation{\theta}{\vec{b}} & = \colvec{a_{x}\cos(\theta)-a_{y}\sin(\theta);a_{x}\sin(\theta)+a_{y}\cos(\theta)} + \colvec{b_{x}\cos(\theta)-b_{y}\sin(\theta);b_{x}\sin(\theta)+b_{y}\cos(\theta)}, \\
+		                                                        & = \colvec{\left(a_{x}+b_{x}\right)\cos(\theta)-\left(a_{y}+b_{y}\right)\sin(\theta);\left(a_{x}+b_{x}\right)\sin(\theta)+\left(a_{y}+b_{y}\right)\cos(\theta)}.
+	\end{align*}
 
 	\item[Homogeneity] Scaling $\vec{a}$ by a scalar $s\in\Rs$ and then rotating it by $\theta$ gives
-		\begin{equation*}
-			\Rotation{\theta}{s\vec{a}} = \text{R}_{\theta}\GenericColVecXY{sa} = \colvec{s a_{x}\cos(\theta)-s a_{y}\sin(\theta);s a_{x}\sin(\theta)+s a_{y}\cos(\theta)}.
-		\end{equation*}
-		On the other hand, first rotating $\vec{a}$ and the scaling by $s$ gives
-		\begin{equation*}
-			s\Rotation{\theta}{\vec{a}} = s\colvec{a_{x}\cos(\theta)-a_{y}\sin(\theta);a_{x}\sin(\theta)+a_{y}\cos(\theta)} = \colvec{s a_{x}\cos(\theta)-s a_{y}\sin(\theta);s a_{x}\sin(\theta)+s a_{y}\cos(\theta)}.
-		\end{equation*}
+	\begin{equation*}
+		\Rotation{\theta}{s\vec{a}} = \text{R}_{\theta}\GenericColVecXY{sa} = \colvec{s a_{x}\cos(\theta)-s a_{y}\sin(\theta);s a_{x}\sin(\theta)+s a_{y}\cos(\theta)}.
+	\end{equation*}
+	On the other hand, first rotating $\vec{a}$ and the scaling by $s$ gives
+	\begin{equation*}
+		s\Rotation{\theta}{\vec{a}} = s\colvec{a_{x}\cos(\theta)-a_{y}\sin(\theta);a_{x}\sin(\theta)+a_{y}\cos(\theta)} = \colvec{s a_{x}\cos(\theta)-s a_{y}\sin(\theta);s a_{x}\sin(\theta)+s a_{y}\cos(\theta)}.
+	\end{equation*}
 \end{descitemize}
 
 \textcolor{xred}{\textbf{Hoorah!}} Rotation is indeed a linear transformation.
@@ -472,21 +472,21 @@ TBW: (1) more text about the domain and image of functions in relation to compos
 \begin{proof}{The Composition of Linear Transformations is Linear}{}
 	Let $T_{1}:\Rs[n]\to\Rs[m]$ and $T_{2}:\Rs[m]\to\Rs[k]$ be linear transformations, let $\vec{v},\vec{w}\in\Rs[n]$ and let $\lambda\in\Rs$. Then:
 	\begin{descitemize}
-	\item[Additivity]
+		\item[Additivity]
 		\begin{align*}
-			\comp{T_{1}}{T_{2}}\left(\vec{v}+\vec{w}\right) &= T_{2}\left(T_{1}\left(\vec{v}+\vec{w}\right)\right)\\
-			\tikzmark{first_linearity_of_T1}				&= T_{2}\left(T_{1}(\vec{v})+T_{1}(\vec{w})\right)\\
-			\tikzmark{first_linearity_of_T2}				&= T_{2}\left(T_{1}(\vec{v})\right) + T_{2}\left(T_{1}(\vec{w})\right)\\
-															&= \comp{T_{1}}{T_{2}}(\vec{v}) + \comp{T_{1}}{T_{2}}(\vec{w}).
+			\comp{T_{1}}{T_{2}}\left(\vec{v}+\vec{w}\right) & = T_{2}\left(T_{1}\left(\vec{v}+\vec{w}\right)\right)                 \\
+			\tikzmark{first_linearity_of_T1}                & = T_{2}\left(T_{1}(\vec{v})+T_{1}(\vec{w})\right)                     \\
+			\tikzmark{first_linearity_of_T2}                & = T_{2}\left(T_{1}(\vec{v})\right) + T_{2}\left(T_{1}(\vec{w})\right) \\
+			                                                & = \comp{T_{1}}{T_{2}}(\vec{v}) + \comp{T_{1}}{T_{2}}(\vec{w}).
 		\end{align*}
 
 		\item[Homogeneity]
-			\begin{align*}
-				\comp{T_{1}}{T_{2}}\left(\lambda\vec{v}\right) &= T_{2}\left(T_{1}\left(\lambda\vec{v}\right)\right)\\
-				\tikzmark{second_linearity_of_T1}			   &= T_{2}\left(\lambda T_{1}\left(\vec{v}\right)\right)\\
-				\tikzmark{second_linearity_of_T2}			   &= \lambda\left(T_{2}\left(T_{1}(\vec{v})\right)\right)\\
-															   &= \lambda\comp{T_{1}}{T_{2}}(\vec{v}).
-			\end{align*}
+		\begin{align*}
+			\comp{T_{1}}{T_{2}}\left(\lambda\vec{v}\right) & = T_{2}\left(T_{1}\left(\lambda\vec{v}\right)\right)   \\
+			\tikzmark{second_linearity_of_T1}              & = T_{2}\left(\lambda T_{1}\left(\vec{v}\right)\right)  \\
+			\tikzmark{second_linearity_of_T2}              & = \lambda\left(T_{2}\left(T_{1}(\vec{v})\right)\right) \\
+			                                               & = \lambda\comp{T_{1}}{T_{2}}(\vec{v}).
+		\end{align*}
 	\end{descitemize}
 
 	Therefore, $\comp{T_{1}}{T_{2}}$ is also a linear transformation.
@@ -509,24 +509,24 @@ where $a,b,c$ and $d$ are some real numbers. In a sense, this is just two linear
 
 	\begin{descitemize}
 		\item[Additivity] Let $\vec{v}=\GenericColVecXY{v}$ and $\vec{w}=\GenericColVecXY{w}$. Then first adding the two vectors together and then applying $T$ we get
-			\begin{equation*}
-				T\left(\vec{v}+\vec{w}\right) = T\colvec{v_{x}+w_{x};v_{y}+w_{y}} = \colvec{a(v_{x}+w_{x})+b(v_{y}+w_{y});c(v_{x}+w_{x})+d(v_{y}+w_{y})}. 
-			\end{equation*}
+		\begin{equation*}
+			T\left(\vec{v}+\vec{w}\right) = T\colvec{v_{x}+w_{x};v_{y}+w_{y}} = \colvec{a(v_{x}+w_{x})+b(v_{y}+w_{y});c(v_{x}+w_{x})+d(v_{y}+w_{y})}.
+		\end{equation*}
 		And on the other hand, transforming each vector separately first and then adding the results, we get
 		\begin{align*}
-			T(\vec{v}) + T(\vec{w}) &= \colvec{av_{x}+bv_{y};cv_{x}+dv_{y}} + \colvec{aw_{x}+bw_{y};cw_{x}+dw_{y}}\\
-									&= \colvec{av_{x}+bv_{y}+aw_{x}+bw_{y};cv_{x}+dv_{y}+cw_{x}+dw_{y}}\\
-									&=\colvec{a(v_{x}+w_{x})+b(v_{y}+w_{y});c(v_{x}+w_{x})+d(v_{y}+w_{y})}. 
+			T(\vec{v}) + T(\vec{w}) & = \colvec{av_{x}+bv_{y};cv_{x}+dv_{y}} + \colvec{aw_{x}+bw_{y};cw_{x}+dw_{y}} \\
+			                        & = \colvec{av_{x}+bv_{y}+aw_{x}+bw_{y};cv_{x}+dv_{y}+cw_{x}+dw_{y}}            \\
+			                        & =\colvec{a(v_{x}+w_{x})+b(v_{y}+w_{y});c(v_{x}+w_{x})+d(v_{y}+w_{y})}.
 		\end{align*}
 
 		\item[Homogeneity] Let $\vec{v}=\GenericColVecXY{v}$ and $\lambda\in\Rs$. Then scaling $\vec{v}$ by $\lambda$ and then applying $T$ gives us
-			\begin{equation*}
-				T\left(\lambda\vec{v}\right) = T\GenericColVecXY{\lambda v} = \colvec{a\lambda v_{x}+b\lambda v_{y};c\lambda v_{x}+d\lambda v_{y}} = \lambda\colvec{av_{x}+bv_{y};cv_{x}+dv_{y}}.
-			\end{equation*}
-			And applying $T$ to $\vec{v}$ first and then scaling it by $\lambda$ gives
-			\begin{equation*}
-				\lambda T(\vec{v}) = \lambda T\GenericColVecXY{v} = \lambda\colvec{av_{x}+bv_{y};cv_{x}+dv_{y}}.
-			\end{equation*}
+		\begin{equation*}
+			T\left(\lambda\vec{v}\right) = T\GenericColVecXY{\lambda v} = \colvec{a\lambda v_{x}+b\lambda v_{y};c\lambda v_{x}+d\lambda v_{y}} = \lambda\colvec{av_{x}+bv_{y};cv_{x}+dv_{y}}.
+		\end{equation*}
+		And applying $T$ to $\vec{v}$ first and then scaling it by $\lambda$ gives
+		\begin{equation*}
+			\lambda T(\vec{v}) = \lambda T\GenericColVecXY{v} = \lambda\colvec{av_{x}+bv_{y};cv_{x}+dv_{y}}.
+		\end{equation*}
 
 		Therefore, $T$ is a linear transformation.
 	\end{descitemize}
