@@ -37,8 +37,17 @@ for chapter, sections in structure_to_compile.items():
     for section in sections:
         print(f" - {section}")
 
-# file = "main/main"
-# job = "wip"
-# chapter = "2_theBasics"
-# section = "2_linearTrans"
-# latexmk_cmd = f'latexmk -pdflua -shell-escape -jobname=main/{job} -pretex="\def\wipchapter{chapter}\def\wipsection{section}" -usepretex {file}'
+# Create a LaTeX array of what to compile
+to_compile_LaTeX = []
+for chapter, sections in structure_to_compile.items():
+    to_compile_LaTeX.append(f"{{./chapters/{chapter}/head}}")
+    for section in sections:
+        to_compile_LaTeX.append(f"{{./chapters/{chapter}/{section}}}")
+to_compile_LaTeX = f"{','.join(to_compile_LaTeX)}"
+print(f"LaTeX compilation variable: {to_compile_LaTeX}")
+
+file = "main/main"
+job = "wip"
+latexmk_cmd = rf'latexmk -pdflua -shell-escape -jobname=main/{job} -pretex="\def\tocompile{{{to_compile_LaTeX}}}" -usepretex {file}'
+print(f"Full latexmk cmd: {latexmk_cmd}")
+subprocess.run(latexmk_cmd, shell=True)

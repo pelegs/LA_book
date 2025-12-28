@@ -32,15 +32,13 @@
 % Preface
 \begingroup
 \let\clearpage\relax
-\input{chapters/preface/head}
+\input{chapters/0_preface/head.tex}
 \endgroup
 
 %%% Chapters %%%
 \makeatletter
-\foreach \c [count=\x from 1] in \chapterslist{
-	\def\input@path{{./chapters/\c/}}
-	% \def\chapterdescription{\input{description}}
-	\input{head}
+\foreach \sec in \tocompile{
+	\input{\sec}
 }
 \makeatother
 
