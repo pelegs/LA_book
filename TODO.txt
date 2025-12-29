@@ -1,0 +1,14 @@
+* Meta
+-- consider formalizing the "TODO" tasks somehow?..
+
+* Compilation
+-- add argument to run a WIP with an output name (deafult: no WIP, full compilation. Default WIP name: "wip").
+
+* Visual
+-- add "properties" environment?
+
+* Material
+* Basic linear algebra
+ - Linear transformations:
+   -- consider adding parantheses around column vectors in transformation notation.
+   -- go over all ideas/suggestions/TODOs I wrote as comments and translate them into this file.

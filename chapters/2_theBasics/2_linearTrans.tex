@@ -62,6 +62,10 @@ The main purely mathematical property of linear transformations is that they pre
 
 However, this is a rather abstract way of discussing linear transformations. Instead, let's first learn some of the more \enquote{graphical} properies of linear transformations in the plane, i.e. $T:\Rs[2]\to\Rs[2]$, and then see practical examples of such transformations before moving on to their more abstract (and powerful) mathematical description.
 
+\subsection{Linear Transformations in 2-Dimensions}
+(here comes an introductory text about the fundamental linear transformations in $\Rs[2]$, what are their properties and some more relevant information\dots)
+
+% consider making this in a dedicated environment, maybe something like "properties".
 Any linear transformation $T:\Rs[2]\to\Rs[2]$ always has the following four properties:
 \begin{descitemize}
 	\item[The origin is kept untouched] $T$ always maps $\vec{0}$ to $\vec{0}$.
@@ -131,13 +135,6 @@ In the original unit square the diagonals are equal: their lengths are $\textcol
 So we can see that at least two quantities aren't necessarily conserved by linear transformations: (1) \textbf{distances}, which unlike areas don't even all scale by the same amount, and (2) \textbf{angles} (more generally, \textbf{directions}).
 
 One last key observation before we move on: as can be seen in \autoref{fig:general linear transformation and invariants} and \autoref{fig:orange unit square in R2} linear transfornations in $\Rs[2]$ transform \textbf{squares} into \textbf{parallelograms}. These parallelograms can be scaled, \enquote{squeezed}, reflected and/or rotated compared to the original squares.
-
-\subsection{Linear Transformations in 2-Dimensions}
-Here comes an introductory text about the fundamental linear transformations in $\Rs[2]$, what are their properties and some more relevant information\dots
-
-We saw how
-
-\dots
 
 There are several \enquote{basic} linear transformations in $\Rs[2]$: these transformations can be thought of as the building blocks of all possible linear transformations on a $2$-dimensional plane. We will see later how we can combine these basic transformations to createnew transformations, but first let's introduce these \enquote{basic} linear transformations.
 
@@ -242,19 +239,66 @@ The formal definition of linear transformations between any two vector spaces is
 	We can combine the above two criteria using an additional scalar $\beta\in\Rs$: $T$ is linear if $$ T(\alpha\vec{a} + \beta\vec{b}) = \alpha T(\vec{a}) + \beta T(\vec{b}).$$
 \end{definition}
 
-Just like with vectirs, the first condition is called \textbf{additivity} and the second condition is called \textbf{homogeneity}. What these conditions say, in simple words, is that we can always scale vectors and add them together before we apply the a linear transformation - and the result will be equal to scaling and adding the transformed vectors. So in practice we can choose what we want to calculate first (addition and scaling or the transformation) according to what is easier and/or more convinient to calculate.
+Just like with vectors, the first condition is called \textbf{additivity} and the second condition is called \textbf{homogeneity}. What these conditions say, in simple words, is that we can always scale vectors and add them together before we apply a linear transformation - and the result will be the same as first transforming each vector separately, and then scaling and/or add them together. So in practice we can choose what we want to calculate first (addition and scaling or the transformation) according to what is easier and/or more convinient to calculate.
 
-Let's see now how to use this definition to show that a transformation is linear. We can start with the identity transformation since it's a very simple transformation.
+The formal definition of linear transformations can be used to prove the first three of the four basic geometric properties of linear transformations in 2- and 3-dimensions. In fact, this works for any $n$-dimensional \newterm{Euclidean space} $\Rs[n]$, so let's prove the more general form of these properties instead of limiting ourselves to 2- or 3-dimensions.
 
-\begin{descitemize}
+\begin{proof}{Geometric Properties of Linear Transformations}{}
+Let $T:\Rs[n]\to\Rs[n]$ be a linear transformation. Then:
+	\begin{descitemize}
+		\item[The origin is kept untouched] the origin in $\Rs[n]$ is represented by the $n$-dimensional zero vector, $\vec{0}$. We can write the zero vector as $0\vec{v}$, where $\vec{v}$ is any vector in $\Rs[n]$ (this is just scaling a vector by $0$, which gives the zero vector). When we apply $T$ to $0\vec{v}$ we get
+			\begin{equation*}
+				T(0\vec{v}) = 0T(\vec{v}) = \vec{0},
+			\end{equation*}
+			since $T(\vec{v})$ is a vector in $\Rs[n]$, so scaling it by $0$ gives $\vec{0}$.
+
+		\item[Lines remain lines] A line in $\Rs[n]$ can be represented just like in 2- and 3-dimensions (see REF TO LINES IN PREVIOUS SECTION):
+			\begin{equation*}
+				\mathbf{L}(s) = \vec{x}_{0} + s\hat{d}.
+			\end{equation*}
+			Applying $T$ to $\mathbf{L}$ gives us
+			\begin{equation*}
+				T\left(\mathbf{L}(s)\right) = T\left(\vec{x}_{0} + s\hat{d}\right),
+			\end{equation*}
+			and by the linearity of $T$ we can separate the right side of the equality:
+			\begin{equation*}
+				T\left(\vec{x}_{0} + s\hat{d}\right) = T(\vec{x}_{0}) + sT(\hat{d}).
+			\end{equation*}
+			Since both $T(\vec{x}_{0})$ and $sT(\hat{d})$ are vectors in $\Rs[n]$, the result of adding them is also a vector in $\Rs[n]$:
+			\begin{equation*}
+				T(\vec{x}_{0}) + sT(\hat{d}) = \vec{a}+s\vec{b} = \mathbf{C}(s),
+			\end{equation*}
+			where $\mathbf{C}(s)$ is now a function of $s$ with a line structure (vector + variable times a direction) - proving that $T$ transforms lines into lines.
+
+		\item[Parallel directions remain parallel] parallel lines have the same direction, i.e. if $\mathbf{L}_{1}(s)$ and $\mathbf{L}_{2}(s)$ are parallel, then they can be written as
+			\begin{align*}
+				\mathbf{L}_{1}(s) &= \vec{x}_{1} + s\hat{d},\\
+				\mathbf{L}_{2}(s) &= \vec{x}_{2} + s\hat{d}.
+			\end{align*}
+		(here $\vec{x}_{1}$ and $\vec{x}_{2}$ might be different, but $\hat{d}$ - the direction of the lines - is the same for both)
+
+		Applying the linear transformation $T$ on these lines gives
+		\begin{align*}
+			T\left(\mathbf{L}_{1}\right) &= T\left(\vec{x}_{1}+s\hat{d}\right) = T\left(\vec{x}_{1}\right) + sT\left(\hat{d}\right),\\
+			T\left(\mathbf{L}_{2}\right) &= T\left(\vec{x}_{2}+s\hat{d}\right) = T\left(\vec{x}_{2}\right) + sT\left(\hat{d}\right),
+		\end{align*}
+		and whatever the value of $T(\hat{d})$ is - it is the same direction for both transformed lines. We therefore get that $T$ transforms two parallel lines (i.e. with the same direction) to two parallel lines.
+		\end{descitemize}
+	\end{proof}
+
+	Unfortunately, the last property is rather difficult to prove with the material covered so far, so this proof will have to wait until a later part of the book (REF?).
+
+	Let's see how to use the formal definition of linear transformations to actually prove that a given transformation is indeed linear. We can start with the identity transformation since it's a very simple transformation.
+
+	\begin{descitemize}
 	\item[Additivity] for any $\vec{a},\vec{b}\in\Rs[2]$, we have
-	\begin{equation}
-		I(\vec{a})=\vec{a},\ I(\vec{b})=\vec{b},
-		\label{eq:identity trans in R2 acting on two vectors}
-	\end{equation}
-	and also that
-	\begin{equation}
-		I\left(\vec{a}+\vec{b}\right)=\vec{a}+\vec{b}.
+		\begin{equation}
+			I(\vec{a})=\vec{a},\ I(\vec{b})=\vec{b},
+			\label{eq:identity trans in R2 acting on two vectors}
+		\end{equation}
+		and also that
+		\begin{equation}
+			I\left(\vec{a}+\vec{b}\right)=\vec{a}+\vec{b}.
 		\label{eq:identity trans in R2 acting on addition of vectors}
 	\end{equation}
 	Therefore, if we first add the vectors $\vec{a}$ and $\vec{b}$ together and then apply $I$ on the result, we get
@@ -307,13 +351,13 @@ Using this fact we can easily show that a $\ang{90}$ rotation is a linear transf
 	\end{equation*}
 	exactly the same as before.
 
-	\item[Homogeneity] if we scale $\vec{a}$ by some scalar\footnote{I'm using $s$ here instead of the usual $\alpha$ because I want to avoid confusion the scalar with an angle.} $s\in\Rs$ first and then rotating the result we get
+	\item[Homogeneity] if we scale $\vec{a}$ by some scalar $\lambda\in\Rs$ first and then rotating the result we get
 	\begin{equation*}
-		\RotDeg{90}{s\vec{a}} = \RotDeg{90}{s\colvec{-a_{y};a_{x}}} = \RotDeg{90}{\GenericColVecXY{s a}} = \colvec{-s a_{y};s a_{x}}.
+		\RotDeg{90}{\lambda\vec{a}} = \RotDeg{90}{\lambda\colvec{-a_{y};a_{x}}} = \RotDeg{90}{\GenericColVecXY{\lambda a}} = \colvec{-\lambda a_{y};\lambda a_{x}}.
 	\end{equation*}
-	And if we first rotate $\vec{a}$ and then scale it by $s$ we get
+	And if we first rotate $\vec{a}$ and then scale it by $\lambda$ we get
 	\begin{equation*}
-		s \RotDeg{90}{\vec{a}} = s \colvec{-a_{y};a_{x}} = \colvec{-s a_{y};s a_{x}},
+		\lambda \RotDeg{90}{\vec{a}} = \lambda \colvec{-a_{y};a_{x}} = \colvec{-\lambda a_{y};\lambda a_{x}},
 	\end{equation*}
 	again - the same result as before.
 \end{descitemize}
@@ -454,7 +498,6 @@ Now that we finally have a formula for rotating any vector in $\Rs[2]$ by any an
 \end{descitemize}
 
 \textcolor{xred}{\textbf{Hoorah!}} Rotation is indeed a linear transformation.
-
 
 % Todo:
 % (*) Improve visualization of 2D LTs and add text
