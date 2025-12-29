@@ -10,5 +10,5 @@
 * Material
 * Basic linear algebra
  - Linear transformations:
-   -- consider adding parantheses around column vectors in transformation notation.
+   -- consider adding parantheses around column vectors in transformation notation. -- DONE.
    -- go over all ideas/suggestions/TODOs I wrote as comments and translate them into this file.

@@ -244,61 +244,61 @@ Just like with vectors, the first condition is called \textbf{additivity} and th
 The formal definition of linear transformations can be used to prove the first three of the four basic geometric properties of linear transformations in 2- and 3-dimensions. In fact, this works for any $n$-dimensional \newterm{Euclidean space} $\Rs[n]$, so let's prove the more general form of these properties instead of limiting ourselves to 2- or 3-dimensions.
 
 \begin{proof}{Geometric Properties of Linear Transformations}{}
-Let $T:\Rs[n]\to\Rs[n]$ be a linear transformation. Then:
+	Let $T:\Rs[n]\to\Rs[n]$ be a linear transformation. Then:
 	\begin{descitemize}
 		\item[The origin is kept untouched] the origin in $\Rs[n]$ is represented by the $n$-dimensional zero vector, $\vec{0}$. We can write the zero vector as $0\vec{v}$, where $\vec{v}$ is any vector in $\Rs[n]$ (this is just scaling a vector by $0$, which gives the zero vector). When we apply $T$ to $0\vec{v}$ we get
-			\begin{equation*}
-				T(0\vec{v}) = 0T(\vec{v}) = \vec{0},
-			\end{equation*}
-			since $T(\vec{v})$ is a vector in $\Rs[n]$, so scaling it by $0$ gives $\vec{0}$.
+		\begin{equation*}
+			T(0\vec{v}) = 0T(\vec{v}) = \vec{0},
+		\end{equation*}
+		since $T(\vec{v})$ is a vector in $\Rs[n]$, so scaling it by $0$ gives $\vec{0}$.
 
 		\item[Lines remain lines] A line in $\Rs[n]$ can be represented just like in 2- and 3-dimensions (see REF TO LINES IN PREVIOUS SECTION):
-			\begin{equation*}
-				\mathbf{L}(s) = \vec{x}_{0} + s\hat{d}.
-			\end{equation*}
-			Applying $T$ to $\mathbf{L}$ gives us
-			\begin{equation*}
-				T\left(\mathbf{L}(s)\right) = T\left(\vec{x}_{0} + s\hat{d}\right),
-			\end{equation*}
-			and by the linearity of $T$ we can separate the right side of the equality:
-			\begin{equation*}
-				T\left(\vec{x}_{0} + s\hat{d}\right) = T(\vec{x}_{0}) + sT(\hat{d}).
-			\end{equation*}
-			Since both $T(\vec{x}_{0})$ and $sT(\hat{d})$ are vectors in $\Rs[n]$, the result of adding them is also a vector in $\Rs[n]$:
-			\begin{equation*}
-				T(\vec{x}_{0}) + sT(\hat{d}) = \vec{a}+s\vec{b} = \mathbf{C}(s),
-			\end{equation*}
-			where $\mathbf{C}(s)$ is now a function of $s$ with a line structure (vector + variable times a direction) - proving that $T$ transforms lines into lines.
+		\begin{equation*}
+			\mathbf{L}(s) = \vec{x}_{0} + s\hat{d}.
+		\end{equation*}
+		Applying $T$ to $\mathbf{L}$ gives us
+		\begin{equation*}
+			T\left(\mathbf{L}(s)\right) = T\left(\vec{x}_{0} + s\hat{d}\right),
+		\end{equation*}
+		and by the linearity of $T$ we can separate the right side of the equality:
+		\begin{equation*}
+			T\left(\vec{x}_{0} + s\hat{d}\right) = T(\vec{x}_{0}) + sT(\hat{d}).
+		\end{equation*}
+		Since both $T(\vec{x}_{0})$ and $sT(\hat{d})$ are vectors in $\Rs[n]$, the result of adding them is also a vector in $\Rs[n]$:
+		\begin{equation*}
+			T(\vec{x}_{0}) + sT(\hat{d}) = \vec{a}+s\vec{b} = \mathbf{C}(s),
+		\end{equation*}
+		where $\mathbf{C}(s)$ is now a function of $s$ with a line structure (vector + variable times a direction) - proving that $T$ transforms lines into lines.
 
 		\item[Parallel directions remain parallel] parallel lines have the same direction, i.e. if $\mathbf{L}_{1}(s)$ and $\mathbf{L}_{2}(s)$ are parallel, then they can be written as
-			\begin{align*}
-				\mathbf{L}_{1}(s) &= \vec{x}_{1} + s\hat{d},\\
-				\mathbf{L}_{2}(s) &= \vec{x}_{2} + s\hat{d}.
-			\end{align*}
+		\begin{align*}
+			\mathbf{L}_{1}(s) & = \vec{x}_{1} + s\hat{d}, \\
+			\mathbf{L}_{2}(s) & = \vec{x}_{2} + s\hat{d}.
+		\end{align*}
 		(here $\vec{x}_{1}$ and $\vec{x}_{2}$ might be different, but $\hat{d}$ - the direction of the lines - is the same for both)
 
 		Applying the linear transformation $T$ on these lines gives
 		\begin{align*}
-			T\left(\mathbf{L}_{1}\right) &= T\left(\vec{x}_{1}+s\hat{d}\right) = T\left(\vec{x}_{1}\right) + sT\left(\hat{d}\right),\\
-			T\left(\mathbf{L}_{2}\right) &= T\left(\vec{x}_{2}+s\hat{d}\right) = T\left(\vec{x}_{2}\right) + sT\left(\hat{d}\right),
+			T\left(\mathbf{L}_{1}\right) & = T\left(\vec{x}_{1}+s\hat{d}\right) = T\left(\vec{x}_{1}\right) + sT\left(\hat{d}\right), \\
+			T\left(\mathbf{L}_{2}\right) & = T\left(\vec{x}_{2}+s\hat{d}\right) = T\left(\vec{x}_{2}\right) + sT\left(\hat{d}\right),
 		\end{align*}
 		and whatever the value of $T(\hat{d})$ is - it is the same direction for both transformed lines. We therefore get that $T$ transforms two parallel lines (i.e. with the same direction) to two parallel lines.
-		\end{descitemize}
-	\end{proof}
+	\end{descitemize}
+\end{proof}
 
-	Unfortunately, the last property is rather difficult to prove with the material covered so far, so this proof will have to wait until a later part of the book (REF?).
+Unfortunately, the last property is rather difficult to prove with the material covered so far, so this proof will have to wait until a later part of the book (REF?).
 
-	Let's see how to use the formal definition of linear transformations to actually prove that a given transformation is indeed linear. We can start with the identity transformation since it's a very simple transformation.
+Let's see how to use the formal definition of linear transformations to actually prove that a given transformation is indeed linear. We can start with the identity transformation since it's a very simple transformation.
 
-	\begin{descitemize}
+\begin{descitemize}
 	\item[Additivity] for any $\vec{a},\vec{b}\in\Rs[2]$, we have
-		\begin{equation}
-			I(\vec{a})=\vec{a},\ I(\vec{b})=\vec{b},
-			\label{eq:identity trans in R2 acting on two vectors}
-		\end{equation}
-		and also that
-		\begin{equation}
-			I\left(\vec{a}+\vec{b}\right)=\vec{a}+\vec{b}.
+	\begin{equation}
+		I(\vec{a})=\vec{a},\ I(\vec{b})=\vec{b},
+		\label{eq:identity trans in R2 acting on two vectors}
+	\end{equation}
+	and also that
+	\begin{equation}
+		I\left(\vec{a}+\vec{b}\right)=\vec{a}+\vec{b}.
 		\label{eq:identity trans in R2 acting on addition of vectors}
 	\end{equation}
 	Therefore, if we first add the vectors $\vec{a}$ and $\vec{b}$ together and then apply $I$ on the result, we get
@@ -628,10 +628,10 @@ To see how this is the case, let's go back to our simple $2$-dimensional example
 We can then apply the defining properties of linear transformations (REF) on $\vec{a}$:
 \begin{equation}
 	\begin{aligned}
-		T\clrcolvecxy{3}{2} & = T\left(\LCa{3}\colvec{1;0}+\LCb{2}\colvec{0;1}\right)                 \\
-		                    & = T\left(\LCa{3}\colvec{1;0}\right) + T\left(\LCb{2}\colvec{0;1}\right) \\
-		                    & = \LCa{3}T\colvec{1;0} + \LCb{2}T\colvec{0;1}                           \\
-		                    & = \LCa{3}T\left(\ebx\right) + \LCb{2}T\left(\eby\right).
+		T\clrcolvecxy{3}{2} & = T\left(\LCa{3}\cdot\colvec{1;0}+\LCb{2}\cdot\colvec{0;1}\right)                   \\
+		                    & = T\left(\LCa{3}\cdot\colvec{1;0}\right) + T\left(\LCb{2}\cdot\colvec{0;1}\right)   \\
+		                    & = \LCa{3}\cdot T\left(\colvec{1;0}\right) + \LCb{2}\cdot T\left(\colvec{0;1}\right) \\
+		                    & = \LCa{3}\cdot T\left(\ebx\right) + \LCb{2}\cdot T\left(\eby\right).
 	\end{aligned}
 	\label{eq:T applied to a in std basis representation}
 \end{equation}
@@ -680,9 +680,10 @@ What this insight shows us is that given a linear transformation, we only need t
 To make this a bit more formal, let's look at the most generic case: say $T:\Rs[n]\to\Rs[n]$ is a linear transformation \footnote{we'll deal with the more general case of $T:\Rs[n]\to\Rs[m]$ where $n\neq m$ in the next section.}. Then applying $T$ to a vector $\vec{v}\in\Rs[n]$ in its standard basis representation, $$\vec{v}=\clrgenericvec{v}{n},$$ we get
 \begin{equation}
 	\begin{aligned}
-		T(\vec{v}) & = T\clrgenericvec{v}{n}                                                         \\
-		           & = T\left( \LCa{v_{1}}\ebx + \LCb{v_{2}}\eby + \dots + \LCe{v_{n}}\eb{n} \right) \\
-		           & = \LCa{v_{1}}T(\ebx) + \LCb{v_{2}}T(\eby) + \dots + \LCe{v_{n}}T(\eb{n}).
+		% If and when the \ebcolxyz is re-written to be... nicer (i.e. with cases), this should be updated accordingly.
+		T(\vec{v}) & = T\clrgenericvec{v}{n}                                                                                        \\
+		           & = T\left( \LCa{v_{1}}\ebcolxyz{1} + \LCb{v_{2}}\ebcolxyz{2} + \dots + \LCe{v_{n}}\ebcol{xorange!25}{n} \right) \\
+		           & = \LCa{v_{1}}T(\ebcolxyz{1}) + \LCb{v_{2}}T(\ebcolxyz{2}) + \dots + \LCe{v_{n}}T(\ebcol{xorange!25}{n}).
 	\end{aligned}
 	\label{eq:}
 \end{equation}

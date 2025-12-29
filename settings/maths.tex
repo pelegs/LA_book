@@ -84,11 +84,13 @@
 \newcommand{\vgreen}{\colorVec{xdarkgreen}{v}}
 
 % Basis vectors and transformations
-\newcommand{\eb}[1]{\hat{e}_{#1}}
 \setlength{\fboxsep}{1pt} % This makes the colored e1, e2 and e3 more compact
-\newcommand{\ebx}{\colorbox{xred!25}{$\eb{1}$}}
-\newcommand{\eby}{\colorbox{xblue!25}{$\eb{2}$}}
-\newcommand{\ebz}{\colorbox{xgreen!25}{$\eb{3}$}}
+\newcommand{\eb}[1]{\hat{e}_{#1}}
+\newcommand{\ebcol}[2]{\colorbox{#1}{$\eb{#2}$}}
+\newcommand{\ebcolxyz}[1]{\ebcol{xcol#1!25}{#1}}  % TODO: This should be re-written as cases with letters vs. integers, etc.
+\newcommand{\ebx}{\colorbox{xred!25}{$\hat{x}$}}
+\newcommand{\eby}{\colorbox{xblue!25}{$\hat{y}$}}
+\newcommand{\ebz}{\colorbox{xgreen!25}{$\hat{z}$}}
 
 \newcommand{\ebc}[1]{\tilde{\vec{e}}_{#1}}
 \newcommand{\ebr}[1]{\color{xdarkblue}\eb{#1}\color{black}}
