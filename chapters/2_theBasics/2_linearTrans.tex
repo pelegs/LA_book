@@ -1,690 +1,698 @@
 \section{Linear Transformations}
-\begin{summary}{The Next Two Sections}{}
-	This section and the one immediately following it deal with a rather simple, yet very powerful type of functions between vector spaces: \newterm{linear transformations}.
-
-	In this section we will:
-	\begin{enumerate}
-		\item see why are we interested in linear transformations,
-		\item what are their properties, and
-		\item how they can provide a powerful tool for many different applications.
-	\end{enumerate}
-
-	In the next section we will explore how we can turn the caulculations of linear transformations into an extremely easy and straight-forward process using \newterm{matrices}.
-\end{summary}
-
-\subsection{Introduction}
-Text text text\dots
-
-\dots
-
-The main purely mathematical property of linear transformations is that they preserve the structure of vector spaces. This means that if we have three vectors $\vec{a},\ \vec{b}$ and $\vec{c}$ such that $\vec{c}=\alpha\vec{a}+\beta\vec{b}$, then for any linear transformation $T$,
-\begin{equation}
-	T(\vec{c}) = \alpha T(\vec{a}) + \beta T(\vec{b}).
-	\label{eq:}
-\end{equation}
-(see \autoref{fig:linear trans preservering linear structure} for a visual example)
-
-\begin{figure}
-	\begin{center}
-		\begin{tikzpicture}
-			\coordinate (a) at (1,0.5);
-			\coordinate (b) at (0,0.75);
-			\pgfmathsetmacro{\al}{2}
-			\pgfmathsetmacro{\be}{3}
-			\draw[vector, xred] (0,0) -- (a) node[midway, below] {$\vec{a}$};
-			\draw[vector, xblue] (0,0) -- (b) node[midway, left] {$\vec{b}$};
-			\draw[vector, xred, dashed] (a) -- ($\al*(a)$) node[pos=0.6, below] {$\alpha\vec{a}$};
-			\draw[vector, xblue, dashed] (b) -- ($\be*(b)$) node[pos=0.6, left] {$\beta\vec{b}$};
-			\draw[vector, dashed, xred, opacity=0.25] ($\be*(b)$) -- ++($\al*(a)$) node[midway, above left] {$\alpha\vec{a}$};
-			\draw[vector, dashed, xblue, opacity=0.25] ($\al*(a)$) -- ++($\be*(b)$) node[midway, right] {$\beta\vec{b}$};
-			\draw[vector, xpurple] (0,0) -- ($\al*(a)+\be*(b)$) node[pos=1.1] {$\vec{c}$};
-
-			\draw[very thick, |->] (3.5,1.5) -- ++(2.5,0) node[midway, above] {$T$} node[midway, below] {(linear)};
-
-			\pgfmathsetmacro{\th}{-45}
-			\pgftransformcm{0.8}{0.0}{0.6}{0.7}{\pgfpoint{75mm}{0}}
-			\coordinate (a) at (1,0.5);
-			\coordinate (b) at (0,0.75);
-			\pgfmathsetmacro{\al}{2}
-			\pgfmathsetmacro{\be}{3}
-			\draw[vector, xred] (0,0) -- (a) node[midway, below, yshift=-3pt] {$T(\vec{a})$};
-			\draw[vector, xblue] (0,0) -- (b) node[midway, left, yshift=3pt] {$T(\vec{b})$};
-			\draw[vector, xred, dashed] (a) -- ($\al*(a)$) node[pos=0.6, below, xshift=-2pt, yshift=-2pt] {$\alpha T(\vec{a})$};
-			\draw[vector, xblue, dashed] (b) -- ($\be*(b)$) node[pos=0.6, left, xshift=2pt, yshift=5pt] {$\beta T(\vec{b})$};
-			\draw[vector, dashed, xred, opacity=0.25] ($\be*(b)$) -- ++($\al*(a)$) node[midway, above] {$\alpha T(\vec{a})$};
-			\draw[vector, dashed, xblue, opacity=0.25] ($\al*(a)$) -- ++($\be*(b)$) node[midway, right, xshift=-5pt, yshift=-5pt] {$\beta T(\vec{b})$};
-			\draw[vector, xpurple] (0,0) -- ($\al*(a)+\be*(b)$) node[pos=1.1] {$T(\vec{c})$};
-		\end{tikzpicture}
-	\end{center}
-	\caption{Two vectors $\color{xred}{\vec{a}}$ and $\color{xblue}{\vec{b}}$ are both scaled (by $\color{xred}{\alpha}$ and $\color{xblue}{\beta}$, respectively) and then added together to form the vector $\color{xdarkpurple}{\vec{c}}$. All the addition and scaling relations between the vectors are kept under the application of a linear transformation $T$.}
-	\label{fig:linear trans preservering linear structure}
-\end{figure}
-
-However, this is a rather abstract way of discussing linear transformations. Instead, let's first learn some of the more \enquote{graphical} properies of linear transformations in the plane, i.e. $T:\Rs[2]\to\Rs[2]$, and then see practical examples of such transformations before moving on to their more abstract (and powerful) mathematical description.
-
-\subsection{Linear Transformations in 2-Dimensions}
-(here comes an introductory text about the fundamental linear transformations in $\Rs[2]$, what are their properties and some more relevant information\dots)
-
-% consider making this in a dedicated environment, maybe something like "properties".
-Any linear transformation $T:\Rs[2]\to\Rs[2]$ always has the following four properties:
-\begin{descitemize}
-	\item[The origin is kept untouched] $T$ always maps $\vec{0}$ to $\vec{0}$.
-	\item[Lines remain lines] a set of points forming a line in $\Rs[2]$ will be mapped to another set of points forming a line (with possibly different direction, distance from origin and scale).
-	\item[Parallel directions remain parallel] if $\vec{a}$ and $\vec{b}$ point at the same direction, then $\vec{b}=\alpha\vec{a}$ for some $\alpha\in\Rs$. After the transformation the maps of $\vec{a}$ and $\vec{b}$ will stay parallels, and would even keep their scalar relation: $T(\vec{b})=\alpha T(\vec{a})$.
-	\item[All areas are scaled by the same factor] if two shapes $S_{1}$ and $S_{2}$ have areas $A_{1}$ and $A_{2}$, respectively, before the transformation is applied, their maps $\tilde{S}_{1}$ and $\tilde{S}_{2}$ would have the areas $kA_{1}$ and $kA_{2}$ (where $k\in\Rs$ depends on the transformation and can take both positive, zero and negative values).
-\end{descitemize}
-\autoref{fig:general linear transformation and invariants} shows these properties in action: there are two planes in the figure - before and after the application of a random linear transformation $T$ (up and down, respectively). The following can be seen:
-\begin{enumerate}
-	\item The origin stays at the same place - see how a small purple dot placed on the origin doesn't change its position after the application of $T$.
-	\item All lines (e.g. axes, grid lines, the two purple lines) are mapped to lines in the transformed plane.
-	\item Parallel directions remain parallel, e.g. grid lines aligned with one of the axes, and the two purple lines.
-	\item All areas are scaled by the same factor: notice for example how all unit squares formed by the grid lines (one is highlighted in orange) are mapped to identical parallelograms. You can also check to see that the blue rectangle is exactly twice as large than the orange square before and after the transformation.
-\end{enumerate}
-
-\begin{figure}
-	\begin{center}
-		\drawtrans{T}{0.8}{0.2}{-1.0}{0.7}{0}{15mm}
-	\end{center}
-	\caption{Some random linear transformation $T$ applied to $\Rs[2]$, with different shapes showing the four main properties discussed for linear transformations.}
-	\label{fig:general linear transformation and invariants}
-\end{figure}
-
-The example in \autoref{fig:general linear transformation and invariants} also shows what \textit{doesn't} get preserved under a linear transformation. To see this more clearly, \autoref{fig:orange unit square in R2}  \enquote{zooms-in} on the orange unit square: we label its vertices as $\color{xorange}{\pnt{O}}, \color{xorange}{\pnt{A}}, \color{xorange}{\pnt{B}}$ and $\color{xorange}{\pnt{C}}$ starting from the point at the origin and going anti-clockwise. The transformed vertices are then, respectively, $\color{xorange}{\pnt{O'}}, \color{xorange}{\pnt{A'}}, \color{xorange}{\pnt{B'}}$ and $\color{xorange}{\pnt{C}'}$.
-
-\begin{figure}
-	\begin{center}
-		\begin{tikzpicture}[node distance=4mm]
-			\tikzset{
-				label/.style={xorange, font=\Large},
-				rshape/.style={xorange, fill=xorange, opacity=1, fill opacity=0.25, line width=2pt},
-				sangle/.style={draw=xorange!75!black, ultra thick, dashed, angle radius=10mm, text=xorange!50!black},
-				measure/.style={|-|, xorange!25!black!50, very thick, dashed},
-			}
-
-			% Original unit square
-			\coordinate (O) at (0,0); \node[label, below left of=O] {$\mathbf{O}$};
-			\coordinate (A) at (2,0); \node[label, below right of=A] {$\mathbf{A}$};
-			\coordinate (B) at (2,2); \node[label, above right of=B] {$\mathbf{B}$};
-			\coordinate (C) at (0,2); \node[label, above left of=C] {$\mathbf{C}$};
-			\draw[rshape] (O) rectangle (B);
-			\draw[measure] ($(O)-(1,0)$) -- ($(C)-(1,0)$) node[midway, left] {$1$};
-			\draw[measure] ($(C)+(0,1)$) -- ($(B)+(0,1)$) node[midway, above] {$1$};
-			\pic[sangle, fill=xorange!90!black, fill opacity=0.5, solid, angle radius=5mm] {right angle=C--O--A};
-
-			% Transformed square
-			\pgftransformcm{0.8}{0.2}{-1.0}{0.7}{\pgfpoint{10cm}{0}}
-			\coordinate (O') at (0,0); \node[label, below of=O'] {$\mathbf{O'}$};
-			\coordinate (A') at (2,0); \node[label, right of=A'] {$\mathbf{A'}$};
-			\coordinate (B') at (2,2); \node[label, above of=B'] {$\mathbf{B'}$};
-			\coordinate (C') at (0,2); \node[label, left of=C'] {$\mathbf{C'}$};
-			\pgftransformreset
-			\draw[rshape] (O') -- (A') -- (B') -- (C') -- cycle;
-			\pic[sangle, pic text=$\alpha$] {angle=O'--C'--B'};
-			\pic[sangle, angle radius=7mm, angle eccentricity=0.5, pic text=$\beta$] {angle=A'--O'--C'};
-
-			% LT arrow
-			\draw[|->, ultra thick] ($(A)!0.5!(B) + (1.5,0)$) -- ++(3,0) node[midway, above] {$T$};
-		\end{tikzpicture}
-	\end{center}
-	\caption{Unit square in $\Rs[2]$ before and after the application of the random linear transformation $T$ from \autoref{fig:general linear transformation and invariants}.}
-	\label{fig:orange unit square in R2}
-\end{figure}
-
-In the original unit square the diagonals are equal: their lengths are $\textcolor{xorange}{\mathbf{OB}}=\textcolor{xorange}{\mathbf{AC}}=\sqrt{2}$. However, it's clear that $\textcolor{xorange}{\mathbf{O'B'}} < \textcolor{xorange}{\mathbf{A'C'}}$. In addition, all the angles in the original unit square are, of course, right angles, but the transformed square is a parallelogram ($\textcolor{xorange}{\mathbf{O'A'B'C'}}$) has two equal acute angles of value $\alpha$ and two equal obtuse angles of value $\beta$ (where $\beta=\pi-\alpha$).
-
-So we can see that at least two quantities aren't necessarily conserved by linear transformations: (1) \textbf{distances}, which unlike areas don't even all scale by the same amount, and (2) \textbf{angles} (more generally, \textbf{directions}).
-
-One last key observation before we move on: as can be seen in \autoref{fig:general linear transformation and invariants} and \autoref{fig:orange unit square in R2} linear transfornations in $\Rs[2]$ transform \textbf{squares} into \textbf{parallelograms}. These parallelograms can be scaled, \enquote{squeezed}, reflected and/or rotated compared to the original squares.
-
-There are several \enquote{basic} linear transformations in $\Rs[2]$: these transformations can be thought of as the building blocks of all possible linear transformations on a $2$-dimensional plane. We will see later how we can combine these basic transformations to createnew transformations, but first let's introduce these \enquote{basic} linear transformations.
-
-In the following introduction, each transformation is shown using a drawing of $\Rs[2]$ with several shapes on it: the two standard basis vectors $\ebx$ and $\eby$, a unit area between the two vectors (drawn in orange), a blue rectangle, two purple parallel lines, a somewhat random green shape\footnote{I shamelessly stole the shape from \url{https://tikz.org/examples/chapter-12-drawing-smooth-curves/} because it's perfect for this illustration.} and the grid lines (or rather, grid dots). When looking at these figures you should pay attention to how each shape is deformed, and especially what relationship are kept the same or are changed: for example, parallel lines remain parallel - but other angles between lines (including $\ang{90}$) are not kept. Also note the areas of the different shapes and how they change under the transformation.
-
-Let's begin:
-
-\begin{descitemize}
-	\item[The identity transformation] not doing anything to the plane is a transformation, even if a rather boring one:
-
-	\begin{center}
-		\drawtrans{I}{1}{0}{0}{1}{0}{7mm}
-	\end{center}
-
-	Indeed, the identity transformation has all of three key properties of linear transformations: the origin is perserved, parallel lines remain parallel after the transformation, and all areas are scaled by the same factor (namely $1$).
-
-	\item[Scaling] Scaling the plane can be done in either the $x$-diretion or the $y$-direction. Just as with vectors, the scaling factor can be any real number, positive or negative (where negative scaling factors flip the direction of the axis):
-
-	\begin{center}
-		\drawtrans{S_{x}}{2}{0}{0}{1}{0}{5mm}
-
-		\drawtrans{S_{y}}{1}{0}{0}{1.3}{0}{0mm}
-	\end{center}
-
-	\item[Rotation about the origin, anti-clockwise] text text text:
-	\begin{center}
-		\pgfmathsetmacro{\th}{35}
-		\pgfmathsetmacro{\C}{cos(\th)}
-		\pgfmathsetmacro{\S}{sin(\th)}
-		\drawtrans{R_{\theta}}{\C}{\S}{-\S}{\C}{0}{0}
-	\end{center}
-
-	\item[Reflection across a line through the origin] text text text:
-	\begin{center}
-		\drawtrans{\text{Ref}_{x}}{1}{0}{0}{-1}{0}{0}
-		\drawtrans{\text{Ref}_{y}}{-1}{0}{0}{1}{0}{0}
-	\end{center}
-
-	\item[Shear] text text text:
-	\begin{center}
-		\drawtrans{K_{x}}{1}{0}{0.2}{1}{0}{0}
-		\drawtrans{K_{y}}{1}{0.2}{0}{1}{0}{0}
-	\end{center}
-
-	\item[Projection on line through the origin] text text text:
-	\begin{center}
-		\drawtrans{P}{0.71}{0.70}{0.70}{0.71}{0}{0}
-	\end{center}
+\subsection{Motivation} % Why do we need LTs? An example problem: rotating and scaling in 3D computer graphics
+\subsection{Linear Transformations in 2-Dimensions} % The "basic" LTs in 2D, geometric properties, examples of non-linear transformations, compositions of LTs
+\subsection{Linear Transformations in 3-Dimensions} % Same but in 3D
+\subsection{The Formal Definition of Linear Transformations} % Formal def of LTs, proving the geometric properties in R2 and R3, proving that some of the examples shown previously are indeed LTs, proof of the linearity of compositions of LTs, general form of LTs in Rn
+\subsection{Representing Linear Transformations, Part 1} % Applying an LT on vector in components form
 
 
-\end{descitemize}
 
-% \subsection{Composition of Basic Linear Transformations}
-
-\subsection{Examples of Non-Linear Transformations in 2-Dimensions}
-% Now that we are visually familiar with linear transformations in $2$-dimensions, let's look at some examples of non-linear transformations in the plane. Each of the following examples will highlight how one of the properties of linear transformations can be \enquote{broken}.
-% \begin{descitemize}
-% 	\item[Preservation of origin] text.
-% 	\item[Lines are mapped to lines] text text text:
+% \begin{summary}{The Next Two Sections}{}
+% 	This section and the one immediately following it deal with a rather simple, yet very powerful type of functions between vector spaces: \newterm{linear transformations}.
+%
+% 	In this section we will:
+% 	\begin{enumerate}
+% 		\item see why are we interested in linear transformations,
+% 		\item what are their properties, and
+% 		\item how they can provide a powerful tool for many different applications.
+% 	\end{enumerate}
+%
+% 	In the next section we will explore how we can turn the caulculations of linear transformations into an extremely easy and straight-forward process using \newterm{matrices}.
+% \end{summary}
+%
+% \subsection{Introduction}
+% Text text text\dots
+%
+% \dots
+%
+% The main purely mathematical property of linear transformations is that they preserve the structure of vector spaces. This means that if we have three vectors $\vec{a},\ \vec{b}$ and $\vec{c}$ such that $\vec{c}=\alpha\vec{a}+\beta\vec{b}$, then for any linear transformation $T$,
+% \begin{equation}
+% 	T(\vec{c}) = \alpha T(\vec{a}) + \beta T(\vec{b}).
+% 	\label{eq:}
+% \end{equation}
+% (see \autoref{fig:linear trans preservering linear structure} for a visual example)
+%
+% \begin{figure}
 % 	\begin{center}
-% 		\pgftransformnonlinear{\bendinglines}
 % 		\begin{tikzpicture}
-% 			\begin{axis}[
-% 					width=10cm,
-% 					xyplane,
-% 					grid=major,
-% 					xmin=-5, xmax=5,
-% 					ymin=-5, ymax=5,
-% 				]
-% 			\end{axis}
+% 			\coordinate (a) at (1,0.5);
+% 			\coordinate (b) at (0,0.75);
+% 			\pgfmathsetmacro{\al}{2}
+% 			\pgfmathsetmacro{\be}{3}
+% 			\draw[vector, xred] (0,0) -- (a) node[midway, below] {$\vec{a}$};
+% 			\draw[vector, xblue] (0,0) -- (b) node[midway, left] {$\vec{b}$};
+% 			\draw[vector, xred, dashed] (a) -- ($\al*(a)$) node[pos=0.6, below] {$\alpha\vec{a}$};
+% 			\draw[vector, xblue, dashed] (b) -- ($\be*(b)$) node[pos=0.6, left] {$\beta\vec{b}$};
+% 			\draw[vector, dashed, xred, opacity=0.25] ($\be*(b)$) -- ++($\al*(a)$) node[midway, above left] {$\alpha\vec{a}$};
+% 			\draw[vector, dashed, xblue, opacity=0.25] ($\al*(a)$) -- ++($\be*(b)$) node[midway, right] {$\beta\vec{b}$};
+% 			\draw[vector, xpurple] (0,0) -- ($\al*(a)+\be*(b)$) node[pos=1.1] {$\vec{c}$};
+%
+% 			\draw[very thick, |->] (3.5,1.5) -- ++(2.5,0) node[midway, above] {$T$} node[midway, below] {(linear)};
+%
+% 			\pgfmathsetmacro{\th}{-45}
+% 			\pgftransformcm{0.8}{0.0}{0.6}{0.7}{\pgfpoint{75mm}{0}}
+% 			\coordinate (a) at (1,0.5);
+% 			\coordinate (b) at (0,0.75);
+% 			\pgfmathsetmacro{\al}{2}
+% 			\pgfmathsetmacro{\be}{3}
+% 			\draw[vector, xred] (0,0) -- (a) node[midway, below, yshift=-3pt] {$T(\vec{a})$};
+% 			\draw[vector, xblue] (0,0) -- (b) node[midway, left, yshift=3pt] {$T(\vec{b})$};
+% 			\draw[vector, xred, dashed] (a) -- ($\al*(a)$) node[pos=0.6, below, xshift=-2pt, yshift=-2pt] {$\alpha T(\vec{a})$};
+% 			\draw[vector, xblue, dashed] (b) -- ($\be*(b)$) node[pos=0.6, left, xshift=2pt, yshift=5pt] {$\beta T(\vec{b})$};
+% 			\draw[vector, dashed, xred, opacity=0.25] ($\be*(b)$) -- ++($\al*(a)$) node[midway, above] {$\alpha T(\vec{a})$};
+% 			\draw[vector, dashed, xblue, opacity=0.25] ($\al*(a)$) -- ++($\be*(b)$) node[midway, right, xshift=-5pt, yshift=-5pt] {$\beta T(\vec{b})$};
+% 			\draw[vector, xpurple] (0,0) -- ($\al*(a)+\be*(b)$) node[pos=1.1] {$T(\vec{c})$};
 % 		\end{tikzpicture}
+% 	\end{center}
+% 	\caption{Two vectors $\color{xred}{\vec{a}}$ and $\color{xblue}{\vec{b}}$ are both scaled (by $\color{xred}{\alpha}$ and $\color{xblue}{\beta}$, respectively) and then added together to form the vector $\color{xdarkpurple}{\vec{c}}$. All the addition and scaling relations between the vectors are kept under the application of a linear transformation $T$.}
+% 	\label{fig:linear trans preservering linear structure}
+% \end{figure}
+%
+% However, this is a rather abstract way of discussing linear transformations. Instead, let's first learn some of the more \enquote{graphical} properies of linear transformations in the plane, i.e. $T:\Rs[2]\to\Rs[2]$, and then see practical examples of such transformations before moving on to their more abstract (and powerful) mathematical description.
+%
+% \subsection{Linear Transformations in 2-Dimensions}
+% (here comes an introductory text about the fundamental linear transformations in $\Rs[2]$, what are their properties and some more relevant information\dots)
+%
+% % consider making this in a dedicated environment, maybe something like "properties".
+% Any linear transformation $T:\Rs[2]\to\Rs[2]$ always has the following four properties:
+% \begin{descitemize}
+% 	\item[The origin is kept untouched] $T$ always maps $\vec{0}$ to $\vec{0}$.
+% 	\item[Lines remain lines] a set of points forming a line in $\Rs[2]$ will be mapped to another set of points forming a line (with possibly different direction, distance from origin and scale).
+% 	\item[Parallel directions remain parallel] if $\vec{a}$ and $\vec{b}$ point at the same direction, then $\vec{b}=\alpha\vec{a}$ for some $\alpha\in\Rs$. After the transformation the maps of $\vec{a}$ and $\vec{b}$ will stay parallels, and would even keep their scalar relation: $T(\vec{b})=\alpha T(\vec{a})$.
+% 	\item[All areas are scaled by the same factor] if two shapes $S_{1}$ and $S_{2}$ have areas $A_{1}$ and $A_{2}$, respectively, before the transformation is applied, their maps $\tilde{S}_{1}$ and $\tilde{S}_{2}$ would have the areas $kA_{1}$ and $kA_{2}$ (where $k\in\Rs$ depends on the transformation and can take both positive, zero and negative values).
+% \end{descitemize}
+% \autoref{fig:general linear transformation and invariants} shows these properties in action: there are two planes in the figure - before and after the application of a random linear transformation $T$ (up and down, respectively). The following can be seen:
+% \begin{enumerate}
+% 	\item The origin stays at the same place - see how a small purple dot placed on the origin doesn't change its position after the application of $T$.
+% 	\item All lines (e.g. axes, grid lines, the two purple lines) are mapped to lines in the transformed plane.
+% 	\item Parallel directions remain parallel, e.g. grid lines aligned with one of the axes, and the two purple lines.
+% 	\item All areas are scaled by the same factor: notice for example how all unit squares formed by the grid lines (one is highlighted in orange) are mapped to identical parallelograms. You can also check to see that the blue rectangle is exactly twice as large than the orange square before and after the transformation.
+% \end{enumerate}
+%
+% \begin{figure}
+% 	\begin{center}
+% 		\drawtrans{T}{0.8}{0.2}{-1.0}{0.7}{0}{15mm}
+% 	\end{center}
+% 	\caption{Some random linear transformation $T$ applied to $\Rs[2]$, with different shapes showing the four main properties discussed for linear transformations.}
+% 	\label{fig:general linear transformation and invariants}
+% \end{figure}
+%
+% The example in \autoref{fig:general linear transformation and invariants} also shows what \textit{doesn't} get preserved under a linear transformation. To see this more clearly, \autoref{fig:orange unit square in R2}  \enquote{zooms-in} on the orange unit square: we label its vertices as $\color{xorange}{\pnt{O}}, \color{xorange}{\pnt{A}}, \color{xorange}{\pnt{B}}$ and $\color{xorange}{\pnt{C}}$ starting from the point at the origin and going anti-clockwise. The transformed vertices are then, respectively, $\color{xorange}{\pnt{O'}}, \color{xorange}{\pnt{A'}}, \color{xorange}{\pnt{B'}}$ and $\color{xorange}{\pnt{C}'}$.
+%
+% \begin{figure}
+% 	\begin{center}
+% 		\begin{tikzpicture}[node distance=4mm]
+% 			\tikzset{
+% 				label/.style={xorange, font=\Large},
+% 				rshape/.style={xorange, fill=xorange, opacity=1, fill opacity=0.25, line width=2pt},
+% 				sangle/.style={draw=xorange!75!black, ultra thick, dashed, angle radius=10mm, text=xorange!50!black},
+% 				measure/.style={|-|, xorange!25!black!50, very thick, dashed},
+% 			}
+%
+% 			% Original unit square
+% 			\coordinate (O) at (0,0); \node[label, below left of=O] {$\mathbf{O}$};
+% 			\coordinate (A) at (2,0); \node[label, below right of=A] {$\mathbf{A}$};
+% 			\coordinate (B) at (2,2); \node[label, above right of=B] {$\mathbf{B}$};
+% 			\coordinate (C) at (0,2); \node[label, above left of=C] {$\mathbf{C}$};
+% 			\draw[rshape] (O) rectangle (B);
+% 			\draw[measure] ($(O)-(1,0)$) -- ($(C)-(1,0)$) node[midway, left] {$1$};
+% 			\draw[measure] ($(C)+(0,1)$) -- ($(B)+(0,1)$) node[midway, above] {$1$};
+% 			\pic[sangle, fill=xorange!90!black, fill opacity=0.5, solid, angle radius=5mm] {right angle=C--O--A};
+%
+% 			% Transformed square
+% 			\pgftransformcm{0.8}{0.2}{-1.0}{0.7}{\pgfpoint{10cm}{0}}
+% 			\coordinate (O') at (0,0); \node[label, below of=O'] {$\mathbf{O'}$};
+% 			\coordinate (A') at (2,0); \node[label, right of=A'] {$\mathbf{A'}$};
+% 			\coordinate (B') at (2,2); \node[label, above of=B'] {$\mathbf{B'}$};
+% 			\coordinate (C') at (0,2); \node[label, left of=C'] {$\mathbf{C'}$};
+% 			\pgftransformreset
+% 			\draw[rshape] (O') -- (A') -- (B') -- (C') -- cycle;
+% 			\pic[sangle, pic text=$\alpha$] {angle=O'--C'--B'};
+% 			\pic[sangle, angle radius=7mm, angle eccentricity=0.5, pic text=$\beta$] {angle=A'--O'--C'};
+%
+% 			% LT arrow
+% 			\draw[|->, ultra thick] ($(A)!0.5!(B) + (1.5,0)$) -- ++(3,0) node[midway, above] {$T$};
+% 		\end{tikzpicture}
+% 	\end{center}
+% 	\caption{Unit square in $\Rs[2]$ before and after the application of the random linear transformation $T$ from \autoref{fig:general linear transformation and invariants}.}
+% 	\label{fig:orange unit square in R2}
+% \end{figure}
+%
+% In the original unit square the diagonals are equal: their lengths are $\textcolor{xorange}{\mathbf{OB}}=\textcolor{xorange}{\mathbf{AC}}=\sqrt{2}$. However, it's clear that $\textcolor{xorange}{\mathbf{O'B'}} < \textcolor{xorange}{\mathbf{A'C'}}$. In addition, all the angles in the original unit square are, of course, right angles, but the transformed square is a parallelogram ($\textcolor{xorange}{\mathbf{O'A'B'C'}}$) has two equal acute angles of value $\alpha$ and two equal obtuse angles of value $\beta$ (where $\beta=\pi-\alpha$).
+%
+% So we can see that at least two quantities aren't necessarily conserved by linear transformations: (1) \textbf{distances}, which unlike areas don't even all scale by the same amount, and (2) \textbf{angles} (more generally, \textbf{directions}).
+%
+% One last key observation before we move on: as can be seen in \autoref{fig:general linear transformation and invariants} and \autoref{fig:orange unit square in R2} linear transfornations in $\Rs[2]$ transform \textbf{squares} into \textbf{parallelograms}. These parallelograms can be scaled, \enquote{squeezed}, reflected and/or rotated compared to the original squares.
+%
+% There are several \enquote{basic} linear transformations in $\Rs[2]$: these transformations can be thought of as the building blocks of all possible linear transformations on a $2$-dimensional plane. We will see later how we can combine these basic transformations to createnew transformations, but first let's introduce these \enquote{basic} linear transformations.
+%
+% In the following introduction, each transformation is shown using a drawing of $\Rs[2]$ with several shapes on it: the two standard basis vectors $\ebx$ and $\eby$, a unit area between the two vectors (drawn in orange), a blue rectangle, two purple parallel lines, a somewhat random green shape\footnote{I shamelessly stole the shape from \url{https://tikz.org/examples/chapter-12-drawing-smooth-curves/} because it's perfect for this illustration.} and the grid lines (or rather, grid dots). When looking at these figures you should pay attention to how each shape is deformed, and especially what relationship are kept the same or are changed: for example, parallel lines remain parallel - but other angles between lines (including $\ang{90}$) are not kept. Also note the areas of the different shapes and how they change under the transformation.
+%
+% Let's begin:
+%
+% \begin{descitemize}
+% 	\item[The identity transformation] not doing anything to the plane is a transformation, even if a rather boring one:
+%
+% 	\begin{center}
+% 		\drawtrans{I}{1}{0}{0}{1}{0}{7mm}
 % 	\end{center}
 %
-% 	\item[Parallel lines stay parallel] text text text:
+% 	Indeed, the identity transformation has all of three key properties of linear transformations: the origin is perserved, parallel lines remain parallel after the transformation, and all areas are scaled by the same factor (namely $1$).
+%
+% 	\item[Scaling] Scaling the plane can be done in either the $x$-diretion or the $y$-direction. Just as with vectors, the scaling factor can be any real number, positive or negative (where negative scaling factors flip the direction of the axis):
+%
 % 	\begin{center}
-% 		\pgftransformnonlinear{\parallelbreak}
+% 		\drawtrans{S_{x}}{2}{0}{0}{1}{0}{5mm}
+%
+% 		\drawtrans{S_{y}}{1}{0}{0}{1.3}{0}{0mm}
+% 	\end{center}
+%
+% 	\item[Rotation about the origin, anti-clockwise] text text text:
+% 	\begin{center}
+% 		\pgfmathsetmacro{\th}{35}
+% 		\pgfmathsetmacro{\C}{cos(\th)}
+% 		\pgfmathsetmacro{\S}{sin(\th)}
+% 		\drawtrans{R_{\theta}}{\C}{\S}{-\S}{\C}{0}{0}
+% 	\end{center}
+%
+% 	\item[Reflection across a line through the origin] text text text:
+% 	\begin{center}
+% 		\drawtrans{\text{Ref}_{x}}{1}{0}{0}{-1}{0}{0}
+% 		\drawtrans{\text{Ref}_{y}}{-1}{0}{0}{1}{0}{0}
+% 	\end{center}
+%
+% 	\item[Shear] text text text:
+% 	\begin{center}
+% 		\drawtrans{K_{x}}{1}{0}{0.2}{1}{0}{0}
+% 		\drawtrans{K_{y}}{1}{0.2}{0}{1}{0}{0}
+% 	\end{center}
+%
+% 	\item[Projection on line through the origin] text text text:
+% 	\begin{center}
+% 		\drawtrans{P}{0.71}{0.70}{0.70}{0.71}{0}{0}
+% 	\end{center}
+%
+%
+% \end{descitemize}
+%
+% % \subsection{Composition of Basic Linear Transformations}
+%
+% \subsection{Examples of Non-Linear Transformations in 2-Dimensions}
+% % Now that we are visually familiar with linear transformations in $2$-dimensions, let's look at some examples of non-linear transformations in the plane. Each of the following examples will highlight how one of the properties of linear transformations can be \enquote{broken}.
+% % \begin{descitemize}
+% % 	\item[Preservation of origin] text.
+% % 	\item[Lines are mapped to lines] text text text:
+% % 	\begin{center}
+% % 		\pgftransformnonlinear{\bendinglines}
+% % 		\begin{tikzpicture}
+% % 			\begin{axis}[
+% % 					width=10cm,
+% % 					xyplane,
+% % 					grid=major,
+% % 					xmin=-5, xmax=5,
+% % 					ymin=-5, ymax=5,
+% % 				]
+% % 			\end{axis}
+% % 		\end{tikzpicture}
+% % 	\end{center}
+% %
+% % 	\item[Parallel lines stay parallel] text text text:
+% % 	\begin{center}
+% % 		\pgftransformnonlinear{\parallelbreak}
+% % 		\begin{tikzpicture}
+% % 			\begin{axis}[
+% % 					width=10cm,
+% % 					xyplane,
+% % 					grid=major,
+% % 					xmin=-5, xmax=5,
+% % 					ymin=-5, ymax=5,
+% % 				]
+% % 			\end{axis}
+% % 		\end{tikzpicture}
+% % 	\end{center}
+% % \end{descitemize}
+%
+% \subsection{3-Dimensional Linear Transformations}
+%
+% \subsection{Formal Definition}
+% The formal definition of linear transformations between any two vector spaces is the following:
+%
+% \begin{definition}{Linear Transformation}{linear_trans}
+% 	A transformation $T:\Rs[n]\to\Rs[m]$ is said to be \textit{linear} if for any two vectors $\vec{a},\vec{b}\in\Rs[n]$ and any scalar $\alpha\in\Rs$:
+% 	\begin{enumerate}
+% 		\item $T\left(\vec{a}+\vec{b}\right) = T(\vec{a})+T(\vec{b})$, and
+% 		\item $T\left(\alpha \vec{a}\right) = \alpha T(\vec{a})$.
+% 	\end{enumerate}
+%
+% 	We can combine the above two criteria using an additional scalar $\beta\in\Rs$: $T$ is linear if $$ T(\alpha\vec{a} + \beta\vec{b}) = \alpha T(\vec{a}) + \beta T(\vec{b}).$$
+% \end{definition}
+%
+% Just like with vectors, the first condition is called \textbf{additivity} and the second condition is called \textbf{homogeneity}. What these conditions say, in simple words, is that we can always scale vectors and add them together before we apply a linear transformation - and the result will be the same as first transforming each vector separately, and then scaling and/or add them together. So in practice we can choose what we want to calculate first (addition and scaling or the transformation) according to what is easier and/or more convinient to calculate.
+%
+% The formal definition of linear transformations can be used to prove the first three of the four basic geometric properties of linear transformations in 2- and 3-dimensions. In fact, this works for any $n$-dimensional \newterm{Euclidean space} $\Rs[n]$, so let's prove the more general form of these properties instead of limiting ourselves to 2- or 3-dimensions.
+%
+% \begin{proof}{Geometric Properties of Linear Transformations}{}
+% 	Let $T:\Rs[n]\to\Rs[n]$ be a linear transformation. Then:
+% 	\begin{descitemize}
+% 		\item[The origin is kept untouched] the origin in $\Rs[n]$ is represented by the $n$-dimensional zero vector, $\vec{0}$. We can write the zero vector as $0\vec{v}$, where $\vec{v}$ is any vector in $\Rs[n]$ (this is just scaling a vector by $0$, which gives the zero vector). When we apply $T$ to $0\vec{v}$ we get
+% 		\begin{equation*}
+% 			T(0\vec{v}) = 0T(\vec{v}) = \vec{0},
+% 		\end{equation*}
+% 		since $T(\vec{v})$ is a vector in $\Rs[n]$, so scaling it by $0$ gives $\vec{0}$.
+%
+% 		\item[Lines remain lines] A line in $\Rs[n]$ can be represented just like in 2- and 3-dimensions (see REF TO LINES IN PREVIOUS SECTION):
+% 		\begin{equation*}
+% 			\mathbf{L}(s) = \vec{x}_{0} + s\hat{d}.
+% 		\end{equation*}
+% 		Applying $T$ to $\mathbf{L}$ gives us
+% 		\begin{equation*}
+% 			T\left(\mathbf{L}(s)\right) = T\left(\vec{x}_{0} + s\hat{d}\right),
+% 		\end{equation*}
+% 		and by the linearity of $T$ we can separate the right side of the equality:
+% 		\begin{equation*}
+% 			T\left(\vec{x}_{0} + s\hat{d}\right) = T(\vec{x}_{0}) + sT(\hat{d}).
+% 		\end{equation*}
+% 		Since both $T(\vec{x}_{0})$ and $sT(\hat{d})$ are vectors in $\Rs[n]$, the result of adding them is also a vector in $\Rs[n]$:
+% 		\begin{equation*}
+% 			T(\vec{x}_{0}) + sT(\hat{d}) = \vec{a}+s\vec{b} = \mathbf{C}(s),
+% 		\end{equation*}
+% 		where $\mathbf{C}(s)$ is now a function of $s$ with a line structure (vector + variable times a direction) - proving that $T$ transforms lines into lines.
+%
+% 		\item[Parallel directions remain parallel] parallel lines have the same direction, i.e. if $\mathbf{L}_{1}(s)$ and $\mathbf{L}_{2}(s)$ are parallel, then they can be written as
+% 		\begin{align*}
+% 			\mathbf{L}_{1}(s) & = \vec{x}_{1} + s\hat{d}, \\
+% 			\mathbf{L}_{2}(s) & = \vec{x}_{2} + s\hat{d}.
+% 		\end{align*}
+% 		(here $\vec{x}_{1}$ and $\vec{x}_{2}$ might be different, but $\hat{d}$ - the direction of the lines - is the same for both)
+%
+% 		Applying the linear transformation $T$ on these lines gives
+% 		\begin{align*}
+% 			T\left(\mathbf{L}_{1}\right) & = T\left(\vec{x}_{1}+s\hat{d}\right) = T\left(\vec{x}_{1}\right) + sT\left(\hat{d}\right), \\
+% 			T\left(\mathbf{L}_{2}\right) & = T\left(\vec{x}_{2}+s\hat{d}\right) = T\left(\vec{x}_{2}\right) + sT\left(\hat{d}\right),
+% 		\end{align*}
+% 		and whatever the value of $T(\hat{d})$ is - it is the same direction for both transformed lines. We therefore get that $T$ transforms two parallel lines (i.e. with the same direction) to two parallel lines.
+% 	\end{descitemize}
+% \end{proof}
+%
+% Unfortunately, the last property is rather difficult to prove with the material covered so far, so this proof will have to wait until a later part of the book (REF?).
+%
+% Let's see how to use the formal definition of linear transformations to actually prove that a given transformation is indeed linear. We can start with the identity transformation since it's a very simple transformation.
+%
+% \begin{descitemize}
+% 	\item[Additivity] for any $\vec{a},\vec{b}\in\Rs[2]$, we have
+% 	\begin{equation}
+% 		I(\vec{a})=\vec{a},\ I(\vec{b})=\vec{b},
+% 		\label{eq:identity trans in R2 acting on two vectors}
+% 	\end{equation}
+% 	and also that
+% 	\begin{equation}
+% 		I\left(\vec{a}+\vec{b}\right)=\vec{a}+\vec{b}.
+% 		\label{eq:identity trans in R2 acting on addition of vectors}
+% 	\end{equation}
+% 	Therefore, if we first add the vectors $\vec{a}$ and $\vec{b}$ together and then apply $I$ on the result, we get
+%
+% 	\vspace{0.5em}
+% 	\begin{equation}
+% 		I\left(\vec{a}+\vec{b}\right)\ \tikzmarknode{Iadd}{=}\ \vec{a}+\vec{b}\ \tikzmarknode{Itrans}{=}\ I(\vec{a})+I(\vec{b}).
+% 		\label{eq:}
+% 	\end{equation}
+% 	\begin{tikzpicture}[remember picture]
+% 		\small
+%
+% 		\node[overlay, eqtxbox={xgreen}, yshift=10mm] (IaddTxt) at (pic cs:Iadd) {from \autoref{eq:identity trans in R2 acting on addition of vectors}};
+% 		\draw[overlay, eqtxboxarrow={xgreen}, shorten >=8pt] (IaddTxt.south) -- (pic cs:Iadd);
+%
+% 		\node[overlay, eqtxbox={xred}, yshift=-8mm] (ItransTxt) at (pic cs:Itrans) {from \autoref{eq:identity trans in R2 acting on two vectors}};
+% 		\draw[overlay, eqtxboxarrow={xred}, shorten >=2pt] (ItransTxt.north) -- (pic cs:Itrans);
+% 	\end{tikzpicture}
+%
+% 	\vspace{0.5em}
+% 	\item[Homogeneity] for any vector $\vec{a}\in\Rs[2]$ and scalar $\alpha\in\Rs$ we have
+% 	\begin{equation}
+% 		I\left(\alpha\vec{a}\right) = \alpha\vec{a},
+% 		\label{eq:}
+% 	\end{equation}
+% 	and together with \autoref{eq:identity trans in R2 acting on two vectors} (specifically its first equality) we get
+% 	\begin{equation}
+% 		I\left(\alpha\vec{a}\right) = \alpha\vec{a} = \alpha I(\vec{a}).
+% 		\label{eq:}
+% 	\end{equation}
+% \end{descitemize}
+% Fullfilling these two conditions proves that $I$ is indeed a linear transformation.
+%
+% Next, let's see that rotation (about the origin) is also a linear transformation, starting with the simple $\ang{90}$ anti-clockwise rotation. Recall that a 2-dimensional vector $\vec{a}=\GenericColVecXY{a}$ can be rotated by $\ang{90}$ anti-clockwise by exchanging its components and then adding a minus sign to the first component (REF TO TRICK):
+% \begin{equation*}
+% 	\GenericColVecXY{a} \xmapsto[\text{(anti-clockwise)}]{\ang{90}\ \text{rotation}} \colvec{-a_{y};a_{x}}.
+% \end{equation*}
+%
+% Using this fact we can easily show that a $\ang{90}$ rotation is a linear transformation:
+% \begin{descitemize}
+% 	\item[Additivity] we need two vectors, let's call them $$\vec{a}=\GenericColVecXY{a}\ \text{and}\ \vec{b}=\GenericColVecXY{b}.$$ Then, adding the vectors first and then rotating the result we get
+% 	\begin{equation*}
+% 		\RotDeg{90}{\vec{a}+\vec{b}} = \RotDeg{90}{\GenericColVecXY{a}+\GenericColVecXY{b}}
+% 		= \RotDeg{90}{\colvec{a_{x}+b_{x};a_{y}+b_{y}}}
+% 		= \colvec{-\left(a_{y}+b_{y}\right);a_{x}+b_{x}}.
+% 	\end{equation*}
+% 	And if we first rotate the vectors and then add the result we get
+% 	\begin{equation*}
+% 		\RotDeg{90}{\vec{a}} + \RotDeg{90}{\vec{b}} = \colvec{-a_{y};a_{x}}+\colvec{-b_{y};b_{x}} = \colvec{-(a_{y}+b_{y});a_{x}+b_{x}},
+% 	\end{equation*}
+% 	exactly the same as before.
+%
+% 	\item[Homogeneity] if we scale $\vec{a}$ by some scalar $\lambda\in\Rs$ first and then rotating the result we get
+% 	\begin{equation*}
+% 		\RotDeg{90}{\lambda\vec{a}} = \RotDeg{90}{\lambda\colvec{-a_{y};a_{x}}} = \RotDeg{90}{\GenericColVecXY{\lambda a}} = \colvec{-\lambda a_{y};\lambda a_{x}}.
+% 	\end{equation*}
+% 	And if we first rotate $\vec{a}$ and then scale it by $\lambda$ we get
+% 	\begin{equation*}
+% 		\lambda \RotDeg{90}{\vec{a}} = \lambda \colvec{-a_{y};a_{x}} = \colvec{-\lambda a_{y};\lambda a_{x}},
+% 	\end{equation*}
+% 	again - the same result as before.
+% \end{descitemize}
+% Together this means that rotating around the origin anti-clockwise by $\ang{90}$ is indeed a linear transformation.
+%
+% Moving on, let's show that a rotation around the origin by \textit{any} angle $\theta$ is a linear transformation. To start, we need to know how to transform a general 2-dimensional vector $\vec{a}=\GenericColVecXY{a}$, which we will find, of course, by using basic trigonometry (use \autoref{fig:rotation of a generic vector in R2} to follow these steps). First, we calculate the norm of $\vec{a}$ (which we'll call $\mathbf{a}$ for convenience):
+% \begin{equation}
+% 	\mathbf{a} = \norm{\vec{a}} = \sqrt{a_{x}^{2}+a_{y}^{2}}.
+% 	\label{eq:norm of a generic 2D vector a}
+% \end{equation}
+%
+% We can then express $\vec{a}$ in polar coordinates (REF), as it's a more natural way of dealing with angles (and thus - rotations):
+% \begin{align}
+% 	a_{x} & = \mathbf{a}\cos(\alpha), \\
+% 	a_{y} & = \mathbf{a}\sin(\alpha).
+% 	\label{eq:vector a in polar coords}
+% \end{align}
+%
+% Rotating the $\vec{a}$ by $\theta$ yields a new vector $\vec{b}$ which as the same norm as $\vec{a}$ (since rotating a vector doesn't change its norm), and an angle $\beta=\alpha+\theta$. Therefore in polar coordinates $\vec{b}$ is
+% \begin{align}
+% 	b_{x} & = \mathbf{a}\cos(\beta) = \mathbf{a}\cos(\alpha+\theta), \\
+% 	b_{y} & = \mathbf{a}\sin(\beta) = \mathbf{a}\sin(\alpha+\theta).
+% 	\label{eq:vector b in polar coords}
+% \end{align}
+%
+% Using the trigonomitric identities for the $cos$ and $sin$ of a sum of two angles (REF), we get:
+% \begin{align}
+% 	b_{x} & = \mathbf{a}\cos(\alpha+\theta) = \mathbf{a}\left[\cos(\alpha)\cos(\theta) - \sin(\alpha)\sin(\theta)\right], \\
+% 	b_{y} & = \mathbf{a}\sin(\alpha+\theta) = \mathbf{a}\left[\sin(\alpha)\cos(\theta) + \sin(\alpha)\cos(\theta)\right]. \\
+% 	\label{eq:vector b in polar coords}
+% \end{align}
+%
+% Now, we can express $\alpha$ in terms of the inverse trigonometric functions $\arccos$ and $\arcsin$:
+% \begin{equation}
+% 	\alpha = \arccos(\frac{a_{x}}{\mathbf{a}}) = \arcsin(\frac{a_{y}}{\mathbf{a}}).
+% 	\label{eq:angle alpha in terms of arccos and arcsin}
+% \end{equation}
+%
+% Substituting \autoref{eq:angle alpha in terms of arccos and arcsin} into \autoref{eq:vector b in polar coords} we get
+% \begin{equation}
+% 	\begin{aligned}
+% 		b_{x} & = \mathbf{a}\left[\cos(\alpha)\cos(\theta) - \sin(\alpha)\sin(\theta)\right]                                                                                                   \\
+% 		      & = \mathbf{a}\left[\cos\left(\arccos\left(\frac{a_{x}}{\mathbf{a}}\right)\right)\cos(\theta) - \sin\left(\arcsin\left(\frac{a_{y}}{\mathbf{a}}\right)\right)\sin(\theta)\right] \\
+% 		      & = \cancel{\mathbf{a}}\left[\frac{a_{x}}{\cancel{\mathbf{a}}}\cos(\theta) - \frac{a_{y}}{\cancel{\mathbf{a}}}\sin(\theta)\right]                                                \\
+% 		      & = a_{x}\cos(\theta)-a_{y}\sin(\theta),
+% 	\end{aligned}
+% 	\label{eq:}
+% \end{equation}
+% \begin{equation}
+% 	\begin{aligned}
+% 		b_{y} & = \mathbf{a}\left[\sin(\alpha)\cos(\theta) - \sin(\alpha)\cos(\theta)\right]                                                                                                   \\
+% 		      & = \mathbf{a}\left[\sin\left(\arcsin\left(\frac{a_{y}}{\mathbf{a}}\right)\right)\cos(\theta) - \sin\left(\arcsin\left(\frac{a_{y}}{\mathbf{a}}\right)\right)\cos(\theta)\right] \\
+% 		      & = \cancel{\mathbf{a}}\left[\frac{a_{y}}{\cancel{\mathbf{a}}}\cos(\theta) - \frac{a_{x}}{\cancel{\mathbf{a}}}\sin(\theta)\right]                                                \\
+% 		      & = a_{x}\sin(\theta)+a_{y}\cos(\theta).
+% 	\end{aligned}
+% 	\label{eq:components of rotated vector}
+% \end{equation}
+%
+% To sum up this result, here it is again - this time in \enquote{mapping} notation:
+% \begin{equation}
+% 	\GenericColVecXY{a} \xmapsto{\text{R}_{\theta}} \colvec{a_{x}\cos(\theta)-a_{y}\sin(\theta);a_{x}\sin(\theta)+a_{y}\cos(\theta)}.
+% 	\label{eq:vector rotation is direct column notation}
+% \end{equation}
+%
+% \begin{figure}
+% 	\begin{center}
 % 		\begin{tikzpicture}
+% 			\tikzset{sangle/.style={draw=#1, very thick, fill=#1!20, text=#1, angle radius=20mm}}
+% 			\colorlet{acol}{xpurple}
+% 			\colorlet{bcol}{xorange}
+% 			\colorlet{abcol}{xgreen}
 % 			\begin{axis}[
-% 					width=10cm,
 % 					xyplane,
+% 					width=8cm, height=8cm,
+% 					set layers=Bowpark,
+% 					xmin=-0.1, xmax=1.1,
+% 					ymin=-0.1, ymax=1.1,
 % 					grid=major,
-% 					xmin=-5, xmax=5,
-% 					ymin=-5, ymax=5,
+% 					major grid style={densely dotted, draw=black!10},
 % 				]
+% 				\pgfmathsetmacro{\ax}{0.75}
+% 				\pgfmathsetmacro{\ay}{0.3}
+% 				\pgfmathsetmacro{\anorm}{sqrt(\ax*\ax+\ay*\ay)}
+% 				\pgfmathsetmacro{\alph}{atan2(\ay, \ax)}
+% 				\pgfmathsetmacro{\th}{35}
+%
+% 				\coordinate (origin) at (0,0);
+% 				\coordinate (xaxs) at (\anorm,0);
+% 				\coordinate (a) at (\ax,\ay);
+% 				\coordinate (b) at ({\anorm*cos(\alph+\th)},{\anorm*sin(\alph+\th)});
+%
+% 				\pic[sangle={bcol}, dashed, angle radius=23mm, angle eccentricity=0.75, pic text=$\beta$, pic text options={shift={(1pt,10pt)}}]{angle=xaxs--origin--b};
+% 				\pic[sangle={acol}, angle eccentricity=0.75, pic text=$\alpha$]{angle=xaxs--origin--a};
+% 				\pic[sangle={abcol}, -stealth, densely dotted, fill=none, angle radius=30mm, angle eccentricity=1.1, pic text=$\theta$]{angle=a--origin--b};
+%
+% 				\draw[vector, acol] (origin) -- (a) node[pos=1, anchor=west] {$\vec{a}$};
+% 				\draw[vector, bcol, dashed] (origin) -- (b) node[pos=1, anchor=west] {$\vec{b}=\Rotation{\theta}{\vec{a}}$};
 % 			\end{axis}
 % 		\end{tikzpicture}
 % 	\end{center}
+% 	\caption{The vector $\textcolor{xpurple}{\vec{a}}$ is rotated by an angle $\textcolor{xgreen}{\theta}$ anti-clockwise about the origin, yielding the vector $\textcolor{xorange}{\vec{b}}$. $\textcolor{xpurple}{\vec{a}}$ is at $\textcolor{xpurple}{\theta}$ relative to the $x$-axis, which becomes $\textcolor{xorange}{\beta}=\textcolor{xpurple}{\alpha}+\textcolor{xgreen}{\theta}$ after the rotation.}
+% 	\label{fig:rotation of a generic vector in R2}
+% \end{figure}
+%
+% Now that we finally have a formula for rotating any vector in $\Rs[2]$ by any angle about the origin, we can finally prove that this is indeed a linear transformation.
+% \begin{descitemize}
+% 	\item[Additivity] let
+% 	\begin{equation*}
+% 		\vec{a}=\GenericColVecXY{a},\ \vec{b}=\GenericColVecXY{b}.
+% 	\end{equation*}
+% 	Adding the two together gives
+% 	\begin{equation*}
+% 		\vec{a}+\vec{b} = \colvec{a_{x}+b_{x};a_{y}+b_{y}},
+% 	\end{equation*}
+% 	and then rotating the result by $\theta$ yields
+% 	\begin{equation*}
+% 		\Rotation{\theta}{\vec{a}+\vec{b}} = \colvec{\left(a_{x}+b_{x}\right)\cos(\theta)-\left(a_{y}+b_{y}\right)\sin(\theta);\left(a_{x}+b_{x}\right)\sin(\theta)+\left(a_{y}+b_{y}\right)\cos(\theta)}.
+% 	\end{equation*}
+% 	On the other hand, rotating the two vectors first gives
+% 	\begin{align*}
+% 		\Rotation{\theta}{\vec{a}} & = \colvec{a_{x}\cos(\theta)-a_{y}\sin(\theta);a_{x}\sin(\theta)+a_{y}\cos(\theta)}, \\
+% 		\Rotation{\theta}{\vec{b}} & = \colvec{b_{x}\cos(\theta)-b_{y}\sin(\theta);b_{x}\sin(\theta)+b_{y}\cos(\theta)}.
+% 	\end{align*}
+% 	Finally, adding the two rotated vectors together we get
+% 	\begin{align*}
+% 		\Rotation{\theta}{\vec{a}} + \Rotation{\theta}{\vec{b}} & = \colvec{a_{x}\cos(\theta)-a_{y}\sin(\theta);a_{x}\sin(\theta)+a_{y}\cos(\theta)} + \colvec{b_{x}\cos(\theta)-b_{y}\sin(\theta);b_{x}\sin(\theta)+b_{y}\cos(\theta)}, \\
+% 		                                                        & = \colvec{\left(a_{x}+b_{x}\right)\cos(\theta)-\left(a_{y}+b_{y}\right)\sin(\theta);\left(a_{x}+b_{x}\right)\sin(\theta)+\left(a_{y}+b_{y}\right)\cos(\theta)}.
+% 	\end{align*}
+%
+% 	\item[Homogeneity] Scaling $\vec{a}$ by a scalar $s\in\Rs$ and then rotating it by $\theta$ gives
+% 	\begin{equation*}
+% 		\Rotation{\theta}{s\vec{a}} = \text{R}_{\theta}\GenericColVecXY{sa} = \colvec{s a_{x}\cos(\theta)-s a_{y}\sin(\theta);s a_{x}\sin(\theta)+s a_{y}\cos(\theta)}.
+% 	\end{equation*}
+% 	On the other hand, first rotating $\vec{a}$ and the scaling by $s$ gives
+% 	\begin{equation*}
+% 		s\Rotation{\theta}{\vec{a}} = s\colvec{a_{x}\cos(\theta)-a_{y}\sin(\theta);a_{x}\sin(\theta)+a_{y}\cos(\theta)} = \colvec{s a_{x}\cos(\theta)-s a_{y}\sin(\theta);s a_{x}\sin(\theta)+s a_{y}\cos(\theta)}.
+% 	\end{equation*}
 % \end{descitemize}
-
-\subsection{3-Dimensional Linear Transformations}
-
-\subsection{Formal Definition}
-The formal definition of linear transformations between any two vector spaces is the following:
-
-\begin{definition}{Linear Transformation}{linear_trans}
-	A transformation $T:\Rs[n]\to\Rs[m]$ is said to be \textit{linear} if for any two vectors $\vec{a},\vec{b}\in\Rs[n]$ and any scalar $\alpha\in\Rs$:
-	\begin{enumerate}
-		\item $T\left(\vec{a}+\vec{b}\right) = T(\vec{a})+T(\vec{b})$, and
-		\item $T\left(\alpha \vec{a}\right) = \alpha T(\vec{a})$.
-	\end{enumerate}
-
-	We can combine the above two criteria using an additional scalar $\beta\in\Rs$: $T$ is linear if $$ T(\alpha\vec{a} + \beta\vec{b}) = \alpha T(\vec{a}) + \beta T(\vec{b}).$$
-\end{definition}
-
-Just like with vectors, the first condition is called \textbf{additivity} and the second condition is called \textbf{homogeneity}. What these conditions say, in simple words, is that we can always scale vectors and add them together before we apply a linear transformation - and the result will be the same as first transforming each vector separately, and then scaling and/or add them together. So in practice we can choose what we want to calculate first (addition and scaling or the transformation) according to what is easier and/or more convinient to calculate.
-
-The formal definition of linear transformations can be used to prove the first three of the four basic geometric properties of linear transformations in 2- and 3-dimensions. In fact, this works for any $n$-dimensional \newterm{Euclidean space} $\Rs[n]$, so let's prove the more general form of these properties instead of limiting ourselves to 2- or 3-dimensions.
-
-\begin{proof}{Geometric Properties of Linear Transformations}{}
-	Let $T:\Rs[n]\to\Rs[n]$ be a linear transformation. Then:
-	\begin{descitemize}
-		\item[The origin is kept untouched] the origin in $\Rs[n]$ is represented by the $n$-dimensional zero vector, $\vec{0}$. We can write the zero vector as $0\vec{v}$, where $\vec{v}$ is any vector in $\Rs[n]$ (this is just scaling a vector by $0$, which gives the zero vector). When we apply $T$ to $0\vec{v}$ we get
-		\begin{equation*}
-			T(0\vec{v}) = 0T(\vec{v}) = \vec{0},
-		\end{equation*}
-		since $T(\vec{v})$ is a vector in $\Rs[n]$, so scaling it by $0$ gives $\vec{0}$.
-
-		\item[Lines remain lines] A line in $\Rs[n]$ can be represented just like in 2- and 3-dimensions (see REF TO LINES IN PREVIOUS SECTION):
-		\begin{equation*}
-			\mathbf{L}(s) = \vec{x}_{0} + s\hat{d}.
-		\end{equation*}
-		Applying $T$ to $\mathbf{L}$ gives us
-		\begin{equation*}
-			T\left(\mathbf{L}(s)\right) = T\left(\vec{x}_{0} + s\hat{d}\right),
-		\end{equation*}
-		and by the linearity of $T$ we can separate the right side of the equality:
-		\begin{equation*}
-			T\left(\vec{x}_{0} + s\hat{d}\right) = T(\vec{x}_{0}) + sT(\hat{d}).
-		\end{equation*}
-		Since both $T(\vec{x}_{0})$ and $sT(\hat{d})$ are vectors in $\Rs[n]$, the result of adding them is also a vector in $\Rs[n]$:
-		\begin{equation*}
-			T(\vec{x}_{0}) + sT(\hat{d}) = \vec{a}+s\vec{b} = \mathbf{C}(s),
-		\end{equation*}
-		where $\mathbf{C}(s)$ is now a function of $s$ with a line structure (vector + variable times a direction) - proving that $T$ transforms lines into lines.
-
-		\item[Parallel directions remain parallel] parallel lines have the same direction, i.e. if $\mathbf{L}_{1}(s)$ and $\mathbf{L}_{2}(s)$ are parallel, then they can be written as
-		\begin{align*}
-			\mathbf{L}_{1}(s) & = \vec{x}_{1} + s\hat{d}, \\
-			\mathbf{L}_{2}(s) & = \vec{x}_{2} + s\hat{d}.
-		\end{align*}
-		(here $\vec{x}_{1}$ and $\vec{x}_{2}$ might be different, but $\hat{d}$ - the direction of the lines - is the same for both)
-
-		Applying the linear transformation $T$ on these lines gives
-		\begin{align*}
-			T\left(\mathbf{L}_{1}\right) & = T\left(\vec{x}_{1}+s\hat{d}\right) = T\left(\vec{x}_{1}\right) + sT\left(\hat{d}\right), \\
-			T\left(\mathbf{L}_{2}\right) & = T\left(\vec{x}_{2}+s\hat{d}\right) = T\left(\vec{x}_{2}\right) + sT\left(\hat{d}\right),
-		\end{align*}
-		and whatever the value of $T(\hat{d})$ is - it is the same direction for both transformed lines. We therefore get that $T$ transforms two parallel lines (i.e. with the same direction) to two parallel lines.
-	\end{descitemize}
-\end{proof}
-
-Unfortunately, the last property is rather difficult to prove with the material covered so far, so this proof will have to wait until a later part of the book (REF?).
-
-Let's see how to use the formal definition of linear transformations to actually prove that a given transformation is indeed linear. We can start with the identity transformation since it's a very simple transformation.
-
-\begin{descitemize}
-	\item[Additivity] for any $\vec{a},\vec{b}\in\Rs[2]$, we have
-	\begin{equation}
-		I(\vec{a})=\vec{a},\ I(\vec{b})=\vec{b},
-		\label{eq:identity trans in R2 acting on two vectors}
-	\end{equation}
-	and also that
-	\begin{equation}
-		I\left(\vec{a}+\vec{b}\right)=\vec{a}+\vec{b}.
-		\label{eq:identity trans in R2 acting on addition of vectors}
-	\end{equation}
-	Therefore, if we first add the vectors $\vec{a}$ and $\vec{b}$ together and then apply $I$ on the result, we get
-
-	\vspace{0.5em}
-	\begin{equation}
-		I\left(\vec{a}+\vec{b}\right)\ \tikzmarknode{Iadd}{=}\ \vec{a}+\vec{b}\ \tikzmarknode{Itrans}{=}\ I(\vec{a})+I(\vec{b}).
-		\label{eq:}
-	\end{equation}
-	\begin{tikzpicture}[remember picture]
-		\small
-
-		\node[overlay, eqtxbox={xgreen}, yshift=10mm] (IaddTxt) at (pic cs:Iadd) {from \autoref{eq:identity trans in R2 acting on addition of vectors}};
-		\draw[overlay, eqtxboxarrow={xgreen}, shorten >=8pt] (IaddTxt.south) -- (pic cs:Iadd);
-
-		\node[overlay, eqtxbox={xred}, yshift=-8mm] (ItransTxt) at (pic cs:Itrans) {from \autoref{eq:identity trans in R2 acting on two vectors}};
-		\draw[overlay, eqtxboxarrow={xred}, shorten >=2pt] (ItransTxt.north) -- (pic cs:Itrans);
-	\end{tikzpicture}
-
-	\vspace{0.5em}
-	\item[Homogeneity] for any vector $\vec{a}\in\Rs[2]$ and scalar $\alpha\in\Rs$ we have
-	\begin{equation}
-		I\left(\alpha\vec{a}\right) = \alpha\vec{a},
-		\label{eq:}
-	\end{equation}
-	and together with \autoref{eq:identity trans in R2 acting on two vectors} (specifically its first equality) we get
-	\begin{equation}
-		I\left(\alpha\vec{a}\right) = \alpha\vec{a} = \alpha I(\vec{a}).
-		\label{eq:}
-	\end{equation}
-\end{descitemize}
-Fullfilling these two conditions proves that $I$ is indeed a linear transformation.
-
-Next, let's see that rotation (about the origin) is also a linear transformation, starting with the simple $\ang{90}$ anti-clockwise rotation. Recall that a 2-dimensional vector $\vec{a}=\GenericColVecXY{a}$ can be rotated by $\ang{90}$ anti-clockwise by exchanging its components and then adding a minus sign to the first component (REF TO TRICK):
-\begin{equation*}
-	\GenericColVecXY{a} \xmapsto[\text{(anti-clockwise)}]{\ang{90}\ \text{rotation}} \colvec{-a_{y};a_{x}}.
-\end{equation*}
-
-Using this fact we can easily show that a $\ang{90}$ rotation is a linear transformation:
-\begin{descitemize}
-	\item[Additivity] we need two vectors, let's call them $$\vec{a}=\GenericColVecXY{a}\ \text{and}\ \vec{b}=\GenericColVecXY{b}.$$ Then, adding the vectors first and then rotating the result we get
-	\begin{equation*}
-		\RotDeg{90}{\vec{a}+\vec{b}} = \RotDeg{90}{\GenericColVecXY{a}+\GenericColVecXY{b}}
-		= \RotDeg{90}{\colvec{a_{x}+b_{x};a_{y}+b_{y}}}
-		= \colvec{-\left(a_{y}+b_{y}\right);a_{x}+b_{x}}.
-	\end{equation*}
-	And if we first rotate the vectors and then add the result we get
-	\begin{equation*}
-		\RotDeg{90}{\vec{a}} + \RotDeg{90}{\vec{b}} = \colvec{-a_{y};a_{x}}+\colvec{-b_{y};b_{x}} = \colvec{-(a_{y}+b_{y});a_{x}+b_{x}},
-	\end{equation*}
-	exactly the same as before.
-
-	\item[Homogeneity] if we scale $\vec{a}$ by some scalar $\lambda\in\Rs$ first and then rotating the result we get
-	\begin{equation*}
-		\RotDeg{90}{\lambda\vec{a}} = \RotDeg{90}{\lambda\colvec{-a_{y};a_{x}}} = \RotDeg{90}{\GenericColVecXY{\lambda a}} = \colvec{-\lambda a_{y};\lambda a_{x}}.
-	\end{equation*}
-	And if we first rotate $\vec{a}$ and then scale it by $\lambda$ we get
-	\begin{equation*}
-		\lambda \RotDeg{90}{\vec{a}} = \lambda \colvec{-a_{y};a_{x}} = \colvec{-\lambda a_{y};\lambda a_{x}},
-	\end{equation*}
-	again - the same result as before.
-\end{descitemize}
-Together this means that rotating around the origin anti-clockwise by $\ang{90}$ is indeed a linear transformation.
-
-Moving on, let's show that a rotation around the origin by \textit{any} angle $\theta$ is a linear transformation. To start, we need to know how to transform a general 2-dimensional vector $\vec{a}=\GenericColVecXY{a}$, which we will find, of course, by using basic trigonometry (use \autoref{fig:rotation of a generic vector in R2} to follow these steps). First, we calculate the norm of $\vec{a}$ (which we'll call $\mathbf{a}$ for convenience):
-\begin{equation}
-	\mathbf{a} = \norm{\vec{a}} = \sqrt{a_{x}^{2}+a_{y}^{2}}.
-	\label{eq:norm of a generic 2D vector a}
-\end{equation}
-
-We can then express $\vec{a}$ in polar coordinates (REF), as it's a more natural way of dealing with angles (and thus - rotations):
-\begin{align}
-	a_{x} & = \mathbf{a}\cos(\alpha), \\
-	a_{y} & = \mathbf{a}\sin(\alpha).
-	\label{eq:vector a in polar coords}
-\end{align}
-
-Rotating the $\vec{a}$ by $\theta$ yields a new vector $\vec{b}$ which as the same norm as $\vec{a}$ (since rotating a vector doesn't change its norm), and an angle $\beta=\alpha+\theta$. Therefore in polar coordinates $\vec{b}$ is
-\begin{align}
-	b_{x} & = \mathbf{a}\cos(\beta) = \mathbf{a}\cos(\alpha+\theta), \\
-	b_{y} & = \mathbf{a}\sin(\beta) = \mathbf{a}\sin(\alpha+\theta).
-	\label{eq:vector b in polar coords}
-\end{align}
-
-Using the trigonomitric identities for the $cos$ and $sin$ of a sum of two angles (REF), we get:
-\begin{align}
-	b_{x} & = \mathbf{a}\cos(\alpha+\theta) = \mathbf{a}\left[\cos(\alpha)\cos(\theta) - \sin(\alpha)\sin(\theta)\right], \\
-	b_{y} & = \mathbf{a}\sin(\alpha+\theta) = \mathbf{a}\left[\sin(\alpha)\cos(\theta) + \sin(\alpha)\cos(\theta)\right]. \\
-	\label{eq:vector b in polar coords}
-\end{align}
-
-Now, we can express $\alpha$ in terms of the inverse trigonometric functions $\arccos$ and $\arcsin$:
-\begin{equation}
-	\alpha = \arccos(\frac{a_{x}}{\mathbf{a}}) = \arcsin(\frac{a_{y}}{\mathbf{a}}).
-	\label{eq:angle alpha in terms of arccos and arcsin}
-\end{equation}
-
-Substituting \autoref{eq:angle alpha in terms of arccos and arcsin} into \autoref{eq:vector b in polar coords} we get
-\begin{equation}
-	\begin{aligned}
-		b_{x} & = \mathbf{a}\left[\cos(\alpha)\cos(\theta) - \sin(\alpha)\sin(\theta)\right]                                                                                                   \\
-		      & = \mathbf{a}\left[\cos\left(\arccos\left(\frac{a_{x}}{\mathbf{a}}\right)\right)\cos(\theta) - \sin\left(\arcsin\left(\frac{a_{y}}{\mathbf{a}}\right)\right)\sin(\theta)\right] \\
-		      & = \cancel{\mathbf{a}}\left[\frac{a_{x}}{\cancel{\mathbf{a}}}\cos(\theta) - \frac{a_{y}}{\cancel{\mathbf{a}}}\sin(\theta)\right]                                                \\
-		      & = a_{x}\cos(\theta)-a_{y}\sin(\theta),
-	\end{aligned}
-	\label{eq:}
-\end{equation}
-\begin{equation}
-	\begin{aligned}
-		b_{y} & = \mathbf{a}\left[\sin(\alpha)\cos(\theta) - \sin(\alpha)\cos(\theta)\right]                                                                                                   \\
-		      & = \mathbf{a}\left[\sin\left(\arcsin\left(\frac{a_{y}}{\mathbf{a}}\right)\right)\cos(\theta) - \sin\left(\arcsin\left(\frac{a_{y}}{\mathbf{a}}\right)\right)\cos(\theta)\right] \\
-		      & = \cancel{\mathbf{a}}\left[\frac{a_{y}}{\cancel{\mathbf{a}}}\cos(\theta) - \frac{a_{x}}{\cancel{\mathbf{a}}}\sin(\theta)\right]                                                \\
-		      & = a_{x}\sin(\theta)+a_{y}\cos(\theta).
-	\end{aligned}
-	\label{eq:components of rotated vector}
-\end{equation}
-
-To sum up this result, here it is again - this time in \enquote{mapping} notation:
-\begin{equation}
-	\GenericColVecXY{a} \xmapsto{\text{R}_{\theta}} \colvec{a_{x}\cos(\theta)-a_{y}\sin(\theta);a_{x}\sin(\theta)+a_{y}\cos(\theta)}.
-	\label{eq:vector rotation is direct column notation}
-\end{equation}
-
-\begin{figure}
-	\begin{center}
-		\begin{tikzpicture}
-			\tikzset{sangle/.style={draw=#1, very thick, fill=#1!20, text=#1, angle radius=20mm}}
-			\colorlet{acol}{xpurple}
-			\colorlet{bcol}{xorange}
-			\colorlet{abcol}{xgreen}
-			\begin{axis}[
-					xyplane,
-					width=8cm, height=8cm,
-					set layers=Bowpark,
-					xmin=-0.1, xmax=1.1,
-					ymin=-0.1, ymax=1.1,
-					grid=major,
-					major grid style={densely dotted, draw=black!10},
-				]
-				\pgfmathsetmacro{\ax}{0.75}
-				\pgfmathsetmacro{\ay}{0.3}
-				\pgfmathsetmacro{\anorm}{sqrt(\ax*\ax+\ay*\ay)}
-				\pgfmathsetmacro{\alph}{atan2(\ay, \ax)}
-				\pgfmathsetmacro{\th}{35}
-
-				\coordinate (origin) at (0,0);
-				\coordinate (xaxs) at (\anorm,0);
-				\coordinate (a) at (\ax,\ay);
-				\coordinate (b) at ({\anorm*cos(\alph+\th)},{\anorm*sin(\alph+\th)});
-
-				\pic[sangle={bcol}, dashed, angle radius=23mm, angle eccentricity=0.75, pic text=$\beta$, pic text options={shift={(1pt,10pt)}}]{angle=xaxs--origin--b};
-				\pic[sangle={acol}, angle eccentricity=0.75, pic text=$\alpha$]{angle=xaxs--origin--a};
-				\pic[sangle={abcol}, -stealth, densely dotted, fill=none, angle radius=30mm, angle eccentricity=1.1, pic text=$\theta$]{angle=a--origin--b};
-
-				\draw[vector, acol] (origin) -- (a) node[pos=1, anchor=west] {$\vec{a}$};
-				\draw[vector, bcol, dashed] (origin) -- (b) node[pos=1, anchor=west] {$\vec{b}=\Rotation{\theta}{\vec{a}}$};
-			\end{axis}
-		\end{tikzpicture}
-	\end{center}
-	\caption{The vector $\textcolor{xpurple}{\vec{a}}$ is rotated by an angle $\textcolor{xgreen}{\theta}$ anti-clockwise about the origin, yielding the vector $\textcolor{xorange}{\vec{b}}$. $\textcolor{xpurple}{\vec{a}}$ is at $\textcolor{xpurple}{\theta}$ relative to the $x$-axis, which becomes $\textcolor{xorange}{\beta}=\textcolor{xpurple}{\alpha}+\textcolor{xgreen}{\theta}$ after the rotation.}
-	\label{fig:rotation of a generic vector in R2}
-\end{figure}
-
-Now that we finally have a formula for rotating any vector in $\Rs[2]$ by any angle about the origin, we can finally prove that this is indeed a linear transformation.
-\begin{descitemize}
-	\item[Additivity] let
-	\begin{equation*}
-		\vec{a}=\GenericColVecXY{a},\ \vec{b}=\GenericColVecXY{b}.
-	\end{equation*}
-	Adding the two together gives
-	\begin{equation*}
-		\vec{a}+\vec{b} = \colvec{a_{x}+b_{x};a_{y}+b_{y}},
-	\end{equation*}
-	and then rotating the result by $\theta$ yields
-	\begin{equation*}
-		\Rotation{\theta}{\vec{a}+\vec{b}} = \colvec{\left(a_{x}+b_{x}\right)\cos(\theta)-\left(a_{y}+b_{y}\right)\sin(\theta);\left(a_{x}+b_{x}\right)\sin(\theta)+\left(a_{y}+b_{y}\right)\cos(\theta)}.
-	\end{equation*}
-	On the other hand, rotating the two vectors first gives
-	\begin{align*}
-		\Rotation{\theta}{\vec{a}} & = \colvec{a_{x}\cos(\theta)-a_{y}\sin(\theta);a_{x}\sin(\theta)+a_{y}\cos(\theta)}, \\
-		\Rotation{\theta}{\vec{b}} & = \colvec{b_{x}\cos(\theta)-b_{y}\sin(\theta);b_{x}\sin(\theta)+b_{y}\cos(\theta)}.
-	\end{align*}
-	Finally, adding the two rotated vectors together we get
-	\begin{align*}
-		\Rotation{\theta}{\vec{a}} + \Rotation{\theta}{\vec{b}} & = \colvec{a_{x}\cos(\theta)-a_{y}\sin(\theta);a_{x}\sin(\theta)+a_{y}\cos(\theta)} + \colvec{b_{x}\cos(\theta)-b_{y}\sin(\theta);b_{x}\sin(\theta)+b_{y}\cos(\theta)}, \\
-		                                                        & = \colvec{\left(a_{x}+b_{x}\right)\cos(\theta)-\left(a_{y}+b_{y}\right)\sin(\theta);\left(a_{x}+b_{x}\right)\sin(\theta)+\left(a_{y}+b_{y}\right)\cos(\theta)}.
-	\end{align*}
-
-	\item[Homogeneity] Scaling $\vec{a}$ by a scalar $s\in\Rs$ and then rotating it by $\theta$ gives
-	\begin{equation*}
-		\Rotation{\theta}{s\vec{a}} = \text{R}_{\theta}\GenericColVecXY{sa} = \colvec{s a_{x}\cos(\theta)-s a_{y}\sin(\theta);s a_{x}\sin(\theta)+s a_{y}\cos(\theta)}.
-	\end{equation*}
-	On the other hand, first rotating $\vec{a}$ and the scaling by $s$ gives
-	\begin{equation*}
-		s\Rotation{\theta}{\vec{a}} = s\colvec{a_{x}\cos(\theta)-a_{y}\sin(\theta);a_{x}\sin(\theta)+a_{y}\cos(\theta)} = \colvec{s a_{x}\cos(\theta)-s a_{y}\sin(\theta);s a_{x}\sin(\theta)+s a_{y}\cos(\theta)}.
-	\end{equation*}
-\end{descitemize}
-
-\textcolor{xred}{\textbf{Hoorah!}} Rotation is indeed a linear transformation.
-
-% Todo:
-% (*) Improve visualization of 2D LTs and add text
-% (*) Add composition of LTs in a graphical way?
-% (*) Continue examples of LTs, some more specific and for some add general proofs (e.g. for rotations: start with π/2, then π, then general. Same for reflections, at least across the axes.)
-% (*) Write about how every LT can be made from compositions of scaling + rotation/reflection (+ rotation can be made from reflections, and reflections from scaling with negative scalars. So actually... scaling IS the basic LT? huh. Any way: think SVD).
-
-\subsection{Composing Linear Transformations}
-In the discussion about 2- and 3-dimensional linear transformations I mentioned several times compositions of such transformations and simply stated that they are also linear transformations. This topic, however, deserves some more exploration. First, in order for us to even be able to compose two transformations $T_{1}$ and $T_{2}$, the composition needs to be properly defined - specifically, if we want to compose $T_{2}$ onto $T_{1}$ (that is, first apply $T_{1}$ and then apply $T_{2}$ on the result), the \textbf{domain} of $T_{1}$ must be at least a superset of the \textbf{image} of $T_{1}$. Otherwise, we might get a situation where we apply $T_{1}$ to some vector and then not being able to apply $T_{2}$ on the result, since it isn't defined.
-
-TBW: (1) more text about the domain and image of functions in relation to composition, (2) discussion on how the order of composition matters (i.e. it isn't commutative).
-
-\dots
-
-\begin{proof}{The Composition of Linear Transformations is Linear}{}
-	Let $T_{1}:\Rs[n]\to\Rs[m]$ and $T_{2}:\Rs[m]\to\Rs[k]$ be linear transformations, let $\vec{v},\vec{w}\in\Rs[n]$ and let $\lambda\in\Rs$. Then:
-	\begin{descitemize}
-		\item[Additivity]
-		\begin{align*}
-			\comp{T_{1}}{T_{2}}\left(\vec{v}+\vec{w}\right) & = T_{2}\left(T_{1}\left(\vec{v}+\vec{w}\right)\right)                 \\
-			\tikzmark{first_linearity_of_T1}                & = T_{2}\left(T_{1}(\vec{v})+T_{1}(\vec{w})\right)                     \\
-			\tikzmark{first_linearity_of_T2}                & = T_{2}\left(T_{1}(\vec{v})\right) + T_{2}\left(T_{1}(\vec{w})\right) \\
-			                                                & = \comp{T_{1}}{T_{2}}(\vec{v}) + \comp{T_{1}}{T_{2}}(\vec{w}).
-		\end{align*}
-
-		\item[Homogeneity]
-		\begin{align*}
-			\comp{T_{1}}{T_{2}}\left(\lambda\vec{v}\right) & = T_{2}\left(T_{1}\left(\lambda\vec{v}\right)\right)   \\
-			\tikzmark{second_linearity_of_T1}              & = T_{2}\left(\lambda T_{1}\left(\vec{v}\right)\right)  \\
-			\tikzmark{second_linearity_of_T2}              & = \lambda\left(T_{2}\left(T_{1}(\vec{v})\right)\right) \\
-			                                               & = \lambda\comp{T_{1}}{T_{2}}(\vec{v}).
-		\end{align*}
-	\end{descitemize}
-
-	Therefore, $\comp{T_{1}}{T_{2}}$ is also a linear transformation.
-\end{proof}
-
-\subsection{General Forms of Linear Transformations}
-You might have noticed by now that all of the linear transformations we dealt with had a similar structure, involving adding and scaling the different components of the vectors they act on. Indeed, the most general form of a linear transform in $\Rs[2]$ is the following:
-\begin{equation}
-	T\GenericColVecXY{v} = \colvec{av_{x}+bv_{y};cv_{x}+dv_{y}},
-	\label{eq:general LT in R2}
-\end{equation}
-where $a,b,c$ and $d$ are some real numbers. In a sense, this is just two linear combinations of the vector's components: one for the $x$-component and one for the $y$-component. Performing any other operation would make the transformation no longer linear. To see this, let's first quickly prove that this general form is indeed a linear transformation:
-
-\begin{proof}{General 2-Dimensional Linear Transformation}{}
-	Let $T:\Rs[2]\to\Rs[2]$ a transformation defined for $\vec{v}=\GenericColVecXY{v}\in\Rs[2]$ as
-	\begin{equation*}
-		T\GenericColVecXY{v} = \colvec{av_{x}+bv_{y};cv_{x}+dv_{y}},
-	\end{equation*}
-	with $a,b,c,d\in\Rs$. As usual, we will prove that $T$ confirms to the two criteria of linear transformations.
-
-	\begin{descitemize}
-		\item[Additivity] Let $\vec{v}=\GenericColVecXY{v}$ and $\vec{w}=\GenericColVecXY{w}$. Then first adding the two vectors together and then applying $T$ we get
-		\begin{equation*}
-			T\left(\vec{v}+\vec{w}\right) = T\colvec{v_{x}+w_{x};v_{y}+w_{y}} = \colvec{a(v_{x}+w_{x})+b(v_{y}+w_{y});c(v_{x}+w_{x})+d(v_{y}+w_{y})}.
-		\end{equation*}
-		And on the other hand, transforming each vector separately first and then adding the results, we get
-		\begin{align*}
-			T(\vec{v}) + T(\vec{w}) & = \colvec{av_{x}+bv_{y};cv_{x}+dv_{y}} + \colvec{aw_{x}+bw_{y};cw_{x}+dw_{y}} \\
-			                        & = \colvec{av_{x}+bv_{y}+aw_{x}+bw_{y};cv_{x}+dv_{y}+cw_{x}+dw_{y}}            \\
-			                        & =\colvec{a(v_{x}+w_{x})+b(v_{y}+w_{y});c(v_{x}+w_{x})+d(v_{y}+w_{y})}.
-		\end{align*}
-
-		\item[Homogeneity] Let $\vec{v}=\GenericColVecXY{v}$ and $\lambda\in\Rs$. Then scaling $\vec{v}$ by $\lambda$ and then applying $T$ gives us
-		\begin{equation*}
-			T\left(\lambda\vec{v}\right) = T\GenericColVecXY{\lambda v} = \colvec{a\lambda v_{x}+b\lambda v_{y};c\lambda v_{x}+d\lambda v_{y}} = \lambda\colvec{av_{x}+bv_{y};cv_{x}+dv_{y}}.
-		\end{equation*}
-		And applying $T$ to $\vec{v}$ first and then scaling it by $\lambda$ gives
-		\begin{equation*}
-			\lambda T(\vec{v}) = \lambda T\GenericColVecXY{v} = \lambda\colvec{av_{x}+bv_{y};cv_{x}+dv_{y}}.
-		\end{equation*}
-
-		Therefore, $T$ is a linear transformation.
-	\end{descitemize}
-\end{proof}
-
-% TODO: write examples of how changing T causes it to be non-linear (e.g. adding a translation, square, ..., any other operation).
-
-\subsection{Calculating Linear Transformations, Part 1}
-Linear transformations have a very nice property which makes applying them on different vectors an extremely efficient process. Consider the linear transformation $T:\Rs[2]\to\Rs[2]$ which is a composition of scaling by a factor of $2$ in the $y$-diretion followed by a rotation of $\ang{90}$ anti-clockwise around the origin. Now let's say that we wish to calculate how $T$ transforms the vector
-$$\vec{a}=\colvec{3;2}.$$
-
-In principle, we could simply apply the operations one after the other on $\vec{a}$:
-\begin{equation}
-	\vec{a} = \colvec{3;2} \xmapsto{\text{$\times 2$ in $y$}} \colvec{3;4} \xmapsto{\text{$\ang{90}$ rotation}} \colvec{-4;3} = T(\vec{a}).
-	\label{eq:simple_LT_example_single_2d_vec}
-\end{equation}
-
-\begin{figure}[h]
-	\begin{center}
-		\begin{tikzpicture}
-			\begin{axis}[
-					width=110mm,
-					xyplane,
-					xmin=-5, xmax=5,
-					ymin=-0.5, ymax=4,
-					major grid style={black!10},
-				]
-				\tikzset{transarrow/.style={darkgray!75, stealth-|, thick, dashed}}
-				\coordinate (o) at (0,0);
-				\draw[vector, xblue] (o) -- (3,2) node [pos=1.1] (albl) {$\vec{a}$};
-				\draw[vector, xblue, dashed, opacity=0.75] (o) -- (3,4) node (atildelbl) [pos=1.1] {$\tilde{\vec{a}}$};
-				\draw[vector, xblue] (o) -- (-4,3) node [pos=1.1] (Talbl) {$T(\vec{a})$};
-				\draw[
-					transarrow, postaction={
-							decorate, decoration={raise=-2ex, text along path, text align={left indent=50mm}, text color=darkgray, text={|\large\bfseries|rotation}}
-						},
-				] (Talbl) to [bend left=45] (atildelbl);
-				\draw[transarrow] (atildelbl) -- (albl) node[darkgray, midway, right, font=\bfseries\large] {$\mathbf{\times 2}$};
-			\end{axis}
-		\end{tikzpicture}
-	\end{center}
-	\caption{The transformation $T$ applied to $\vec{a}$: first the vector is scaled by $2$ in the $y$-direction, and then rotated by $\ang{90}$ anti-clockwise.}
-	\label{fig:simple_LT_example_single_2d_vec}
-\end{figure}
-
-Now, what happens if we wish to calculate a more complicated linear transformation, which is both composed out of many more basic transformations - and also acts on higher-dimensional vectors? Performing each transformation step might not be so straight-forward, and is definitely not an efficient process. In fact, even if we're dealing with a simple example just like the one we just saw, we would still need to apply it every time we want to calculate how a new vector is transformed.
-
-It turns out that thanks to the simplicity of linear transformations \footnote{more correctly: to the strict rules they enforce} we only need to perform a few simple calculations per transformation to practically get any possible application of it on any vector!
-
-To see how this is the case, let's go back to our simple $2$-dimensional example. First, recall that we can express any vector in terms of the standard basis vectors (REF), which in this case gives us (note the color-coding)
-\begin{equation}
-	\vec{a} = \clrcolvecxy{3}{2} = \LCa{3}\overset{\substack{\ebx \\ \downarrow}}{\colvec{1;0}} + \LCb{2}\overset{\substack{\eby \\ \downarrow}}{\colvec{0;1}}.
-	\label{eq:vec a representation in the standard basis}
-\end{equation}
-
-We can then apply the defining properties of linear transformations (REF) on $\vec{a}$:
-\begin{equation}
-	\begin{aligned}
-		T\clrcolvecxy{3}{2} & = T\left(\LCa{3}\cdot\colvec{1;0}+\LCb{2}\cdot\colvec{0;1}\right)                   \\
-		                    & = T\left(\LCa{3}\cdot\colvec{1;0}\right) + T\left(\LCb{2}\cdot\colvec{0;1}\right)   \\
-		                    & = \LCa{3}\cdot T\left(\colvec{1;0}\right) + \LCb{2}\cdot T\left(\colvec{0;1}\right) \\
-		                    & = \LCa{3}\cdot T\left(\ebx\right) + \LCb{2}\cdot T\left(\eby\right).
-	\end{aligned}
-	\label{eq:T applied to a in std basis representation}
-\end{equation}
-
-Now, applying $T$ to the two standard basis vectors $\ebx$ and $\eby$ we get
-\begin{equation}
-	\begin{aligned}
-		\ebx & = \colvec{1;0} \xmapsto[\text{$\times 2$ in $y$}]{} \colvec{1;0} \xmapsto[\text{$\ang{90}$ rotation}]{} \colvec{0;1} = T(\ebx)                                    \\
-		\eby & = \colvec{0;1} \xmapsto{\textcolor{white}{\text{$\times 2$ in $y$}}} \colvec{0;2} \xmapsto{\textcolor{white}{\text{$\ang{90}$ rotation}}} \colvec{-2;0} = T(\eby)
-	\end{aligned}
-	\label{eq:simple LT example transformed basis vectors}
-\end{equation}
-
-And when we use these transformed basis vectors in the linear combination we finally get
-\begin{equation}
-	\begin{aligned}
-		\LCa{3}T\left(\ebx\right) + \LCb{2}T\left(\eby\right) & = \LCa{3}\colvec{0;1} +\LCb{2}\colvec{-2;0} \\
-		                                                      & = \colvec{0;3} + \colvec{-4;0}              \\
-		                                                      & = \colvec{-4;3},
-	\end{aligned}
-	\label{eq:}
-\end{equation}
-which is exactly what we got when we calculated $T$'s effect directly on $\vec{a}$ (cf. \autoref{eq:simple_LT_example_single_2d_vec}).
-
-Notice exactly what happened: in the standard basis representation, $\vec{a}$ had the coefficients $\LCa{3}$ and $\LCb{2}$ for $\ebx$ and $\eby$, respectively. When applying $T$ to $\vec{a}$ these two coefficients remained, but the basis changed: instead of $\left\{\ebx,\eby\right\}$, the two basis vectors became $\left\{T(\ebx),T(\eby)\right\}$.
-
-Of course, this is not unique to $\vec{a}$. For example, let's look at another vector, $$\vec{b}=\clrcolvecxy{2}{-4}.$$ Its coefficients in the standard basis representation are $\LCa{2}$ and $\LCb{-4}$, respectively. So we expect $T(\vec{b})$ to be
-\begin{equation}
-	\begin{aligned}
-		T(\vec{b}) & = \LCa{2}T(\ebx) - \LCb{4}T(\eby)            \\
-		           & = \LCa{2}\colvec{0;1} - \LCb{4}\colvec{-2;0} \\
-		           & = \colvec{0;2} + \colvec{8;0}                \\
-		           & = \colvec{8;2}.
-	\end{aligned}
-	\label{eq:second_simple_LT_example_single_2d_vec}
-\end{equation}
-
-If we now calculate $T(\vec{b})$ directly, we get the following:
-\begin{equation}
-	\vec{b} = \colvec{2;-4} \xmapsto{\text{$\times 2$ in $y$}} \colvec{2;-8} \xmapsto{\text{$\ang{90}$ rotation}} \colvec{8;2} = T(\vec{b}).
-	\label{eq:simple_LT_example_single_2d_vec}
-\end{equation}
-
-What this insight shows us is that given a linear transformation, we only need to know how it transforms the respective standard basis vectors in order to calculate how it transform any vector in its domain. The transformed version of the vector would simply be the linear combination of these transformed basis vectors, with the coefficients given by the vector's presentation in the standard basis. It really can't get any simpler than that!
-
-To make this a bit more formal, let's look at the most generic case: say $T:\Rs[n]\to\Rs[n]$ is a linear transformation \footnote{we'll deal with the more general case of $T:\Rs[n]\to\Rs[m]$ where $n\neq m$ in the next section.}. Then applying $T$ to a vector $\vec{v}\in\Rs[n]$ in its standard basis representation, $$\vec{v}=\clrgenericvec{v}{n},$$ we get
-\begin{equation}
-	\begin{aligned}
-		% If and when the \ebcolxyz is re-written to be... nicer (i.e. with cases), this should be updated accordingly.
-		T(\vec{v}) & = T\left( \LCa{v_{1}}\ebcolxyz{1} + \LCb{v_{2}}\ebcolxyz{2} + \dots + \LCe{v_{n}}\ebcol{xorange!25}{n} \right) \\
-		           & = \LCa{v_{1}}T(\ebcolxyz{1}) + \LCb{v_{2}}T(\ebcolxyz{2}) + \dots + \LCe{v_{n}}T(\ebcol{xorange!25}{n}).
-	\end{aligned}
-	\label{eq:}
-\end{equation}
-
-This is an incredibly powerful insight which allows us to save a lot of calculations - and which we will use in the next section to make the calculations of linear transformations \textit{even more} concise and simple, using the power of\dots % this was the previous joke: \footnote{\textbf{spoiler}: \rotatebox{180}{matrices!}\ \dots\ although the section heading is right here.}.
+%
+% \textcolor{xred}{\textbf{Hoorah!}} Rotation is indeed a linear transformation.
+%
+% % Todo:
+% % (*) Improve visualization of 2D LTs and add text
+% % (*) Add composition of LTs in a graphical way?
+% % (*) Continue examples of LTs, some more specific and for some add general proofs (e.g. for rotations: start with π/2, then π, then general. Same for reflections, at least across the axes.)
+% % (*) Write about how every LT can be made from compositions of scaling + rotation/reflection (+ rotation can be made from reflections, and reflections from scaling with negative scalars. So actually... scaling IS the basic LT? huh. Any way: think SVD).
+%
+% \subsection{Composing Linear Transformations}
+% In the discussion about 2- and 3-dimensional linear transformations I mentioned several times compositions of such transformations and simply stated that they are also linear transformations. This topic, however, deserves some more exploration. First, in order for us to even be able to compose two transformations $T_{1}$ and $T_{2}$, the composition needs to be properly defined - specifically, if we want to compose $T_{2}$ onto $T_{1}$ (that is, first apply $T_{1}$ and then apply $T_{2}$ on the result), the \textbf{domain} of $T_{1}$ must be at least a superset of the \textbf{image} of $T_{1}$. Otherwise, we might get a situation where we apply $T_{1}$ to some vector and then not being able to apply $T_{2}$ on the result, since it isn't defined.
+%
+% TBW: (1) more text about the domain and image of functions in relation to composition, (2) discussion on how the order of composition matters (i.e. it isn't commutative).
+%
+% \dots
+%
+% \begin{proof}{The Composition of Linear Transformations is Linear}{}
+% 	Let $T_{1}:\Rs[n]\to\Rs[m]$ and $T_{2}:\Rs[m]\to\Rs[k]$ be linear transformations, let $\vec{v},\vec{w}\in\Rs[n]$ and let $\lambda\in\Rs$. Then:
+% 	\begin{descitemize}
+% 		\item[Additivity]
+% 		\begin{align*}
+% 			\comp{T_{1}}{T_{2}}\left(\vec{v}+\vec{w}\right) & = T_{2}\left(T_{1}\left(\vec{v}+\vec{w}\right)\right)                 \\
+% 			\tikzmark{first_linearity_of_T1}                & = T_{2}\left(T_{1}(\vec{v})+T_{1}(\vec{w})\right)                     \\
+% 			\tikzmark{first_linearity_of_T2}                & = T_{2}\left(T_{1}(\vec{v})\right) + T_{2}\left(T_{1}(\vec{w})\right) \\
+% 			                                                & = \comp{T_{1}}{T_{2}}(\vec{v}) + \comp{T_{1}}{T_{2}}(\vec{w}).
+% 		\end{align*}
+%
+% 		\item[Homogeneity]
+% 		\begin{align*}
+% 			\comp{T_{1}}{T_{2}}\left(\lambda\vec{v}\right) & = T_{2}\left(T_{1}\left(\lambda\vec{v}\right)\right)   \\
+% 			\tikzmark{second_linearity_of_T1}              & = T_{2}\left(\lambda T_{1}\left(\vec{v}\right)\right)  \\
+% 			\tikzmark{second_linearity_of_T2}              & = \lambda\left(T_{2}\left(T_{1}(\vec{v})\right)\right) \\
+% 			                                               & = \lambda\comp{T_{1}}{T_{2}}(\vec{v}).
+% 		\end{align*}
+% 	\end{descitemize}
+%
+% 	Therefore, $\comp{T_{1}}{T_{2}}$ is also a linear transformation.
+% \end{proof}
+%
+% \subsection{General Forms of Linear Transformations}
+% You might have noticed by now that all of the linear transformations we dealt with had a similar structure, involving adding and scaling the different components of the vectors they act on. Indeed, the most general form of a linear transform in $\Rs[2]$ is the following:
+% \begin{equation}
+% 	T\GenericColVecXY{v} = \colvec{av_{x}+bv_{y};cv_{x}+dv_{y}},
+% 	\label{eq:general LT in R2}
+% \end{equation}
+% where $a,b,c$ and $d$ are some real numbers. In a sense, this is just two linear combinations of the vector's components: one for the $x$-component and one for the $y$-component. Performing any other operation would make the transformation no longer linear. To see this, let's first quickly prove that this general form is indeed a linear transformation:
+%
+% \begin{proof}{General 2-Dimensional Linear Transformation}{}
+% 	Let $T:\Rs[2]\to\Rs[2]$ a transformation defined for $\vec{v}=\GenericColVecXY{v}\in\Rs[2]$ as
+% 	\begin{equation*}
+% 		T\GenericColVecXY{v} = \colvec{av_{x}+bv_{y};cv_{x}+dv_{y}},
+% 	\end{equation*}
+% 	with $a,b,c,d\in\Rs$. As usual, we will prove that $T$ confirms to the two criteria of linear transformations.
+%
+% 	\begin{descitemize}
+% 		\item[Additivity] Let $\vec{v}=\GenericColVecXY{v}$ and $\vec{w}=\GenericColVecXY{w}$. Then first adding the two vectors together and then applying $T$ we get
+% 		\begin{equation*}
+% 			T\left(\vec{v}+\vec{w}\right) = T\colvec{v_{x}+w_{x};v_{y}+w_{y}} = \colvec{a(v_{x}+w_{x})+b(v_{y}+w_{y});c(v_{x}+w_{x})+d(v_{y}+w_{y})}.
+% 		\end{equation*}
+% 		And on the other hand, transforming each vector separately first and then adding the results, we get
+% 		\begin{align*}
+% 			T(\vec{v}) + T(\vec{w}) & = \colvec{av_{x}+bv_{y};cv_{x}+dv_{y}} + \colvec{aw_{x}+bw_{y};cw_{x}+dw_{y}} \\
+% 			                        & = \colvec{av_{x}+bv_{y}+aw_{x}+bw_{y};cv_{x}+dv_{y}+cw_{x}+dw_{y}}            \\
+% 			                        & =\colvec{a(v_{x}+w_{x})+b(v_{y}+w_{y});c(v_{x}+w_{x})+d(v_{y}+w_{y})}.
+% 		\end{align*}
+%
+% 		\item[Homogeneity] Let $\vec{v}=\GenericColVecXY{v}$ and $\lambda\in\Rs$. Then scaling $\vec{v}$ by $\lambda$ and then applying $T$ gives us
+% 		\begin{equation*}
+% 			T\left(\lambda\vec{v}\right) = T\GenericColVecXY{\lambda v} = \colvec{a\lambda v_{x}+b\lambda v_{y};c\lambda v_{x}+d\lambda v_{y}} = \lambda\colvec{av_{x}+bv_{y};cv_{x}+dv_{y}}.
+% 		\end{equation*}
+% 		And applying $T$ to $\vec{v}$ first and then scaling it by $\lambda$ gives
+% 		\begin{equation*}
+% 			\lambda T(\vec{v}) = \lambda T\GenericColVecXY{v} = \lambda\colvec{av_{x}+bv_{y};cv_{x}+dv_{y}}.
+% 		\end{equation*}
+%
+% 		Therefore, $T$ is a linear transformation.
+% 	\end{descitemize}
+% \end{proof}
+%
+% % TODO: write examples of how changing T causes it to be non-linear (e.g. adding a translation, square, ..., any other operation).
+%
+% \subsection{Calculating Linear Transformations, Part 1}
+% Linear transformations have a very nice property which makes applying them on different vectors an extremely efficient process. Consider the linear transformation $T:\Rs[2]\to\Rs[2]$ which is a composition of scaling by a factor of $2$ in the $y$-diretion followed by a rotation of $\ang{90}$ anti-clockwise around the origin. Now let's say that we wish to calculate how $T$ transforms the vector
+% $$\vec{a}=\colvec{3;2}.$$
+%
+% In principle, we could simply apply the operations one after the other on $\vec{a}$:
+% \begin{equation}
+% 	\vec{a} = \colvec{3;2} \xmapsto{\text{$\times 2$ in $y$}} \colvec{3;4} \xmapsto{\text{$\ang{90}$ rotation}} \colvec{-4;3} = T(\vec{a}).
+% 	\label{eq:simple_LT_example_single_2d_vec}
+% \end{equation}
+%
+% \begin{figure}[h]
+% 	\begin{center}
+% 		\begin{tikzpicture}
+% 			\begin{axis}[
+% 					width=110mm,
+% 					xyplane,
+% 					xmin=-5, xmax=5,
+% 					ymin=-0.5, ymax=4,
+% 					major grid style={black!10},
+% 				]
+% 				\tikzset{transarrow/.style={darkgray!75, stealth-|, thick, dashed}}
+% 				\coordinate (o) at (0,0);
+% 				\draw[vector, xblue] (o) -- (3,2) node [pos=1.1] (albl) {$\vec{a}$};
+% 				\draw[vector, xblue, dashed, opacity=0.75] (o) -- (3,4) node (atildelbl) [pos=1.1] {$\tilde{\vec{a}}$};
+% 				\draw[vector, xblue] (o) -- (-4,3) node [pos=1.1] (Talbl) {$T(\vec{a})$};
+% 				\draw[
+% 					transarrow, postaction={
+% 							decorate, decoration={raise=-2ex, text along path, text align={left indent=50mm}, text color=darkgray, text={|\large\bfseries|rotation}}
+% 						},
+% 				] (Talbl) to [bend left=45] (atildelbl);
+% 				\draw[transarrow] (atildelbl) -- (albl) node[darkgray, midway, right, font=\bfseries\large] {$\mathbf{\times 2}$};
+% 			\end{axis}
+% 		\end{tikzpicture}
+% 	\end{center}
+% 	\caption{The transformation $T$ applied to $\vec{a}$: first the vector is scaled by $2$ in the $y$-direction, and then rotated by $\ang{90}$ anti-clockwise.}
+% 	\label{fig:simple_LT_example_single_2d_vec}
+% \end{figure}
+%
+% Now, what happens if we wish to calculate a more complicated linear transformation, which is both composed out of many more basic transformations - and also acts on higher-dimensional vectors? Performing each transformation step might not be so straight-forward, and is definitely not an efficient process. In fact, even if we're dealing with a simple example just like the one we just saw, we would still need to apply it every time we want to calculate how a new vector is transformed.
+%
+% It turns out that thanks to the simplicity of linear transformations \footnote{more correctly: to the strict rules they enforce} we only need to perform a few simple calculations per transformation to practically get any possible application of it on any vector!
+%
+% To see how this is the case, let's go back to our simple $2$-dimensional example. First, recall that we can express any vector in terms of the standard basis vectors (REF), which in this case gives us (note the color-coding)
+% \begin{equation}
+% 	\vec{a} = \clrcolvecxy{3}{2} = \LCa{3}\overset{\substack{\ebx \\ \downarrow}}{\colvec{1;0}} + \LCb{2}\overset{\substack{\eby \\ \downarrow}}{\colvec{0;1}}.
+% 	\label{eq:vec a representation in the standard basis}
+% \end{equation}
+%
+% We can then apply the defining properties of linear transformations (REF) on $\vec{a}$:
+% \begin{equation}
+% 	\begin{aligned}
+% 		T\clrcolvecxy{3}{2} & = T\left(\LCa{3}\cdot\colvec{1;0}+\LCb{2}\cdot\colvec{0;1}\right)                   \\
+% 		                    & = T\left(\LCa{3}\cdot\colvec{1;0}\right) + T\left(\LCb{2}\cdot\colvec{0;1}\right)   \\
+% 		                    & = \LCa{3}\cdot T\left(\colvec{1;0}\right) + \LCb{2}\cdot T\left(\colvec{0;1}\right) \\
+% 		                    & = \LCa{3}\cdot T\left(\ebx\right) + \LCb{2}\cdot T\left(\eby\right).
+% 	\end{aligned}
+% 	\label{eq:T applied to a in std basis representation}
+% \end{equation}
+%
+% Now, applying $T$ to the two standard basis vectors $\ebx$ and $\eby$ we get
+% \begin{equation}
+% 	\begin{aligned}
+% 		\ebx & = \colvec{1;0} \xmapsto[\text{$\times 2$ in $y$}]{} \colvec{1;0} \xmapsto[\text{$\ang{90}$ rotation}]{} \colvec{0;1} = T(\ebx)                                    \\
+% 		\eby & = \colvec{0;1} \xmapsto{\textcolor{white}{\text{$\times 2$ in $y$}}} \colvec{0;2} \xmapsto{\textcolor{white}{\text{$\ang{90}$ rotation}}} \colvec{-2;0} = T(\eby)
+% 	\end{aligned}
+% 	\label{eq:simple LT example transformed basis vectors}
+% \end{equation}
+%
+% And when we use these transformed basis vectors in the linear combination we finally get
+% \begin{equation}
+% 	\begin{aligned}
+% 		\LCa{3}T\left(\ebx\right) + \LCb{2}T\left(\eby\right) & = \LCa{3}\colvec{0;1} +\LCb{2}\colvec{-2;0} \\
+% 		                                                      & = \colvec{0;3} + \colvec{-4;0}              \\
+% 		                                                      & = \colvec{-4;3},
+% 	\end{aligned}
+% 	\label{eq:}
+% \end{equation}
+% which is exactly what we got when we calculated $T$'s effect directly on $\vec{a}$ (cf. \autoref{eq:simple_LT_example_single_2d_vec}).
+%
+% Notice exactly what happened: in the standard basis representation, $\vec{a}$ had the coefficients $\LCa{3}$ and $\LCb{2}$ for $\ebx$ and $\eby$, respectively. When applying $T$ to $\vec{a}$ these two coefficients remained, but the basis changed: instead of $\left\{\ebx,\eby\right\}$, the two basis vectors became $\left\{T(\ebx),T(\eby)\right\}$.
+%
+% Of course, this is not unique to $\vec{a}$. For example, let's look at another vector, $$\vec{b}=\clrcolvecxy{2}{-4}.$$ Its coefficients in the standard basis representation are $\LCa{2}$ and $\LCb{-4}$, respectively. So we expect $T(\vec{b})$ to be
+% \begin{equation}
+% 	\begin{aligned}
+% 		T(\vec{b}) & = \LCa{2}T(\ebx) - \LCb{4}T(\eby)            \\
+% 		           & = \LCa{2}\colvec{0;1} - \LCb{4}\colvec{-2;0} \\
+% 		           & = \colvec{0;2} + \colvec{8;0}                \\
+% 		           & = \colvec{8;2}.
+% 	\end{aligned}
+% 	\label{eq:second_simple_LT_example_single_2d_vec}
+% \end{equation}
+%
+% If we now calculate $T(\vec{b})$ directly, we get the following:
+% \begin{equation}
+% 	\vec{b} = \colvec{2;-4} \xmapsto{\text{$\times 2$ in $y$}} \colvec{2;-8} \xmapsto{\text{$\ang{90}$ rotation}} \colvec{8;2} = T(\vec{b}).
+% 	\label{eq:simple_LT_example_single_2d_vec}
+% \end{equation}
+%
+% What this insight shows us is that given a linear transformation, we only need to know how it transforms the respective standard basis vectors in order to calculate how it transform any vector in its domain. The transformed version of the vector would simply be the linear combination of these transformed basis vectors, with the coefficients given by the vector's presentation in the standard basis. It really can't get any simpler than that!
+%
+% To make this a bit more formal, let's look at the most generic case: say $T:\Rs[n]\to\Rs[n]$ is a linear transformation \footnote{we'll deal with the more general case of $T:\Rs[n]\to\Rs[m]$ where $n\neq m$ in the next section.}. Then applying $T$ to a vector $\vec{v}\in\Rs[n]$ in its standard basis representation, $$\vec{v}=\clrgenericvec{v}{n},$$ we get
+% \begin{equation}
+% 	\begin{aligned}
+% 		% If and when the \ebcolxyz is re-written to be... nicer (i.e. with cases), this should be updated accordingly.
+% 		T(\vec{v}) & = T\left( \LCa{v_{1}}\ebcolxyz{1} + \LCb{v_{2}}\ebcolxyz{2} + \dots + \LCe{v_{n}}\ebcol{xorange!25}{n} \right) \\
+% 		           & = \LCa{v_{1}}T(\ebcolxyz{1}) + \LCb{v_{2}}T(\ebcolxyz{2}) + \dots + \LCe{v_{n}}T(\ebcol{xorange!25}{n}).
+% 	\end{aligned}
+% 	\label{eq:}
+% \end{equation}
+%
+% This is an incredibly powerful insight which allows us to save a lot of calculations - and which we will use in the next section to make the calculations of linear transformations \textit{even more} concise and simple, using the power of\dots % this was the previous joke: \footnote{\textbf{spoiler}: \rotatebox{180}{matrices!}\ \dots\ although the section heading is right here.}.
