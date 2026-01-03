@@ -1,7 +1,22 @@
 \section{Vectors and Vector Spaces}
 \subsection{Motivation} % Why do we need vectors? Two example problems: (1) bouncing off a wall in a 3D computer games, (2) Newtonian gravity force in coordinate form
-\begin{motivation}{Test}{}
-	This is a test.
+\begin{motivation}{Bouncing Off a Wall}{wall bounce}
+	Imagine we are writing a 3D computer game in which an elastic ball bounces off a wall. The wall can be oriented in any possible direction in space, not necessarily aligned with the usual up/down, left/right or front/back directions. To correctly simulate this collision we need to know
+	\begin{enumerate}
+		\item when and where will the ball hit the wall, and
+		\item what would be the velocity of the ball immediately following the collision.
+	\end{enumerate}
+	The goal of this motivating problem is to do so by using the parameters we already know:
+	\begin{enumerate}
+		\item the current position and velocity of the ball, and
+		\item the orientation and position of the wall.
+	\end{enumerate}
+	\vspace{0.5em}
+
+	To solve this problem we will need to know how to represent quantities like position, velocity and orientation in 3-dimensions, to understand ideas like points, lines and planes in 3D and how to calculate the intersection between these different objects. By the end of this section you should be able to solve this problem by yourself, and even generalize it to any number of dimensions.
+	\vspace{0.5em}
+
+	\textbf{Note}: for simplicity (since this is not really about solving 3D physics) we'll assume that the ball is point-like, meaning that we don't need to care about its radius when doing these calculation.
 \end{motivation}
 
 \subsection{Geomteric Properties of Vectors} % Definition, operations (addition, scaling)
