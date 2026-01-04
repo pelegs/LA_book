@@ -54,13 +54,16 @@
 
 	\begin{center}
 		\tdplotsetmaincoords{75}{30}
-		\begin{tikzpicture}[tdplot_main_coords]
+		\begin{tikzpicture}[tdplot_main_coords, rotate=35]
 			\coordinate (a) at (-3,-3,0);
 			\coordinate (b) at (3,-3,0);
 			\coordinate (c) at (3,3,0);
 			\coordinate (d) at (-3,3,0);
-			\draw[xpurple, very thick, fill=xpurple, opacity=0.3] (a) -- (b) -- (c) -- (d) -- cycle;
-			\draw[vector, xred] (1,1,2) -- (0,0,0);
+			\draw[xpurple, thick, fill=xpurple, opacity=0.2] (a) -- (b) -- (c) -- (d) -- cycle;
+			\begin{scope}[canvas is xy plane at z=0]
+				\draw[help lines, opacity=0.25] (-3,-3) grid (3,3);
+			\end{scope}
+			\draw[vector, xred, dashed] (1,1,2) -- (0,0,0);
 			\draw[vector, xblue, dashed] (0,0,0) -- (-1,-1,2);
 		\end{tikzpicture}
 	\end{center}
