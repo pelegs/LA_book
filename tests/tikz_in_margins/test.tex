@@ -4,14 +4,59 @@
 \usepackage[a4paper, total={6in, 8in}]{geometry}
 \usetikzlibrary{positioning}
 
+\setlength{\parskip}{1em}
+
+\newtcolorbox{SynonymsBox}[2][]{%
+	enhanced,
+	remember as=synonymsbox,
+	width=2cm,
+	size=fbox,
+	colframe=#2!50,
+	colback=#2!20,
+	coltitle=white,
+	title=synonyms,
+	sharp corners,
+	#1
+}
+\tcbset{
+	hltext/.style={
+		enhanced,
+		nobeforeafter,
+		box align=base,
+		size=tight,
+		text width=2cm,
+		colframe=#1!50,
+		colback=#1!10,
+		boxrule=0pt,
+		borderline east={3pt}{0pt}{#1!50},
+		right=6pt,
+	}
+}
+\newcommand{\synonyms}[3]{
+	\tikz[remember picture, baseline=0.5ex]{
+		\node[anchor=south, inner sep=0pt] (foo) {\tcbox[hltext={#3}]{#1}}
+	}
+	\tikz[remember picture, overlay]{
+		\node[anchor=north, inner sep=0pt, yshift=-3pt] (bla) at (current page marginpar area |- foo) {\begin{SynonymsBox}{#3}#2\end{SynonymsBox}};
+		\draw[thick, #3!50] (foo.south east) -- (bla.north west);
+	}
+}
+
 \begin{document}
 \section{Introduction}
 This is a test document which uses A4-sized paper and the user-defined text area.
 \subsection{Some dummy text}
-\blindtext
-\tikz[overlay, remember picture]{\node at (current page marginpar area) {$a=b^2$}}
-\blindtext[6]
-\tikz[overlay, remember picture]{\node at (current page marginpar area) {\tcbox[enhanced, size=fbox, colframe=red!50, colback=red!20, coltitle=white, title=synonyms]{text text text}}}
+\blindtext[2]
+
+\blindtext[1]
+
+Now, this is a test text, \synonyms{bla, bla, bla}{yada, yada, yada}{red} and so on. And from now on, I can write more and more text! Hoorah. And... let's move on? Maybe I should write a b it more text to make this paragraph thicker.
+
+\blindtext[1]
+
+Suprise! Here I'm testing again this "feature" I made. Let's see, do you know the term \synonyms{linear transformations}{linear functions, linear maps}{blue}? Well, it's a very important and interesting concept! You should learn about it!
+
+\blindtext[1]
 
 %% TODO: READ THIS: https://tex.stackexchange.com/questions/551320/using-tcolorbox-along-with-tikz
 
