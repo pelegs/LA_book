@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage{blindtext, tikz, tikzpagenodes}
+\usepackage[dvipsnames]{xcolor}
 \usepackage[most]{tcolorbox}
 \usepackage[a4paper, total={6in, 8in}]{geometry}
 \usetikzlibrary{positioning}
@@ -14,8 +15,7 @@
 	colframe=#2!50,
 	colback=#2!20,
 	coltitle=white,
-	title=synonyms,
-	sharp corners,
+	title=synonym(s),
 	#1
 }
 \tcbset{
@@ -33,12 +33,12 @@
 	}
 }
 \newcommand{\synonyms}[3]{
-	\tikz[remember picture, baseline=0.5ex]{
+	\tikz[remember picture, baseline=0ex]{
 		\node[anchor=south, inner sep=0pt] (foo) {\tcbox[hltext={#3}]{#1}}
 	}
 	\tikz[remember picture, overlay]{
-		\node[anchor=north, inner sep=0pt, yshift=-3pt] (bla) at (current page marginpar area |- foo) {\begin{SynonymsBox}{#3}#2\end{SynonymsBox}};
-		\draw[thick, #3!50] (foo.south east) -- (bla.north west);
+		\node[anchor=north, inner sep=0pt, yshift=-3pt] (bla) at (current page marginpar area |- foo) {\begin{SynonymsBox}{#3}#2.\end{SynonymsBox}};
+		% \draw[thick, #3!50] (foo.south east) -- (bla.north west);
 	}
 }
 
@@ -46,15 +46,17 @@
 \section{Introduction}
 This is a test document which uses A4-sized paper and the user-defined text area.
 \subsection{Some dummy text}
-\blindtext[2]
-
 \blindtext[1]
 
-Now, this is a test text, \synonyms{bla, bla, bla}{yada, yada, yada}{red} and so on. And from now on, I can write more and more text! Hoorah. And... let's move on? Maybe I should write a b it more text to make this paragraph thicker.
+\blindtext Now, this is a test text, \synonyms{bla, bla, bla}{yada, yada, yada}{red} and so on. And from now on, I can write more and more text! Hoorah. And... let's move on? Maybe I should write a b it more text to make this paragraph thicker.
 
 \blindtext[1]
 
 Suprise! Here I'm testing again this "feature" I made. Let's see, do you know the term \synonyms{linear transformations}{linear functions, linear maps}{blue}? Well, it's a very important and interesting concept! You should learn about it!
+
+\blindtext[1]
+
+Space, the final \synonyms{frontier}{border}{SeaGreen}. These are the voyages of the starship Enterprise. It's continuing mission - to explore strange, new worlds. To seek out new life forms and new civilizations. To boldy go where no one has gone before!
 
 \blindtext[1]
 
