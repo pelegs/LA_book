@@ -119,22 +119,22 @@
 % Box for other names side note
 \tcbset{
 	marginbox/.style={
-		float,
-		enhanced,
-		size=fbox,
-		colframe=#1!50,
-		colback=#1!20,
-		coltitle=white,
-		title=synonyms,
-	},
+			float,
+			enhanced,
+			size=fbox,
+			colframe=#1!50,
+			colback=#1!20,
+			coltitle=white,
+			title=synonyms,
+		},
 	evenmarginbox/.style={
-		marginbox={#1}, 
-		width=1in + \hoffset + \oddsidemargin,
-	},
+			marginbox={#1},
+			width=1in + \hoffset + \oddsidemargin,
+		},
 	oddmarginbox/.style={
-		marginbox={#1}, 
-		width=1in + \hoffset + \evensidemargin
-	},
+			marginbox={#1},
+			width=1in + \hoffset + \evensidemargin
+		},
 }
 \NewDocumentCommand\synonyms{O{xpurple}mm}%
 {
