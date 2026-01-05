@@ -6,6 +6,12 @@
 
 * Visual
 -- add "properties" environment?
+-- interesting design elements:
+  --- wrapped boxes: https://tex.stackexchange.com/questions/119282/dealing-with-many-margin-notes
+  --- consider using <wrapfigure> for figures + add gray background as in the wrapped boxes example. Read here for more: https://www.overleaf.com/learn/latex/Questions/How_do_I_wrap_text_around_a_figure%3F
+  --- https://tex.stackexchange.com/questions/61586/tikz-picture-fitted-to-page-edge
+  --- https://tex.stackexchange.com/questions/657439/empty-margin-inside-of-text-body
+  --- for (sub)section heading: https://tex.stackexchange.com/questions/615524/tikz-how-to-draw-from-a-node-to-the-margin-of-a-page
 
 * Material
 * Basic linear algebra

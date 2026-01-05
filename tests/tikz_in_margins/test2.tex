@@ -1,0 +1,170 @@
+\documentclass[10pt]{article}
+
+
+% Packages
+\usepackage[newcommands]{ragged2e}
+\usepackage{newfile}
+\usepackage{color}
+\usepackage{xparse}
+\usepackage{graphics}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{hyperref}
+\usepackage{wrapfig}
+\usepackage{ifthen}
+\usepackage[math]{blindtext}
+\usepackage{tikz}
+\usetikzlibrary{calc, positioning}
+
+\definecolor{blueish}{HTML}{5B9BD5}
+\definecolor{greyish}{HTML}{E7E6E6}
+
+% Settings
+\colorlet{Pbardefault}{yellow!70} % Default color for the colored bar left to the notes
+\colorlet{Plightdefault}{yellow!10}% Default color for background of the note
+\def\Pmin{0.5} % ~minimal amount main text
+\def\Pmax{0.95} % ~maximal amount main text / \Psf
+\def\Psf{1.14} % 
+
+
+\newcounter{localsidenotecounter}
+\newlength{\currentparskip}
+\setlength{\currentparskip}{\parskip}
+
+
+% The formatting of the note
+\newdimen\Pparsep
+\Pparsep=0.2em
+
+\newdimen\Pcolorwidth
+\Pcolorwidth=2mm
+
+
+% The paragraph command
+\makeatletter
+\def\sidenotepi#1\par%
+{
+%
+\immediate\openout\tempfile=sidenotes.tex %
+%
+\twopara%
+{
+#1   \immediate\closeout\tempfile 
+}
+{\input{sidenotes.tex}}
+}
+
+\makeatother
+
+
+
+
+% A command for finding the optimal text widths
+\makeatletter
+
+\long\def\twopara#1#2{%
+
+\newdimen\columnsep
+\columnsep=\dimexpr \Pparsep + \Pcolorwidth
+
+ \def\@elt##1{\global\value{##1}\the\value{##1}\relax}% 
+\edef\TY@ckpt{\cl@@ckpt}%
+
+\@tempdima\dimexpr\textwidth-\columnsep\relax
+{\hbadness\@M\raggedright\hsize.5\@tempdima \@tempdima\hsize
+\setbox\z@\vbox{{#1\endgraf}}%
+\setbox\tw@\vbox{{#2\endgraf}}%
+\Gscale@div\tmp{\ht\z@}{\dimexpr\ht\z@+\ht\tw@\relax}%
+\global\let\xtmp\tmp}%
+\dimen@ \xtmp\@tempdima
+\ifdim\dimen@<\Pmin\@tempdima \dimen@\Pmin\@tempdima\fi
+\ifdim\dimen@>\Pmax\@tempdima \dimen@\Pmax\@tempdima\fi
+\dimen@ii\dimexpr\@tempdima-\dimen@\relax 
+
+\TY@ckpt
+
+
+\ifdim\dimen@ii<20pt
+  #1
+\else
+  \ifdim \Psf\dimen@ii>\dimexpr\textwidth-\Pmin\textwidth
+    #1
+    \let\Pnotebox\Pnotebox@
+    \dimen@ii = \dimexpr \textwidth-4mm
+      \setlength{\intextsep}{2pt}%
+      \begin{figure}[h]
+          #2
+      \end{figure}
+  \else
+
+      \let\Pnotebox\Pnotebox@
+      \dimen@ii\dimexpr\Psf\dimen@ii
+      \setlength{\intextsep}{0pt}%
+      \begin{wrapfigure}{o}[-4mm]{\dimen@ii}
+          #2
+      \end{wrapfigure}
+      #1
+      \fi
+  \fi
+
+\let\Pnotebox\Pnotebox@@
+}
+\makeatother
+
+
+
+% The unformatted note text
+\makeatletter
+\long\def\Pnotebox@@#1#2#3{ %barcolor, backcolor, text
+#3}
+\makeatother
+
+\makeatletter
+\long\def\Pnotebox#1#2#3{ %barcolor, backcolor, text
+#3}
+\makeatother
+
+% The formatting of the notes
+\makeatletter
+\newdimen\Pnoteheight
+\long\def\Pnotebox@#1#2#3{ %barcolor, backcolor, text
+\settoheight{\Pnoteheight}{\parbox{\dimen@ii}{#3}}%
+\begin{minipage}{\dimexpr\dimen@ii+\Pcolorwidth}
+  \textcolor{#1}{\rule[\dimexpr-\Pnoteheight+1mm]{\Pcolorwidth}{\dimexpr 2\Pnoteheight}}%
+  \colorbox{#2}{\parbox{\dimen@ii}{#3}}
+\end{minipage}%
+}
+\makeatother
+
+
+
+% Commands for making the sidenote
+\newwrite\tempfile
+
+\makeatletter
+\DeclareDocumentCommand \sidenote {m O{Pbardefault} O{Plightdefault}} {%
+	\immediate\write\tempfile{\noexpand\Pnotebox{#2}{#3}{#1}}
+}
+\makeatother
+
+
+\begin{document}
+
+
+
+
+
+\sidenotepi
+But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue\sidenote{Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure}[blueish][greyish] pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure
+
+
+\sidenotepi
+But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure.
+
+
+\sidenotepi
+This is some random text introducing linear transformations\sidenote{It was the dawn of the third age of mankind...}[blueish][greyish]: a linear transformation is a transformation which perserves the structure of a vector space.
+
+\blindtext[2]
+
+
+\end{document}
