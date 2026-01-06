@@ -1,57 +1,9 @@
 \section{Vectors and Vector Spaces}
 \subsection{Motivation} % Why do we need vectors? Two example problems: (1) bouncing off a wall in a 3D computer games, (2) Newtonian gravity force in coordinate form
-\begin{motivation}{Bouncing Off a Wall}{wall bounce}
-	Imagine we are writing a 3D computer game in which an elastic ball bounces off a wall. The wall can be oriented in any possible direction in space, not necessarily aligned with the usual up/down, left/right or front/back directions. To correctly simulate this collision we need to know
-	\begin{enumerate}
-		\item when and where will the ball hit the wall, and
-		\item what would be the velocity of the ball immediately following the collision.
-	\end{enumerate}
-	The goal of this motivating problem is to do so by using the parameters we already know:
-	\begin{enumerate}
-		\item the current position and velocity of the ball, and
-		\item the orientation and position of the wall.
-	\end{enumerate}
-	\vspace{0.5em}
+\begin{motivation}{Bouncing/Reflecting Off a Wall}{wall_bounce}
+	Imagine we are writing a 3D computer game in which some object is bouncing off a wall. Alternatively, consider 3D graphics in general, where one simulates rays of light reflecting off of smooth surfaces. In both cases the same problem needs to be solved: given a flat plane of some orientation in space, and an object hitting it from some direction - what would be the direction of the object after it bounces off the plane?
 
-	To solve this problem we will need to know how to represent quantities like position, velocity and orientation in 3-dimensions, to understand ideas like points, lines and planes in 3D and how to calculate the intersection between these different objects. By the end of this section you should be able to solve this problem by yourself, and even generalize it to any number of dimensions.
-	\vspace{0.5em}
-
-	\textbf{Note}: for simplicity (since this is not really about solving 3D physics) we'll assume that the ball is point-like, meaning that we don't need to care about its radius when doing these calculation.
-
-	% TODO: https://tex.stackexchange.com/questions/489682/drawing-a-simple-plane-in-3d-space
-	% also: https://tikz.dev/library-3d
-
-	% 	\begin{center}
-	% 		\begin{tikzpicture}[z={(10:10mm)},x={(-45:5mm)}]
-	%   \def\wave{
-	%     \draw[fill,thick,fill opacity=.2]
-	%      (0,0) sin (1,1) cos (2,0) sin (3,-1) cos (4,0)
-	%            sin (5,1) cos (6,0) sin (7,-1) cos (8,0)
-	%            sin (9,1) cos (10,0)sin (11,-1)cos (12,0);
-	%     \foreach \shift in {0,4,8}
-	%     {
-	%       \begin{scope}[xshift=\shift cm,thin]
-	%         \draw (.5,0)  -- (0.5,0 |- 45:1cm);
-	%         \draw (1,0)   -- (1,1);
-	%         \draw (1.5,0) -- (1.5,0 |- 45:1cm);
-	%         \draw (2.5,0) -- (2.5,0 |- -45:1cm);
-	%         \draw (3,0)   -- (3,-1);
-	%         \draw (3.5,0) -- (3.5,0 |- -45:1cm);
-	%       \end{scope}
-	%     }
-	%   }
-	%   \begin{scope}[canvas is zy plane at x=0,fill=blue]
-	%     \wave
-	%     \node at (6,-1.5) [transform shape] {magnetic field};
-	%   \end{scope}
-	%   \begin{scope}[canvas is zx plane at y=0,fill=red]
-	%     \draw[help lines] (0,-2) grid (12,2);
-	%     \wave
-	%     \node at (6,1.5) [rotate=180,xscale=-1,transform shape] {electric field};
-	%   \end{scope}
-	% \end{tikzpicture}
-	% 	\end{center}
-
+	\vspace{1em}
 	\begin{center}
 		\tdplotsetmaincoords{75}{30}
 		\begin{tikzpicture}[tdplot_main_coords, rotate=35]
@@ -67,7 +19,23 @@
 			\draw[vector, xblue, dashed] (0,0,0) -- (-1,-1,2);
 		\end{tikzpicture}
 	\end{center}
+
+	\vspace{1em}
+	To solve this problem we will need to know how to represent quantities like position, velocity and orientation in 3D, and more generally points, lines and planes - and to know how to calculate the intersection between these different objects. By the end of this section you should be able to solve this problem by yourself, and even generalize it to any number of dimensions.
 \end{motivation}
+
+\begin{motivation}{Gravity Force}{gravity_force}
+	Consider a simple simulation of classical (\enquote{Newtionian}) gravity, say of a planet with mass $m$ orbiting a star with mass $M$ (where $M\gg m$). At any given moment, the force acting on the planet due to the star's gravity has magnitude
+	\begin{equation*}
+		F = G\frac{Mm}{r^{2}},
+	\end{equation*}
+	where $r$ is the distance between the planet and the star at that moment, and $G$ is a universal constant (specifically, $G=\SI{6.674e-11}{\newton\meter\squared\per\kilo\gram\squared}$).
+
+	\vspace{1em}
+	However, since we live in 3-dimensional space\footnote{allegedly.}, we also want this force to be pointing in the direction from the planet to the star. To do this, we need to understant how to describe orientations in 3-dimensional space, and be able to pack together both orientation and magnitude in a correct way.
+\end{motivation}
+
+\lipsum
 
 \subsection{Geomteric Properties of Vectors} % Definition, operations (addition, scaling)
 
