@@ -1,5 +1,16 @@
 \section{Vectors and Vector Spaces}
 \subsection{Motivation} % Why do we need vectors? Two example problems: (1) bouncing off a wall in a 3D computer games, (2) Newtonian gravity force in coordinate form
+\begin{motivation}{Gravity Force}{gravity_force}
+	Consider a simple simulation of classical (\enquote{Newtionian}) gravity, say of a planet with mass $m$ orbiting a star with mass $M$ (where $M\gg m$). At any given moment, the force acting on the planet due to the star's gravity has magnitude
+	\begin{equation*}
+		F = G\frac{Mm}{r^{2}},
+	\end{equation*}
+	where $r$ is the distance between the planet and the star at that moment, and $G$ is a universal constant (specifically, $G=\SI{6.674e-11}{\newton\meter\squared\per\kilo\gram\squared}$).
+
+	\vspace{1em}
+	However, since we live in 3-dimensional space\footnote{allegedly.}, we also want this force to be pointing in the direction from the planet to the star. To do this, we need to understant how to describe orientations in 3-dimensional space, and be able to pack together both orientation and magnitude in the correct way.
+\end{motivation}
+
 \begin{motivation}{Bouncing/Reflecting Off a Wall}{wall_bounce}
 	Imagine we are writing a 3D computer game in which some object is bouncing off a wall. Alternatively, consider 3D graphics in general, where one simulates rays of light reflecting off of smooth surfaces. In both cases the same problem needs to be solved: given a flat plane of some orientation in space, and an object hitting it from some direction - what would be the direction of the object after it bounces off the plane?
 
@@ -7,12 +18,8 @@
 	\begin{center}
 		\tdplotsetmaincoords{75}{30}
 		\begin{tikzpicture}[tdplot_main_coords, rotate=35]
-			\coordinate (a) at (-3,-3,0);
-			\coordinate (b) at (3,-3,0);
-			\coordinate (c) at (3,3,0);
-			\coordinate (d) at (-3,3,0);
-			\draw[xpurple, thick, fill=xpurple, opacity=0.2] (a) -- (b) -- (c) -- (d) -- cycle;
 			\begin{scope}[canvas is xy plane at z=0]
+				\draw[xpurple, thick, fill=xpurple, opacity=0.2] (-3,-3) -- (-3,3) -- (3,3) -- (3,-3) -- cycle;
 				\draw[help lines, opacity=0.25] (-3,-3) grid (3,3);
 			\end{scope}
 			\draw[vector, xred, dashed] (1,1,2) -- (0,0,0);
@@ -24,20 +31,73 @@
 	To solve this problem we will need to know how to represent quantities like position, velocity and orientation in 3D, and more generally points, lines and planes - and to know how to calculate the intersection between these different objects. By the end of this section you should be able to solve this problem by yourself, and even generalize it to any number of dimensions.
 \end{motivation}
 
-\begin{motivation}{Gravity Force}{gravity_force}
-	Consider a simple simulation of classical (\enquote{Newtionian}) gravity, say of a planet with mass $m$ orbiting a star with mass $M$ (where $M\gg m$). At any given moment, the force acting on the planet due to the star's gravity has magnitude
-	\begin{equation*}
-		F = G\frac{Mm}{r^{2}},
-	\end{equation*}
-	where $r$ is the distance between the planet and the star at that moment, and $G$ is a universal constant (specifically, $G=\SI{6.674e-11}{\newton\meter\squared\per\kilo\gram\squared}$).
-
-	\vspace{1em}
-	However, since we live in 3-dimensional space\footnote{allegedly.}, we also want this force to be pointing in the direction from the planet to the star. To do this, we need to understant how to describe orientations in 3-dimensional space, and be able to pack together both orientation and magnitude in a correct way.
-\end{motivation}
-
-\lipsum
+\lipsum[1]
 
 \subsection{Geomteric Properties of Vectors} % Definition, operations (addition, scaling)
+
+Text text text\dots (what are vectors, pictorial representation, notation, all starting from the origin, etc.)
+
+Vectors have two important properties: they can be added together and be scaled to form other vectors.
+\begin{descitemize}
+	\item[Adding vectors together] any two vectors of the same dimensionality (e.g. 2-dimensional, 3-dimensional, 4-dimensional, etc.) can be added together, and the result is a third vector. Pictorially, here are two vectors $\vecA$ and $\vecB$ which we want to sum together:
+
+	\begin{center}
+		\begin{tikzpicture}
+			\pic{VecSum};
+			\draw[vector, xred] (o) -- (a) node[left, xshift=-5pt] {$\vecA$};
+			\draw[vector, xblue] (o) -- (b) node[below, yshift=-3pt] {$\vecB$};
+		\end{tikzpicture}
+	\end{center}
+
+	The steps to produce the sum of $\vecA$ and $\vecB$ is the following:
+	\begin{enumerate}
+		\item move $\vecB$ such that its origin aligns with the head of $\vecA$:
+		      \begin{center}
+			      \begin{tikzpicture}
+				      \pic{VecSum};
+				      \draw[vector, xred] (o) -- (a) node[left, xshift=-5pt] {$\vecA$};
+
+				      \foreach \op in {0.2, 0.4, ..., 0.8}{
+						      \draw[vector, xblue, dashed, opacity=\op] ($(o)!\op!(a)$) -- ++(b);
+					      }
+
+				      \draw[vector, xblue] (a) -- ++(b) node[right] {$\vecB$};
+			      \end{tikzpicture}
+		      \end{center}
+		\item draw a new vector from the origin to the head of the shifted $\vecB$:
+		      \begin{center}
+			      \begin{tikzpicture}
+				      \pic{VecSum};
+				      \draw[vector, xred] (o) -- (a) node[left, xshift=-5pt] {$\vecA$};
+				      \draw[vector, xblue] (a) -- ++(b) node[above left] {$\vecB$};
+				      \draw[vector, xpurple] (o) -- ($(a)+(b)$) node[below, yshift=-4pt] {$\vecC$};
+			      \end{tikzpicture}
+		      \end{center}
+		\item the resulting vector $\vecC$ \textit{is} the sum of $\vecA$ and $\vecB$. Here are all three vectors together from the same origin:
+		      \begin{center}
+			      \begin{tikzpicture}
+				      \pic{VecSum};
+				      \draw[vector, xred] (o) -- (a) node[left, xshift=-5pt] {$\vecA$};
+				      \draw[vector, xblue] (o) -- (b) node[above left] {$\vecB$};
+				      \draw[vector, xpurple] (o) -- ($(a)+(b)$) node[below, yshift=-4pt] {$\vecC$};
+			      \end{tikzpicture}
+		      \end{center}
+
+		      This method is called the \newterm{triangle method}, and it displays an important property of vector addition: it is commutative! This means that the order of addition doesn't matter: $\vecA+\vecB=\vecB+\vecA$. To see this visually, we can apply the triangle method twice, i.e. moving both $\vecA$ \textit{and} $\vecB$:
+		      \begin{center}
+			      \begin{tikzpicture}
+				      \pic{VecSum};
+				      \draw[vector, xred] (o) -- (a) node[left, xshift=-5pt] {$\vecA$};
+				      \draw[vector, xblue] (o) -- (b) node[below] {$\vecB$};
+				      \draw[vector, xpurple, opacity=0.25] (o) -- ($(a)+(b)$) node[pos=1.05] {$\vecC$};
+				      \draw[vector, xblue, dashed] (a) -- ++(b);
+				      \draw[vector, xred, dashed] (b) -- ++(a);
+			      \end{tikzpicture}
+		      \end{center}
+
+		      We see that no matter which vector we add onto which (i.e. what is the order of addition) - the result is the same. The shape formed by this demonstration is called a \newterm{parallelogram}, and it is incredibly important in linear algebra as a whole as we will see in future sections.
+	\end{enumerate}
+\end{descitemize}
 
 \subsection{Common Coordinate Systems in 2- and 3-Dimensions} % Cartesian, polar, cylindrical and spherical coordinate systems
 
