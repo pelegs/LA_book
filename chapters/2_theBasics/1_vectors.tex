@@ -111,8 +111,8 @@ Vectors have two important properties: they can be added together and be scaled 
 	\begin{center}
 		\begin{tikzpicture}
 			\coordinate (base) at (o);
-			\foreach [count=\i] \coord in {a, b, c, d, e}{
-					\draw[vector={xcol\i}] (base) -- ++(\coord);
+			\foreach \coord in {a, b, c, d, e}{
+					\draw[vector={x\coord col}] (base) -- ++(\coord);
 					\coordinate (base) at ($(base)+(\coord)$);
 				}
 			% \draw[dashedvector={gray}] ($(o)+(xsh)$) -- ($(base)+(xsh)$);
@@ -123,7 +123,7 @@ Vectors have two important properties: they can be added together and be scaled 
 		\begin{tikzpicture}
 			\coordinate (base) at (o);
 			\foreach [count=\i] \coord in {a, b, c, d, e}{
-					\draw[vector={xcol\i}] (base) -- ++(\coord);
+					\draw[vector={x\coord col}] (base) -- ++(\coord);
 					\coordinate (base) at ($(base)+(\coord)$);
 				}
 			\draw[dashedvector={gray}] (o) -- (base);
@@ -134,7 +134,7 @@ Vectors have two important properties: they can be added together and be scaled 
 		\begin{tikzpicture}
 			\coordinate (base) at (o);
 			\foreach [count=\i] \coord in {c, e, a, b, d}{
-					\draw[vector={xcol\i}] (base) -- ++(\coord);
+					\draw[vector={x\coord col}] (base) -- ++(\coord);
 					\coordinate (base) at ($(base)+(\coord)$);
 				}
 			\draw[dashedvector={gray}] (o) -- (base);
