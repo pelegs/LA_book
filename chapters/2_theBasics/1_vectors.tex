@@ -168,17 +168,38 @@ Vectors have two important properties: they can be added together and be scaled 
 	\end{equation}
 	We say that the zero vector is \textit{agnostic} (also: neutral) to addition.
 
-	\item[Scaling vectors] any vector can be \newterm{scaled} by any real number, which in this context we call a \newterm{scalar}. Scaling by a number simply \enquote{stretches} the vector by the number. For example, in the following figure the red vector is scaled by several scalars:
+	\item[Scaling vectors] any vector can be \newterm{scaled} by any real number, which in this context we call a \newterm{scalar}. Scaling by a number simply \enquote{stretches} the vector by the number. For example, in the following figure a red vector is scaled by a scalar $\lambda$, taking on different values:
+
+	\newcommand{\testest}[1]{
+		\tikz{
+			\draw[opacity=0] (-0.5,-2) rectangle (0.5,2);
+			\ifthenelse{\equal{#1}{0}}{}{
+				\draw[vector={xred}] (o) -- ($#1*(a)$);
+			}
+			\fill (o) circle (0.05);
+		}
+	}
 	\begin{center}
-		\begin{tikzpicture}
-			\draw[vector={xred}] (o) -- (a);
-			\foreach \s [count=\i] in {2, 0.5, -1, -1.5} {
-					\coordinate (sh) at (\i,0);
-					\draw[vector={xred}] ($(o)+(sh)$) -- ($\s*(a)+(sh)$) node[pos=1.1] {$\s$};
-				}
-			]
-		\end{tikzpicture}
+		\begin{tabular}{ccccccc}
+			$\lambda\ =$ & $1$         & $2$         & $0$         & $\frac{1}{2}$ & $-1$         & $-\frac{3}{2}$ \\
+			             & \testest{1} & \testest{2} & \testest{0} & \testest{0.5} & \testest{-1} & \testest{-1.5} \\
+		\end{tabular}
 	\end{center}
+
+	This example shows us several things:
+	\begin{itemize}
+		\item no matter by which positive scalar we scale a vector, it always points in the same direction.
+		\item If we scale a vector by $0$ it becomes the zero vector.
+		\item Finally, scaling a vector by a negative scalar rotates the vector by $\ang{180}$ and then scales it by the absolute value of the scalar.
+	\end{itemize}
+
+	This is very similar to how real numbers behave under multiplication: multiplying a real number by a negative number is, in a sense, \enquote{flipping} and scaling it relative to $0$ (the origin). For example, multiplying $3$ by $-2$ flips the the number to point to the left, and then scales it to be of length $6$:
+
+	% Figure
+
+	Therefore, scaling a vector is denoted just like multiplication of real numbers: $\lambda\vec{a}$, where $\lambda$ is the scalar. In the above example, if the red vector is $\vecA$, then the other five vectors can be written as $2\vecA,\ 0\vecA,\ \frac{1}{2}\vecA,\ -1\vecA$ and $-\frac{3}{2}\vecA$.
+
+	Furthermore, we can place the vector notation in different places and even hiding the scalar depending on convinience, so for example we can write $-\vecA$ instead of $-1\vecA$ and $-\frac{3\vecA}{2}$ instead of $-\frac{3}{2}\vecA$.
 \end{descitemize}
 
 \subsection{Common Coordinate Systems in 2- and 3-Dimensions} % Cartesian, polar, cylindrical and spherical coordinate systems
