@@ -221,6 +221,11 @@
 			\coordinate (b) at (2,1);
 			\coordinate (c) at ($(a)+(b)$);
 		},
+	fig with vectors/.style={
+			execute at end picture={%
+					\fill (0,0) circle (0.05);
+				}
+		},
 }
 
 \newcommand{\rulerTwoD}[6]{

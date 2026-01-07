@@ -175,3 +175,19 @@
 % 	] {#2}
 % 	\tikz[overlay, remember picture]{\draw[thick, #3!25] (hltext.north) -- (synonymsbox.north)}
 % }
+
+% Highlighting a new term should somehow be integrated with synonyms
+% e.g. as an optional argument.
+% For now I'm leaving this as a very simple highlighting of the term.
+\newtcbox{\mylib}{enhanced,nobeforeafter,tcbox raise base,boxrule=0.4pt,top=0mm,bottom=0mm,
+	right=0mm,left=4mm,arc=1pt,boxsep=2pt,before upper={\vphantom{dlg}},
+	colframe=xpurple!50!black,coltext=xpurple!25!black,colback=xpurple!10!white,
+	overlay={\begin{tcbclipinterior}\fill[xpurple!75!blue!50!white] (frame.south west)
+				rectangle node[text=white,font=\sffamily\bfseries\tiny] {\faHighlighter} ([xshift=4mm]frame.north west);\end{tcbclipinterior}}}
+\newcommand{\newterm}[1]{%
+	% \tcbox[colback=xblue!50, coltext=white, size=tight]{#1}
+	% \mylib{#1}
+	\colorlet{hlcolor}{xpurple!20}%
+	\sethlcolor{hlcolor}%
+	\hl{#1}%
+}
