@@ -44,8 +44,9 @@ Vectors have two important properties: they can be added together and be scaled 
 	\begin{center}
 		\begin{tikzpicture}
 			\pic{VecSum};
-			\draw[vector, xred] (o) -- (a) node[left, xshift=-5pt] {$\vecA$};
-			\draw[vector, xblue] (o) -- (b) node[below, yshift=-3pt] {$\vecB$};
+			\draw[vector={xred}] (o) -- (a) node[left, xshift=-5pt] {$\vecA$};
+			\draw[vector={xblue}] (o) -- (b) node[below, yshift=-3pt] {$\vecB$};
+			\fill (o) circle (0.05);
 		\end{tikzpicture}
 	\end{center}
 
@@ -54,49 +55,63 @@ Vectors have two important properties: they can be added together and be scaled 
 		\item move $\vecB$ such that its origin aligns with the head of $\vecA$:
 		      \begin{center}
 			      \begin{tikzpicture}
-				      \pic{VecSum};
-				      \draw[vector, xred] (o) -- (a) node[left, xshift=-5pt] {$\vecA$};
-
+				      \draw[vector={xred}] (o) -- (a) node[left, xshift=-5pt] {$\vecA$};
 				      \foreach \op in {0.2, 0.4, ..., 0.8}{
-						      \draw[vector, xblue, dashed, opacity=\op] ($(o)!\op!(a)$) -- ++(b);
+						      \draw[dashedvector={xblue}, dashed, opacity=\op] ($(o)!\op!(a)$) -- ++(b);
 					      }
-
-				      \draw[vector, xblue] (a) -- ++(b) node[right] {$\vecB$};
+				      \draw[vector={xblue}] (a) -- ++(b) node[right] {$\vecB$};
 			      \end{tikzpicture}
 		      \end{center}
 		\item draw a new vector from the origin to the head of the shifted $\vecB$:
 		      \begin{center}
 			      \begin{tikzpicture}
-				      \pic{VecSum};
-				      \draw[vector, xred] (o) -- (a) node[left, xshift=-5pt] {$\vecA$};
-				      \draw[vector, xblue] (a) -- ++(b) node[above left] {$\vecB$};
-				      \draw[vector, xpurple] (o) -- ($(a)+(b)$) node[below, yshift=-4pt] {$\vecC$};
+				      \draw[vector={xred}] (o) -- (a) node[left, xshift=-5pt] {$\vecA$};
+				      \draw[vector={xblue}] (a) -- ++(b) node[above left] {$\vecB$};
+				      \draw[vector={xorange}] (o) -- (c) node[below, yshift=-4pt] {$\vecC$};
 			      \end{tikzpicture}
 		      \end{center}
 		\item the resulting vector $\vecC$ \textit{is} the sum of $\vecA$ and $\vecB$. Here are all three vectors together from the same origin:
 		      \begin{center}
 			      \begin{tikzpicture}
-				      \pic{VecSum};
-				      \draw[vector, xred] (o) -- (a) node[left, xshift=-5pt] {$\vecA$};
-				      \draw[vector, xblue] (o) -- (b) node[above left] {$\vecB$};
-				      \draw[vector, xpurple] (o) -- ($(a)+(b)$) node[below, yshift=-4pt] {$\vecC$};
+				      \draw[vector={xred}] (o) -- (a) node[left, xshift=-5pt] {$\vecA$};
+				      \draw[vector={xblue}] (o) -- (b) node[above left] {$\vecB$};
+				      \draw[vector={xorange}] (o) -- (c) node[below, yshift=-4pt] {$\vecC$};
 			      \end{tikzpicture}
 		      \end{center}
 
 		      This method is called the \newterm{triangle method}, and it displays an important property of vector addition: it is commutative! This means that the order of addition doesn't matter: $\vecA+\vecB=\vecB+\vecA$. To see this visually, we can apply the triangle method twice, i.e. moving both $\vecA$ \textit{and} $\vecB$:
 		      \begin{center}
 			      \begin{tikzpicture}
-				      \pic{VecSum};
 				      \draw[vector, xred] (o) -- (a) node[left, xshift=-5pt] {$\vecA$};
 				      \draw[vector, xblue] (o) -- (b) node[below] {$\vecB$};
-				      \draw[vector, xpurple, opacity=0.25] (o) -- ($(a)+(b)$) node[pos=1.05] {$\vecC$};
-				      \draw[vector, xblue, dashed] (a) -- ++(b);
-				      \draw[vector, xred, dashed] (b) -- ++(a);
+				      \draw[vector, xorange, opacity=0.25] (o) -- ($(a)+(b)$) node[pos=1.05] {$\vecC$};
+				      \draw[dashedvector={xblue}] (a) -- ++(b);
+				      \draw[dashedvector={xred}] (b) -- ++(a);
 			      \end{tikzpicture}
 		      \end{center}
 
 		      We see that no matter which vector we add onto which (i.e. what is the order of addition) - the result is the same. The shape formed by this demonstration is called a \newterm{parallelogram}, and it is incredibly important in linear algebra as a whole as we will see in future sections.
 	\end{enumerate}
+
+	This method of summing vectors can be applied to any number of vectors. For example:
+	\begin{center}
+		\begin{tikzpicture}
+			\coordinate (a) at (0.5,1);
+			\coordinate (b) at (-1,0.75);
+			\coordinate (c) at (1.5,0.5);
+			\coordinate (d) at (0,-0.65);
+			\coordinate (e) at (1,0);
+			\coordinate (base) at (o);
+			\coordinate (xsh) at (4cm, 0);
+			\foreach [count=\i] \coord in {a, b, c, d, e}{
+					\draw[vector={xcol\i}] ($(o)-(xsh)$) -- ($(\coord)-(xsh)$);
+					\draw[vector={xcol\i}] (base) -- ++(\coord);
+					\draw[vector={xcol\i}] ($(base)+(xsh)$) -- ++(\coord);
+					\coordinate (base) at ($(base)+(\coord)$);
+				}
+			\draw[dashedvector={gray}] ($(o)+(xsh)$) -- ($(base)+(xsh)$);
+		\end{tikzpicture}
+	\end{center}
 \end{descitemize}
 
 \subsection{Common Coordinate Systems in 2- and 3-Dimensions} % Cartesian, polar, cylindrical and spherical coordinate systems
