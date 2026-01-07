@@ -93,7 +93,7 @@ Vectors have two important properties: they can be added together and be scaled 
 		      We see that no matter which vector we add onto which (i.e. what is the order of addition) - the result is the same. The shape formed by this demonstration is called a \newterm{parallelogram}, and it is incredibly important in linear algebra as a whole as we will see in future sections.
 	\end{enumerate}
 
-	This method of summing vectors can be applied to any number of vectors. For example:
+	This method of summing vectors can be applied to any number of vectors. For example, consider the following 5 vectors:
 	\begin{center}
 		\begin{tikzpicture}
 			\coordinate (a) at (0.5,1);
@@ -102,16 +102,45 @@ Vectors have two important properties: they can be added together and be scaled 
 			\coordinate (d) at (0,-0.65);
 			\coordinate (e) at (1,0);
 			\coordinate (base) at (o);
-			\coordinate (xsh) at (4cm, 0);
 			\foreach [count=\i] \coord in {a, b, c, d, e}{
-					\draw[vector={xcol\i}] ($(o)-(xsh)$) -- ($(\coord)-(xsh)$);
-					\draw[vector={xcol\i}] (base) -- ++(\coord);
-					\draw[vector={xcol\i}] ($(base)+(xsh)$) -- ++(\coord);
-					\coordinate (base) at ($(base)+(\coord)$);
+					\draw[vector={xcol\i}] (o) -- (\coord);
 				}
-			\draw[dashedvector={gray}] ($(o)+(xsh)$) -- ($(base)+(xsh)$);
 		\end{tikzpicture}
 	\end{center}
+	To sum them together, all we need is to start with one the vectors (say, the red one) and use the triangle method to add the other vectors step by step:
+	\begin{center}
+		\begin{tikzpicture}
+			\coordinate (base) at (o);
+			\foreach [count=\i] \coord in {a, b, c, d, e}{
+					\draw[vector={xcol\i}] (base) -- ++(\coord);
+					\coordinate (base) at ($(base)+(\coord)$);
+				}
+			% \draw[dashedvector={gray}] ($(o)+(xsh)$) -- ($(base)+(xsh)$);
+		\end{tikzpicture}
+	\end{center}
+	Finally, we connect the origin of the first vector with the head of the last vector (in this case the orange one):
+	\begin{center}
+		\begin{tikzpicture}
+			\coordinate (base) at (o);
+			\foreach [count=\i] \coord in {a, b, c, d, e}{
+					\draw[vector={xcol\i}] (base) -- ++(\coord);
+					\coordinate (base) at ($(base)+(\coord)$);
+				}
+			\draw[dashedvector={gray}] (o) -- (base);
+		\end{tikzpicture}
+	\end{center}
+	and that's it, the dashed gray vector is the sum of all five vectors. To see that the order of addition really doesn't matter we can do this again but this time starting with the green vector and changing the summation order completely:
+	\begin{center}
+		\begin{tikzpicture}
+			\coordinate (base) at (o);
+			\foreach [count=\i] \coord in {c, e, a, b, d}{
+					\draw[vector={xcol\i}] (base) -- ++(\coord);
+					\coordinate (base) at ($(base)+(\coord)$);
+				}
+			\draw[dashedvector={gray}] (o) -- (base);
+		\end{tikzpicture}
+	\end{center}
+	As you can see, the resulting dashed gray vector is exactly the same as before.
 \end{descitemize}
 
 \subsection{Common Coordinate Systems in 2- and 3-Dimensions} % Cartesian, polar, cylindrical and spherical coordinate systems
