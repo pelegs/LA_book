@@ -141,6 +141,44 @@ Vectors have two important properties: they can be added together and be scaled 
 		\end{tikzpicture}
 	\end{center}
 	As you can see, the resulting dashed gray vector is exactly the same as before.
+
+	Another important property of the addition of vectors is that we can always take a vector and rotate it by $\ang{180}$, giving us a vector that \enquote{cancels} the original vector by summation. For example, the following red vector is rotated to yield its opposite, colored in orange:
+	\begin{center}
+		\begin{tikzpicture}
+			\draw[vector={xred}] (o) -- (a);
+			\draw[vector={xorange}] (o) -- ($-1*(a)$);
+			\fill (o) circle (0.05);
+		\end{tikzpicture}
+	\end{center}
+	These vectors added together using the triangle method yield a vector with $0$ norm:
+	\begin{center}
+		\begin{tikzpicture}
+			\draw[vector={xred}] (o) -- (a);
+			\coordinate (shift) at (2pt, -2pt);
+			\draw[vector={xorange}] ($(a)+(shift)$) -- (shift);
+			\fill (o) circle (0.05);
+		\end{tikzpicture}
+	\end{center}
+	(here I drew the vectors a bit shifted from each other so that we can see both)
+
+	Such a vector is called the \newterm{zero vector}, denoted as $\vec{0}$. It has no direction, and a norm of $0$. Adding $\vec{0}$ to any other vector is the same as not adding any vector at all (and it doesn't matter \enquote{from which side} we add $\vec{0}$):
+	\begin{equation}
+		\vec{a} + \vec{0} = \vec{0} + \vec{a} = \vec{a}.
+		\label{eq:addition with the zero vector}
+	\end{equation}
+	We say that the zero vector is \textit{agnostic} (also: neutral) to addition.
+
+	\item[Scaling vectors] any vector can be \newterm{scaled} by any real number, which in this context we call a \newterm{scalar}. Scaling by a number simply \enquote{stretches} the vector by the number. For example, in the following figure the red vector is scaled by several scalars:
+	\begin{center}
+		\begin{tikzpicture}
+			\draw[vector={xred}] (o) -- (a);
+			\foreach \s [count=\i] in {2, 0.5, -1, -1.5} {
+					\coordinate (sh) at (\i,0);
+					\draw[vector={xred}] ($(o)+(sh)$) -- ($\s*(a)+(sh)$) node[pos=1.1] {$\s$};
+				}
+			]
+		\end{tikzpicture}
+	\end{center}
 \end{descitemize}
 
 \subsection{Common Coordinate Systems in 2- and 3-Dimensions} % Cartesian, polar, cylindrical and spherical coordinate systems
