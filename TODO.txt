@@ -5,6 +5,7 @@
 -- add argument to run a WIP with an output name (deafult: no WIP, full compilation. Default WIP name: "wip").
 
 * Visual
+-- nice pastel color palettes: https://coolors.co/palettes/trending/pastel 
 -- add "properties" environment?
 -- interesting design elements:
   --- wrapped boxes: https://tex.stackexchange.com/questions/119282/dealing-with-many-margin-notes
@@ -12,6 +13,9 @@
   --- https://tex.stackexchange.com/questions/61586/tikz-picture-fitted-to-page-edge
   --- https://tex.stackexchange.com/questions/657439/empty-margin-inside-of-text-body
   --- for (sub)section heading: https://tex.stackexchange.com/questions/615524/tikz-how-to-draw-from-a-node-to-the-margin-of-a-page
+-- Read these:
+  --- auto node text at same angle as line: https://tex.stackexchange.com/questions/184225/sloped-tikz-node-with-rotation-and-scale
+  --- bold arrow in vector notation: https://tex.stackexchange.com/questions/269644/vector-bold-and-arrow-sign-on-top
 
 * Material
 * Basic linear algebra

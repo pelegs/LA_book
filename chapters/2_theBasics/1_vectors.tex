@@ -140,7 +140,7 @@ Vectors have two important properties: they can be added together and be scaled 
 			\draw[dashedvector={gray}] (o) -- (base);
 		\end{tikzpicture}
 	\end{center}
-	As you can see, the resulting dashed gray vector is exactly the same as before.
+	As can be seen, the resulting dashed gray vector is exactly the same as before.
 
 	Another important property of the addition of vectors is that we can always take a vector and rotate it by $\ang{180}$, giving us a vector that \enquote{cancels} the original vector by summation. For example, the following red vector is rotated to yield its opposite, colored in orange:
 	\begin{center}
@@ -245,11 +245,14 @@ While subtration is not commutative, it is \newterm{antisymmetric}:
 \end{equation}
 i.e. flipping the order of subtraction changes the sign of the expression.
 
-\colorlet{planetcol}{xpurple}
-\colorlet{starcol}{xorange}
-\colorlet{ptoscol}{xdarkgreen}
-\newcommand{\vecPl}{\textcolor{planetcol}{\vec{r}_{p}}}
+% \definecolor{starcol}{HTML}{FF8161}
+% \definecolor{planetcol}{HTML}{7161EF}
+% \definecolor{ptoscol}{HTML}{00B289}
+\colorlet{starcol}{xred}
+\colorlet{planetcol}{xblue!80!xgreen}
+\colorlet{ptoscol}{orange!75!xred}
 \newcommand{\vecSt}{\textcolor{starcol}{\vec{r}_{s}}}
+\newcommand{\vecPl}{\textcolor{planetcol}{\vec{r}_{p}}}
 \newcommand{\vecPtoS}{\textcolor{ptoscol}{\vec{r}_{p\to s}}}
 \newcommand{\uvecPtoS}{\textcolor{ptoscol}{\uvec{r}_{p\to s}}}
 
@@ -266,7 +269,7 @@ So we can use vector subtraction as a convinient way to point from one vector to
 		\coordinate (planet) at (1,3);
 		\draw pic {star={star}{1}{starcol}};
 		\draw pic {star={planet}{0.5}{planetcol}};
-		\draw[vector={orange}] (0,0) -- (star) node[midway, below left] {$\vec{r}_{s}$} node[black, above left, xshift=-30pt] {star};
+		\draw[vector={starcol}] (0,0) -- (star) node[midway, below left] {$\vec{r}_{s}$} node[black, above left, xshift=-30pt] {star};
 		\draw[vector={planetcol}] (0,0) -- (planet) node[midway, right] {$\vec{r}_{p}$} node[black, above right, xshift=15pt] {planet};
 		\draw[dashedvector={ptoscol}] (planet) -- (star) node[midway, above] {$\vec{r}_{p\to s}$};
 		\node[below of=o, yshift=15pt] {origin};
@@ -293,9 +296,27 @@ Now, if we scale a unit vector $\uvec{a}$ by any scalar $\lambda$ we get a vecto
 
 Back to our star-planet system: by normalizing the vector $\vecPtoS$ we get a unit vector pointing from the planet to the star: $\textcolor{ptoscol}{\uvecPtoS}$, and scaling by the magnitude of the gravitational attraction (\autoref{eq:gravity_force}) we finally get the correct \textit{gravity force vector}:
 \begin{equation}
-	\vec{F} = G\frac{Mm}{r^{2}}\uvec{r}_{p\to s}.
+	\tikz[
+		remember picture,
+		node distance={15pt}
+	]{
+		\node[coloredterm={xorange}] (F) {$\vec{F}$};
+		\node[right of=F] (eq) {$=$};
+		\node[coloredterm={xblue}, right of=eq, xshift=10pt] (scalar) {$G\frac{Mm}{r^{2}}$};
+		\node[coloredterm={xgreen}, right of=scalar, xshift=18pt] (vec) {$\uvec{r}_{p\to s}$};
+
+		\node[below of=F, yshift=-15pt] (Ftxt) {vector};
+		\node[below of=scalar, yshift=-25pt] (scalartxt) {scalar};
+		\node[below of=vec, yshift=-15pt] (vectxt) {vector};
+
+		\draw[coloredarrow={xorange}] (Ftxt.north) -- (F.south);
+		\draw[coloredarrow={xblue}] (scalartxt.north) -- (scalar.south);
+		\draw[coloredarrow={xgreen}] (vectxt.north) -- (vec.south);
+	}
 	\label{eq:gravity force vector}
 \end{equation}
+
+Indeed, $\vec{F}$ is a vector: it has a magnitude (scalar part) and a direction (vector part).
 
 % TODO: parallel vectors? distributivity of scalar and vector addition: s(a+b) = sa+sb, (x+y)a = xa+ya. Also, just a bit about linear combinations.
 
