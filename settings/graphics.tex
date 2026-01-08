@@ -226,6 +226,12 @@
 					\fill (0,0) circle (0.05);
 				}
 		},
+	pics/star/.style n args={3}{
+			code = {
+					\draw[very thick, fill=#3!20] (#1) circle (#2);
+					\fill (#1) circle (0.05);
+				}
+		},
 }
 
 \newcommand{\rulerTwoD}[6]{

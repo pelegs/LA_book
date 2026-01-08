@@ -2,9 +2,10 @@
 \subsection{Motivation} % Why do we need vectors? Two example problems: (1) bouncing off a wall in a 3D computer games, (2) Newtonian gravity force in coordinate form
 \begin{motivation}{Gravity Force}{gravity_force}
 	Consider a simple simulation of classical (\enquote{Newtionian}) gravity, say of a planet with mass $m$ orbiting a star with mass $M$ (where $M\gg m$). At any given moment, the force acting on the planet due to the star's gravity has magnitude
-	\begin{equation*}
+	\begin{equation}
 		F = G\frac{Mm}{r^{2}},
-	\end{equation*}
+		\label{eq:gravity_force}
+	\end{equation}
 	where $r$ is the distance between the planet and the star at that moment, and $G$ is a universal constant (specifically, $G=\SI{6.674e-11}{\newton\meter\squared\per\kilo\gram\squared}$).
 
 	\vspace{1em}
@@ -224,7 +225,7 @@ In fact, the similarities to real number don't end there: subtracting a vector $
 	\vecA - \vecB = \vecA + (-\vecB).
 	\label{eq:subtracting vectors}
 \end{equation}
-Visually, if we place the origin of $\vecA-\vecB$ at the head of $\vec{B}$, its head would be at the same point as the head of $\vecA$:
+Visually, if we place the origin of $\vecA-\vecB$ at the head of $\vecB$, its head would be at the same point as the head of $\vecA$:
 \begin{center}
 	\begin{tikzpicture}[fig with vectors]
 		\coordinate (a) at (-1.5,2.5);
@@ -242,9 +243,61 @@ While subtration is not commutative, it is \newterm{antisymmetric}:
 	\end{aligned}
 	\label{eq:anti symmetry of vec subtraction}
 \end{equation}
-i.e. if we flip the order of subtraction we carry a sign change.
+i.e. flipping the order of subtraction changes the sign of the expression.
 
-% TODO: unit vectors, parallel vectors?, distributivity of scalar and vector addition: s(a+b) = sa+sb, (x+y)a = xa+ya. Also, just a bit about linear combinations.
+\colorlet{planetcol}{xpurple}
+\colorlet{starcol}{xorange}
+\colorlet{ptoscol}{xdarkgreen}
+\newcommand{\vecPl}{\textcolor{planetcol}{\vec{r}_{p}}}
+\newcommand{\vecSt}{\textcolor{starcol}{\vec{r}_{s}}}
+\newcommand{\vecPtoS}{\textcolor{ptoscol}{\vec{r}_{p\to s}}}
+\newcommand{\uvecPtoS}{\textcolor{ptoscol}{\uvec{r}_{p\to s}}}
+
+So we can use vector subtraction as a convinient way to point from one vector to another. This can be utilized to implement the gravity force in \autoref{motivation:gravity_force}: if we know the position of the planet (let's call it $\vecPl$) and the position of the star ($\vecSt$), a vector pointing from the planet's center to the star's center would be, for example,
+\begin{equation}
+	\vecPtoS = \vecPl - \vecSt.
+	\label{eq:pointing from planet to star}
+\end{equation}
+(the notation $\textcolor{ptoscol}{p\to s}$ is just an easy way to represent that the vector is pointing from the planet to the star)
+
+\begin{center}
+	\begin{tikzpicture}[fig with vectors]
+		\coordinate (star) at (-2,2);
+		\coordinate (planet) at (1,3);
+		\draw pic {star={star}{1}{starcol}};
+		\draw pic {star={planet}{0.5}{planetcol}};
+		\draw[vector={orange}] (0,0) -- (star) node[midway, below left] {$\vec{r}_{s}$} node[black, above left, xshift=-30pt] {star};
+		\draw[vector={planetcol}] (0,0) -- (planet) node[midway, right] {$\vec{r}_{p}$} node[black, above right, xshift=15pt] {planet};
+		\draw[dashedvector={ptoscol}] (planet) -- (star) node[midway, above] {$\vec{r}_{p\to s}$};
+		\node[below of=o, yshift=15pt] {origin};
+	\end{tikzpicture}
+\end{center}
+
+However, this vector has a norm equal to the distance between the plant and the star - and we want to use it to calculate the \textit{force} acting on the planet, which has a different magnitude (and units). To do this, we need to be able to scale $\vecPtoS$ to whatever norm we want. Taking inspiration from real numbers, we can employ the following procedure: say we want to scale some non-zero number $x$ to be $y$. We can multiple $x$ by $\frac{y}{x}$, canceling the $x$:
+\begin{equation*}
+	x \mapsto \cancel{x}\cdot\frac{y}{\cancel{x}} = y.
+\end{equation*}
+A different way to phrase this is that we simply multiplying (or \textit{scaling}) $x$ by $\frac{1}{x}$, and then multiply the result by $y$:
+\begin{equation*}
+	x \mapsto \cancel{x}\cdot\frac{1}{\cancel{x}}\cdot y = y.
+\end{equation*}
+
+We can apply the same technique to vectors. Scaling a vector by its \textit{reciprocal norm} yields a vector with norm $1$, which we denote by replacing the arrow in the vector notation by a \enquote{hat}:
+\begin{equation}
+	\uvec{a} = \frac{1}{\norm{\vec{a}}}\vec{a}.
+	\label{eq:unit vector}
+\end{equation}
+This operation is called \newterm{normalization}, and the resulting vector is a \newterm{unit vector} (also: normalized vector).
+
+Now, if we scale a unit vector $\uvec{a}$ by any scalar $\lambda$ we get a vector of the same direction as $\uvec{a}$ (and also $\vec{a}$), and with a norm of $\lambda$. The vectors $\vec{a},\ \uvec{a}$ and $\lambda\uvec{a}$ are all parallel to each other.
+
+Back to our star-planet system: by normalizing the vector $\vecPtoS$ we get a unit vector pointing from the planet to the star: $\textcolor{ptoscol}{\uvecPtoS}$, and scaling by the magnitude of the gravitational attraction (\autoref{eq:gravity_force}) we finally get the correct \textit{gravity force vector}:
+\begin{equation}
+	\vec{F} = G\frac{Mm}{r^{2}}\uvec{r}_{p\to s}.
+	\label{eq:gravity force vector}
+\end{equation}
+
+% TODO: parallel vectors? distributivity of scalar and vector addition: s(a+b) = sa+sb, (x+y)a = xa+ya. Also, just a bit about linear combinations.
 
 % Any expression which is made up of a combination of adding and scaling vectors is called a \newterm{linear combination}.
 
