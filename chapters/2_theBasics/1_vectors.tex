@@ -34,11 +34,61 @@
 
 \lipsum[1]
 
-\subsection{Geomteric Properties of Vectors} % Definition, operations (addition, scaling)
+\subsection{Vecotrs and Their Geomteric Properties} % Definition, operations (addition, scaling)
+The above motivating problems require objects that have both a magnitude and a direction: for example, the force of gravity between a star and a planet has magnitude given by \autoref{eq:gravity_force} and a direction from the planet to the star. In \autoref{motivation:wall_bounce}, if we model some object hitting a wall, the object's velocity is a combination of magnitude (which we usually simply call speed) and a direction (towards the wall).
 
-Text text text\dots (what are vectors, pictorial representation, notation, all starting from the origin, etc.)
+In the simplest terms, \newterm{vectors} mathematical objects which have both a magnitude and a direction. They can exist in $2$-dimesnsions, $3$-dimensions or even higher dimensions. Since higher dimensions are rather hard to conseptulize, I will first focus on $2$- and $3$-dimensional vectors so that we can better undetstand their properties, and only then generalize to higher dimensions when it's relevant.
 
-Vectors have two important properties: they can be added together and be scaled to form other vectors.
+In $2$-dimensions we can represent vectors as arrows:
+\begin{center}
+	\begin{tikzpicture}
+		\def\xcoordsOrig{0,1,1,-1,2,3}
+		\def\ycoordsOrig{0,1,-1,-2,0,-1}
+		\def\xcoordsComps{-1,2,1,-1,-2,1}
+		\def\ycoordsComps{1,0,-2,2,-1,1}
+
+		\foreach \xo [count=\c,
+			parallel foreach=\yo in \ycoordsOrig via \c,
+			parallel foreach=\xs in \xcoordsComps via \c,
+			parallel foreach=\ys in \ycoordsComps via \c]
+		in \xcoordsOrig
+		{
+			\draw[vector={xcol\c}] (\xo,\yo) -- ++(\xs,\ys);
+		}
+
+	\end{tikzpicture}
+\end{center}
+
+However, since we are usually interested in the magnitude and direction of vectors and not where they originate from, we draw them as originating in the same location which we unimaginatively call the \newterm{origin}:
+\begin{center}
+	\begin{tikzpicture}[fig with vectors]
+		\def\xcoordsComps{-1,2,1,-1,-2,1}
+		\def\ycoordsComps{1,0,-2,2,-1,1}
+
+		\foreach \xc [count=\c, parallel foreach=\yc in \ycoordsComps via \c]
+		in \xcoordsComps
+		{
+			\draw[vector={xcol\c}] (0,0) -- (\xc,\yc);
+		}
+
+	\end{tikzpicture}
+\end{center}
+
+To stay consistant with most textbooks, from now on we will call the magnitude of a vector its \newterm{norm}. We will also sometimes refer to a vector's direction as its \newterm{orientation}.
+
+Since we will be using vectors as mathematical objects and would like to do use them in an arithmetical context, we obviously have to use some kind of notation. Usually, vectors are denoted as lower-case Latin letters, either in boldface or with a line or an arrow symbol above or below the letter. Here are few examples:
+
+\begin{align*}
+	 & \mathbf{a},\  \mathbf{b},\ \mathbf{c},\ \mathbf{x},\ \mathbf{y},\ \mathbf{z},\ \dots                   \\
+	 & \overline{a},\  \overline{b},\ \overline{c},\ \overline{x},\ \overline{y},\ \overline{z},\ \dots       \\
+	 & \underline{a},\  \underline{b},\ \underline{c},\ \underline{x},\ \underline{y},\ \underline{z},\ \dots \\
+	 & \vec{a},\  \vec{b},\ \vec{c},\ \vec{x},\ \vec{y},\ \vec{z},\ \dots                                     \\
+	 & \vvec{a},\  \vvec{b},\ \vvec{c},\ \vvec{x},\ \vvec{y},\ \vvec{z},\ \dots
+\end{align*}
+
+In this book I am using the last notation - a boldface Latin letter with an arrow above it. This ensures that it is both easy to read and is distinctive enough to quickly differentiate vectors from other objects. Sometimes, depending on context, the vectors are colored to make it easier to follow through (the process of setting up/developing a concept/equation).
+
+There are two fundamental operations involving vectors: addition and scaling. These two operations result in creating a new vector.
 \begin{descitemize}
 	\item[Adding vectors together] any two vectors of the same dimensionality (e.g. 2-dimensional, 3-dimensional, 4-dimensional, etc.) can be added together, and the result is a third vector. Pictorially, here are two vectors $\vecA$ and $\vecB$ which we want to sum together:
 
@@ -159,9 +209,9 @@ Vectors have two important properties: they can be added together and be scaled 
 	\end{center}
 	(here I drew the vectors a bit shifted from each other so that we can see both)
 
-	Such a vector is called the \newterm{zero vector}, denoted as $\vec{0}$. It has no direction, and a norm of $0$. Adding $\vec{0}$ to any other vector is the same as not adding any vector at all (and it doesn't matter \enquote{from which side} we add $\vec{0}$):
+	Such a vector is called the \newterm{zero vector}, denoted as $\vvec{0}$. It has no direction, and a norm of $0$. Adding $\vvec{0}$ to any other vector is the same as not adding any vector at all (and it doesn't matter \enquote{from which side} we add $\vvec{0}$):
 	\begin{equation}
-		\vec{a} + \vec{0} = \vec{0} + \vec{a} = \vec{a}.
+		\vvec{a} + \vvec{0} = \vvec{0} + \vvec{a} = \vvec{a}.
 		\label{eq:addition with the zero vector}
 	\end{equation}
 	We say that the zero vector is \textit{agnostic} (also: neutral) to addition.
@@ -213,7 +263,7 @@ Vectors have two important properties: they can be added together and be scaled 
 		\end{tikzpicture}
 	\end{center}
 
-	Therefore, scaling a vector is denoted just like multiplication of real numbers: $\lambda\vec{a}$, where $\lambda$ is the scalar. In the above example, if the red vector is $\vecA$, then the other five vectors can be written as $2\vecA,\ 0\vecA,\ \frac{1}{2}\vecA,\ -1\vecA$ and $-\frac{3}{2}\vecA$.
+	Therefore, scaling a vector is denoted just like multiplication of real numbers: $\lambda\vvec{a}$, where $\lambda$ is the scalar. In the above example, if the red vector is $\vecA$, then the other five vectors can be written as $2\vecA,\ 0\vecA,\ \frac{1}{2}\vecA,\ -1\vecA$ and $-\frac{3}{2}\vecA$.
 
 	Furthermore, we can place the vector notation in different places and even hiding the scalar depending on convinience, so for example we can write $-\vecA$ instead of $-1\vecA$ and $-\frac{3\vecA}{2}$ instead of $-\frac{3}{2}\vecA$.
 
@@ -251,9 +301,9 @@ i.e. flipping the order of subtraction changes the sign of the expression.
 \colorlet{starcol}{xred}
 \colorlet{planetcol}{xblue!80!xgreen}
 \colorlet{ptoscol}{orange!75!xred}
-\newcommand{\vecSt}{\textcolor{starcol}{\vec{r}_{s}}}
-\newcommand{\vecPl}{\textcolor{planetcol}{\vec{r}_{p}}}
-\newcommand{\vecPtoS}{\textcolor{ptoscol}{\vec{r}_{p\to s}}}
+\newcommand{\vecSt}{\textcolor{starcol}{\vvec{r}_{s}}}
+\newcommand{\vecPl}{\textcolor{planetcol}{\vvec{r}_{p}}}
+\newcommand{\vecPtoS}{\textcolor{ptoscol}{\vvec{r}_{p\to s}}}
 \newcommand{\uvecPtoS}{\textcolor{ptoscol}{\uvec{r}_{p\to s}}}
 
 So we can use vector subtraction as a convinient way to point from one vector to another. This can be utilized to implement the gravity force in \autoref{motivation:gravity_force}: if we know the position of the planet (let's call it $\vecPl$) and the position of the star ($\vecSt$), a vector pointing from the planet's center to the star's center would be, for example,
@@ -269,9 +319,9 @@ So we can use vector subtraction as a convinient way to point from one vector to
 		\coordinate (planet) at (1,3);
 		\draw pic {star={star}{1}{starcol}};
 		\draw pic {star={planet}{0.5}{planetcol}};
-		\draw[vector={starcol}] (0,0) -- (star) node[midway, below left] {$\vec{r}_{s}$} node[black, above left, xshift=-30pt] {star};
-		\draw[vector={planetcol}] (0,0) -- (planet) node[midway, right] {$\vec{r}_{p}$} node[black, above right, xshift=15pt] {planet};
-		\draw[dashedvector={ptoscol}] (planet) -- (star) node[midway, above] {$\vec{r}_{p\to s}$};
+		\draw[vector={starcol}] (0,0) -- (star) node[midway, below left] {$\vvec{r}_{s}$} node[black, above left, xshift=-30pt] {star};
+		\draw[vector={planetcol}] (0,0) -- (planet) node[midway, right] {$\vvec{r}_{p}$} node[black, above right, xshift=15pt] {planet};
+		\draw[dashedvector={ptoscol}] (planet) -- (star) node[midway, above] {$\vvec{r}_{p\to s}$};
 		\node[below of=o, yshift=15pt] {origin};
 	\end{tikzpicture}
 \end{center}
@@ -287,12 +337,12 @@ A different way to phrase this is that we simply multiplying (or \textit{scaling
 
 We can apply the same technique to vectors. Scaling a vector by its \textit{reciprocal norm} yields a vector with norm $1$, which we denote by replacing the arrow in the vector notation by a \enquote{hat}:
 \begin{equation}
-	\uvec{a} = \frac{1}{\norm{\vec{a}}}\vec{a}.
+	\uvec{a} = \frac{1}{\norm{\vvec{a}}}\vvec{a}.
 	\label{eq:unit vector}
 \end{equation}
 This operation is called \newterm{normalization}, and the resulting vector is a \newterm{unit vector} (also: normalized vector).
 
-Now, if we scale a unit vector $\uvec{a}$ by any scalar $\lambda$ we get a vector of the same direction as $\uvec{a}$ (and also $\vec{a}$), and with a norm of $\lambda$. The vectors $\vec{a},\ \uvec{a}$ and $\lambda\uvec{a}$ are all parallel to each other.
+Now, if we scale a unit vector $\uvec{a}$ by any scalar $\lambda$ we get a vector of the same direction as $\uvec{a}$ (and also $\vvec{a}$), and with a norm of $\lambda$. The vectors $\vvec{a},\ \uvec{a}$ and $\lambda\uvec{a}$ are all parallel to each other.
 
 Back to our star-planet system: by normalizing the vector $\vecPtoS$ we get a unit vector pointing from the planet to the star: $\textcolor{ptoscol}{\uvecPtoS}$, and scaling by the magnitude of the gravitational attraction (\autoref{eq:gravity_force}) we finally get the correct \textit{gravity force vector}:
 \begin{equation}
@@ -300,7 +350,7 @@ Back to our star-planet system: by normalizing the vector $\vecPtoS$ we get a un
 		remember picture,
 		node distance={15pt}
 	]{
-		\node[coloredterm={xorange}] (F) {$\vec{F}$};
+		\node[coloredterm={xorange}] (F) {$\vvec{F}$};
 		\node[right of=F] (eq) {$=$};
 		\node[coloredterm={xblue}, right of=eq, xshift=10pt] (scalar) {$G\frac{Mm}{r^{2}}$};
 		\node[coloredterm={xgreen}, right of=scalar, xshift=18pt] (vec) {$\uvec{r}_{p\to s}$};
@@ -316,7 +366,7 @@ Back to our star-planet system: by normalizing the vector $\vecPtoS$ we get a un
 	\label{eq:gravity force vector}
 \end{equation}
 
-Indeed, $\vec{F}$ is a vector: it has a magnitude (scalar part) and a direction (vector part).
+Indeed, $\vvec{F}$ is a vector: it has a magnitude (scalar part) and a direction (vector part).
 
 % TODO: parallel vectors? distributivity of scalar and vector addition: s(a+b) = sa+sb, (x+y)a = xa+ya. Also, just a bit about linear combinations.
 

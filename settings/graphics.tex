@@ -61,9 +61,9 @@
 \colorlet{MCol4}{xgreen}
 
 
-%%%%%%%%%%%%%%%%%%%%%
-%        PGF        %
-%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        PGFPLOTS        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{pgfplots}
 \usepgfplotslibrary{fillbetween}%, colormaps, colorbrewer, patchplots}
@@ -249,6 +249,16 @@
 	\pgfmathsetmacro{\scale}{3*\a/sqrt(\Vx*\Vx+\Vy*\Vy)};
 	\foreach \b in {-#4,...,#4}
 	\addplot[very thick, #5] {-(\Vx/\Vy)*x+(\b/\a)};
+}
+
+%%%%%%%%%%%%%%%%%%%%%
+%        PGF        %
+%%%%%%%%%%%%%%%%%%%%%
+
+\pgfset{
+	% Foreach on multiple lists
+	% Taken from: https://tex.stackexchange.com/a/193943/162087
+	foreach/parallel foreach/.style args={#1in#2via#3}{evaluate=#3 as #1 using {{#2}[#3-1]}},
 }
 
 %%%%%%%%%%%%%%%%%%%%%%
