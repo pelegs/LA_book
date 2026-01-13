@@ -165,7 +165,6 @@ There are two fundamental operations involving vectors: addition and scaling. Th
 					\draw[vector={x\coord col}] (base) -- ++(\coord);
 					\coordinate (base) at ($(base)+(\coord)$);
 				}
-			% \draw[dashedvector={gray}] ($(o)+(xsh)$) -- ($(base)+(xsh)$);
 		\end{tikzpicture}
 	\end{center}
 	Finally, we connect the origin of the first vector with the head of the last vector (in this case the orange one):
@@ -374,6 +373,8 @@ Indeed, $\vvec{F}$ is a vector: it has a magnitude (the scalar $G\frac{Mm}{r^{2}
 \end{equation}
 where $v\in\Rs$ is the magnitude of $\vvec{v}$, i.e. $v=\norm{\vvec{v}}$.
 
+TBW: text about how in 3D the same rules apply.
+
 \begin{center}
 	\tdplotsetmaincoords{75}{130}
 	\begin{tikzpicture}[tdplot_main_coords]
@@ -387,9 +388,9 @@ where $v\in\Rs$ is the magnitude of $\vvec{v}$, i.e. $v=\norm{\vvec{v}}$.
 
 		\edef\n{\listlen\xcomps[]}
 		\foreach \s in {2,...,\n}{
-				\draw[vector={xred!20}] (\xcomps[\s-1],\ycomps[\s-1],0) -- (\xcomps[\s],\ycomps[\s],0);
-				\draw[vector={xblue!20}] (\xcomps[\s-1],0,\zcomps[\s-1]) -- (\xcomps[\s],0,\zcomps[\s]);
-				\draw[vector={xgreen!20}] (0,\ycomps[\s-1],\zcomps[\s-1]) -- (0,\ycomps[\s],\zcomps[\s]);
+				\draw[vector={xred!50}] (\xcomps[\s-1],\ycomps[\s-1],0) -- (\xcomps[\s],\ycomps[\s],0);
+				\draw[vector={xblue!50}] (\xcomps[\s-1],0,\zcomps[\s-1]) -- (\xcomps[\s],0,\zcomps[\s]);
+				\draw[vector={xgreen!50}] (0,\ycomps[\s-1],\zcomps[\s-1]) -- (0,\ycomps[\s],\zcomps[\s]);
 				\draw[vector={\xcolorslst[\s-1]}] (\xcomps[\s-1],\ycomps[\s-1],\zcomps[\s-1]) -- (\xcomps[\s],\ycomps[\s],\zcomps[\s]);
 			}
 	\end{tikzpicture}
@@ -397,9 +398,50 @@ where $v\in\Rs$ is the magnitude of $\vvec{v}$, i.e. $v=\norm{\vvec{v}}$.
 
 % TODO: parallel vectors? distributivity of scalar and vector addition: s(a+b) = sa+sb, (x+y)a = xa+ya. Also, just a bit about linear combinations.
 
-% Any expression which is made up of a combination of adding and scaling vectors is called a \newterm{linear combination}.
-
 \subsection{Common Coordinate Systems in 2- and 3-Dimensions} % Cartesian, polar, cylindrical and spherical coordinate systems
+Everything we discussed so far is well and good - but it doesn't give us much in the way of actually doing any practical calculations. To do that, we need to \enquote{quantify} vectors somehow. There are many ways to assign values to vectors, and for now we will concetrate on the most common ones: two systems in 2-dimensions and three systems in 3-dimensions.
+
+In 2-dimensions, we can choose two perpendicular directions to be the $x$- and $y$-axes, respectively. For convinience and to align with almost any other text about this topic, I will (almost) always choose the $x$-axis to lie in the horizontal direction, and the $y$-axis to lie in the vertical directions:
+\begin{center}
+	\begin{tikzpicture}
+		\begin{axis}[
+				width=8cm, height=8cm,
+				xyplane,
+				xmin=-1.5, xmax=1.5,
+				ymin=-1.5, ymax=1.5,
+				xtick={-1.5,-1.25,...,1.5},
+				ytick={-1.5,-1.25,...,1.5},
+			]
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
+This is known as the \newterm{Cartesian coordinate system}. Let's place the colorful vectors from before in this coordinate system:
+
+\begin{center}
+	\begin{tikzpicture}
+		\begin{axis}[
+				width=8cm, height=8cm,
+				xyplane,
+				xmin=-1.5, xmax=1.5,
+				ymin=-1.5, ymax=1.5,
+				xtick={-1.5,-1.25,...,1.5},
+				ytick={-1.5,-1.25,...,1.5},
+			]
+			\coordinate (a) at (0.5,1);
+			\coordinate (b) at (-1,0.75);
+			\coordinate (c) at (1.5,0.5);
+			\coordinate (d) at (0,-0.65);
+			\coordinate (e) at (1,0);
+			\draw[vector={xred}] (0,0) -- (a);
+			\draw[vector={xblue}] (0,0) -- (b);
+			\draw[vector={xgreen}] (0,0) -- (c);
+			\draw[vector={xpurple}] (0,0) -- (d);
+			\draw[vector={xorange}] (0,0) -- (e);
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
+
+\lipsum
 
 
 \subsection{Geomteric Objects} % Points, lines, planes, intersections
