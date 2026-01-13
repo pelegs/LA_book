@@ -23,8 +23,8 @@
 				\draw[xpurple, thick, fill=xpurple, opacity=0.2] (-3,-3) -- (-3,3) -- (3,3) -- (3,-3) -- cycle;
 				\draw[help lines, opacity=0.25] (-3,-3) grid (3,3);
 			\end{scope}
-			\draw[vector, xred, dashed] (1,1,2) -- (0,0,0);
-			\draw[vector, xblue, dashed] (0,0,0) -- (-1,-1,2);
+			\draw[dashedvector, xred] (1,1,2) -- (0,0,0);
+			\draw[dashedvector, xblue] (0,0,0) -- (-1,-1,2);
 		\end{tikzpicture}
 	\end{center}
 
@@ -247,8 +247,8 @@ There are two fundamental operations involving vectors: addition and scaling. Th
 			\draw[thick] (-4,0) -- (4,0);
 			\draw[thick, dotted] (-4,0) -- (-4.5,0) node[left] {$-\infty$};
 			\draw[thick, dotted] (4,0) -- (4.5,0) node[right] {$+\infty$};
-			\foreach \x in {-3.5, -3, ..., 3.5}{
-					\draw[thick] (\x,-0.1) -- (\x,0.1);
+			\foreach \xnew in {-3.5, -3, ..., 3.5}{
+					\draw[thick] (\xnew,-0.1) -- (\xnew,0.1);
 				}
 			\node (A) at (0,-0.4) {$0$};
 			\node at (1.5,-0.4) {$3$};
@@ -366,13 +366,41 @@ Back to our star-planet system: by normalizing the vector $\vecPtoS$ we get a un
 	\label{eq:gravity force vector}
 \end{equation}
 
-Indeed, $\vvec{F}$ is a vector: it has a magnitude (scalar part) and a direction (vector part).
+Indeed, $\vvec{F}$ is a vector: it has a magnitude (the scalar $G\frac{Mm}{r^{2}}$) and a direction (the unit vector $\hat{r}_{p\to s}$). Any vector can be written as a unit vector scaled by a real number:
+
+\begin{equation}
+	\vvec{v} = v\uvec{v},
+	\label{eq:vector as magnitude and orientation}
+\end{equation}
+where $v\in\Rs$ is the magnitude of $\vvec{v}$, i.e. $v=\norm{\vvec{v}}$.
+
+\begin{center}
+	\tdplotsetmaincoords{75}{130}
+	\begin{tikzpicture}[tdplot_main_coords]
+		\readlist\xcomps{0,1,2,3,3}
+		\readlist\ycomps{0,1,1,2,3}
+		\readlist\zcomps{0,1,2,3,4}
+
+		\draw[thick, fill=xred!10] (0,0,0) -- (5,0,0) -- (5,5,0) -- (0,5,0) -- cycle;
+		\draw[thick, fill=xblue!10] (0,0,0) -- (0,0,5) -- (5,0,5) -- (5,0,0) -- cycle;
+		\draw[thick, fill=xgreen!10] (0,0,0) -- (0,5,0) -- (0,5,5) -- (0,0,5) -- cycle;
+
+		\edef\n{\listlen\xcomps[]}
+		\foreach \s in {2,...,\n}{
+				\draw[vector={xred!20}] (\xcomps[\s-1],\ycomps[\s-1],0) -- (\xcomps[\s],\ycomps[\s],0);
+				\draw[vector={xblue!20}] (\xcomps[\s-1],0,\zcomps[\s-1]) -- (\xcomps[\s],0,\zcomps[\s]);
+				\draw[vector={xgreen!20}] (0,\ycomps[\s-1],\zcomps[\s-1]) -- (0,\ycomps[\s],\zcomps[\s]);
+				\draw[vector={\xcolorslst[\s-1]}] (\xcomps[\s-1],\ycomps[\s-1],\zcomps[\s-1]) -- (\xcomps[\s],\ycomps[\s],\zcomps[\s]);
+			}
+	\end{tikzpicture}
+\end{center}
 
 % TODO: parallel vectors? distributivity of scalar and vector addition: s(a+b) = sa+sb, (x+y)a = xa+ya. Also, just a bit about linear combinations.
 
 % Any expression which is made up of a combination of adding and scaling vectors is called a \newterm{linear combination}.
 
 \subsection{Common Coordinate Systems in 2- and 3-Dimensions} % Cartesian, polar, cylindrical and spherical coordinate systems
+
 
 \subsection{Geomteric Objects} % Points, lines, planes, intersections
 
