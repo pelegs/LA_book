@@ -37,7 +37,7 @@
 \subsection{Vecotrs and Their Geomteric Properties} % Definition, operations (addition, scaling)
 The above motivating problems require objects that have both a magnitude and a direction: for example, the force of gravity between a star and a planet has magnitude given by \autoref{eq:gravity_force} and a direction from the planet to the star. In \autoref{motivation:wall_bounce}, if we model some object hitting a wall, the object's velocity is a combination of magnitude (which we usually simply call speed) and a direction (towards the wall).
 
-In the simplest terms, \newterm{vectors} mathematical objects which have both a magnitude and a direction. They can exist in $2$-dimesnsions, $3$-dimensions or even higher dimensions. Since higher dimensions are rather hard to conseptulize, I will first focus on $2$- and $3$-dimensional vectors so that we can better undetstand their properties, and only then generalize to higher dimensions when it's relevant.
+In the simplest terms, \newterm{vectors} are mathematical objects which have both a magnitude and a direction. The magnitude of a vector is called \newterm{norm}, while its direction is sometimes refered to as its \newterm{orientation}. Vecotrs can exist in $2$-dimesnsions, $3$-dimensions or even higher dimensions. Since higher dimensions are rather hard to conseptulize, I will first focus on $2$- and $3$-dimensional vectors so that we can better undetstand their properties, and only then generalize to higher dimensions when it's relevant.
 
 In $2$-dimensions we can represent vectors as arrows:
 \begin{center}
@@ -64,19 +64,31 @@ However, since we are usually interested in the magnitude and direction of vecto
 	\begin{tikzpicture}[fig with vectors]
 		\def\xcoordsComps{-1,2,1,-1,-2,1}
 		\def\ycoordsComps{1,0,-2,2,-1,1}
-
 		\foreach \xc [count=\c, parallel foreach=\yc in \ycoordsComps via \c]
 		in \xcoordsComps
 		{
 			\draw[vector={xcol\c}] (0,0) -- (\xc,\yc);
 		}
-
 	\end{tikzpicture}
 \end{center}
 
-To stay consistant with most textbooks, from now on we will call the magnitude of a vector its \newterm{norm}. We will also sometimes refer to a vector's direction as its \newterm{orientation}.
+In fact, all vectors that have the same norm and orientation are considered identical - no matter where they originate. For example, the following vectors are actually all identical:
 
-Since we will be using vectors as mathematical objects and would like to do use them in an arithmetical context, we obviously have to use some kind of notation. Usually, vectors are denoted as lower-case Latin letters, either in boldface or with a line or an arrow symbol above or below the letter. Here are few examples:
+\begin{center}
+	\begin{tikzpicture}
+		\coordinate (head) at (2,1.5);
+		\draw[vector={xcol0!50}] (-3,1) -- ++(head);
+		\draw[vector={xcol1}] (3,2) -- ++(head);
+		\draw[vector={xcol2}] (2,-3) -- ++(head);
+		\draw[vector={xcol3}] (-4,-1) -- ++(head);
+		\draw[vector={xcol4}] (1,-1) -- ++(head);
+		\draw[vector={xcol5}] (-1,0) -- ++(head);
+		\draw[vector={xcol6}] (1,-2) -- ++(head);
+		\draw[vector={xcol7}] (-4,3) -- ++(head);
+	\end{tikzpicture}
+\end{center}
+
+Since we will be using vectors as mathematical objects and would like to use them in an arithmetical context, we need to use some kind of notation. Usually, vectors are denoted as lower-case Latin letters, either in boldface or with a line or an arrow symbol above or below the letter. Here are few examples:
 
 \begin{align*}
 	 & \mathbf{a},\  \mathbf{b},\ \mathbf{c},\ \mathbf{x},\ \mathbf{y},\ \mathbf{z},\ \dots                   \\
@@ -88,7 +100,9 @@ Since we will be using vectors as mathematical objects and would like to do use 
 
 In this book I am using the last notation - a boldface Latin letter with an arrow above it. This ensures that it is both easy to read and is distinctive enough to quickly differentiate vectors from other objects. Sometimes, depending on context, the vectors are colored to make it easier to follow through (the process of setting up/developing a concept/equation).
 
-There are two fundamental operations involving vectors: addition and scaling. These two operations result in creating a new vector.
+There are two fundamental operations involving vectors: addition and scaling. These two operations result in creating a new vector of the same dimensions: adding together two 2-dimensional vectors results in a $2$-dimensional vector, scaling a $3$-dimensional vector result in a $3$-dimensional vector, etc.
+
+Let's have a closer look at these two fundamental vector operations:
 \begin{descitemize}
 	\item[Adding vectors together] any two vectors of the same dimensionality (e.g. 2-dimensional, 3-dimensional, 4-dimensional, etc.) can be added together, and the result is a third vector. Pictorially, here are two vectors $\vecA$ and $\vecB$ which we want to sum together:
 
@@ -368,10 +382,10 @@ Back to our star-planet system: by normalizing the vector $\vecPtoS$ we get a un
 Indeed, $\vvec{F}$ is a vector: it has a magnitude (the scalar $G\frac{Mm}{r^{2}}$) and a direction (the unit vector $\hat{r}_{p\to s}$). Any vector can be written as a unit vector scaled by a real number:
 
 \begin{equation}
-	\vvec{v} = v\uvec{v},
+	\vvec{a} = a\uvec{a},
 	\label{eq:vector as magnitude and orientation}
 \end{equation}
-where $v\in\Rs$ is the magnitude of $\vvec{v}$, i.e. $v=\norm{\vvec{v}}$.
+where $a\in\Rs$ is the magnitude of $\vvec{a}$, i.e. $a=\norm{\vvec{a}}$. This is nothing more than a rearrangement of \autoref{eq:unit vector}: by dividing both sides of the equation by $a=\norm{\vec{a}}$ we get the definition of a unit vector.
 
 TBW: text about how in 3D the same rules apply.
 
@@ -398,51 +412,10 @@ TBW: text about how in 3D the same rules apply.
 
 % TODO: parallel vectors? distributivity of scalar and vector addition: s(a+b) = sa+sb, (x+y)a = xa+ya. Also, just a bit about linear combinations.
 
-\subsection{Common Coordinate Systems in 2- and 3-Dimensions} % Cartesian, polar, cylindrical and spherical coordinate systems
+% TODO:#2: a little bit about the vector spaces R^n.
+
+\subsection{Basis Sets, and Common Coordinate Systems} % Linear Combinations, Basis sets and the common coordinate systems: Cartesian, polar, cylindrical and spherical
 Everything we discussed so far is well and good - but it doesn't give us much in the way of actually doing any practical calculations. To do that, we need to \enquote{quantify} vectors somehow. There are many ways to assign values to vectors, and for now we will concetrate on the most common ones: two systems in 2-dimensions and three systems in 3-dimensions.
-
-In 2-dimensions, we can choose two perpendicular directions to be the $x$- and $y$-axes, respectively. For convinience and to align with almost any other text about this topic, I will (almost) always choose the $x$-axis to lie in the horizontal direction, and the $y$-axis to lie in the vertical directions:
-\begin{center}
-	\begin{tikzpicture}
-		\begin{axis}[
-				width=8cm, height=8cm,
-				xyplane,
-				xmin=-1.5, xmax=1.5,
-				ymin=-1.5, ymax=1.5,
-				xtick={-1.5,-1.25,...,1.5},
-				ytick={-1.5,-1.25,...,1.5},
-			]
-		\end{axis}
-	\end{tikzpicture}
-\end{center}
-This is known as the \newterm{Cartesian coordinate system}. Let's place the colorful vectors from before in this coordinate system:
-
-\begin{center}
-	\begin{tikzpicture}
-		\begin{axis}[
-				width=8cm, height=8cm,
-				xyplane,
-				xmin=-1.5, xmax=1.5,
-				ymin=-1.5, ymax=1.5,
-				xtick={-1.5,-1.25,...,1.5},
-				ytick={-1.5,-1.25,...,1.5},
-			]
-			\coordinate (a) at (0.5,1);
-			\coordinate (b) at (-1,0.75);
-			\coordinate (c) at (1.5,0.5);
-			\coordinate (d) at (0,-0.65);
-			\coordinate (e) at (1,0);
-			\draw[vector={xred}] (0,0) -- (a);
-			\draw[vector={xblue}] (0,0) -- (b);
-			\draw[vector={xgreen}] (0,0) -- (c);
-			\draw[vector={xpurple}] (0,0) -- (d);
-			\draw[vector={xorange}] (0,0) -- (e);
-		\end{axis}
-	\end{tikzpicture}
-\end{center}
-
-\lipsum
-
 
 \subsection{Geomteric Objects} % Points, lines, planes, intersections
 
