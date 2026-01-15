@@ -415,7 +415,39 @@ TBW: text about how in 3D the same rules apply.
 \subsection{Cartesian coordinate System and Basis Sets}
 % General idea for the structure of this subsection: how can we quantify vectors? -> Cartesian coordinates in 2D (and 3D?) -> linear combination form (v=ax+by=ai+bj, where x,y=i,j are the unit vectors) -> why not linear combinations of any set of vectors? -> show that in 2D any *non colinear* vectors can be used to represent any vectors -> discussion about linear independence in 2D (and 3D?) -> span & basis sets -> vector spaces and subspaces (which brings us nicely into the next topic of geometric objects)
 
-Everything we discussed so far is very nice - but it doesn't give us much in the way of actually doing any practical calculations. To do that, we need to \enquote{quantify} vectors somehow.
+Everything we discussed so far is very nice - but it doesn't give us much in the way of actually doing any practical calculations. To do that, we need to \enquote{quantify} vectors somehow. By far the most common way in 2- and 3-dimensions is to use a \newterm{Cartesian coordinate system}: in dimensions we simply choose a direction to be the $x$-direction (usually the horizontal direction such that the numbers increase to the right), and then the choose between the two possible perpendicular directions to be the positive $y$-direction:
+\begin{center}
+	\begin{tikzpicture}
+		\begin{axis}[
+				width=12cm, height=12cm,
+				xyplane,
+				name=ax,
+			]
+			% \node at (ax.west) {$-x$};
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
+
+We then set the origin of all vectors to be at the origin of the axes (i.e. the point $(0,0)$). To quantify vectors, we draw two lines from the vector's head: one parallel to the $x$-axis and one parallel to the $y$-axis. The points at which these lines intersect the $y$- and $x$-axes, respectively, are then the $x$- and $y$-coordinates of the vector:
+
+\begin{center}
+	\begin{tikzpicture}
+		\Huge
+		\begin{axis}[
+				width=12cm, height=12cm,
+				xyplane,
+				xmin=-2, xmax=5,
+				ymin=-2, ymax=5,
+				xlabel=\Huge$x$,
+				ylabel=\Huge$y$,
+			]
+			\coordinate (a) at (2,3);
+			\draw[ultra thick, dashed, xred] (a) -- (a |- 0,0) node[below] {$a_{x}$};
+			\draw[ultra thick, dashed, xblue] (a) -- (0,0 |- a) node[left] {$a_{y}$};
+			\draw[vector={gray}, line width=3pt] (0,0) -- (a) node[pos=1.1] {$\vec{a}$};
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
 
 \subsection{Geomteric Objects} % Points, lines, planes, intersections
 
