@@ -428,30 +428,80 @@ Everything we discussed so far is very nice - but it doesn't give us much in the
 	\end{tikzpicture}
 \end{center}
 
-We then set the origin of all vectors to be at the origin of the axes (i.e. the point $(0,0)$). To quantify vectors, we draw two lines from the vector's head: one parallel to the $x$-axis and one parallel to the $y$-axis. The points at which these lines intersect the $y$- and $x$-axes, respectively, are then the $x$- and $y$-coordinates of the vector:
+We then set the origin of all vectors to be at the origin of the axes (i.e. the point $(0,0)$). To quantify a vector, we draw two lines from its head: one parallel to the $x$-axis and one parallel to the $y$-axis. The points at which these lines intersect the $y$- and $x$-axes are then, respectively, the $x$- and $y$-coordinates of the vector: for example, \autoref{fig:vector in 2D Cartesian system} shows a vector $\vec{a}$ placed in a Cartesian coordinate system. The $x$-coordinate of the vector is $a_{x}=2$ and its $y$-coordinate is $a_{y}=3$.
 
-\begin{center}
-	\begin{tikzpicture}
-		\Huge
-		\begin{axis}[
-				width=12cm, height=12cm,
-				xyplane,
-				xmin=-2, xmax=5,
-				ymin=-2, ymax=5,
-				xlabel=\Huge$x$,
-				ylabel=\Huge$y$,
-			]
-			\coordinate (a) at (2,3);
-			\draw[ultra thick, dashed, xred] (a) -- (a |- 0,0) node[below] {$a_{x}$};
-			\draw[ultra thick, dashed, xblue] (a) -- (0,0 |- a) node[left] {$a_{y}$};
-			\draw[vector={gray}, line width=3pt] (0,0) -- (a) node[pos=1.1] {$\vec{a}$};
-		\end{axis}
-	\end{tikzpicture}
-\end{center}
+\begin{figure}
+	\begin{center}
+		\begin{tikzpicture}
+			\Huge
+			\begin{axis}[
+					width=12cm, height=12cm,
+					xyplane,
+					xmin=-2, xmax=5,
+					ymin=-2, ymax=5,
+					xlabel=\Huge$x$,
+					ylabel=\Huge$y$,
+				]
+				\pgfmathsetmacro{\ax}{2}
+				\pgfmathsetmacro{\ay}{3}
+				\coordinate (a) at (\ax,\ay);
+				\draw[ultra thick, dashed, xred] (a) -- (\ax,0) node[below] {$a_{x}=\ax$};
+				\draw[ultra thick, dashed, xblue] (a) -- (0,\ay) node[left] {$a_{y}=\ay$};
+				\draw[vector={gray}, line width=3pt] (0,0) -- (a) node[pos=1.1] {$\vec{a}$};
+			\end{axis}
+		\end{tikzpicture}
+	\end{center}
+	\label{fig:vector in 2D Cartesian system}
+	\caption{The vector $\vec{a}$ placed in a Cartesian coordinate system, making its coordinates $a_{x}=3$ and $a_{y}=2$.}
+\end{figure}
+
+Using these coordinates, we can then write $\vec{a}=\left(3,2\right)$, i.e. identify the vector with the point in the Cartesian system where its head is (given that its origin aligns with the origin of the system). In general, this works for any vector: each point $\pnt{P}=(x,y)$ in the Cartesian system can be identified with a single vector $\vec{v}=(x,y)$, and each vector can be identified with a single point.
+
+However, vector are not points, and we should make this fact reflected in the notation we use. Therefore I choose to use the \newterm{column-form notation} for vectors, for example
+\begin{equation}
+	\vec{a} = \colvec{2;3},\ \vec{v}=\colvec{x;y},
+	\label{eq:first column vectors}
+\end{equation}
+etc. In principle, I could have chosen to use a similar notation, namely the \newterm{row-form notation}:
+\begin{equation}
+	\vec{a} = \rowvec{2;3},\ \vec{v}=\rowvec{x;y},
+	\label{eq:first row vectors}
+\end{equation}
+
+While both notations are essentially equivalent, to keep notational consistency I would need to strictly use one of these notations, and for reasons of personal preferences I chose the column-form. This enforces the use of some notational conventions later, for example the meaning of matrix columns vs. rows and the notation for a set of related objects called \newterm{covectors} (discussed in details in REF).
+
+Back to the material itself: another way of interpreting the coordinates of a vector is to define two unit vectors:
+\begin{equation}
+	\ebx = \colvec{1;0},\quad\eby = \colvec{0;1}.
+	\label{eq:std basis vectors in 2D}
+\end{equation}
+Looking at \autoref{fig:std basis vectors in 2D}, these two vectors correspond to the two axes of the Cartesian coordinate system: $\ebx$ is a unit vector in the direction of the $x$-axis, and $\eby$ is a unit vector in the direction of the $y$-axis.
+
+\begin{figure}
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{axis}[
+					xyplane,
+					xmin=-1.5, xmax=1.5,
+					ymin=-1.5, ymax=1.5,
+					xtick={-1.5,-1,...,1.5},
+					ytick={-1.5,-1,...,1.5},
+					xticklabels={,-1,,,,1,},
+					yticklabels={,-1,,,,1,},
+				]
+				\draw[vector={xred}] (0,0) -- (1,0) node[above] {$\ebx$};
+				\draw[vector={xblue}] (0,0) -- (0,1) node[right] {$\eby$};
+			\end{axis}
+		\end{tikzpicture}
+	\end{center}
+	\caption{}
+	\label{fig:std basis vectors in 2D}
+\end{figure}
+
 
 \subsection{Geomteric Objects} % Points, lines, planes, intersections
 
-\subsection{Projections and Rejections} % Vector decomposition, projection & rejection, the dot product, the cross product and its issues
+\subsection{Projections an`d Rejections} % Vector decomposition, projection & rejection, the dot product, the cross product and its issues
 
 \subsection{Vector Spaces} % R2, R3 & Rn and their subsets, linear combinations, span, basis sets, subspaces, the Gram-Schmist process
 
