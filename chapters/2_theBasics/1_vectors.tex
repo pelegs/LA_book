@@ -487,33 +487,51 @@ Using the triangle method, we move $\vvec{b}$ such that its origin lies at the h
 					ymin=-1, ymax=5,
 					xtick={-1,...,5},
 					ytick={-1,...,5},
+					axis line style={stealth-stealth, very thick, opacity=0.2},
+					tick style={opacity=0.2},
+					every axis x label/.append style={opacity=0.2},
+					every axis y label/.append style={opacity=0.2},
 				]
 				\tikzset{
-					axprojline/.style={|-|, draw=#1, ultra thick, dashed},
+					axprojline/.style={|-|, draw=#1, ultra thick, densely dotted},
 					axprojarea/.style={#1, opacity=0.05},
-					axprojborder/.style={#1, thick, dashed, opacity=0.5},
+					axprojborder/.style={#1, ultra thick, dashed, opacity=0.5},
 					% axprojarea/.style={pattern=north east lines, pattern color=#1, opacity=0.3},
 					% I should develop this idea further - maybe lines in the same slope as the vector?..
+					% MAYBE separate to x- and y-axes individually?
 				}
 				\colorlet{acol}{xpurple}
 				\colorlet{bcol}{xorange}
+				% \colorlet{ccol}{xdarkgreen}
+
 				\pgfmathsetmacro{\ax}{1}
 				\pgfmathsetmacro{\ay}{3}
 				\pgfmathsetmacro{\bx}{2}
 				\pgfmathsetmacro{\by}{1}
-				\fill[axprojarea={acol}] (0,0) rectangle (\ax,\ay);
+				% \pgfmathsetmacro{\cx}{1}
+				% \pgfmathsetmacro{\cy}{-2}
+
+				\fill[axprojarea={acol}] (0,0) -- (\ax,0) -- (\ax,\ay) -- cycle;
+				% \fill[axprojarea={acol}] (0,0) rectangle (\ax,\ay);
 				\fill[axprojarea={bcol}] (\ax,0) -- ({\ax+\bx},0) -- ({\ax+\bx},{\ay+\by}) -- (\ax,\ay) -- cycle;
-				\fill[axprojarea={bcol}] (0,\ay) -- (\ax,\ay) -- ({\ax+\bx},{\ay+\by}) -- (0,{\ay+\by}) -- cycle;
+				% \fill[axprojarea={bcol}] (0,\ay) -- (\ax,\ay) -- ({\ax+\bx},{\ay+\by}) -- (0,{\ay+\by}) -- cycle;
+				% \fill[axprojarea={ccol}] ({\ax+\bx},0) -- ({\ax+\bx+\cx},0) -- ({\ax+\bx+\cx},{\ay+\by+\cy}) -- ({\ax+\bx},{\ay+\by}) -- cycle;
+
 				\draw[axprojborder={acol}] (\ax,\ay) -- (\ax,0);
-				\draw[axprojborder={acol}] (\ax,\ay) -- (0,\ay);
+				% \draw[axprojborder={acol}] (\ax,\ay) -- (0,\ay);
 				\draw[axprojborder={bcol}] ({\ax+\bx},{\ay+\by}) -- ({\ax+\bx},0);
-				\draw[axprojborder={bcol}] ({\ax+\bx},{\ay+\by}) -- (0,{\ay+\by});
+				% \draw[axprojborder={bcol}] ({\ax+\bx},{\ay+\by}) -- (0,{\ay+\by});
+				% \draw[axprojborder={ccol}] ({\ax+\bx+\cx},{\ay+\by+\cy}) -- ({\ax+\bx+\cx},0);
+
 				\draw[vector={acol}] (0,0) -- (\ax,\ay);
 				\draw[vector={bcol}] (\ax,\ay) -- ({\ax+\bx},{\ay+\by});
+				% \draw[vector={ccol}] ({\ax+\bx},{\ay+\by}) -- ({\ax+\bx+\cx},{\ay+\by+\cy});
+
 				\draw[axprojline={acol}] (0,0) -- (\ax,0);
-				\draw[axprojline={acol}] (0,0) -- (0,\ay);
+				% \draw[axprojline={acol}] (0,0) -- (0,\ay);
 				\draw[axprojline={bcol}] (\ax,0) -- ({\ax+\bx},0);
-				\draw[axprojline={bcol}] (0,\ay) -- (0,{\ay+\by});
+				% \draw[axprojline={bcol}] (0,\ay) -- (0,{\ay+\by});
+				% \draw[axprojline={ccol}] ({\ax+\bx},0) -- ({\ax+\bx+\cx},0);
 			\end{axis}
 		\end{tikzpicture}
 	\end{center}
