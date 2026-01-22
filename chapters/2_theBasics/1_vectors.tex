@@ -470,72 +470,103 @@ etc. In principle, I could have chosen to use a similar notation, namely the \ne
 
 While both notations are essentially equivalent, to keep notational consistency I would need to strictly use one of these notations, and for reasons of personal preferences I chose the column-form. This enforces the use of some notational conventions later, for example the meaning of matrix columns vs. rows and the notation for a set of related objects called \newterm{covectors} (discussed in details in REF).
 
+\colorlet{acol}{xpurple}
+\colorlet{bcol}{xorange}
+\colorlet{ccol}{xdarkgreen}
+\def\vveca{\textcolor{acol}{\vvec{a}}}
+\def\vvecb{\textcolor{bcol}{\vvec{b}}}
+\def\vvecc{\textcolor{ccol}{\vvec{c}}}
+
 How does the column form of a vector behaves under the two basic vector operations (addition and scaling)? Let's see what happenes when we add two vectors together, say
 \begin{equation*}
-	\vvec{a} = \colvec{1;3},\quad \vvec{b}=\colvec{2;1}.
+	\vveca = \ClrColVecXY{1}{3},\quad \vvecb=\ClrColVecXY{2}{1}.
 \end{equation*}
 
-Using the triangle method, we move $\vvec{b}$ such that its origin lies at the head of $\vvec{a}$ (\autoref{fig:addition of column vectors}). The result of the addition $\vvec{c}=\vvec{a}+\vvec{b}$ \dots
-
+Following the triangle method for vector addition, we first $\vvecb$ such that its origin lies at the head of $\vveca$, and the resulting addition, $\vvecc$, is drawn from the origin to the head of $\vvecb$. In \autoref{fig:addition of column vectors} we can see the projection of both $\vveca,\ \vvecb$ and $\vvecc$ onto the $x$- and $y$-axes, respectively: each component of $\vvecc$ is simply the addition of the same components of $\vveca$ and $\vvecb$:
+\begin{equation}
+	\vvecc = \vveca + \vvecb = \ClrColVecXY{1}{3} + \ClrColVecXY{2}{1} = \ClrColVecXY{1+2}{3+1} = \ClrColVecXY{3}{4}.
+	\label{eq:}
+\end{equation}
 
 \begin{figure}
 	\begin{center}
-		\begin{tikzpicture}
-			\begin{axis}[
-					xyplane,
-					xmin=-1, xmax=5,
-					ymin=-1, ymax=5,
-					xtick={-1,...,5},
-					ytick={-1,...,5},
-					axis line style={stealth-stealth, very thick, opacity=0.2},
-					tick style={opacity=0.2},
-					every axis x label/.append style={opacity=0.2},
-					every axis y label/.append style={opacity=0.2},
-				]
-				\tikzset{
-					axprojline/.style={|-|, draw=#1, ultra thick, densely dotted},
-					axprojarea/.style={#1, opacity=0.05},
-					axprojborder/.style={#1, ultra thick, dashed, opacity=0.5},
-					% axprojarea/.style={pattern=north east lines, pattern color=#1, opacity=0.3},
-					% I should develop this idea further - maybe lines in the same slope as the vector?..
-					% MAYBE separate to x- and y-axes individually?
-				}
-				\colorlet{acol}{xpurple}
-				\colorlet{bcol}{xorange}
-				% \colorlet{ccol}{xdarkgreen}
+		\tikzset{
+			axprojline/.style={|-|, draw=#1, ultra thick, densely dotted},
+			axprojarea/.style={#1, opacity=0.05},
+			axprojborder/.style={#1, ultra thick, dashed, opacity=0.5},
+			% axprojarea/.style={pattern=north east lines, pattern color=#1, opacity=0.3},
+			% I should develop this idea further - maybe lines in the same slope as the vector?..
+			% MAYBE separate to x- and y-axes individually?
+		}
+		\pgfmathsetmacro{\ax}{1}
+		\pgfmathsetmacro{\ay}{3}
+		\pgfmathsetmacro{\bx}{2}
+		\pgfmathsetmacro{\by}{1}
+		\begin{subfigure}[t]{0.47\textwidth}
+			\begin{tikzpicture}
+				\begin{axis}[
+						xyplane,
+						xmin=-1, xmax=5,
+						ymin=-1, ymax=5,
+						xtick={-1,...,5},
+						ytick={-1,...,5},
+						axis line style={stealth-stealth, very thick, opacity=0.2},
+						tick style={opacity=0.2},
+						every axis y label/.append style={opacity=0.2},
+						xlabel={},
+					]
+					\draw[dashedvector={ccol}, opacity=0.2] (0,0) -- ({\ax+\bx},{\ay+\by}) node[midway, below] {$\vvec{c}$};
 
-				\pgfmathsetmacro{\ax}{1}
-				\pgfmathsetmacro{\ay}{3}
-				\pgfmathsetmacro{\bx}{2}
-				\pgfmathsetmacro{\by}{1}
-				% \pgfmathsetmacro{\cx}{1}
-				% \pgfmathsetmacro{\cy}{-2}
+					\fill[axprojarea={acol}] (0,0) -- (\ax,0) -- (\ax,\ay) -- cycle;
+					\fill[axprojarea={bcol}] (\ax,0) -- ({\ax+\bx},0) -- ({\ax+\bx},{\ay+\by}) -- (\ax,\ay) -- cycle;
 
-				\fill[axprojarea={acol}] (0,0) -- (\ax,0) -- (\ax,\ay) -- cycle;
-				% \fill[axprojarea={acol}] (0,0) rectangle (\ax,\ay);
-				\fill[axprojarea={bcol}] (\ax,0) -- ({\ax+\bx},0) -- ({\ax+\bx},{\ay+\by}) -- (\ax,\ay) -- cycle;
-				% \fill[axprojarea={bcol}] (0,\ay) -- (\ax,\ay) -- ({\ax+\bx},{\ay+\by}) -- (0,{\ay+\by}) -- cycle;
-				% \fill[axprojarea={ccol}] ({\ax+\bx},0) -- ({\ax+\bx+\cx},0) -- ({\ax+\bx+\cx},{\ay+\by+\cy}) -- ({\ax+\bx},{\ay+\by}) -- cycle;
+					\draw[axprojborder={acol}] (\ax,\ay) -- (\ax,0);
+					\draw[axprojborder={bcol}] ({\ax+\bx},{\ay+\by}) -- ({\ax+\bx},0);
 
-				\draw[axprojborder={acol}] (\ax,\ay) -- (\ax,0);
-				% \draw[axprojborder={acol}] (\ax,\ay) -- (0,\ay);
-				\draw[axprojborder={bcol}] ({\ax+\bx},{\ay+\by}) -- ({\ax+\bx},0);
-				% \draw[axprojborder={bcol}] ({\ax+\bx},{\ay+\by}) -- (0,{\ay+\by});
-				% \draw[axprojborder={ccol}] ({\ax+\bx+\cx},{\ay+\by+\cy}) -- ({\ax+\bx+\cx},0);
+					\draw[vector={acol}] (0,0) -- (\ax,\ay) node[midway, left] {$\vvec{a}$};
+					\draw[vector={bcol}] (\ax,\ay) -- ({\ax+\bx},{\ay+\by}) node[midway, above left, yshift=-5pt] {$\vvec{b}$};
 
-				\draw[vector={acol}] (0,0) -- (\ax,\ay);
-				\draw[vector={bcol}] (\ax,\ay) -- ({\ax+\bx},{\ay+\by});
-				% \draw[vector={ccol}] ({\ax+\bx},{\ay+\by}) -- ({\ax+\bx+\cx},{\ay+\by+\cy});
+					\draw[axprojline={ccol}, yshift=-5pt] (0,0) -- ({\ax+\bx},0);
+					\draw[axprojline={acol}] (0,0) -- (\ax,0);
+					\draw[axprojline={bcol}] (\ax,0) -- ({\ax+\bx},0);
+				\end{axis}
+			\end{tikzpicture}
+			\caption{Projection on $x$-axis.}
+		\end{subfigure}
+		~
+		\begin{subfigure}[t]{0.47\textwidth}
+			\begin{tikzpicture}
+				\begin{axis}[
+						xyplane,
+						xmin=-1, xmax=5,
+						ymin=-1, ymax=5,
+						xtick={-1,...,5},
+						ytick={-1,...,5},
+						axis line style={stealth-stealth, very thick, opacity=0.2},
+						tick style={opacity=0.2},
+						every axis x label/.append style={opacity=0.2},
+						every axis y label/.append style={opacity=0.2},
+					]
+					\draw[dashedvector={ccol}, opacity=0.2] (0,0) -- ({\ax+\bx},{\ay+\by}) node[midway, below] {$\vvec{c}$};
 
-				\draw[axprojline={acol}] (0,0) -- (\ax,0);
-				% \draw[axprojline={acol}] (0,0) -- (0,\ay);
-				\draw[axprojline={bcol}] (\ax,0) -- ({\ax+\bx},0);
-				% \draw[axprojline={bcol}] (0,\ay) -- (0,{\ay+\by});
-				% \draw[axprojline={ccol}] ({\ax+\bx},0) -- ({\ax+\bx+\cx},0);
-			\end{axis}
-		\end{tikzpicture}
+					\fill[axprojarea={acol}] (0,0) -- (0,\ay) -- (\ax,\ay) -- cycle;
+					\fill[axprojarea={bcol}] (0,\ay) -- (0,{\ax+\bx}) -- ({\ax+\bx},{\ay+\by}) -- (\ax,\ay) -- cycle;
+
+					\draw[axprojborder={acol}] (\ax,\ay) -- (0,\ay);
+					\draw[axprojborder={bcol}] ({\ax+\bx},{\ay+\by}) -- (0,{\ay+\by});
+
+					\draw[vector={acol}] (0,0) -- (\ax,\ay) node[midway, left] {$\vvec{a}$};
+					\draw[vector={bcol}] (\ax,\ay) -- ({\ax+\bx},{\ay+\by}) node[midway, above left, yshift=-5pt] {$\vvec{b}$};
+
+					\draw[axprojline={ccol}, xshift=-5pt] (0,0) -- (0,{\ay+\by});
+					\draw[axprojline={acol}] (0,0) -- (0,\ay);
+					\draw[axprojline={bcol}] (0,\ay) -- (0,{\ay+\by});
+				\end{axis}
+			\end{tikzpicture}
+			\caption{Projection on $y$-axis.}
+		\end{subfigure}
 	\end{center}
-	\caption{Text text text.}
+	\caption{Projecting three vectors on the $x$- and $y$-axes: $\vveca,\ \vvecb$ and $\vvecc=\vveca+\vvecb$. Note how the projection of $\vvecc$ on to an axis is exactly the same as the addition of the projections of $\vveca$ and $\vvecb$ on the same axis.}
 	\label{fig:addition of column vectors}
 \end{figure}
 
