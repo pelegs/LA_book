@@ -472,6 +472,58 @@ etc. In principle, I could have chosen to use a similar notation, namely the \ne
 
 While both notations are essentially equivalent, to keep notational consistency I would need to strictly use one of these notations, and for reasons of personal preferences I chose the column-form. This enforces the use of some notational conventions later, for example the meaning of matrix columns vs. rows and the notation for a set of related objects called \newterm{covectors} (discussed in details in REF).
 
+Let's see how the two basic properties of vectors (magnitude and direction) look like using the column notation. \autoref{fig:norm of a vector in column notation} shows a vector $\vvec{v}$ in a Cartesian coordinates system. The triangle $\tria{OVA}$ is a right triangle, with the side $\lin{OV}$ being equal to the $x$-coordinate of $\vvec{v}$ and the side $\lin{VX}$ equal to the $y$-coordinate of $\vvec{v}$. We can calculate the length of the hypotenuse $\lin{OV}$ using the Pythagorean theorem:
+
+\def\vx{\textcolor{xcomp}{v_{x}}}
+\def\vy{\textcolor{ycomp}{v_{y}}}
+\begin{figure}
+	\begin{center}
+		\begin{tikzpicture}
+			\Large
+			\begin{axis}[
+					width=8cm, height=8cm,
+					xyplane,
+					xmin=-1, xmax=4,
+					ymin=-1, ymax=4,
+				]
+				\tikzset{comp/.style={draw=#1, line width=8pt, opacity=0.2}}
+
+				\pgfmathsetmacro{\vx}{2}
+				\pgfmathsetmacro{\vy}{3}
+
+				\coordinate (O) at (0,0);
+				\coordinate (X) at (\vx,0);
+				\coordinate (V) at (\vx,\vy);
+
+				\fill[xorange, opacity=0.1] (O) -- (X) -- (V) -- cycle;
+				\pic[draw=xorange, ultra thick, fill=xorange!90!black, fill opacity=0.3, solid, angle radius=5mm] {right angle=O--X--V};
+				\draw[comp={xred}, yshift=-5pt] (0,0) -- (\vx,0) node[xred, opacity=1, midway, below] {$v_{x}$};
+				\draw[comp={xblue}, xshift=-5pt] (0,0) -- (0,\vy) node[xblue, opacity=1, midway, left] {$v_{y}$};
+				\draw[vector={black!75}] (0,0) -- (\vx,\vy) node [midway, above left] {$\vvec{v}$};
+				\draw[xorange, ultra thick, dashed] (\vx,\vy) -- (\vx,0) node[black, below, xshift=7pt] {$\pnt{X}$};
+				\node[xshift=10pt, yshift=10pt] at (V) {$\pnt{V}$};
+				\node[xshift=-10pt, yshift=-10pt] at (O) {$\pnt{O}$};
+			\end{axis}
+		\end{tikzpicture}
+	\end{center}
+	\caption{A vector $\vvec{v}$ with components $\vx$ and $\vy$ creates a right triangle between the origin $\pnt{O}$, the point $\pnt{X}=(\vx,0)$ and the point $\pnt{V}=(\vx,\vy)$. Therefore the norm of the vector can be derived using the Pythagorean theorem.}
+	\label{fig:norm of a vector in column notation}
+\end{figure}
+
+
+\begin{equation}
+	\lin{OV}^{2} = \lin{OX}^{2} + \lin{VX}^{2}.
+	\label{eq:Pythagorean theorem}
+\end{equation}
+
+Replacing each line with the respective vector component, and then taking the square root we get
+\begin{equation}
+	\norm{\vvec{v}} = \sqrt{v_{x}^{2} + v_{y}^{2}}.
+	\label{eq:square norm of a vector}
+\end{equation}
+
+% TODO: write about vector angles in 2D.
+
 \colorlet{acol}{xpurple}
 \colorlet{bcol}{xorange}
 \colorlet{ccol}{xdarkgreen}
