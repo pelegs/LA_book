@@ -100,13 +100,23 @@ Since we will be using vectors as mathematical objects and would like to use the
 
 In this book I am using the last notation - a boldface Latin letter with an arrow above it. This ensures that it is both easy to read and is distinctive enough to quickly differentiate vectors from other objects. Sometimes, depending on context, the vectors are colored to make it easier to follow through (the process of setting up/developing a concept/equation).
 
-There are two fundamental operations involving vectors: addition and scaling. These two operations result in creating a new vector of the same dimensions: adding together two 2-dimensional vectors results in a $2$-dimensional vector, scaling a $3$-dimensional vector result in a $3$-dimensional vector, etc.
-
 % TODO: perhaps write a bit about what we except/want from vector addition, instead of just throwing the method at the reader.
 
-Let's have a closer look at these two fundamental vector operations:
+Just like with real numbers, we would like to be able to peform two basic opertaions with vectors: addition and multiplication. Let's examine these two operations more closely:
+
 \begin{descitemize}
-	\item[Adding vectors together] any two vectors of the same dimensionality (e.g. 2-dimensional, 3-dimensional, 4-dimensional, etc.) can be added together, and the result is a third vector. Pictorially, here are two vectors $\vecA$ and $\vecB$ which we want to sum together:
+	\item[Vector addition] addition of two real numbers can be described geometrically: say we have the numbers $5$ and $3$. We imagine each of the numbers as an interval on the real number line, and then we move one of the intervals, say $3$, such that it is position exactly to the right of the other interval. The sum of the two numbers, $3+5$, is now the length of the interval from the \textbf{left end} of the $5$ interval to the \textbf{right end} of the $3$ interval.
+
+	\begin{center}
+		\begin{tikzpicture}
+			\draw pic {realline=-1/10};
+			\draw pic {realinterval=0/5/xred};
+			\draw pic {realinterval=5/3/xgreen};
+		\end{tikzpicture}
+	\end{center}
+
+
+	any two vectors of the same dimensionality (e.g. 2-dimensional, 3-dimensional, 4-dimensional, etc.) can be added together, and the result is a third vector. Pictorially, here are two vectors $\vecA$ and $\vecB$ which we want to sum together:
 
 	\begin{center}
 		\begin{tikzpicture}[fig with vectors]

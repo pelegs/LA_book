@@ -166,6 +166,22 @@
 	%% Styles %%
 	vector/.style = {#1, line width=2pt, -stealth, cap=round},
 	dashedvector/.style = {vector={#1}, dash pattern=on 1pt off 4pt},
+	pics/realline/.style args={#1/#2}{
+			code = {
+					\draw[thick] (#1,0) -- (#2,0);
+					\draw[thick, dotted] (#1,0) -- ++(-0.5,0) node[left] {$-\infty$};
+					\draw[thick, dotted] (#2,0) -- ++(0.5,0) node[right] {$+\infty$};
+					\foreach \xnew in {#1, ..., #2}{
+							\draw[thick] (\xnew,-0.1) -- (\xnew,0.1);
+							% \node[] at (\xnew,-0.5) {$\xnew$};
+						}
+				}
+		},
+	pics/realinterval/.style args={#1/#2/#3}{
+			code = {
+					\draw[line width=10pt, draw=#3, opacity=0.5] (#1,0) -- ++(#2,0);
+				}
+		},
 	pics/ruler/.style n args = {5}{
 			code = {
 					% Parameters
