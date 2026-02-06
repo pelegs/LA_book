@@ -102,19 +102,71 @@ In this book I am using the last notation - a boldface Latin letter with an arro
 
 % TODO: perhaps write a bit about what we except/want from vector addition, instead of just throwing the method at the reader.
 
-Just like with real numbers, we would like to be able to peform two basic opertaions with vectors: addition and multiplication. Let's examine these two operations more closely:
+Just like with real numbers, we would like to be able to peform two basic opertaions with vectors: addition and multiplication. Since vectors are fundamentaly geometric objects, we can take inspiration from how we perform these two operations on real numbers geometrically.
 
 \begin{descitemize}
-	\item[Vector addition] addition of two real numbers can be described geometrically: say we have the numbers $5$ and $3$. We imagine each of the numbers as an interval on the real number line, and then we move one of the intervals, say $3$, such that it is position exactly to the right of the other interval. The sum of the two numbers, $3+5$, is now the length of the interval from the \textbf{left end} of the $5$ interval to the \textbf{right end} of the $3$ interval.
+	\colorlet{I1}{xpurple}
+	\colorlet{I2}{xorange}
+	\colorlet{I12}{black!75}
+	\def\three{\textcolor{I1}{3}}
+	\def\five{\textcolor{I2}{5}}
+	\item[Vector addition] there are some properties that we would like vector addition to have: the simplest is that if we add a vector and its opposite, they should cancel each other out somehow. Another property is that averaging two vectors makes sense: \dots
+
+	The addition of two real numbers can be interpreted geometrically as follows: each number is represented by a horizontal line segment of appropriate length: the number $2$ is represented by a line segment of length $2$, the number $5$ is represented by a line segment of length $5$, etc. Addition of two numbers is done by placing intervals side-by-side and measuring their total length. For example, the sum of $\three$ and $\five$ can be represented by placing side-by-side two intervals, of of lengths $\three$ and $\five$ respectively:
 
 	\begin{center}
 		\begin{tikzpicture}
-			\draw pic {realline=-1/10};
-			\draw pic {realinterval=0/5/xred};
-			\draw pic {realinterval=5/3/xgreen};
+			\draw[interval=I1] (0,0) -- (3,0) node[midway, above, I1] {$3$};
+			\draw[interval=I2] (3,0) -- ++(5,0) node[midway, above, I2] {$5$};
+			\draw[I12, very thick, decorate, decoration={brace, amplitude=5pt, mirror, raise=10pt}] (0,0) -- (8,0) node[midway, yshift=-25pt]{$\three+\five=\textcolor{I12}{8}$};
 		\end{tikzpicture}
 	\end{center}
 
+	Note that the order of summation doesn't matter: $\three+\five = \five+\three=8$, and this is evident in the geometric method:
+
+	\begin{center}
+		\begin{tikzpicture}
+			\draw[interval=I2] (0,0) -- (5,0) node[midway, above, I2] {$5$};
+			\draw[interval=I1] (5,0) -- ++(3,0) node[midway, above, I1] {$3$};
+			\draw[I12, very thick, decorate, decoration={brace, amplitude=5pt, mirror, raise=10pt}] (0,0) -- (8,0) node[midway, yshift=-25pt]{$\five+\three=\textcolor{I12}{8}$};
+		\end{tikzpicture}
+	\end{center}
+
+	% TODO: make it such that the interval has a direction, so that subtraction uses the inversion of a number
+	Subtraction also works pretty well using this method, but we have to tweak it just a little to make things more clear: we'll add a direction to our intervals - right for positive and left for negative. So for example, the number $4$ is positive, and therefore as a \enquote{direction} to the right:
+
+	\begin{center}
+		\begin{tikzpicture}
+			\draw[intervalwithdir=xred] (0,0) -- (4,0) node[midway, above, xred] {$4$};
+		\end{tikzpicture}
+	\end{center}
+
+	Its opposite $-4$ is represented with a line segment of the same length but directed to the left:
+	\begin{center}
+		\begin{tikzpicture}
+			\draw[intervalwithdir=xred!75!black] (4,0) -- ++(-4,0) node[midway, above, xred!75!black] {$-4$};
+		\end{tikzpicture}
+	\end{center}
+
+	Now we can rewrite subtraction as addition with negative numbers. For example, $\five-\three = \five + (-\three)$:
+	\begin{center}
+		\begin{tikzpicture}
+			\draw[intervalwithdir=I2] (0,0) -- ++(5,0) node[midway, above, I2] {$5$};
+			\draw[intervalwithdir=I1] (5,-0.5) -- ++(-3,0) node[midway, below, I1] {$-3$};
+		\end{tikzpicture}
+	\end{center}
+	(I'm drawing the line segments here with a vertical offset so that we can visually see what's going on - instead of the segments covering each other)
+
+	The result of the summation works exactly the same as in the simple positives-only case: it's the distance from the start of $\five$ to the end (head) of $\three$:
+	\begin{center}
+		\begin{tikzpicture}
+			\draw[intervalwithdir=I2] (0,0) -- ++(5,0) node[midway, above, I2] {$5$};
+			\draw[intervalwithdir=I1] (5,-0.5) -- ++(-3,0) node[midway, below, I1] {$-3$};
+			\draw[I12, very thick, decorate, decoration={brace, amplitude=5pt, mirror, raise=10pt}, yshift=-12pt] (0,0) -- (2,0) node[midway, yshift=-25pt]{$\five-\three=\textcolor{I12}{2}$};
+		\end{tikzpicture}
+	\end{center}
+
+	\dots
 
 	any two vectors of the same dimensionality (e.g. 2-dimensional, 3-dimensional, 4-dimensional, etc.) can be added together, and the result is a third vector. Pictorially, here are two vectors $\vecA$ and $\vecB$ which we want to sum together:
 

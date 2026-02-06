@@ -1,0 +1,21 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+
+\tikzset{
+	pics/interval/.style 2 args={
+		code = {
+			\draw[arrows = {Bracket[]Circle[scale=0.75]-Stealth[]Bracket}, line width=3pt, #2] (0,0) -- (#1,0);
+		}
+	}
+}
+
+\begin{document}
+\begin{tikzpicture}
+	\fill[white] (-5,-5) -- (5,5);
+	% \draw[arrows = {Bracket[]Circle[scale=0.75]-Stealth[]Bracket}, line width=3pt, blue] (0,0) -- (4,0);
+	% \draw[arrows = {Bracket[]-Stealth[]Bracket}, line width=3pt, red ] (0,-2) -- (-3,-2);
+	\draw pic {interval=3};
+\end{tikzpicture}
+\end{document}
