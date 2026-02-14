@@ -1,391 +1,391 @@
 \section{Matrices}
-\subsection{Representing Linear Transformations, Part 2} % From LTs to Matrices
-\subsection{Matrix Representations of 2- and 3-Dimensional Linear Transformations}
-\subsection{Types of Matrices}
-\subsection{Matrix-Matrix Product}
-\subsection{Matrix Determinants}
+% \subsection{Representing Linear Transformations, Part 2} % From LTs to Matrices
+% \subsection{Matrix Representations of 2- and 3-Dimensional Linear Transformations}
+% \subsection{Types of Matrices}
+% \subsection{Matrix-Matrix Product}
+% \subsection{Matrix Determinants}
 
-% \subsection{Calculating Linear Transformations, Part 2}
-% Following our example from the end of the previous section, let's look again at the result of applying $T$ from \autoref{eq:simple_LT_example_single_2d_vec} on the vector $\vec{a}=\clrcolvecxy{3}{2}$.
-%
-% Since we know how $T$ transforms the basis vectors $\ebx$ and $\eby$ (\autoref{eq:simple LT example transformed basis vectors}), we can $T(\vec{a})$ in the following way:
-% \begin{equation}
-% 	T(\vec{a}) = \colvec{3;4} = \overset{\substack{\LCa{a_{x}} \\ \downarrow}}{\LCa{3}}\underset{\substack{\uparrow \\ T(\ebx)}}{\colvec{0;1}} + \overset{\substack{\LCb{a_{y}} \\ \downarrow}}{\LCb{2}}\underset{\substack{\uparrow \\ T(\eby)}}{\colvec{-2;0}} = \colvec{0\cdot\LCa{3}-2\cdot\LCb{2};1\cdot\LCa{3}+0\cdot\LCb{2}}.
-% 	\label{eq:developing matrix notation step 1}
-% \end{equation}
-%
-% Then, we collect all the coefficients in black into a single structure, which we call a \newterm{matrix}:
-% \begin{equation}
-% 	\mat{M} =
-% 	\begin{bmatrix}
-% 		0 & -2 \\
-% 		1 & 0
-% 	\end{bmatrix}.
-% 	\label{eq:developing matrix notation step 2}
-% \end{equation}
-%
-% Finally, we define the action of the matrix $\mat{M}$ on the vector $\vec{a}$ as following:
-% \begin{equation}
-% 	\mat{M}\vec{a} =
-% 	\begin{bmatrix}
-% 		0 & -2 \\
-% 		1 & 0
-% 	\end{bmatrix}\clrcolvecxy{3}{2} = \colvec{0\cdot\LCa{3}-2\cdot\LCb{2};1\cdot\LCa{3}+0\cdot\LCb{2}} = T(\vec{a}).
-% 	\label{eq:developing matrix notation step 3}
-% \end{equation}
-%
-% Of course, we should make sure that the matrix $\mat{M}$ we just defined works for other vectors as well. If we apply $\mat{M}$ to the second vector from our example, $\vec{b}=\clrcolvecxy{2}{-4}$, we get
-% \begin{equation}
-% 	\mat{M}\vec{b} =
-% 	\begin{bmatrix}
-% 		0 & -2 \\
-% 		1 & 0
-% 	\end{bmatrix}\clrcolvecxy{2}{-4} = \colvec{0\cdot\LCa{2}-2\cdot\LCb{-4};1\cdot\LCa{2}+0\cdot\LCb{-4}} = \colvec{8;2} = T(\vec{b}),
-% 	\label{eq:validating matrix works for b}
-% \end{equation}
-% which is exactly the result we got in \autoref{eq:second_simple_LT_example_single_2d_vec}. Great!
-%
-% Why not continue checking how this matrix-vector product we developed works for other vectors? First, let's check $\ebx$ and $\eby$ for which we already know the results (\autoref{eq:simple_LT_example_single_2d_vec}):
-% \begin{equation}
-% 	\begin{aligned}
-% 		\mat{M}\ebx & =
-% 		\begin{bmatrix}
-% 			0 & -2 \\
-% 			1 & 0
-% 		\end{bmatrix}\clrcolvecxy{1}{0} = \colvec{0\cdot\LCa{1}-2\cdot\LCb{0};1\cdot\LCa{1}+0\cdot\LCb{0}} = \colvec{0;1} = T(\ebx), \\
-% 		\mat{M}\eby & =
-% 		\begin{bmatrix}
-% 			0 & -2 \\
-% 			1 & 0
-% 		\end{bmatrix}\clrcolvecxy{0}{1} = \colvec{0\cdot\LCa{0}-2\cdot\LCb{1};1\cdot\LCa{0}+0\cdot\LCb{1}} = \colvec{-2;0} = T(\eby),
-% 		\label{eq:}
-% 	\end{aligned}
-% \end{equation}
-% exactly the results we expected.
-%
-% Perhaps you've noticed something by now - the columns of $\mat{M}$ are exactly the vectors $T(\ebx)$ and $T(\eby)$ in the right order:
-%
-% \begin{center}
-% 	\fromtranstomat{T}{\mat{M}}{0}{1}{-2}{0}
-% \end{center}
-%
-% The most general transformation we can have using $\mat{M}$ would be applying it to a general vector, $\vec{v}=\clrcolvecxy{x}{y}\in\Rs[2]$:
-% \begin{equation}
-% 	\mat{M}\vec{v} = \begin{bmatrix}
-% 		0 & -2 \\
-% 		1 & 0
-% 	\end{bmatrix}\clrcolvecxy{x}{y} = \colvec{0\cdot\LCa{x}-2\cdot\LCb{y};1\cdot\LCa{x}+0\cdot\LCb{y}} = \colvec{-2y;x}.
-% 	\label{eq:applying M on a generic 2D vector}
-% \end{equation}
-%
-% Of course, this result is exactly what we expect, as we can see when we apply each step of $T$ on the generic vector $\vec{v}$:
-% \begin{equation}
-% 	\colvec{x;y} \xmapsto{\text{$\times 2$ in $y$}} \colvec{x;2y} \xmapsto{\text{$\ang{90}$ rotation}} \colvec{-2y;x}.
-% 	\label{eq:}
-% \end{equation}
-%
-% OK, up until now everything we did was for a specific transformation we called $T$. However, we can build a matrix for a general linear transformation $T:\Rs[2]\to\Rs[2]$. Such a transformation has the form
-% \begin{equation*}
-% 	T\colvec{x;y} = \colvec{ax+by;cx+dy},
-% \end{equation*}
-% where $a,b,c,d\in\Rs$ (REF), and using the same process as in \autoref{eq:developing matrix notation step 1} we get the general matrix
-% \begin{equation}
-% 	\mat{M} = \begin{bmatrix}
-% 		a & b \\
-% 		c & d
-% 	\end{bmatrix}.
-% 	\label{eq:general 2x2 matrix}
-% \end{equation}
-%
-% Just like in our specific example, the columns of $\mat{M}$ are exactly the images of the basis vectors $\ebx$ and $\eby$, respectively. To confirm this, let's apply the $\mat{M}$ on both basis vectors:
-% \begin{equation}
-% 	\begin{aligned}
-% 		\mat{M}\ebx & =
-% 		\begin{bmatrix}
-% 			a & b \\
-% 			c & d
-% 		\end{bmatrix}\clrcolvecxy{1}{0} = \colvec{a\cdot\LCa{1}+b\cdot\LCb{0};c\cdot\LCa{1}+d\cdot\LCb{0}} = \colvec{a;c} = M_{1}, \\
-% 		\mat{M}\eby & =
-% 		\begin{bmatrix}
-% 			a & b \\
-% 			c & d
-% 		\end{bmatrix}\clrcolvecxy{0}{1} = \colvec{a\cdot\LCa{0}+b\cdot\LCb{1};c\cdot\LCa{0}+d\cdot\LCb{1}} = \colvec{b;d} = \mat{M}_{2}.
-% 		\label{eq:applying a general 2x2 matrix on basis vectors}
-% 	\end{aligned}
-% \end{equation}
-%
-% Note that I use $M_{1}$ and $M_{2}$ to denote the $1$-st and $2$-nd columns of $\mat{M}$, respectively.
-%
-% In most textbooks and courses I've seen, the process of multiplying a matrix $\mat{M}$ by a vector $\vec{v}$ is described as following: the $i$-th component of the resulting vector (in our case $i\in\left\{\LCa{1},\LCb{2}\right\}$) is the \textit{dot product} of the $i$-th row of $\mat{M}$ and the vector $\vec{v}$ itself. This is exactly what happens in practice in the development process we went through here - if we name the resulting vector of $\mat{M}\vec{v}$ as $\vec{w}$ we get its following two components:
-% \begin{equation}
-% 	\left.
-% 	\begin{aligned}
-% 		w_{1} & = \rowvec{a;b}\clrcolvecxy{x}{y} = \colvec{a\cdot\LCa{x}+b\cdot\LCb{y}} = \colvec{a\LCa{x}+b\LCb{y}} \\[2ex]
-% 		w_{2} & = \rowvec{c;d}\clrcolvecxy{x}{y} = \colvec{c\cdot\LCa{x}+d\cdot\LCb{y}} = \colvec{c\LCa{x}+d\LCb{y}}
-% 		\label{eq:}
-% 	\end{aligned}
-% 	\right\} \rightarrow \vec{w} = \colvec{a\LCa{x}+b\LCb{y};c\LCa{x}+d\LCb{y}}.
-% \end{equation}
-%
-% Of course, this is just the case for a matrix representing a general linear transformation $T:\Rs[2]\to\Rs[2]$. Matrices representing such transformations have $4$ components, since they are made of $2$ basis vectors as columns, each having $2$ components (since the vectors live in $\Rs[2]$). We also say that the matrix lives in the space $\Rs[2\times2]$.
-%
-% In general (also in higher-dimensional cases), we use 2 indices to denote the components of any matrix: the 1st index for the \textit{row} of the component and the 2nd index for the \textit{column} of the component. For example, a general matrix $\mat{A}\in\Rs[2\times2]$ can be written as
-% \begin{equation}
-% 	\mat{A} = \begin{bmatrix}
-% 		a_{11} & a_{12} \\
-% 		a_{21} & a_{22} \\
-% 	\end{bmatrix},
-% 	\label{eq:general 2x2 matrix with index notation for components}
-% \end{equation}
-% where it is important to remember that there are two indices here - and not a single number. For example, $a_{11}$ should be read as \enquote{a-one-one} (i.e. the component in the 1st row and the 1st column), and not as \enquote{a-eleven}. Similarly, $a_{12}$ is \enquote{a-one-two} (not \enquote{a-tweleve}), $a_{21}$ is \enquote{a-two-one}, etc. The reason this notation is used (as much as it might be confusing at first) is lazyness: nobody wants to write redundant commas (i.e. $a_{1,1}$). It is what it is, and you will get used to it \shrug
-%
-% We can now finally move on to the most general form of a linear transformation between a real vector space to itself, i.e. $T:\Rs[n]\to\Rs[n]$. The most general vector $\vec{v}\in\Rs[n]$ has the form
-% \begin{equation}
-% 	\vec{v} = \clrgenericvec{v}{n},
-% 	\label{eq:generic vector in Rn}
-% \end{equation}
-% and therefore the application of a generic linear transformation from $\Rs[n]$ to itself on $\vec{v}$ yields the vector
-% \begin{equation}
-% 	T(\vec{v}) = \vec{w} =
-% 	\colvec{a_{11}\LCa{v_{1}} + a_{12}\LCb{v_{2}} + \dots + a_{1n}\LCe{v_{n}};a_{21}\LCa{v_{1}} + a_{22}\LCb{v_{2}} + \dots + a_{2n}\LCe{v_{n}};\vdots;a_{n1}\LCa{v_{1}} + a_{n2}\LCb{v_{2}} + \dots + a_{nn}\LCe{v_{n}}},
-% 	\label{eq:generic LT from Rn to itself}
-% \end{equation}
-% where $a_{ij}\in\Rs$ (with $i,j\in\left\{1,2,\dots,n\right\}$). Of course, denoting the components as $a_{ij}$ is alluding to the next step - collecting them into a matrix:
-% \begin{equation}
-% 	\mat{A} =
-% 	\begin{bNiceMatrix}[margin]
-% 		a_{11} & a_{12} & \cdots & a_{1n} \\
-% 		a_{21} & a_{22} & \cdots & a_{2n} \\
-% 		\vdots & \vdots & \ddots & \vdots \\
-% 		a_{n1} & a_{n2} & \cdots & a_{nn}
-% 	\end{bNiceMatrix}.
-% 	\label{eq:}
-% \end{equation}
-%
-% Just like in the $2\times2$ case, the $i$-th column vector of $\mat{A}$ shows how it transforms $\eb{i}$ (which in this case lives in the space $\Rs[n]$, of course):
-%
-% \begin{equation*}
-% 	\mat{M} = \begin{tikzpicture}[baseline=-0.5ex]
-% 		\matrix [
-% 		matrix of math nodes,
-% 		nodes={rectangle, minimum size=15pt}, % should somehow also make a vertical space to the bottom of the matrix
-% 		inner sep=0pt,
-% 		column sep=8pt,
-% 		left delimiter={[}, right delimiter={]},
-% 			] (A) {
-% 				a_{11} & a_{12} & \cdots & a_{1n} \\
-% 				a_{21} & a_{22} & \cdots & a_{2n} \\
-% 				\vdots & \vdots & \ddots & \vdots \\
-% 				a_{n1} & a_{n2} & \cdots & a_{nn} \\
-% 			};
-% 		\tiny
-% 		\foreach \x in {1,2,4} {
-% 				\begin{scope}[on background layer]
-% 					\filldraw[MCol\x, rounded corners, opacity=0.25] (A-1-\x.north west) rectangle (A-4-\x.south east);
-% 				\end{scope}
-%
-% 				\node[MCol\x, above of=A-1-\x] (eb-\x-text) {$T(\eb{\ifthenelse{\x=4}{n}{\x}})$};
-% 				\draw[-stealth, MCol\x] (eb-\x-text) -- (A-1-\x.north);
-% 			}
-% 	\end{tikzpicture}.
-% \end{equation*}
-%
-% Therefore, in general we define the product of an $n\times n$ matrix $\mat{A}$ (otherwise written as $\mat{A}\in\Rs[n\times n]$) and a vector $\vec{v}\in\Rs[n]$ to be
-% \begin{equation}
-% 	\mat{A}\vec{v} =
-% 	\begin{bNiceMatrix}[margin]
-% 		a_{11} & a_{12} & \cdots & a_{1n} \\
-% 		a_{21} & a_{22} & \cdots & a_{2n} \\
-% 		\vdots & \vdots & \ddots & \vdots \\
-% 		a_{n1} & a_{n2} & \cdots & a_{nn}
-% 	\end{bNiceMatrix}\clrgenericvec{v}{n} = \colvec{a_{11}\LCa{v_{1}} + a_{12}\LCb{v_{2}} + \dots + a_{1n}\LCe{v_{n}};a_{21}\LCa{v_{1}} + a_{22}\LCb{v_{2}} + \dots + a_{2n}\LCe{v_{n}};\vdots;a_{n1}\LCa{v_{1}} + a_{n2}\LCb{v_{2}} + \dots + a_{nn}\LCe{v_{n}}} = \vec{w}.
-% 	\label{eq:product of n-by-n matrix and a vec in Rn}
-% \end{equation}
-%
-% Indeed, this can be presented (as it often does) in the following way: the $i$-th coefficient of the vector $\vec{w}=\mat{A}\vec{v}$ is the dot product of the $i$-th row of $\mat{A}$ and the vector $\vec{v}$. To see this in practice, follow closely how each of the rows $1,2$ and $n$ of $\mat{A}$ in \autoref{eq:product of n-by-n matrix and a vec in Rn} are dot-multiplied with $\vec{v}$ to yields the corresponding component of $\vec{w}$.
-%
-% \begin{note}{Square Matrices}{}
-% 	All the kinds of matrices we defined so far are called \newterm{square matrices}, since they have an equal number of rows and columns (since they map from any vector space $\Rs[n]$ to itself) - i.e. their dimensions are of the form $n\times n$.
-%
-% 	\vspace{1em}
-% 	However, in general matrices can represent any kind of linear transformation - also those that map between different real vector spaces, i.e. $\Rs[n]\to\Rs[m]$ (where $n\neq m$). These matrices would be of order $m\times n$, and are of course \textbf{not} square matrices. However, since square matrices are the easiest to understand when first learning the topic, and they also happen to play a very important role in linear algebra - I chose to concentrate on them in the beginning, before moving on to more general matrices.
-% \end{note}
-%
-% \subsection{The Fundamental Linear Transformations as Matrices}
-% Let us now use the process we devolped above to represent the fundamental $\Rs[2]\to\Rs[2]$ linear transformations (REF) in matrix form. Since we're dealing with transformations from $\Rs[2]$ to itself, the matrices representing these transformations are of dimension $2\times2$, i.e. they live in the space $\Rs[2\times2]$.
-%
-% We start with the most boring linear transformation: the identity transformation $I$. As a reminder, $I$ maps \textit{any} vector $\vec{v}\in\Rs[2]$ to itself: $I(\vec{v})=\vec{v}$. In particular, it takes the two standard basis vectors $\ebx$ and $\eby$ and maps them to themselves:
-% \begin{equation}
-% 	\colvec{1;0} \xmapsto{I}\ \colvec{1;0},\quad \colvec{0;1} \xmapsto{I}\ \colvec{0;1}.
-% 	\label{eq:}
-% \end{equation}
-% Very exciting indeed. Knowing how $I$ transforms $\ebx$ and $\eby$ we can use their maps as the columns of the matrix representation of $I$:
-% \begin{equation}
-% 	\fromtranstomat{I}{\Id{2}}{1}{0}{0}{1}
-% 	% \fromtranstomat{R}{\mat{R}}{\cos(\theta)}{\sin(\theta)}{-\sin(\theta)}{\cos(\theta)}
-% 	\label{eq:the 2-by-2 identity matrix}
-% \end{equation}
-% ($\Id{}$ is a common notation for identity matrices, and the index $2$ signifies that this is the specific $2\times2$ identity matrix)
-%
-% The next type of fundamental linear transformations we should represent in matrix form are the scaling matrices. Instead of calculting their representation separately, let's directly find the matrix representation of the linear transformation $S$ which scales any vector by $\alpha$ in the $x$-direction and by $\beta$ in the $y$-direction:
-%
-% \begin{equation}
-% 	\fromtranstomat{S}{\mat{S}}{\alpha}{0}{0}{\beta}
-% 	\label{eq:matrix representation of scaling in R2}
-% \end{equation}
-%
-% $\mat{S}$ has an important property: it only has non-zero entries in $a_{11}$ and $a_{22}$: we call these elements together the \newterm{main diagonal} of the matrix. A matrix which has non-zero entries only in its main diagonal is unsurprisingly called a \newterm{diagonal matrix}\footnote{this might seem unremarkable now, but in higher dimensions these matrices are very important.}.
-%
-% \begin{note}{The Identity Matrix is a Diagonal Matrix}{}
-% 	In the specific case where $\alpha=\beta=1$ a scaling matrix essentially does nothing: it scales by $1$ in both directions. Indeed, in this case it becomes the identity matrix $\Id{2}$.
-% \end{note}
-%
-% The next family of linear transformations to represent as matrices are the rotations around the origin. Again, we don't really need to think too much: just check the results of rotating $\ebx$ and $\eby$ by $\theta$ anti-clockwise. Since $\ebx$ is a unit vector, rotating it by $\theta$ anti-clockwise around the origin gives another unit vector (since rotating a vector doesn't change its norm), which is at an $theta$ to the $x$-axis. Its coordinates are then exactly the polar coordinates of a vector at $\theta$ to the $x$-axis but with $R=1$ (see REF TO POLAR COORDINATES EQUATION):
-% \begin{equation}
-% 	R_{\theta}(\ebx) = \colvec{\cos(\theta);\sin(\theta)}.
-% 	\label{eq:eb1 rotated by theta}
-% \end{equation}
-%
-% Since the rotated $\eby$ is orthogonal to the rotated $\ebx$ we can use the orthogonality trick in 2-dimensions to find its coordinates (REF TO ORTHOGONALITY TRICK IN 2D):
-% \begin{equation}
-% 	R_{\theta}(\eby) = \colvec{-\sin(\theta);\cos(\theta)}.
-% 	\label{eq:eb2 rotated by theta}
-% \end{equation}
-%
-% (see \autoref{fig:rotating_e1_e2} for a visualization of this idea)
-%
-% \begin{figure}
-% 	\begin{center}
-% 		\begin{tikzpicture}
-% 			\begin{axis}[
-% 					width=12cm,
-% 					xyplane,
-% 					xmin=-1.25, xmax=1.25,
-% 					ymin=0, ymax=0.60,
-% 					label style={black!20},
-% 					axis line style={black!20},
-% 					major grid style={black!5},
-% 				]
-% 				\tikzset{
-% 					bracket/.style={ultra thick, cap=round, decorate, opacity=0.65},
-% 					rightbracket/.style={bracket, decoration={brace, amplitude=5pt, mirror, raise=3pt}},
-% 					leftbracket/.style={bracket, decoration={brace, amplitude=5pt, raise=3pt}},
-% 				}
-%
-% 				\pgfmathsetmacro{\th}{55}
-% 				\coordinate (o) at (0,0);
-% 				\coordinate (e1) at (1,0);
-% 				\coordinate (Re1) at ({cos(\th)},{sin(\th)});
-% 				\coordinate (Re2) at ({-sin(\th)},{cos(\th)});
-% 				\coordinate (Re1x) at ({cos(\th)},0);
-%
-% 				\pic[draw=xpurple, line width=2pt, fill=xpurple, fill opacity=0.25] {right angle=Re2--o--Re1};
-% 				% \draw[perpline, opacity=0.25] (o) -- (Re1x) -- (Re1);
-% 				% \pic[draw=xred, line width=2pt, fill=xred, fill opacity=0.25] {right angle=o--Re1x--Re1};
-% 				\pic[
-% 					angle radius=10mm,
-% 					draw=xred!75, -stealth, line width=2pt, fill=xred!25,
-% 					pic text=$\theta$, pic text options={text=xred, opacity=1},
-% 				] {angle=e1--o--Re1};
-%
-% 				\draw[vector, xred, line width=2pt] (0,0) -- (Re1) node[pos=1.1] {$R_{\theta}(\ebx)$};
-% 				\draw[vector, xblue, line width=2pt] (0,0) -- (Re2) node[pos=1.2] {$R_{\theta}(\eby)$};
-%
-% 				% \draw[leftbracket] (0,0) -- ({-sin(\th)},0) node[midway, below, yshift=-7pt] {$-\sin(\theta)$};
-% 				% \draw[leftbracket] ({-sin(\th)},0) -- ({-sin(\th)},{cos(\th)}) node[midway, left, xshift=-7pt] {$\cos(\theta)$};
-% 				\draw[rightbracket] (0,0) -- ({cos(\th)},0) node[midway, below, yshift=-7pt] {$\cos(\theta)$};
-% 				\draw[rightbracket] ({cos(\th)},0) -- ({cos(\th)},{sin(\th)}) node[midway, right, xshift=7pt] {$\sin(\theta)$};
-% 			\end{axis}
-% 		\end{tikzpicture}
-% 	\end{center}
-% 	\caption{The two basis vectors $\ebx,\eby$ rotated by an angle $\theta$ anti-clockwise around the origin. The coordinates of the rotated $\ebx$ are simply the polar coordinates of a general vector which is at an angle $\theta$ to the $x$-axis, with $R=1$ (since $\ebx$ is a unit vector).}
-% 	\label{fig:rotating_e1_e2}
-% \end{figure}
-%
-% Therefore, the rotation matrix $\mat{R}_{\theta}$ is
-%
-% \begin{equation}
-% 	\fromtranstomat{R_{\theta}}{\mat{R}_{\theta}}{\cos(\theta)}{\sin{\theta}}{-\sin(\theta)}{\cos(\theta)}
-% 	\label{eq:2d rotation matrix}
-% \end{equation}
-%
-% Let's check some specific examples of rotationg matrices, starting with $\theta=0$. This gives the matrix
-% \begin{equation}
-% 	\mat{R}_{0} = \begin{bmatrix} \cos(0) & -\sin(0) \\ \sin(0) & \cos(0) \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} = \Id{2},
-% 	\label{eq:rotation by angle 0}
-% \end{equation}
-% which is exactly what we expect, since a rotation by $\theta=0$ doesn't do anything, so we get back the identity matrix.
-%
-% A rotation by $\theta=\pihalf$ (equivalent to $\ang{90}$) is done by the matrix
-% \begin{equation}
-% 	\mat{R}_{\pihalf} = \begin{bmatrix} \cos\left(\pihalf\right) & -\sin\left(\pihalf\right) \\ \sin\left(\pihalf\right) & \cos\left(\pihalf\right) \end{bmatrix} = \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}.
-% 	\label{eq:rotation by angle 90}
-% \end{equation}
-% This is an nice result: rotating by $\pihalf$ is equivalent to switching the two basis vector $\ebx$ and $\eby$ and then flipping the \enquote{new} $\eby$ around so it faces in the negative $x$-direction.
-%
-% Before continuing to $mat{R}_{\pi}$ let's see what we expect: rotating a vector by $\theta=\pi$ is simply inverting it (i.e. negating both its coordinates). And indeed,
-% \begin{equation}
-% 	\mat{R}_{\pi} = \begin{bmatrix} \cos\left(\pi\right) & -\sin\left(\pi\right) \\ \sin\left(\pi\right) & \cos\left(\pi\right) \end{bmatrix} = \begin{bmatrix} -1 & 0 \\ 0 & -1 \end{bmatrix},
-% 	\label{eq:rotation by angle 180}
-% \end{equation}
-% which is exactly the identity matrix with all its entries negating. How cool is that?
-%
-% Ok, next up: reflections! Reflecting a vector across the $x$-axis is simply flipping it\footnote{yes, I also laughed when writing this.} vertically - so its $x$-component doesn't change, and its $y$-component gets flipped. The result for the basis vectors is that $\ebx$ stays the same (i.e. reflecting $\ebx$ across the $x$ access doesn't change it), while $\eby$ gets flipped:
-% \begin{equation}
-% 	\fromtranstomat{\Reflection{x}}{\Reflection{x}}{1}{0}{0}{-1}
-% 	\label{eq:vertical reflection matrix}
-% \end{equation}
-%
-% Similarly, reflecting a vector across the $y$-axis flips their $x$-coordinate and keeps their $y$-coordinate untouched, i.e. $\ebx$ gets flipped and $\eby$ remains the same:
-% \begin{equation}
-% 	\fromtranstomat{\text{ref}_{y}}{\mat{ref}_{y}}{-1}{0}{0}{1}
-% 	\label{eq:horizontal reflection matrix}
-% \end{equation}
-%
-% See \autoref{fig:reflections matrices} for a visualization.
-%
-% Before we can build a general reflection matrix (i.e. representing a reflection across \textit{any} line going through the origin, not only the axes) we need to learn a couple of more things, so we'll skip that for now and hop on to building matrices for shear transformations.
-%
-% Now for the shear transformations: a shear in the $x$-direction keeps $\ebx$ untouched, while simply moving $\eby$ by some amount in the $x$-direction (see \autoref{fig:shear in x dir}).
-%
-% \begin{figure}
-% 	\begin{center}
-% 		\begin{tikzpicture}
-% 			\begin{axis}[
-% 					sheargrid,
-% 					name=original,
-% 				]
-% 				\draw[vector, xred] (0,0) -- (1,0) node[pos=1.2, black] {$\ebx$};
-% 				\draw[vector, xblue] (0,0) -- (0,1) node[pos=1.2, black] {$\eby$};
-% 				\draw[vector, xblue, dashed] (0,0) -- (0.5,1) node[pos=1.1, anchor=west, black] {$K_{x}(\eby)$};
-% 				\draw[vector, dotted, black] (0.05,0.8) -- (0.35,0.8);
-% 			\end{axis}
-%
-% 			\pgftransformcm{1}{0}{0.5}{1}{\pgfpoint{7cm}{0}}
-% 			\begin{axis}[
-% 					sheargrid,
-% 					name=transformed,
-% 					xlabel={},
-% 					ylabel={},
-% 				]
-% 				\draw[vector, xred] (0,0) -- (1,0) node (ke1) {};
-% 				\draw[vector, xblue] (0,0) -- (0,1) node (ke2) {};
-% 				\coordinate (Ke1) at (1,0);
-% 				\coordinate (Ke2) at (0.5,1);
-% 				\coordinate (xlbl) at (2.2,0);
-% 				\coordinate (ylbl) at (1.1,1.6);
-% 			\end{axis}
-% 			\pgftransformreset
-% 			\node[xshift=25pt] at (Ke1) {$\ebx$};
-% 			\node[xshift=-15pt] at (Ke2) {$K_{x}(\eby)$};
-% 			\draw[|->, very thick] ($(original.east)+(10pt,0)$) -- ($(transformed.west)-(10pt,0)$) node[midway, above] {\Large $K_{x}$};
-% 			\node at (xlbl) {$x'$};
-% 			\node at (ylbl) {$y'$};
-% 		\end{tikzpicture}
-% 	\end{center}
-% 	\caption{Shearing in the $x$-direction: while $\ebx$ is kept untouched, $\eby$ is shifted by some value $k\in\Rs$.}
-% 	\label{fig:shear in x dir}
-% \end{figure}
-%
-% % and after that projections.
-% % Cool idea for a challange: prove using matrices that a rotation by 2x can be made from two reflections, such that the angle between the two lines of reflection is x.
+\subsection{Calculating Linear Transformations, Part 2}
+Following our example from the end of the previous section, let's look again at the result of applying $T$ from \autoref{eq:simple_LT_example_single_2d_vec} on the vector $\vec{a}=\clrcolvecxy{3}{2}$.
+
+Since we know how $T$ transforms the basis vectors $\ebx$ and $\eby$ (\autoref{eq:simple LT example transformed basis vectors}), we can $T(\vec{a})$ in the following way:
+\begin{equation}
+	T(\vec{a}) = \colvec{3;4} = \overset{\substack{\LCa{a_{x}} \\ \downarrow}}{\LCa{3}}\underset{\substack{\uparrow \\ T(\ebx)}}{\colvec{0;1}} + \overset{\substack{\LCb{a_{y}} \\ \downarrow}}{\LCb{2}}\underset{\substack{\uparrow \\ T(\eby)}}{\colvec{-2;0}} = \colvec{0\cdot\LCa{3}-2\cdot\LCb{2};1\cdot\LCa{3}+0\cdot\LCb{2}}.
+	\label{eq:developing matrix notation step 1}
+\end{equation}
+
+Then, we collect all the coefficients in black into a single structure, which we call a \newterm{matrix}:
+\begin{equation}
+	\mat{M} =
+	\begin{bmatrix}
+		0 & -2 \\
+		1 & 0
+	\end{bmatrix}.
+	\label{eq:developing matrix notation step 2}
+\end{equation}
+
+Finally, we define the action of the matrix $\mat{M}$ on the vector $\vec{a}$ as following:
+\begin{equation}
+	\mat{M}\vec{a} =
+	\begin{bmatrix}
+		0 & -2 \\
+		1 & 0
+	\end{bmatrix}\clrcolvecxy{3}{2} = \colvec{0\cdot\LCa{3}-2\cdot\LCb{2};1\cdot\LCa{3}+0\cdot\LCb{2}} = T(\vec{a}).
+	\label{eq:developing matrix notation step 3}
+\end{equation}
+
+Of course, we should make sure that the matrix $\mat{M}$ we just defined works for other vectors as well. If we apply $\mat{M}$ to the second vector from our example, $\vec{b}=\clrcolvecxy{2}{-4}$, we get
+\begin{equation}
+	\mat{M}\vec{b} =
+	\begin{bmatrix}
+		0 & -2 \\
+		1 & 0
+	\end{bmatrix}\clrcolvecxy{2}{-4} = \colvec{0\cdot\LCa{2}-2\cdot\LCb{-4};1\cdot\LCa{2}+0\cdot\LCb{-4}} = \colvec{8;2} = T(\vec{b}),
+	\label{eq:validating matrix works for b}
+\end{equation}
+which is exactly the result we got in \autoref{eq:second_simple_LT_example_single_2d_vec}. Great!
+
+Why not continue checking how this matrix-vector product we developed works for other vectors? First, let's check $\ebx$ and $\eby$ for which we already know the results (\autoref{eq:simple_LT_example_single_2d_vec}):
+\begin{equation}
+	\begin{aligned}
+		\mat{M}\ebx & =
+		\begin{bmatrix}
+			0 & -2 \\
+			1 & 0
+		\end{bmatrix}\clrcolvecxy{1}{0} = \colvec{0\cdot\LCa{1}-2\cdot\LCb{0};1\cdot\LCa{1}+0\cdot\LCb{0}} = \colvec{0;1} = T(\ebx), \\
+		\mat{M}\eby & =
+		\begin{bmatrix}
+			0 & -2 \\
+			1 & 0
+		\end{bmatrix}\clrcolvecxy{0}{1} = \colvec{0\cdot\LCa{0}-2\cdot\LCb{1};1\cdot\LCa{0}+0\cdot\LCb{1}} = \colvec{-2;0} = T(\eby),
+		\label{eq:}
+	\end{aligned}
+\end{equation}
+exactly the results we expected.
+
+Perhaps you've noticed something by now - the columns of $\mat{M}$ are exactly the vectors $T(\ebx)$ and $T(\eby)$ in the right order:
+
+\begin{center}
+	\fromtranstomat{T}{\mat{M}}{0}{1}{-2}{0}
+\end{center}
+
+The most general transformation we can have using $\mat{M}$ would be applying it to a general vector, $\vec{v}=\clrcolvecxy{x}{y}\in\Rs[2]$:
+\begin{equation}
+	\mat{M}\vec{v} = \begin{bmatrix}
+		0 & -2 \\
+		1 & 0
+	\end{bmatrix}\clrcolvecxy{x}{y} = \colvec{0\cdot\LCa{x}-2\cdot\LCb{y};1\cdot\LCa{x}+0\cdot\LCb{y}} = \colvec{-2y;x}.
+	\label{eq:applying M on a generic 2D vector}
+\end{equation}
+
+Of course, this result is exactly what we expect, as we can see when we apply each step of $T$ on the generic vector $\vec{v}$:
+\begin{equation}
+	\colvec{x;y} \xmapsto{\text{$\times 2$ in $y$}} \colvec{x;2y} \xmapsto{\text{$\ang{90}$ rotation}} \colvec{-2y;x}.
+	\label{eq:}
+\end{equation}
+
+OK, up until now everything we did was for a specific transformation we called $T$. However, we can build a matrix for a general linear transformation $T:\Rs[2]\to\Rs[2]$. Such a transformation has the form
+\begin{equation*}
+	T\colvec{x;y} = \colvec{ax+by;cx+dy},
+\end{equation*}
+where $a,b,c,d\in\Rs$ (REF), and using the same process as in \autoref{eq:developing matrix notation step 1} we get the general matrix
+\begin{equation}
+	\mat{M} = \begin{bmatrix}
+		a & b \\
+		c & d
+	\end{bmatrix}.
+	\label{eq:general 2x2 matrix}
+\end{equation}
+
+Just like in our specific example, the columns of $\mat{M}$ are exactly the images of the basis vectors $\ebx$ and $\eby$, respectively. To confirm this, let's apply the $\mat{M}$ on both basis vectors:
+\begin{equation}
+	\begin{aligned}
+		\mat{M}\ebx & =
+		\begin{bmatrix}
+			a & b \\
+			c & d
+		\end{bmatrix}\clrcolvecxy{1}{0} = \colvec{a\cdot\LCa{1}+b\cdot\LCb{0};c\cdot\LCa{1}+d\cdot\LCb{0}} = \colvec{a;c} = M_{1}, \\
+		\mat{M}\eby & =
+		\begin{bmatrix}
+			a & b \\
+			c & d
+		\end{bmatrix}\clrcolvecxy{0}{1} = \colvec{a\cdot\LCa{0}+b\cdot\LCb{1};c\cdot\LCa{0}+d\cdot\LCb{1}} = \colvec{b;d} = \mat{M}_{2}.
+		\label{eq:applying a general 2x2 matrix on basis vectors}
+	\end{aligned}
+\end{equation}
+
+Note that I use $M_{1}$ and $M_{2}$ to denote the $1$-st and $2$-nd columns of $\mat{M}$, respectively.
+
+In most textbooks and courses I've seen, the process of multiplying a matrix $\mat{M}$ by a vector $\vec{v}$ is described as following: the $i$-th component of the resulting vector (in our case $i\in\left\{\LCa{1},\LCb{2}\right\}$) is the \textit{dot product} of the $i$-th row of $\mat{M}$ and the vector $\vec{v}$ itself. This is exactly what happens in practice in the development process we went through here - if we name the resulting vector of $\mat{M}\vec{v}$ as $\vec{w}$ we get its following two components:
+\begin{equation}
+	\left.
+	\begin{aligned}
+		w_{1} & = \rowvec{a;b}\clrcolvecxy{x}{y} = \colvec{a\cdot\LCa{x}+b\cdot\LCb{y}} = \colvec{a\LCa{x}+b\LCb{y}} \\[2ex]
+		w_{2} & = \rowvec{c;d}\clrcolvecxy{x}{y} = \colvec{c\cdot\LCa{x}+d\cdot\LCb{y}} = \colvec{c\LCa{x}+d\LCb{y}}
+		\label{eq:}
+	\end{aligned}
+	\right\} \rightarrow \vec{w} = \colvec{a\LCa{x}+b\LCb{y};c\LCa{x}+d\LCb{y}}.
+\end{equation}
+
+Of course, this is just the case for a matrix representing a general linear transformation $T:\Rs[2]\to\Rs[2]$. Matrices representing such transformations have $4$ components, since they are made of $2$ basis vectors as columns, each having $2$ components (since the vectors live in $\Rs[2]$). We also say that the matrix lives in the space $\Rs[2\times2]$.
+
+In general (also in higher-dimensional cases), we use 2 indices to denote the components of any matrix: the 1st index for the \textit{row} of the component and the 2nd index for the \textit{column} of the component. For example, a general matrix $\mat{A}\in\Rs[2\times2]$ can be written as
+\begin{equation}
+	\mat{A} = \begin{bmatrix}
+		a_{11} & a_{12} \\
+		a_{21} & a_{22} \\
+	\end{bmatrix},
+	\label{eq:general 2x2 matrix with index notation for components}
+\end{equation}
+where it is important to remember that there are two indices here - and not a single number. For example, $a_{11}$ should be read as \enquote{a-one-one} (i.e. the component in the 1st row and the 1st column), and not as \enquote{a-eleven}. Similarly, $a_{12}$ is \enquote{a-one-two} (not \enquote{a-tweleve}), $a_{21}$ is \enquote{a-two-one}, etc. The reason this notation is used (as much as it might be confusing at first) is lazyness: nobody wants to write redundant commas (i.e. $a_{1,1}$). It is what it is, and you will get used to it \shrug
+
+We can now finally move on to the most general form of a linear transformation between a real vector space to itself, i.e. $T:\Rs[n]\to\Rs[n]$. The most general vector $\vec{v}\in\Rs[n]$ has the form
+\begin{equation}
+	\vec{v} = \clrgenericvec{v}{n},
+	\label{eq:generic vector in Rn}
+\end{equation}
+and therefore the application of a generic linear transformation from $\Rs[n]$ to itself on $\vec{v}$ yields the vector
+\begin{equation}
+	T(\vec{v}) = \vec{w} =
+	\colvec{a_{11}\LCa{v_{1}} + a_{12}\LCb{v_{2}} + \dots + a_{1n}\LCe{v_{n}};a_{21}\LCa{v_{1}} + a_{22}\LCb{v_{2}} + \dots + a_{2n}\LCe{v_{n}};\vdots;a_{n1}\LCa{v_{1}} + a_{n2}\LCb{v_{2}} + \dots + a_{nn}\LCe{v_{n}}},
+	\label{eq:generic LT from Rn to itself}
+\end{equation}
+where $a_{ij}\in\Rs$ (with $i,j\in\left\{1,2,\dots,n\right\}$). Of course, denoting the components as $a_{ij}$ is alluding to the next step - collecting them into a matrix:
+\begin{equation}
+	\mat{A} =
+	\begin{bNiceMatrix}[margin]
+		a_{11} & a_{12} & \cdots & a_{1n} \\
+		a_{21} & a_{22} & \cdots & a_{2n} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		a_{n1} & a_{n2} & \cdots & a_{nn}
+	\end{bNiceMatrix}.
+	\label{eq:}
+\end{equation}
+
+Just like in the $2\times2$ case, the $i$-th column vector of $\mat{A}$ shows how it transforms $\eb{i}$ (which in this case lives in the space $\Rs[n]$, of course):
+
+\begin{equation*}
+	\mat{M} = \begin{tikzpicture}[baseline=-0.5ex]
+		\matrix [
+		matrix of math nodes,
+		nodes={rectangle, minimum size=15pt}, % should somehow also make a vertical space to the bottom of the matrix
+		inner sep=0pt,
+		column sep=8pt,
+		left delimiter={[}, right delimiter={]},
+			] (A) {
+				a_{11} & a_{12} & \cdots & a_{1n} \\
+				a_{21} & a_{22} & \cdots & a_{2n} \\
+				\vdots & \vdots & \ddots & \vdots \\
+				a_{n1} & a_{n2} & \cdots & a_{nn} \\
+			};
+		\tiny
+		\foreach \x in {1,2,4} {
+				\begin{scope}[on background layer]
+					\filldraw[MCol\x, rounded corners, opacity=0.25] (A-1-\x.north west) rectangle (A-4-\x.south east);
+				\end{scope}
+
+				\node[MCol\x, above of=A-1-\x] (eb-\x-text) {$T(\eb{\ifthenelse{\x=4}{n}{\x}})$};
+				\draw[-stealth, MCol\x] (eb-\x-text) -- (A-1-\x.north);
+			}
+	\end{tikzpicture}.
+\end{equation*}
+
+Therefore, in general we define the product of an $n\times n$ matrix $\mat{A}$ (otherwise written as $\mat{A}\in\Rs[n\times n]$) and a vector $\vec{v}\in\Rs[n]$ to be
+\begin{equation}
+	\mat{A}\vec{v} =
+	\begin{bNiceMatrix}[margin]
+		a_{11} & a_{12} & \cdots & a_{1n} \\
+		a_{21} & a_{22} & \cdots & a_{2n} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		a_{n1} & a_{n2} & \cdots & a_{nn}
+	\end{bNiceMatrix}\clrgenericvec{v}{n} = \colvec{a_{11}\LCa{v_{1}} + a_{12}\LCb{v_{2}} + \dots + a_{1n}\LCe{v_{n}};a_{21}\LCa{v_{1}} + a_{22}\LCb{v_{2}} + \dots + a_{2n}\LCe{v_{n}};\vdots;a_{n1}\LCa{v_{1}} + a_{n2}\LCb{v_{2}} + \dots + a_{nn}\LCe{v_{n}}} = \vec{w}.
+	\label{eq:product of n-by-n matrix and a vec in Rn}
+\end{equation}
+
+Indeed, this can be presented (as it often does) in the following way: the $i$-th coefficient of the vector $\vec{w}=\mat{A}\vec{v}$ is the dot product of the $i$-th row of $\mat{A}$ and the vector $\vec{v}$. To see this in practice, follow closely how each of the rows $1,2$ and $n$ of $\mat{A}$ in \autoref{eq:product of n-by-n matrix and a vec in Rn} are dot-multiplied with $\vec{v}$ to yields the corresponding component of $\vec{w}$.
+
+\begin{note}{Square Matrices}{}
+	All the kinds of matrices we defined so far are called \newterm{square matrices}, since they have an equal number of rows and columns (since they map from any vector space $\Rs[n]$ to itself) - i.e. their dimensions are of the form $n\times n$.
+
+	\vspace{1em}
+	However, in general matrices can represent any kind of linear transformation - also those that map between different real vector spaces, i.e. $\Rs[n]\to\Rs[m]$ (where $n\neq m$). These matrices would be of order $m\times n$, and are of course \textbf{not} square matrices. However, since square matrices are the easiest to understand when first learning the topic, and they also happen to play a very important role in linear algebra - I chose to concentrate on them in the beginning, before moving on to more general matrices.
+\end{note}
+
+\subsection{The Fundamental Linear Transformations as Matrices}
+Let us now use the process we devolped above to represent the fundamental $\Rs[2]\to\Rs[2]$ linear transformations (REF) in matrix form. Since we're dealing with transformations from $\Rs[2]$ to itself, the matrices representing these transformations are of dimension $2\times2$, i.e. they live in the space $\Rs[2\times2]$.
+
+We start with the most boring linear transformation: the identity transformation $I$. As a reminder, $I$ maps \textit{any} vector $\vec{v}\in\Rs[2]$ to itself: $I(\vec{v})=\vec{v}$. In particular, it takes the two standard basis vectors $\ebx$ and $\eby$ and maps them to themselves:
+\begin{equation}
+	\colvec{1;0} \xmapsto{I}\ \colvec{1;0},\quad \colvec{0;1} \xmapsto{I}\ \colvec{0;1}.
+	\label{eq:}
+\end{equation}
+Very exciting indeed. Knowing how $I$ transforms $\ebx$ and $\eby$ we can use their maps as the columns of the matrix representation of $I$:
+\begin{equation}
+	\fromtranstomat{I}{\Id{2}}{1}{0}{0}{1}
+	% \fromtranstomat{R}{\mat{R}}{\cos(\theta)}{\sin(\theta)}{-\sin(\theta)}{\cos(\theta)}
+	\label{eq:the 2-by-2 identity matrix}
+\end{equation}
+($\Id{}$ is a common notation for identity matrices, and the index $2$ signifies that this is the specific $2\times2$ identity matrix)
+
+The next type of fundamental linear transformations we should represent in matrix form are the scaling matrices. Instead of calculting their representation separately, let's directly find the matrix representation of the linear transformation $S$ which scales any vector by $\alpha$ in the $x$-direction and by $\beta$ in the $y$-direction:
+
+\begin{equation}
+	\fromtranstomat{S}{\mat{S}}{\alpha}{0}{0}{\beta}
+	\label{eq:matrix representation of scaling in R2}
+\end{equation}
+
+$\mat{S}$ has an important property: it only has non-zero entries in $a_{11}$ and $a_{22}$: we call these elements together the \newterm{main diagonal} of the matrix. A matrix which has non-zero entries only in its main diagonal is unsurprisingly called a \newterm{diagonal matrix}\footnote{this might seem unremarkable now, but in higher dimensions these matrices are very important.}.
+
+\begin{note}{The Identity Matrix is a Diagonal Matrix}{}
+	In the specific case where $\alpha=\beta=1$ a scaling matrix essentially does nothing: it scales by $1$ in both directions. Indeed, in this case it becomes the identity matrix $\Id{2}$.
+\end{note}
+
+The next family of linear transformations to represent as matrices are the rotations around the origin. Again, we don't really need to think too much: just check the results of rotating $\ebx$ and $\eby$ by $\theta$ anti-clockwise. Since $\ebx$ is a unit vector, rotating it by $\theta$ anti-clockwise around the origin gives another unit vector (since rotating a vector doesn't change its norm), which is at an $theta$ to the $x$-axis. Its coordinates are then exactly the polar coordinates of a vector at $\theta$ to the $x$-axis but with $R=1$ (see REF TO POLAR COORDINATES EQUATION):
+\begin{equation}
+	R_{\theta}(\ebx) = \colvec{\cos(\theta);\sin(\theta)}.
+	\label{eq:eb1 rotated by theta}
+\end{equation}
+
+Since the rotated $\eby$ is orthogonal to the rotated $\ebx$ we can use the orthogonality trick in 2-dimensions to find its coordinates (REF TO ORTHOGONALITY TRICK IN 2D):
+\begin{equation}
+	R_{\theta}(\eby) = \colvec{-\sin(\theta);\cos(\theta)}.
+	\label{eq:eb2 rotated by theta}
+\end{equation}
+
+(see \autoref{fig:rotating_e1_e2} for a visualization of this idea)
+
+\begin{figure}
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{axis}[
+					width=12cm,
+					xyplane,
+					xmin=-1.25, xmax=1.25,
+					ymin=0, ymax=0.60,
+					label style={black!20},
+					axis line style={black!20},
+					major grid style={black!5},
+				]
+				\tikzset{
+					bracket/.style={ultra thick, cap=round, decorate, opacity=0.65},
+					rightbracket/.style={bracket, decoration={brace, amplitude=5pt, mirror, raise=3pt}},
+					leftbracket/.style={bracket, decoration={brace, amplitude=5pt, raise=3pt}},
+				}
+
+				\pgfmathsetmacro{\th}{55}
+				\coordinate (o) at (0,0);
+				\coordinate (e1) at (1,0);
+				\coordinate (Re1) at ({cos(\th)},{sin(\th)});
+				\coordinate (Re2) at ({-sin(\th)},{cos(\th)});
+				\coordinate (Re1x) at ({cos(\th)},0);
+
+				\pic[draw=xpurple, line width=2pt, fill=xpurple, fill opacity=0.25] {right angle=Re2--o--Re1};
+				% \draw[perpline, opacity=0.25] (o) -- (Re1x) -- (Re1);
+				% \pic[draw=xred, line width=2pt, fill=xred, fill opacity=0.25] {right angle=o--Re1x--Re1};
+				\pic[
+					angle radius=10mm,
+					draw=xred!75, -stealth, line width=2pt, fill=xred!25,
+					pic text=$\theta$, pic text options={text=xred, opacity=1},
+				] {angle=e1--o--Re1};
+
+				\draw[vector, xred, line width=2pt] (0,0) -- (Re1) node[pos=1.1] {$R_{\theta}(\ebx)$};
+				\draw[vector, xblue, line width=2pt] (0,0) -- (Re2) node[pos=1.2] {$R_{\theta}(\eby)$};
+
+				% \draw[leftbracket] (0,0) -- ({-sin(\th)},0) node[midway, below, yshift=-7pt] {$-\sin(\theta)$};
+				% \draw[leftbracket] ({-sin(\th)},0) -- ({-sin(\th)},{cos(\th)}) node[midway, left, xshift=-7pt] {$\cos(\theta)$};
+				\draw[rightbracket] (0,0) -- ({cos(\th)},0) node[midway, below, yshift=-7pt] {$\cos(\theta)$};
+				\draw[rightbracket] ({cos(\th)},0) -- ({cos(\th)},{sin(\th)}) node[midway, right, xshift=7pt] {$\sin(\theta)$};
+			\end{axis}
+		\end{tikzpicture}
+	\end{center}
+	\caption{The two basis vectors $\ebx,\eby$ rotated by an angle $\theta$ anti-clockwise around the origin. The coordinates of the rotated $\ebx$ are simply the polar coordinates of a general vector which is at an angle $\theta$ to the $x$-axis, with $R=1$ (since $\ebx$ is a unit vector).}
+	\label{fig:rotating_e1_e2}
+\end{figure}
+
+Therefore, the rotation matrix $\mat{R}_{\theta}$ is
+
+\begin{equation}
+	\fromtranstomat{R_{\theta}}{\mat{R}_{\theta}}{\cos(\theta)}{\sin{\theta}}{-\sin(\theta)}{\cos(\theta)}
+	\label{eq:2d rotation matrix}
+\end{equation}
+
+Let's check some specific examples of rotationg matrices, starting with $\theta=0$. This gives the matrix
+\begin{equation}
+	\mat{R}_{0} = \begin{bmatrix} \cos(0) & -\sin(0) \\ \sin(0) & \cos(0) \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} = \Id{2},
+	\label{eq:rotation by angle 0}
+\end{equation}
+which is exactly what we expect, since a rotation by $\theta=0$ doesn't do anything, so we get back the identity matrix.
+
+A rotation by $\theta=\pihalf$ (equivalent to $\ang{90}$) is done by the matrix
+\begin{equation}
+	\mat{R}_{\pihalf} = \begin{bmatrix} \cos\left(\pihalf\right) & -\sin\left(\pihalf\right) \\ \sin\left(\pihalf\right) & \cos\left(\pihalf\right) \end{bmatrix} = \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}.
+	\label{eq:rotation by angle 90}
+\end{equation}
+This is an nice result: rotating by $\pihalf$ is equivalent to switching the two basis vector $\ebx$ and $\eby$ and then flipping the \enquote{new} $\eby$ around so it faces in the negative $x$-direction.
+
+Before continuing to $mat{R}_{\pi}$ let's see what we expect: rotating a vector by $\theta=\pi$ is simply inverting it (i.e. negating both its coordinates). And indeed,
+\begin{equation}
+	\mat{R}_{\pi} = \begin{bmatrix} \cos\left(\pi\right) & -\sin\left(\pi\right) \\ \sin\left(\pi\right) & \cos\left(\pi\right) \end{bmatrix} = \begin{bmatrix} -1 & 0 \\ 0 & -1 \end{bmatrix},
+	\label{eq:rotation by angle 180}
+\end{equation}
+which is exactly the identity matrix with all its entries negating. How cool is that?
+
+Ok, next up: reflections! Reflecting a vector across the $x$-axis is simply flipping it\footnote{yes, I also laughed when writing this.} vertically - so its $x$-component doesn't change, and its $y$-component gets flipped. The result for the basis vectors is that $\ebx$ stays the same (i.e. reflecting $\ebx$ across the $x$ access doesn't change it), while $\eby$ gets flipped:
+\begin{equation}
+	\fromtranstomat{\Reflection{x}}{\Reflection{x}}{1}{0}{0}{-1}
+	\label{eq:vertical reflection matrix}
+\end{equation}
+
+Similarly, reflecting a vector across the $y$-axis flips their $x$-coordinate and keeps their $y$-coordinate untouched, i.e. $\ebx$ gets flipped and $\eby$ remains the same:
+\begin{equation}
+	\fromtranstomat{\text{ref}_{y}}{\mat{ref}_{y}}{-1}{0}{0}{1}
+	\label{eq:horizontal reflection matrix}
+\end{equation}
+
+See \autoref{fig:reflections matrices} for a visualization.
+
+Before we can build a general reflection matrix (i.e. representing a reflection across \textit{any} line going through the origin, not only the axes) we need to learn a couple of more things, so we'll skip that for now and hop on to building matrices for shear transformations.
+
+Now for the shear transformations: a shear in the $x$-direction keeps $\ebx$ untouched, while simply moving $\eby$ by some amount in the $x$-direction (see \autoref{fig:shear in x dir}).
+
+\begin{figure}
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{axis}[
+					sheargrid,
+					name=original,
+				]
+				\draw[vector, xred] (0,0) -- (1,0) node[pos=1.2, black] {$\ebx$};
+				\draw[vector, xblue] (0,0) -- (0,1) node[pos=1.2, black] {$\eby$};
+				\draw[vector, xblue, dashed] (0,0) -- (0.5,1) node[pos=1.1, anchor=west, black] {$K_{x}(\eby)$};
+				\draw[vector, dotted, black] (0.05,0.8) -- (0.35,0.8);
+			\end{axis}
+
+			\pgftransformcm{1}{0}{0.5}{1}{\pgfpoint{7cm}{0}}
+			\begin{axis}[
+					sheargrid,
+					name=transformed,
+					xlabel={},
+					ylabel={},
+				]
+				\draw[vector, xred] (0,0) -- (1,0) node (ke1) {};
+				\draw[vector, xblue] (0,0) -- (0,1) node (ke2) {};
+				\coordinate (Ke1) at (1,0);
+				\coordinate (Ke2) at (0.5,1);
+				\coordinate (xlbl) at (2.2,0);
+				\coordinate (ylbl) at (1.1,1.6);
+			\end{axis}
+			\pgftransformreset
+			\node[xshift=25pt] at (Ke1) {$\ebx$};
+			\node[xshift=-15pt] at (Ke2) {$K_{x}(\eby)$};
+			\draw[|->, very thick] ($(original.east)+(10pt,0)$) -- ($(transformed.west)-(10pt,0)$) node[midway, above] {\Large $K_{x}$};
+			\node at (xlbl) {$x'$};
+			\node at (ylbl) {$y'$};
+		\end{tikzpicture}
+	\end{center}
+	\caption{Shearing in the $x$-direction: while $\ebx$ is kept untouched, $\eby$ is shifted by some value $k\in\Rs$.}
+	\label{fig:shear in x dir}
+\end{figure}
+
+% and after that projections.
+% Cool idea for a challange: prove using matrices that a rotation by 2x can be made from two reflections, such that the angle between the two lines of reflection is x.
